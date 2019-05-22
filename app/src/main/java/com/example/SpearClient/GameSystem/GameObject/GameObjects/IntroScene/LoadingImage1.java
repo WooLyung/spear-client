@@ -1,7 +1,8 @@
-package com.example.SpearClient.GameSystem.GameObject;
+package com.example.SpearClient.GameSystem.GameObject.GameObjects.IntroScene;
 
 import com.example.SpearClient.GameSystem.Component.Components.RendererComponent.Renderers.SpriteRenderer;
 import com.example.SpearClient.GameSystem.Component.Components.TransformComponent.Transforms.Transform;
+import com.example.SpearClient.GameSystem.GameObject.GameObject;
 import com.example.SpearClient.GraphicSystem.GL.GLRenderer;
 
 public class LoadingImage1 extends GameObject {

@@ -2,6 +2,7 @@ package com.example.SpearClient.Main;
 
 import com.example.SpearClient.GameSystem.Scene.*;
 import com.example.SpearClient.GameIO.Input;
+import com.example.SpearClient.GameSystem.Scene.Scenes.IntroScene;
 
 import javax.microedition.khronos.opengles.GL10;
 

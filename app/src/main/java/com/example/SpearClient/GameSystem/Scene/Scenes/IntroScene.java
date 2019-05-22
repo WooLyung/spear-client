@@ -1,14 +1,12 @@
-package com.example.SpearClient.GameSystem.Scene;
-
-import android.util.Log;
+package com.example.SpearClient.GameSystem.Scene.Scenes;
 
 import com.example.SpearClient.GameIO.Input;
-import com.example.SpearClient.GameSystem.GameObject.IntroImage;
-import com.example.SpearClient.GameSystem.GameObject.LoadingImage1;
-import com.example.SpearClient.GameSystem.GameObject.LoadingImage2;
+import com.example.SpearClient.GameSystem.GameObject.GameObjects.IntroScene.IntroImage;
+import com.example.SpearClient.GameSystem.GameObject.GameObjects.IntroScene.LoadingImage1;
+import com.example.SpearClient.GameSystem.GameObject.GameObjects.IntroScene.LoadingImage2;
+import com.example.SpearClient.GameSystem.Scene.Scene;
 import com.example.SpearClient.GraphicSystem.GL.GLRenderer;
 import com.example.SpearClient.GraphicSystem.ImageData;
-import com.example.SpearClient.Main.Engine;
 import com.example.SpearClient.Main.Game;
 
 public class IntroScene extends Scene {
@@ -61,7 +59,7 @@ public class IntroScene extends Scene {
 
     private void changeScene() {
         if (state == STATE.INTRO && (Input.getTouchState() == Input.TOUCH_STATE.DOWN || Input.getTouchState() == Input.TOUCH_STATE.STAY)) {
-            Game.engine.changeScene(new IntroScene());
+            Game.engine.changeScene(new LoginScene());
         }
     }
 

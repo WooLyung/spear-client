@@ -1,10 +1,11 @@
-package com.example.SpearClient.GameSystem.GameObject;
+package com.example.SpearClient.GameSystem.GameObject.GameObjects.IntroScene;
 
 import com.example.SpearClient.GameSystem.Component.Components.RendererComponent.Renderers.SpriteRenderer;
 import com.example.SpearClient.GameSystem.Component.Components.TransformComponent.Transforms.Transform;
+import com.example.SpearClient.GameSystem.GameObject.GameObject;
 import com.example.SpearClient.GraphicSystem.GL.GLRenderer;
 
-public class IntroImage extends GameObject {
+public class LoadingImage2 extends GameObject {
     private SpriteRenderer spriteRenderer;
     private Transform transform;
 
@@ -12,7 +13,7 @@ public class IntroImage extends GameObject {
     public void start() {
         spriteRenderer = new SpriteRenderer();
         attachComponent(spriteRenderer);
-        spriteRenderer.bindingImage(GLRenderer.findImage("intro_image"));
+        spriteRenderer.bindingImage(GLRenderer.findImage("loading_image2"));
 
         transform = new Transform();
         attachComponent(transform);
