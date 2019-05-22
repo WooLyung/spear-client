@@ -1,27 +1,30 @@
-package com.example.SpearClient.GameSystem.GameObject.GameObjects;
+package com.example.SpearClient.GameSystem.GameObject;
 
 import com.example.SpearClient.GameSystem.Component.Components.RendererComponent.Renderers.SpriteRenderer;
 import com.example.SpearClient.GameSystem.Component.Components.TransformComponent.Transforms.Transform;
-import com.example.SpearClient.GameSystem.GameObject.GameObject;
 import com.example.SpearClient.GraphicSystem.GL.GLRenderer;
 
-public class FrontLeg2 extends GameObject {
+public class IntroImage extends GameObject {
+    private SpriteRenderer spriteRenderer;
+    private Transform transform;
+
     @Override
     public void start() {
-        setName("frontLeg2");
-
-        SpriteRenderer spriteRenderer = new SpriteRenderer();
+        spriteRenderer = new SpriteRenderer();
         attachComponent(spriteRenderer);
-        spriteRenderer.bindingImage(GLRenderer.findImage("stick"));
+        spriteRenderer.bindingImage(GLRenderer.findImage("intro_image"));
 
-        Transform transform = new Transform();
+        transform = new Transform();
         attachComponent(transform);
-        transform.anchor.x = 0;
-        transform.position.x = -4;
     }
 
     @Override
     public void update() {
         super.update();
+    }
+
+    @Override
+    public void finish() {
+        super.finish();
     }
 }

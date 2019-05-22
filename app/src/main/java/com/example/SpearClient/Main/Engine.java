@@ -10,7 +10,7 @@ public class Engine {
     public Scene nowScene;
 
     public Engine() {
-        changeScene(new TestScene());
+        changeScene(new IntroScene());
         start();
     }
 

@@ -57,11 +57,10 @@ public class GLRenderer implements GLSurfaceView.Renderer {
         this.context = context;
 
         // 이미지 정보 목록에 각 이미지들을 미리 추가함
-        addImage(R.drawable.image, "img1");
-        addImage(R.drawable.test1, "img2");
-        addImage(R.drawable.circle2, "circle");
-        addImage(R.drawable.circle, "circle2");
-        addImage(R.drawable.stick, "stick");
+        addImage(R.drawable.loading_image1, "loading_image1");
+        addImage(R.drawable.loading_image2, "loading_image2");
+        addImage(R.drawable.intro_image, "intro_image");
+        addImage(R.drawable.test_button, "test_button");
     }
 
     @Override
@@ -222,7 +221,7 @@ public class GLRenderer implements GLSurfaceView.Renderer {
     @Override
     public void onSurfaceCreated(GL10 gl, EGLConfig arg1) {
         // 렌더러의 여러 값들을 초기화
-        gl.glClearColor(1f, 1f, 1f, 0.5f);
+        gl.glClearColor(0f, 0f, 0f, 1f);
         gl.glHint(GL10.GL_PERSPECTIVE_CORRECTION_HINT, GL10.GL_FASTEST);
         gl.glEnable(GL10.GL_TEXTURE_2D);
         gl.glGenTextures(100, imageCode, 0);
