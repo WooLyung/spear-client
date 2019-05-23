@@ -2,6 +2,9 @@ package com.example.SpearClient.SocketIO;
 
 import android.util.Log;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.net.URI;
 import java.net.URISyntaxException;
 
@@ -37,7 +40,6 @@ public class SocketIOBuilder {
         mSocket.on(Socket.EVENT_DISCONNECT, new Emitter.Listener() {
             @Override
             public void call(final Object... args) { Log.d(TAG, "Disconnected"); }});
-
 
         mSocket.on("message", new Emitter.Listener() { // 이벤트네임, 콜백
             @Override

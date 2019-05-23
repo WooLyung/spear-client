@@ -51,16 +51,16 @@ public class LoginButton extends GameObject {
                     Log.i("login (password)", password);
                     Log.i("login (name)", name);
 
-                    login(id, password, name);
+                    login(id, password);
                 }
             }
         }
     }
 
-    private void login(String id, String password, String name) {
+    private void login(String id, String password) {
         try {
             Socket socket = new SocketIOBuilder("http://spear-server.run.goorm.io").getSocket();
-            socket.emit("login", new JSONObject("{username: \""+id+"\", password: \""+password+"\", nickname: \""+name+"}"));
+            socket.emit("login", new JSONObject("{username: \""+id+"\", password: \""+password+"\"}"));
         } catch (Exception e) {
             e.printStackTrace();
         }

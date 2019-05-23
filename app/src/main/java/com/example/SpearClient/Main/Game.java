@@ -48,11 +48,7 @@ public class Game extends AppCompatActivity {
         // 시간 초기화
         preTime = System.currentTimeMillis();
 
-        try { // socketio로 서버 연결
-            socket = new SocketIOBuilder("http://spear-server.run.goorm.io").getSocket();
-        } catch (URISyntaxException e) { // 서버 주소 문법 오류시
-            e.printStackTrace();
-        }
+        startSocketCommunication();
 
         super.onCreate(savedInstanceState); // 조명 항상켜기
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
@@ -96,11 +92,7 @@ public class Game extends AppCompatActivity {
     }
 
     private void startSocketCommunication() {
-        try { // socketio로 서버 연결
-            socket = new SocketIOBuilder("http://omok-server.run.goorm.io").getSocket();
-        } catch (URISyntaxException e) { // 서버 주소 문법 오류시
-            e.printStackTrace();
-        }
+
 
 
 /*        JSONObject jsonObject;

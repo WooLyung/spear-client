@@ -9,7 +9,12 @@ import com.example.SpearClient.GameSystem.Component.Components.TransformComponen
 import com.example.SpearClient.GameSystem.GameObject.GameObject;
 import com.example.SpearClient.GraphicSystem.GL.GLRenderer;
 import com.example.SpearClient.Main.Game;
+import com.example.SpearClient.SocketIO.SocketIOBuilder;
 import com.example.SpearClient.Types.Vector;
+
+import org.json.JSONObject;
+
+import io.socket.client.Socket;
 
 public class RegisterButton extends GameObject {
     private SpriteRenderer spriteRenderer;
@@ -43,9 +48,18 @@ public class RegisterButton extends GameObject {
                     Log.i("register (password)", password);
                     Log.i("register (name)", name);
 
-
+                    register(id, password, name);
                 }
             }
+        }
+    }
+
+    private void register(String id, String password, String name) {
+        try {
+            Socket socket = new SocketIOBuilder("http://spear-server.run.goorm.io").getSocket();
+            socket.emit("register", new JSONObject("{username: \""+id+"\", password: \""+password+"\", nickname: \""+name+"\"}"));
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
