@@ -49,7 +49,7 @@ public class Game extends AppCompatActivity {
         preTime = System.currentTimeMillis();
 
         try { // socketio로 서버 연결
-            socket = new SocketIOBuilder("http://omok-server.run.goorm.io").getSocket();
+            socket = new SocketIOBuilder("http://spear-server.run.goorm.io").getSocket();
         } catch (URISyntaxException e) { // 서버 주소 문법 오류시
             e.printStackTrace();
         }

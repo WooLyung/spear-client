@@ -3,6 +3,8 @@ package com.example.SpearClient.Main;
 import com.example.SpearClient.GameSystem.Scene.*;
 import com.example.SpearClient.GameIO.Input;
 import com.example.SpearClient.GameSystem.Scene.Scenes.IntroScene;
+import com.example.SpearClient.GameSystem.Scene.Scenes.LoginScene;
+import com.example.SpearClient.GameSystem.Scene.Scenes.MainScene;
 
 import javax.microedition.khronos.opengles.GL10;
 
@@ -11,7 +13,7 @@ public class Engine {
     public Scene nowScene;
 
     public Engine() {
-        changeScene(new IntroScene());
+        changeScene(new LoginScene());
         start();
     }
 

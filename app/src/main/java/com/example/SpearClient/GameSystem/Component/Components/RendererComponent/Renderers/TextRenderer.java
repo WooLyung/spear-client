@@ -31,7 +31,11 @@ public class TextRenderer extends Component {
 
         if (isExist == false) {
             if (Game.instance.mainView != null) {
-                Game.instance.mainView.addView(textView);
+                Game.instance.runOnUiThread(new Runnable() {
+                    public void run() {
+                        Game.instance.mainView.addView(textView);
+                    }
+                });
                 isExist = true;
             }
         }

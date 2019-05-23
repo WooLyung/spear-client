@@ -15,6 +15,7 @@ public class EditTextRenderer extends Component {
     private float nowWidth = 99999;
     private float nowHeight = 99999;
     private boolean isExist = false;
+    private boolean isAppear = false;
     private boolean isCenterWidth = true;
     private boolean isCenterHeight = true;
 
@@ -31,7 +32,11 @@ public class EditTextRenderer extends Component {
 
         if (isExist == false) {
             if (Game.instance.mainView != null) {
-                Game.instance.mainView.addView(editText);
+                Game.instance.runOnUiThread(new Runnable() {
+                    public void run() {
+                        Game.instance.mainView.addView(editText);
+                    }
+                });
                 isExist = true;
             }
         }
@@ -47,6 +52,10 @@ public class EditTextRenderer extends Component {
                         nowY = object.getTransform().position.y;
                         nowHeight = editText.getMeasuredHeight();
                         editText.setY(Game.screenHeight / 2 - Game.screenHeight * object.getTransform().position.y / (float)GLView.defaultHeight / 2 - ((isCenterHeight) ? editText.getMeasuredHeight() / 2 : 0));
+                    }
+                    if (!editText.isFocused() && !isAppear) {
+                        editText.setText(editText.getText());
+                        isAppear = true;
                     }
                 }
             });

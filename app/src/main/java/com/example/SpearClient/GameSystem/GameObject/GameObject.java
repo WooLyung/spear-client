@@ -5,6 +5,9 @@ import com.example.SpearClient.GameSystem.Component.Components.RendererComponent
 import com.example.SpearClient.GameSystem.Component.Components.TransformComponent.TransformComponent;
 import com.example.SpearClient.Main.Game;
 
+import org.json.JSONException;
+
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 
 import javax.microedition.khronos.opengles.GL10;

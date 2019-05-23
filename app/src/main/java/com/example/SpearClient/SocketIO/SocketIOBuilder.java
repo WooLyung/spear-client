@@ -16,7 +16,7 @@ public class SocketIOBuilder {
 
     public SocketIOBuilder(String serverUri) throws URISyntaxException {
         IO.Options opts = new IO.Options();
-        mSocket = IO.socket(new URI("http://omok-server.run.goorm.io"),opts);
+        mSocket = IO.socket(new URI("http://spear-server.run.goorm.io"),opts);
         mSocket.connect();
 
         mSocket.on(Socket.EVENT_CONNECT, new Emitter.Listener() {
