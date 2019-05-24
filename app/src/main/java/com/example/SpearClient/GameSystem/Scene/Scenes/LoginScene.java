@@ -1,32 +1,16 @@
 package com.example.SpearClient.GameSystem.Scene.Scenes;
 
-import com.example.SpearClient.GameSystem.GameObject.GameObjects.LoginScene.Input_ID;
-import com.example.SpearClient.GameSystem.GameObject.GameObjects.LoginScene.Input_name;
-import com.example.SpearClient.GameSystem.GameObject.GameObjects.LoginScene.Input_password;
-import com.example.SpearClient.GameSystem.GameObject.GameObjects.LoginScene.LoginButton;
-import com.example.SpearClient.GameSystem.GameObject.GameObjects.LoginScene.RegisterButton;
+import com.example.SpearClient.GameSystem.GameObject.GameObjects.LoginScene.LoginBoard.LoginBoard;
 import com.example.SpearClient.GameSystem.Scene.Scene;
 
 public class LoginScene extends Scene {
-    Input_ID input_id;
-    Input_name input_name;
-    Input_password input_password;
-    LoginButton loginButton;
-    RegisterButton registerButton;
+    LoginBoard loginBoard;
 
     @Override
     public void start() {
-        input_id = new Input_ID();
-        input_password = new Input_password();
-        input_name = new Input_name();
-        loginButton = new LoginButton();
-        registerButton = new RegisterButton();
+        loginBoard = new LoginBoard();
 
-        objs.add(input_id);
-        objs.add(input_name);
-        objs.add(input_password);
-        objs.add(loginButton);
-        objs.add(registerButton);
+        objs.add(loginBoard);
     }
 
     @Override

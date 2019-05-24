@@ -36,8 +36,8 @@ abstract public class Scene {
 
     public GameObject findObjectByName(String name) {
         for (GameObject gameObject : objs) {
-            if (gameObject.getName().equals(name))
-                return gameObject;
+            if (gameObject.findOfName(name) != null)
+                return gameObject.findOfName(name) ;
         }
 
         return null;
@@ -47,8 +47,8 @@ abstract public class Scene {
         ArrayList<GameObject> returnObjects = new ArrayList<>();
 
         for (GameObject gameObject : objs) {
-            if (gameObject.getName().equals(name))
-                returnObjects.add(gameObject);
+            if (gameObject.findOfName(name) != null)
+                returnObjects.add(gameObject.findOfName(name) );
         }
 
         return returnObjects;
@@ -56,8 +56,8 @@ abstract public class Scene {
 
     public GameObject findObjectByTag(String tag) {
         for (GameObject gameObject : objs) {
-            if (gameObject.getTag().equals(tag))
-                return gameObject;
+            if (gameObject.findOfTag(tag) != null)
+                return gameObject.findOfTag(tag);
         }
 
         return null;
@@ -67,8 +67,8 @@ abstract public class Scene {
         ArrayList<GameObject> returnObjects = new ArrayList<>();
 
         for (GameObject gameObject : objs) {
-            if (gameObject.getTag().equals(tag))
-                returnObjects.add(gameObject);
+            if (gameObject.findOfTag(tag) != null)
+                returnObjects.add(gameObject.findOfTag(tag));
         }
 
         return returnObjects;

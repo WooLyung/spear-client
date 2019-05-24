@@ -79,6 +79,20 @@ abstract public class GameObject {
         child.removeParent();
     }
 
+    public GameObject findOfTag(String tag) {
+        if (getName().equals(tag)) {
+            return this;
+        }
+
+        for (GameObject child : childs) {
+            GameObject foundObj = child.findOfTag(tag);
+            if (foundObj != null)
+                return foundObj;
+        }
+
+        return null;
+    }
+
     public GameObject findOfName(String name) {
         if (getName().equals(name)) {
             return this;

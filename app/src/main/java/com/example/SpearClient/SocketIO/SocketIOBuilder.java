@@ -16,6 +16,7 @@ public class SocketIOBuilder {
 
     private Socket mSocket;
     private static final String TAG = "SocketIO";
+    private static SocketIOBuilder instance = null;
 
     public SocketIOBuilder(String serverUri) throws URISyntaxException {
         IO.Options opts = new IO.Options();
@@ -50,5 +51,14 @@ public class SocketIOBuilder {
         });
     }
 
-    public Socket getSocket () { return mSocket; }
+    public static Socket getSocket () {
+        if (instance == null) {
+            try {
+                instance = new SocketIOBuilder("http://spear-server.run.goorm.io");
+            } catch (URISyntaxException e) {
+                e.printStackTrace();
+            }
+        }
+        return instance.mSocket;
+    }
 }

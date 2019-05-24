@@ -1,12 +1,14 @@
 package com.example.SpearClient.GameSystem.GameObject.GameObjects.LoginScene;
 
 import android.util.Log;
+import android.widget.Toast;
 
 import com.example.SpearClient.GameIO.Input;
 import com.example.SpearClient.GameSystem.Component.Components.RendererComponent.Renderers.EditTextRenderer;
 import com.example.SpearClient.GameSystem.Component.Components.RendererComponent.Renderers.SpriteRenderer;
 import com.example.SpearClient.GameSystem.Component.Components.TransformComponent.Transforms.GUITransform;
 import com.example.SpearClient.GameSystem.GameObject.GameObject;
+import com.example.SpearClient.GameSystem.Scene.Scenes.MainScene;
 import com.example.SpearClient.GraphicSystem.GL.GLRenderer;
 import com.example.SpearClient.Main.Game;
 import com.example.SpearClient.SocketIO.SocketIOBuilder;
@@ -15,6 +17,7 @@ import com.example.SpearClient.Types.Vector;
 import org.json.JSONObject;
 
 import io.socket.client.Socket;
+import io.socket.emitter.Emitter;
 
 public class RegisterButton extends GameObject {
     private SpriteRenderer spriteRenderer;
@@ -29,7 +32,7 @@ public class RegisterButton extends GameObject {
         transform = new GUITransform();
         attachComponent(transform);
 
-        transform.position.x = 2;
+        transform.position.x = 4;
         transform.position.y = -3;
     }
 
@@ -44,10 +47,6 @@ public class RegisterButton extends GameObject {
                     String password = ((EditTextRenderer) Game.engine.nowScene.findObjectByName("input_password").getComponent("editTextRenderer")).getEditText().getText().toString();
                     String name = ((EditTextRenderer) Game.engine.nowScene.findObjectByName("input_name").getComponent("editTextRenderer")).getEditText().getText().toString();
 
-                    Log.i("register (id)", id);
-                    Log.i("register (password)", password);
-                    Log.i("register (name)", name);
-
                     register(id, password, name);
                 }
             }
@@ -56,7 +55,31 @@ public class RegisterButton extends GameObject {
 
     private void register(String id, String password, String name) {
         try {
-            Socket socket = new SocketIOBuilder("http://spear-server.run.goorm.io").getSocket();
+            Socket socket = SocketIOBuilder.getSocket();
+            socket.on("registerCallback", new Emitter.Listener() {
+                @Override
+                public void call(final Object... args) {
+                    Game.instance.runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            try {
+                                JSONObject jsonObject = new JSONObject(args[0].toString());
+                                String message = jsonObject.getString("message");
+                                if (message.equals("register failed")) {
+                                    Toast.makeText(Game.instance, "회원가입에 실패했습니다.", Toast.LENGTH_SHORT).show();
+                                }
+                                else if (message.equals("register complete")) {
+                                    Game.engine.changeScene(new MainScene());
+                                }
+                            }
+                            catch (Exception e) {
+                                e.printStackTrace();
+                            }
+
+                        }
+                    });
+                }
+            });
             socket.emit("register", new JSONObject("{username: \""+id+"\", password: \""+password+"\", nickname: \""+name+"\"}"));
         } catch (Exception e) {
             e.printStackTrace();

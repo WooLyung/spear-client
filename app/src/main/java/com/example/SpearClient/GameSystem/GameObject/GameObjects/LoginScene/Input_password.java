@@ -1,10 +1,14 @@
 package com.example.SpearClient.GameSystem.GameObject.GameObjects.LoginScene;
 
 import android.graphics.Color;
+import android.text.InputType;
 
 import com.example.SpearClient.GameSystem.Component.Components.RendererComponent.Renderers.EditTextRenderer;
 import com.example.SpearClient.GameSystem.Component.Components.TransformComponent.Transforms.GUITransform;
 import com.example.SpearClient.GameSystem.GameObject.GameObject;
+import com.example.SpearClient.GraphicSystem.GL.GLView;
+import com.example.SpearClient.Main.Game;
+import com.example.SpearClient.R;
 
 public class Input_password extends GameObject {
     private EditTextRenderer editTextRenderer;
@@ -20,11 +24,16 @@ public class Input_password extends GameObject {
         editTextRenderer = new EditTextRenderer();
         attachComponent(editTextRenderer);
 
-        editTextRenderer.getEditText().setHint("비밀번호를 입력하세요.");
-        editTextRenderer.getEditText().setTextColor(Color.WHITE);
-        editTextRenderer.getEditText().setHintTextColor(Color.WHITE);
+        editTextRenderer.getEditText().setHint("Password");
+        editTextRenderer.getEditText().setTextColor(Game.instance.getResources().getColor(R.color.loginColor));
+        editTextRenderer.getEditText().setHintTextColor(Game.instance.getResources().getColor(R.color.loginColorHint));
+        editTextRenderer.getEditText().setInputType( InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD );
+        editTextRenderer.getEditText().setText("");
+        editTextRenderer.getEditText().setMaxWidth(1000000 / Game.screenWidth);
+        editTextRenderer.getEditText().setWidth(1000000 / Game.screenWidth);
+        editTextRenderer.getEditText().setTextSize(30000 / Game.screenWidth);
         transform.position.x = 0;
-        transform.position.y = 0;
+        transform.position.y = -0.22f;
     }
 
     @Override

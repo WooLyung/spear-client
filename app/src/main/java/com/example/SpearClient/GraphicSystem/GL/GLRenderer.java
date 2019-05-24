@@ -52,8 +52,8 @@ public class GLRenderer implements GLSurfaceView.Renderer {
 
     public GLRenderer(Context context) {
         // 변수 초기화
-        imageDatas = new ArrayList<ImageData>();
-        renderTargets = new ArrayList<RenderTarget>();
+        imageDatas = new ArrayList<>();
+        renderTargets = new ArrayList<>();
         this.context = context;
 
         // 이미지 정보 목록에 각 이미지들을 미리 추가함
@@ -61,6 +61,10 @@ public class GLRenderer implements GLSurfaceView.Renderer {
         addImage(R.drawable.loading_image2, "loading_image2");
         addImage(R.drawable.intro_image, "intro_image");
         addImage(R.drawable.test_button, "test_button");
+        addImage(R.drawable.login_board, "login_board");
+        addImage(R.drawable.login_button, "login_button");
+        addImage(R.drawable.ground, "ground");
+        addImage(R.drawable.sky, "sky");
     }
 
     @Override
