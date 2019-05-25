@@ -1,16 +1,14 @@
 package com.example.SpearClient.GameSystem.Scene.Scenes;
 
+import com.example.SpearClient.GameSystem.GameObject.GameObjects.Background;
 import com.example.SpearClient.GameSystem.GameObject.GameObjects.LoginScene.LoginBoard.LoginBoard;
 import com.example.SpearClient.GameSystem.Scene.Scene;
 
 public class LoginScene extends Scene {
-    LoginBoard loginBoard;
-
     @Override
     public void start() {
-        loginBoard = new LoginBoard();
-
-        objs.add(loginBoard);
+        objs.add(new Background());
+        objs.add(new LoginBoard());
     }
 
     @Override

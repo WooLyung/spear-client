@@ -1,14 +1,14 @@
-package com.example.SpearClient.GameSystem.GameObject.GameObjects.LoginScene.LoginBoard;
+package com.example.SpearClient.GameSystem.GameObject.GameObjects.LoginScene.RegisterBoard;
 
 import com.example.SpearClient.GameIO.Input;
 import com.example.SpearClient.GameSystem.Component.Components.RendererComponent.Renderers.TextRenderer;
 import com.example.SpearClient.GameSystem.Component.Components.TransformComponent.Transforms.GUITransform;
 import com.example.SpearClient.GameSystem.GameObject.GameObject;
-import com.example.SpearClient.GameSystem.GameObject.GameObjects.LoginScene.RegisterBoard.RegisterBoard;
+import com.example.SpearClient.GameSystem.GameObject.GameObjects.LoginScene.LoginBoard.LoginBoard;
 import com.example.SpearClient.Main.Game;
 import com.example.SpearClient.R;
 
-public class ToRegisterBoard extends GameObject {
+public class ToLoginBoard extends GameObject {
     private TextRenderer textRenderer;
     private GUITransform transform;
 
@@ -21,7 +21,7 @@ public class ToRegisterBoard extends GameObject {
         attachComponent(textRenderer);
 
         textRenderer.getTextView().setTextColor(Game.instance.getResources().getColor(R.color.loginColor));
-        textRenderer.getTextView().setText("회원가입");
+        textRenderer.getTextView().setText("로그인");
         textRenderer.getTextView().setTextSize(16);
         transform.position.x = 2.1f;
         transform.position.y = -1.2f;
@@ -36,7 +36,7 @@ public class ToRegisterBoard extends GameObject {
                 if (Math.abs(Input.getTouchUIPos(i).x - transform.position.x) <= 300 / 300f
                         && Math.abs(Input.getTouchUIPos(i).y - transform.position.y) <= 60 / 200f) { // 버튼을 클릭했을 경우
                     getParent().destroy();
-                    Game.engine.nowScene.objs.add(new RegisterBoard());
+                    Game.engine.nowScene.objs.add(new LoginBoard());
                 }
             }
         }

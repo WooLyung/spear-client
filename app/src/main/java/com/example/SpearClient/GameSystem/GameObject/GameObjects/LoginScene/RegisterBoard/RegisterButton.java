@@ -1,4 +1,4 @@
-package com.example.SpearClient.GameSystem.GameObject.GameObjects.LoginScene;
+package com.example.SpearClient.GameSystem.GameObject.GameObjects.LoginScene.RegisterBoard;
 
 import android.util.Log;
 import android.widget.Toast;
@@ -27,13 +27,14 @@ public class RegisterButton extends GameObject {
     public void start() {
         spriteRenderer = new SpriteRenderer();
         attachComponent(spriteRenderer);
-        spriteRenderer.bindingImage(GLRenderer.findImage("test_button"));
+        spriteRenderer.bindingImage(GLRenderer.findImage("login_button"));
 
         transform = new GUITransform();
         attachComponent(transform);
-
-        transform.position.x = 4;
-        transform.position.y = -3;
+        transform.position.x = 0;
+        transform.position.y = -2.6f;
+        transform.scale.x = 1000/1470f;
+        transform.scale.y = 1000/1470f;
     }
 
     @Override
@@ -42,7 +43,8 @@ public class RegisterButton extends GameObject {
 
         for (int i = 0; i < 5; i++) {
             if (Input.getTouchState(i) == Input.TOUCH_STATE.DOWN) {
-                if (Vector.distanceDouble(Input.getTouchUIPos(i), transform.position) <= 140/100f * 140/100f) { // 버튼을 클릭했을 경우
+                if (Math.abs(Input.getTouchUIPos(i).x - transform.position.x) <= 300 / 100f
+                        && Math.abs(Input.getTouchUIPos(i).y - transform.position.y) <= 60 / 100f) { // 버튼을 클릭했을 경우
                     String id = ((EditTextRenderer) Game.engine.nowScene.findObjectByName("input_id").getComponent("editTextRenderer")).getEditText().getText().toString();
                     String password = ((EditTextRenderer) Game.engine.nowScene.findObjectByName("input_password").getComponent("editTextRenderer")).getEditText().getText().toString();
                     String name = ((EditTextRenderer) Game.engine.nowScene.findObjectByName("input_name").getComponent("editTextRenderer")).getEditText().getText().toString();

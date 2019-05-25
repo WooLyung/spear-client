@@ -1,5 +1,7 @@
 package com.example.SpearClient.GameSystem.GameObject.GameObjects.LoginScene.LoginBoard;
 
+import android.graphics.Typeface;
+
 import com.example.SpearClient.GameSystem.Component.Components.RendererComponent.Renderers.TextRenderer;
 import com.example.SpearClient.GameSystem.Component.Components.TransformComponent.Transforms.GUITransform;
 import com.example.SpearClient.GameSystem.GameObject.GameObject;
@@ -20,7 +22,7 @@ public class LoginTitle extends GameObject {
 
         textRenderer.getTextView().setTextColor(Game.instance.getResources().getColor(R.color.loginColor));
         textRenderer.getTextView().setText("결투 지원서");
-        textRenderer.getTextView().setTextSize(50000 / Game.screenWidth);
+        textRenderer.getTextView().setTextSize(33);
         transform.position.x = 0;
         transform.position.y = 2.6f;
     }

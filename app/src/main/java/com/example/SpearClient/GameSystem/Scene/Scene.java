@@ -4,6 +4,7 @@ import com.example.SpearClient.GameSystem.Camera;
 import com.example.SpearClient.GameSystem.GameObject.GameObject;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import javax.microedition.khronos.opengles.GL10;
 
@@ -15,16 +16,26 @@ abstract public class Scene {
     abstract public void start();
 
     public void update() {
-        for (GameObject gameObject : objs) {
+        Iterator<GameObject> iter = objs.iterator();
+        while (iter.hasNext()) {
+            GameObject gameObject = iter.next();
             if (gameObject.getIsActive())
                 gameObject.update();
         }
     }
 
     public void render(GL10 gl) {
-        for (GameObject gameObject : objs) {
-            if (gameObject.getIsActive() && (gameObject.getRenderer() == null || gameObject.getRenderer().getIsVisible()))
-                gameObject.render(gl);
+        Iterator<GameObject> iter = objs.iterator();
+        while (iter.hasNext()) {
+            try {
+                GameObject gameObject = iter.next();
+                if (gameObject.getIsActive() && (gameObject.getRenderer() == null || gameObject.getRenderer().getIsVisible()))
+                    gameObject.render(gl);
+            }
+            catch (Exception e){
+                break;
+            }
+
         }
     }
 

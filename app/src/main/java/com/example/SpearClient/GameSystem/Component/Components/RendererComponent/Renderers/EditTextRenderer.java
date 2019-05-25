@@ -24,7 +24,6 @@ public class EditTextRenderer extends Component {
         setName("editTextRenderer");
 
         editText = new EditText(Game.instance);
-        setText("text");
     }
 
     @Override
@@ -64,8 +63,13 @@ public class EditTextRenderer extends Component {
 
     @Override
     public void finish() {
-        if (isExist == true)
-            Game.instance.mainView.removeView(editText);
+        if (isExist == true) {
+            Game.instance.runOnUiThread(new Runnable() {
+                public void run() {
+                    Game.instance.mainView.removeView(editText);
+                }
+            });
+        }
     }
 
     public String getText() {

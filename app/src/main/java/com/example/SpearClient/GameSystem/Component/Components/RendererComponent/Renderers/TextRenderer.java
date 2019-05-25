@@ -1,5 +1,6 @@
 package com.example.SpearClient.GameSystem.Component.Components.RendererComponent.Renderers;
 
+import android.util.Log;
 import android.widget.TextView;
 
 import com.example.SpearClient.GameSystem.Component.Component;
@@ -23,7 +24,6 @@ public class TextRenderer extends Component {
         setName("textRenderer");
 
         textView = new TextView(Game.instance);
-        setText("text");
     }
 
     @Override
@@ -61,8 +61,13 @@ public class TextRenderer extends Component {
 
     @Override
     public void finish() {
-        if (isExist == true)
-            Game.instance.mainView.removeView(textView);
+        if (isExist == true) {
+            Game.instance.runOnUiThread(new Runnable() {
+                public void run() {
+                    Game.instance.mainView.removeView(textView);
+                }
+            });
+        }
     }
 
     public String getText() {

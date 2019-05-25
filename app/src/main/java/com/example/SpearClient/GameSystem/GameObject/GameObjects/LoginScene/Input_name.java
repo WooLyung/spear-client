@@ -2,6 +2,7 @@ package com.example.SpearClient.GameSystem.GameObject.GameObjects.LoginScene;
 
 import android.graphics.Color;
 import android.text.InputType;
+import android.util.DisplayMetrics;
 
 import com.example.SpearClient.GameSystem.Component.Components.RendererComponent.Renderers.EditTextRenderer;
 import com.example.SpearClient.GameSystem.Component.Components.TransformComponent.Transforms.GUITransform;
@@ -29,9 +30,10 @@ public class Input_name extends GameObject {
         editTextRenderer.getEditText().setHintTextColor(Game.instance.getResources().getColor(R.color.loginColorHint));
         editTextRenderer.getEditText().setInputType(InputType.TYPE_CLASS_TEXT);
         editTextRenderer.getEditText().setText("");
-        editTextRenderer.getEditText().setMaxWidth(1000000 / Game.screenWidth);
-        editTextRenderer.getEditText().setWidth(1000000 / Game.screenWidth);
-        editTextRenderer.getEditText().setTextSize(30000 / Game.screenWidth);
+        float d = Game.instance.getResources().getDisplayMetrics().density;
+        editTextRenderer.getEditText().setMaxWidth((int)(220 * d));
+        editTextRenderer.getEditText().setWidth((int)(220 * d));
+        editTextRenderer.getEditText().setTextSize(23);
         transform.position.x = 0;
         transform.position.y = -1;
     }
