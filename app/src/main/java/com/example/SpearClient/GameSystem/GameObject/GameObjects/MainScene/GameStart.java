@@ -8,6 +8,7 @@ import com.example.SpearClient.GameSystem.Component.Components.RendererComponent
 import com.example.SpearClient.GameSystem.Component.Components.TransformComponent.Transforms.Transform;
 import com.example.SpearClient.GameSystem.GameObject.GameObject;
 import com.example.SpearClient.GraphicSystem.GL.GLRenderer;
+import com.example.SpearClient.GraphicSystem.GL.GLView;
 import com.example.SpearClient.Main.Game;
 import com.example.SpearClient.SocketIO.SocketIOBuilder;
 import com.example.SpearClient.Types.Vector;
@@ -17,7 +18,7 @@ import org.json.JSONObject;
 import io.socket.client.Socket;
 import io.socket.emitter.Emitter;
 
-public class Tutorial extends GameObject {
+public class GameStart extends GameObject {
     private SpriteRenderer spriteRenderer;
     private Transform transform;
 
@@ -25,12 +26,13 @@ public class Tutorial extends GameObject {
     public void start() {
         spriteRenderer = new SpriteRenderer();
         attachComponent(spriteRenderer);
-        spriteRenderer.bindingImage(GLRenderer.findImage("tutorial"));
+        spriteRenderer.bindingImage(GLRenderer.findImage("game_start"));
+        spriteRenderer.setZ_index(-9);
 
         transform = new Transform();
         attachComponent(transform);
-        transform.position.x = -5.2f;
-        transform.position.y = 0.5f;
+        transform.position.y = -20.48f - 3.5f;
+        transform.position.x = -(float) GLView.nowWidth + 4;
         transform.scale.x = 1000/1470f;
         transform.scale.y = 1000/1470f;
     }
@@ -41,9 +43,11 @@ public class Tutorial extends GameObject {
 
         for (int i = 0; i < 5; i++) {
             if (Input.getTouchState(i) == Input.TOUCH_STATE.DOWN) {
-                if (Vector.distanceDouble(Input.getTouchWorldPos(i), transform.position) <= 350/147f * 350/147f) { // 버튼을 클릭했을 경우
+                if (Math.abs(Input.getTouchUIPos(i).x - transform.position.x) <= 300 / 100f
+                        && Math.abs(Input.getTouchUIPos(i).y - transform.position.y) <= 60 / 100f) { // 버튼을 클릭했을 경우
+                    enter();
 
-                    Log.i("main", "tutorial");
+                    Log.i("main", "game_start");
                 }
             }
         }

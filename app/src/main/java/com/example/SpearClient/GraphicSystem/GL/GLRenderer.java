@@ -68,6 +68,14 @@ public class GLRenderer implements GLSurfaceView.Renderer {
         addImage(R.drawable.fastgame, "fastgame");
         addImage(R.drawable.tutorial, "tutorial");
         addImage(R.drawable.settings, "settings");
+        addImage(R.drawable.button_apply, "button_apply");
+        addImage(R.drawable.cloud, "cloud");
+        addImage(R.drawable.game_start, "game_start");
+        addImage(R.drawable.soil, "soil");
+        addImage(R.drawable.under_background, "under_background");
+        addImage(R.drawable.left_bricks, "left_bricks");
+        addImage(R.drawable.right_bricks, "right_bricks");
+        addImage(R.drawable.place_for_character, "place");
     }
 
     @Override

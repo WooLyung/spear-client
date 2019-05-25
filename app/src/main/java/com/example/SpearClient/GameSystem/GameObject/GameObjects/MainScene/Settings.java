@@ -41,7 +41,7 @@ public class Settings extends GameObject {
 
         for (int i = 0; i < 5; i++) {
             if (Input.getTouchState(i) == Input.TOUCH_STATE.DOWN) {
-                if (Vector.distanceDouble(Input.getTouchWorldPos(i), transform.position) <= 450/147f * 450/147f) { // 버튼을 클릭했을 경우
+                if (Vector.distanceDouble(Input.getTouchWorldPos(i), transform.position) <= 350/147f * 350/147f) { // 버튼을 클릭했을 경우
 
                     Log.i("main", "settings");
                 }

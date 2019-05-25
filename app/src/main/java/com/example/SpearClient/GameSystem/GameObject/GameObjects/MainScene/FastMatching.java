@@ -42,44 +42,11 @@ public class FastMatching extends GameObject {
         for (int i = 0; i < 5; i++) {
             if (Input.getTouchState(i) == Input.TOUCH_STATE.DOWN) {
                 if (Vector.distanceDouble(Input.getTouchWorldPos(i), transform.position) <= 450/147f * 450/147f) { // 버튼을 클릭했을 경우
-                    enter();
-
-                    Log.i("main", "fastmaching");
+                    ((MainScene)Game.engine.nowScene).state = MainScene.MAIN_SCENE_STATE.MOVE_DOWN;
+                    ((MainScene)Game.engine.nowScene).selectedGame = "fast";
+                    ((MainScene)Game.engine.nowScene).time = 0;
                 }
             }
-        }
-    }
-
-    private void enter() {
-        try {
-            Socket socket = SocketIOBuilder.getSocket();
-            socket.on("enterCallback", new Emitter.Listener() {
-                @Override
-                public void call(final Object... args) {
-                    Game.instance.runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            try {
-                                JSONObject jsonObject = new JSONObject(args[0].toString());
-                                String message = jsonObject.getString("message");
-                                if (message.equals("enter failed")) {
-                                    Toast.makeText(Game.instance, "빠른 매칭에 실패했습니다.", Toast.LENGTH_SHORT).show();
-                                }
-                                else if (message.equals("enter complete")) {
-                                    Toast.makeText(Game.instance, "빠른 매칭 성공, 룸아이디 : " + jsonObject.getInt("roomid"), Toast.LENGTH_SHORT).show();
-                                }
-                            }
-                            catch (Exception e) {
-                                e.printStackTrace();
-                            }
-
-                        }
-                    });
-                }
-            });
-            socket.emit("enter");
-        } catch (Exception e) {
-            e.printStackTrace();
         }
     }
 

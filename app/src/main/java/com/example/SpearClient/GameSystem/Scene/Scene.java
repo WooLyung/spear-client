@@ -18,9 +18,14 @@ abstract public class Scene {
     public void update() {
         Iterator<GameObject> iter = objs.iterator();
         while (iter.hasNext()) {
-            GameObject gameObject = iter.next();
-            if (gameObject.getIsActive())
-                gameObject.update();
+            try {
+                GameObject gameObject = iter.next();
+                if (gameObject.getIsActive())
+                    gameObject.update();
+            }
+            catch (Exception e) {
+                break;
+            }
         }
     }
 

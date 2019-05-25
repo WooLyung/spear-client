@@ -8,6 +8,7 @@ import com.example.SpearClient.GameSystem.Component.Components.RendererComponent
 import com.example.SpearClient.GameSystem.Component.Components.RendererComponent.Renderers.SpriteRenderer;
 import com.example.SpearClient.GameSystem.Component.Components.TransformComponent.Transforms.GUITransform;
 import com.example.SpearClient.GameSystem.GameObject.GameObject;
+import com.example.SpearClient.GameSystem.GameObject.GameObjects.LoginScene.LoginBoard.LoginBoard;
 import com.example.SpearClient.GameSystem.Scene.Scenes.MainScene;
 import com.example.SpearClient.GraphicSystem.GL.GLRenderer;
 import com.example.SpearClient.Main.Game;
@@ -27,7 +28,7 @@ public class RegisterButton extends GameObject {
     public void start() {
         spriteRenderer = new SpriteRenderer();
         attachComponent(spriteRenderer);
-        spriteRenderer.bindingImage(GLRenderer.findImage("login_button"));
+        spriteRenderer.bindingImage(GLRenderer.findImage("button_apply"));
 
         transform = new GUITransform();
         attachComponent(transform);
@@ -71,7 +72,9 @@ public class RegisterButton extends GameObject {
                                     Toast.makeText(Game.instance, "회원가입에 실패했습니다.", Toast.LENGTH_SHORT).show();
                                 }
                                 else if (message.equals("register complete")) {
-                                    Game.engine.changeScene(new MainScene());
+                                    Toast.makeText(Game.instance, "계정이 성공적으로 생성되었습니다.", Toast.LENGTH_SHORT).show();
+                                    getParent().destroy();
+                                    Game.engine.nowScene.objs.add(new LoginBoard());
                                 }
                             }
                             catch (Exception e) {
