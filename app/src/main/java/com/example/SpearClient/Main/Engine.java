@@ -13,7 +13,7 @@ public class Engine {
     public Scene nowScene;
 
     public Engine() {
-        changeScene(new LoginScene());
+        changeScene(new MainScene());
         start();
     }
 
