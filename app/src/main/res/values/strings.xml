@@ -1,100 +1,127 @@
 <resources>
     <string name="app_name">Spear Client</string>
-    <string name="testAnim">
-[{"name":"part1",
-  "rot":[{
-    "start":0,
-    "end":180,
-    "time":2
-  }, {
-    "start":180,
-    "end":0,
-    "time":2
-  }],
-  "posX":[{
-    "start":0,
-    "end":3,
-    "time":2
-  }, {
-    "start":3,
-    "end":0,
-    "time":2
-  }],
-  "posY":[{
-    "start":0,
-    "end":-3,
-    "time":2
-  }, {
-    "start":-3,
-    "end":0,
-    "time":4
-  }]
-}]
-    </string>
-
-  <string name="walk">
-[{"name":"body",
-  "rot":[{
-    "start":0,
-    "end":20,
-    "time":0.5
-  }, {
-    "start":20,
-    "end":-20,
-    "time":1
-  }, {
-    "start":-20,
-    "end":0,
-    "time":0.5
-  }]
-}, {"name":"frontLeg1",
-    "rot":[{
-      "start":90,
-      "end":100,
-      "time":0.5
-    }, {
-      "start":100,
-      "end":80,
-      "time":1
-    }, {
-      "start":80,
-      "end":90,
-      "time":0.5
-    }]
-}, {"name":"frontLeg2",
-    "rot":[{
-      "start":0,
-      "end":-50,
-      "time":0.5
-    }, {
-      "start":-50,
-      "end":0,
-      "time":1.5
-    }]
-}, {"name":"backLeg1",
-    "rot":[{
-      "start":90,
-      "end":70,
-      "time":0.5
-    }, {
-      "start":70,
-      "end":110,
-      "time":1
-    }, {
-      "start":110,
-      "end":90,
-      "time":0.5
-    }]
-}, {"name":"backLeg2",
-    "rot":[{
-      "start":0,
-      "end":30,
-      "time":1
-    }, {
-      "start":30,
-      "end":0,
-      "time":1
-    }]
+  	<string name="walk">
+[{
+	"name":"horse_body",
+	"rot":[{
+		"start":-45,
+		"end":45,
+		"time":1.5
+	}, {
+		"start":45,
+		"end":-45,
+		"time":1.5
+	}]
+}, {
+	"name":"horse_neck",
+	"rot":[{
+		"start":-45,
+		"end":45,
+		"time":1.5
+	}, {
+		"start":45,
+		"end":-45,
+		"time":1.5
+	}]
+}, {
+	"name":"horse_head",
+	"rot":[{
+		"start":-45,
+		"end":45,
+		"time":1.5
+	}, {
+		"start":45,
+		"end":-45,
+		"time":1.5
+	}]
+}, {
+	"name":"horse_leg_right_front_top",
+	"rot":[{
+		"start":-45,
+		"end":45,
+		"time":1.5
+	}, {
+		"start":45,
+		"end":-45,
+		"time":1.5
+	}]
+}, {
+	"name":"horse_leg_right_front_bottom",
+	"rot":[{
+		"start":-45,
+		"end":45,
+		"time":1.5
+	}, {
+		"start":45,
+		"end":-45,
+		"time":1.5
+	}]
+}, {
+	"name":"horse_leg_left_front_top",
+	"rot":[{
+		"start":-45,
+		"end":45,
+		"time":1.5
+	}, {
+		"start":45,
+		"end":-45,
+		"time":1.5
+	}]
+}, {
+	"name":"horse_leg_left_front_bottom",
+	"rot":[{
+		"start":-45,
+		"end":45,
+		"time":1.5
+	}, {
+		"start":45,
+		"end":-45,
+		"time":1.5
+	}]
+}, {
+	"name":"horse_leg_right_back_top",
+	"rot":[{
+		"start":-45,
+		"end":45,
+		"time":1.5
+	}, {
+		"start":45,
+		"end":-45,
+		"time":1.5
+	}]
+}, {
+	"name":"horse_leg_right_back_bottom",
+	"rot":[{
+		"start":-45,
+		"end":45,
+		"time":1.5
+	}, {
+		"start":45,
+		"end":-45,
+		"time":1.5
+	}]
+}, {
+	"name":"horse_leg_left_back_top",
+	"rot":[{
+		"start":-45,
+		"end":45,
+		"time":1.5
+	}, {
+		"start":45,
+		"end":-45,
+		"time":1.5
+	}]
+}, {
+	"name":"horse_leg_left_back_bottom",
+	"rot":[{
+		"start":-45,
+		"end":45,
+		"time":1.5
+	}, {
+		"start":45,
+		"end":-45,
+		"time":1.5
+	}]
 }]
     </string>
 </resources>

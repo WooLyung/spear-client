@@ -84,8 +84,16 @@ public class GLRenderer implements GLSurfaceView.Renderer {
 
         // 기사 스킨들
         addImage(R.drawable.knight_purple, "knight_purple");
+        addImage(R.drawable.knight_purple_ingame, "knight_purple_ingame");
 
-        // 보드들
+        // 말 파츠
+        addImage(R.drawable.horse_body, "horse_body");
+        addImage(R.drawable.horse_head, "horse_head");
+        addImage(R.drawable.horse_neck, "horse_neck");
+        addImage(R.drawable.horse_leg_right, "horse_leg_right");
+        addImage(R.drawable.horse_leg_left, "horse_leg_left");
+
+       // 보드들
         addImage(R.drawable.board, "board");
         addImage(R.drawable.board_skills, "board_skills");
         addImage(R.drawable.board_skin, "board_skin");
@@ -95,6 +103,7 @@ public class GLRenderer implements GLSurfaceView.Renderer {
         addImage(R.drawable.left_bricks, "left_bricks");
         addImage(R.drawable.right_bricks, "right_bricks");
         addImage(R.drawable.place, "place");
+        addImage(R.drawable.empty, "empty");
     }
 
     @Override

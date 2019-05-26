@@ -20,7 +20,7 @@ public class MoveLeft extends GameObject {
         spriteRenderer = new SpriteRenderer();
         attachComponent(spriteRenderer);
         spriteRenderer.bindingImage(GLRenderer.findImage("button_move_left"));
-        spriteRenderer.setZ_index(10);
+        spriteRenderer.setZ_index(20);
 
         transform = new GUITransform();
         attachComponent(transform);
