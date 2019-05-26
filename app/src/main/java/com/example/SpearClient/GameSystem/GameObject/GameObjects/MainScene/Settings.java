@@ -50,36 +50,30 @@ public class Settings extends GameObject {
     }
 
     private void enter() {
-        try {
-            Socket socket = SocketIOBuilder.getSocket();
-            socket.on("enterCallback", new Emitter.Listener() {
-                @Override
-                public void call(final Object... args) {
-                    Game.instance.runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            try {
-                                JSONObject jsonObject = new JSONObject(args[0].toString());
-                                String message = jsonObject.getString("message");
-                                if (message.equals("enter failed")) {
-                                    Toast.makeText(Game.instance, "빠른 매칭에 실패했습니다.", Toast.LENGTH_SHORT).show();
-                                }
-                                else if (message.equals("enter complete")) {
-                                    Toast.makeText(Game.instance, "빠른 매칭 성공, 룸아이디 : " + jsonObject.getInt("roomid"), Toast.LENGTH_SHORT).show();
-                                }
+        SocketIOBuilder.getInstance().enter(new Emitter.Listener() {
+            @Override
+            public void call(final Object... args) {
+                Game.instance.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            JSONObject jsonObject = new JSONObject(args[0].toString());
+                            String message = jsonObject.getString("message");
+                            if (message.equals("enter failed")) {
+                                Toast.makeText(Game.instance, "빠른 매칭에 실패했습니다.", Toast.LENGTH_SHORT).show();
                             }
-                            catch (Exception e) {
-                                e.printStackTrace();
+                            else if (message.equals("enter complete")) {
+                                Toast.makeText(Game.instance, "빠른 매칭 성공, 룸아이디 : " + jsonObject.getInt("roomid"), Toast.LENGTH_SHORT).show();
                             }
-
                         }
-                    });
-                }
-            });
-            socket.emit("enter");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+                        catch (Exception e) {
+                            e.printStackTrace();
+                        }
+
+                    }
+                });
+            }
+        });
     }
 
     @Override

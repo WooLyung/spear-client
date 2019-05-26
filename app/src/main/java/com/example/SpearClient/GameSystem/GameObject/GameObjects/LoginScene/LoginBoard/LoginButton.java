@@ -1,6 +1,5 @@
 package com.example.SpearClient.GameSystem.GameObject.GameObjects.LoginScene.LoginBoard;
 
-import android.util.Log;
 import android.widget.Toast;
 
 import com.example.SpearClient.GameIO.Input;
@@ -12,12 +11,8 @@ import com.example.SpearClient.GameSystem.Scene.Scenes.MainScene;
 import com.example.SpearClient.GraphicSystem.GL.GLRenderer;
 import com.example.SpearClient.Main.Game;
 import com.example.SpearClient.SocketIO.SocketIOBuilder;
-import com.example.SpearClient.Types.Vector;
 
-import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.net.URISyntaxException;
 
 import io.socket.client.Socket;
 import io.socket.emitter.Emitter;
@@ -59,8 +54,7 @@ public class LoginButton extends GameObject {
 
     private void login(String id, String password) {
         try {
-            Socket socket = SocketIOBuilder.getSocket();
-            socket.on("loginCallback", new Emitter.Listener() {
+            SocketIOBuilder.getInstance().login(id, password, new Emitter.Listener() {
                 @Override
                 public void call(final Object... args) {
                     Game.instance.runOnUiThread(new Runnable() {
@@ -84,7 +78,6 @@ public class LoginButton extends GameObject {
                     });
                 }
             });
-            socket.emit("login", new JSONObject("{username: \""+id+"\", password: \""+password+"\"}"));
         } catch (Exception e) {
             e.printStackTrace();
         }
