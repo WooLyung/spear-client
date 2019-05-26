@@ -26,7 +26,7 @@ public class GameStart extends GameObject {
     public void start() {
         spriteRenderer = new SpriteRenderer();
         attachComponent(spriteRenderer);
-        spriteRenderer.bindingImage(GLRenderer.findImage("game_start"));
+        spriteRenderer.bindingImage(GLRenderer.findImage("button_gamestart"));
         spriteRenderer.setZ_index(-9);
 
         transform = new Transform();
@@ -47,7 +47,7 @@ public class GameStart extends GameObject {
                         && Math.abs(Input.getTouchUIPos(i).y - transform.position.y) <= 60 / 100f) { // 버튼을 클릭했을 경우
                     enter();
 
-                    Log.i("main", "game_start");
+                    Log.i("main", "button_gamestart");
                 }
             }
         }

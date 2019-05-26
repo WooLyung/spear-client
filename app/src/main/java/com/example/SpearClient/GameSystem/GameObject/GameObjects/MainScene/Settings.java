@@ -25,7 +25,7 @@ public class Settings extends GameObject {
     public void start() {
         spriteRenderer = new SpriteRenderer();
         attachComponent(spriteRenderer);
-        spriteRenderer.bindingImage(GLRenderer.findImage("settings"));
+        spriteRenderer.bindingImage(GLRenderer.findImage("button_settings"));
 
         transform = new Transform();
         attachComponent(transform);
@@ -43,7 +43,7 @@ public class Settings extends GameObject {
             if (Input.getTouchState(i) == Input.TOUCH_STATE.DOWN) {
                 if (Vector.distanceDouble(Input.getTouchWorldPos(i), transform.position) <= 350/147f * 350/147f) { // 버튼을 클릭했을 경우
 
-                    Log.i("main", "settings");
+                    Log.i("main", "button_settings");
                 }
             }
         }

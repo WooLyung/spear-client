@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">GLES Game Engine</string>
+    <string name="app_name">Spear Client</string>
     <string name="testAnim">
 [{"name":"part1",
   "rot":[{

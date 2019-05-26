@@ -57,25 +57,44 @@ public class GLRenderer implements GLSurfaceView.Renderer {
         this.context = context;
 
         // 이미지 정보 목록에 각 이미지들을 미리 추가함
+
+        // 인트로씬 이미지
         addImage(R.drawable.loading_image1, "loading_image1");
         addImage(R.drawable.loading_image2, "loading_image2");
         addImage(R.drawable.intro_image, "intro_image");
-        addImage(R.drawable.test_button, "test_button");
+
+        // 버튼들
+        addImage(R.drawable.button_test, "button_test");
+        addImage(R.drawable.button_login, "button_login");
+        addImage(R.drawable.button_fastgame, "button_fastgame");
+        addImage(R.drawable.button_tutorial, "button_tutorial");
+        addImage(R.drawable.button_settings, "button_settings");
+        addImage(R.drawable.button_register, "button_register");
+        addImage(R.drawable.button_gamestart, "button_gamestart");
+        addImage(R.drawable.button_move_left, "button_move_left");
+        addImage(R.drawable.button_move_right, "button_move_right");
+
+        // 배경들
+        addImage(R.drawable.background_ground, "background_ground");
+        addImage(R.drawable.background_sky, "background_sky");
+        addImage(R.drawable.background_cloud, "background_cloud");
+        addImage(R.drawable.background_soil, "background_soil");
+        addImage(R.drawable.background_under, "background_under");
+        addImage(R.drawable.background_black, "background_black");
+
+        // 기사 스킨들
+        addImage(R.drawable.knight_purple, "knight_purple");
+
+        // 보드들
         addImage(R.drawable.board, "board");
-        addImage(R.drawable.login_button, "login_button");
-        addImage(R.drawable.ground, "ground");
-        addImage(R.drawable.sky, "sky");
-        addImage(R.drawable.fastgame, "fastgame");
-        addImage(R.drawable.tutorial, "tutorial");
-        addImage(R.drawable.settings, "settings");
-        addImage(R.drawable.button_apply, "button_apply");
-        addImage(R.drawable.cloud, "cloud");
-        addImage(R.drawable.game_start, "game_start");
-        addImage(R.drawable.soil, "soil");
-        addImage(R.drawable.under_background, "under_background");
+        addImage(R.drawable.board_skills, "board_skills");
+        addImage(R.drawable.board_skin, "board_skin");
+        addImage(R.drawable.board_gray, "board_gray");
+
+        // 기타
         addImage(R.drawable.left_bricks, "left_bricks");
         addImage(R.drawable.right_bricks, "right_bricks");
-        addImage(R.drawable.place_for_character, "place");
+        addImage(R.drawable.place, "place");
     }
 
     @Override

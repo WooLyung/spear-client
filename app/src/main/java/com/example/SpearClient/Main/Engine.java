@@ -2,6 +2,7 @@ package com.example.SpearClient.Main;
 
 import com.example.SpearClient.GameSystem.Scene.*;
 import com.example.SpearClient.GameIO.Input;
+import com.example.SpearClient.GameSystem.Scene.Scenes.InGameScene;
 import com.example.SpearClient.GameSystem.Scene.Scenes.IntroScene;
 import com.example.SpearClient.GameSystem.Scene.Scenes.LoginScene;
 import com.example.SpearClient.GameSystem.Scene.Scenes.MainScene;
@@ -13,7 +14,7 @@ public class Engine {
     public Scene nowScene;
 
     public Engine() {
-        changeScene(new IntroScene());
+        changeScene(new InGameScene());
         start();
     }
 

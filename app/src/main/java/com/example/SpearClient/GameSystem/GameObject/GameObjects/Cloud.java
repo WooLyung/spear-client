@@ -14,7 +14,7 @@ public class Cloud extends GameObject {
     public void start() {
         spriteRenderer = new SpriteRenderer();
         attachComponent(spriteRenderer);
-        spriteRenderer.bindingImage(GLRenderer.findImage("cloud"));
+        spriteRenderer.bindingImage(GLRenderer.findImage("background_cloud"));
         spriteRenderer.setZ_index(-9);
 
         transform = new Transform();
@@ -28,7 +28,7 @@ public class Cloud extends GameObject {
             public void start() {
                 SpriteRenderer spriteRenderer = new SpriteRenderer();
                 attachComponent(spriteRenderer);
-                spriteRenderer.bindingImage(GLRenderer.findImage("cloud"));
+                spriteRenderer.bindingImage(GLRenderer.findImage("background_cloud"));
                 spriteRenderer.setZ_index(-9);
 
                 transform = new Transform();
@@ -40,7 +40,7 @@ public class Cloud extends GameObject {
             public void start() {
                 SpriteRenderer spriteRenderer = new SpriteRenderer();
                 attachComponent(spriteRenderer);
-                spriteRenderer.bindingImage(GLRenderer.findImage("cloud"));
+                spriteRenderer.bindingImage(GLRenderer.findImage("background_cloud"));
                 spriteRenderer.setZ_index(-9);
 
                 transform = new Transform();

@@ -14,7 +14,7 @@ public class Background extends GameObject {
     public void start() {
         spriteRenderer = new SpriteRenderer();
         attachComponent(spriteRenderer);
-        spriteRenderer.bindingImage(GLRenderer.findImage("sky"));
+        spriteRenderer.bindingImage(GLRenderer.findImage("background_sky"));
         spriteRenderer.setZ_index(-10);
 
         transform = new Transform();
@@ -25,7 +25,7 @@ public class Background extends GameObject {
             public void start() {
                 SpriteRenderer spriteRenderer = new SpriteRenderer();
                 attachComponent(spriteRenderer);
-                spriteRenderer.bindingImage(GLRenderer.findImage("ground"));
+                spriteRenderer.bindingImage(GLRenderer.findImage("background_ground"));
                 spriteRenderer.setZ_index(-2);
 
                 transform = new Transform();

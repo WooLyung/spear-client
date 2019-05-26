@@ -28,7 +28,7 @@ public class RegisterButton extends GameObject {
     public void start() {
         spriteRenderer = new SpriteRenderer();
         attachComponent(spriteRenderer);
-        spriteRenderer.bindingImage(GLRenderer.findImage("button_apply"));
+        spriteRenderer.bindingImage(GLRenderer.findImage("button_register"));
 
         transform = new GUITransform();
         attachComponent(transform);
