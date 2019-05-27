@@ -36,14 +36,6 @@ public class InGameScene extends Scene {
     @Override
     public void update() {
         super.update();
-
-        time += Game.deltaTime;
-
-        camera.angle += Game.deltaTime * 45;
-        camera.position.x = 2 * (float)Math.cos((double)time);
-        camera.position.y = 2 * (float)Math.sin((double)time);
-        camera.setZoomX(2 * ((float)Math.cos((double)time) + 1.1f));
-        camera.setZoomY(2 * ((float)Math.cos((double)time) + 1.1f));
     }
 
     @Override

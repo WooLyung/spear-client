@@ -41,8 +41,8 @@ public class MoveLeft extends GameObject {
             if (Input.getTouchState(i) == Input.TOUCH_STATE.DOWN
                 || Input.getTouchState(i) == Input.TOUCH_STATE.STAY) {
                 if (Vector.distanceDouble(Input.getTouchUIPos(i), transform.position) <= 150/147f * 150/147f) { // 버튼을 클릭했을 경우
-                    player.getTransform().position.x -= Game.deltaTime * 4;
-                    ((SpriteRenderer)player.getRenderer()).setIsFlip(true);
+
+
                 }
             }
         }

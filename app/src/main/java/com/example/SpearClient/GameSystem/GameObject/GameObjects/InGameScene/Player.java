@@ -3,6 +3,7 @@ package com.example.SpearClient.GameSystem.GameObject.GameObjects.InGameScene;
 import android.util.Log;
 
 import com.example.SpearClient.GameSystem.Component.Components.AnimationComponent.AnimationComponent;
+import com.example.SpearClient.GameSystem.Component.Components.PlayerMoveComponent;
 import com.example.SpearClient.GameSystem.Component.Components.RendererComponent.Renderers.SpriteRenderer;
 import com.example.SpearClient.GameSystem.Component.Components.TransformComponent.Transforms.Transform;
 import com.example.SpearClient.GameSystem.GameObject.GameObject;
@@ -13,6 +14,7 @@ import com.example.SpearClient.R;
 public class Player extends GameObject {
     SpriteRenderer spriteRenderer;
     AnimationComponent animationComponent;
+    PlayerMoveComponent playerMoveComponent;
 
     GameObject knight, horse;
 
@@ -47,12 +49,18 @@ public class Player extends GameObject {
 
         transform = new Transform();
         attachComponent(transform);
+        transform.position.y = -0.1f;
         transform.scale.x = 1000/1470f;
         transform.scale.y = 1000/1470f;
 
         animationComponent = new AnimationComponent();
         attachComponent(animationComponent);
         animationComponent.addAnimation(Game.instance.getResources().getString(R.string.walk));
+        animationComponent.addAnimation(Game.instance.getResources().getString(R.string.run));
+        animationComponent.addAnimation(Game.instance.getResources().getString(R.string.idle));
+
+        playerMoveComponent = new PlayerMoveComponent();
+        attachComponent(playerMoveComponent);
     }
 
     @Override
@@ -60,7 +68,7 @@ public class Player extends GameObject {
         super.update();
 
         if (animationComponent.getNowAnim() == -1) {
-            animationComponent.play(0);
+            animationComponent.play(2);
         }
     }
 
