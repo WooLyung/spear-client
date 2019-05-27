@@ -1,6 +1,10 @@
 package com.example.SpearClient.SocketIO;
 
 import android.util.Log;
+import android.widget.Toast;
+
+import com.example.SpearClient.GameSystem.GameObject.GameObjects.LoginScene.LoginBoard.LoginBoard;
+import com.example.SpearClient.Main.Game;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -18,9 +22,9 @@ public class SocketIOBuilder {
     private static final String TAG = "SocketIO";
     private static SocketIOBuilder instance = null;
 
-    public SocketIOBuilder(String serverUri) throws URISyntaxException {
+    private SocketIOBuilder(String serverUri) throws URISyntaxException {
         IO.Options opts = new IO.Options();
-        mSocket = IO.socket(new URI("http://spear-server.run.goorm.io"),opts);
+        mSocket = IO.socket(new URI(serverUri),opts);
         mSocket.connect();
 
         mSocket.on(Socket.EVENT_CONNECT, new Emitter.Listener() {
@@ -51,7 +55,7 @@ public class SocketIOBuilder {
         });
     }
 
-    public static Socket getSocket () {
+    public static SocketIOBuilder getInstance () {
         if (instance == null) {
             try {
                 instance = new SocketIOBuilder("http://spear-server.run.goorm.io");
@@ -59,6 +63,29 @@ public class SocketIOBuilder {
                 e.printStackTrace();
             }
         }
-        return instance.mSocket;
+        return instance;
+    }
+
+    public void register (String id, String password, String nickname, Emitter.Listener listener) {
+        try {
+            mSocket.emit("register", new JSONObject("{username: \""+id+"\", password: \""+password+"\", nickname: \""+nickname+"\"}"));
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        mSocket.on("registerCallback", listener);
+    }
+
+    public void login (String id, String password, Emitter.Listener listener) {
+        try {
+            mSocket.emit("login", new JSONObject("{username: \""+id+"\", password: \""+password+"\"}"));
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        mSocket.on("loginCallback", listener);
+    }
+
+    public void enter (Emitter.Listener listener) {
+        mSocket.emit("enter");
+        mSocket.on("enterCallback", listener);
     }
 }

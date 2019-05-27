@@ -1,6 +1,5 @@
 package com.example.SpearClient.GameSystem.GameObject.GameObjects.LoginScene.RegisterBoard;
 
-import android.util.Log;
 import android.widget.Toast;
 
 import com.example.SpearClient.GameIO.Input;
@@ -9,11 +8,9 @@ import com.example.SpearClient.GameSystem.Component.Components.RendererComponent
 import com.example.SpearClient.GameSystem.Component.Components.TransformComponent.Transforms.GUITransform;
 import com.example.SpearClient.GameSystem.GameObject.GameObject;
 import com.example.SpearClient.GameSystem.GameObject.GameObjects.LoginScene.LoginBoard.LoginBoard;
-import com.example.SpearClient.GameSystem.Scene.Scenes.MainScene;
 import com.example.SpearClient.GraphicSystem.GL.GLRenderer;
 import com.example.SpearClient.Main.Game;
 import com.example.SpearClient.SocketIO.SocketIOBuilder;
-import com.example.SpearClient.Types.Vector;
 
 import org.json.JSONObject;
 
@@ -58,8 +55,7 @@ public class RegisterButton extends GameObject {
 
     private void register(String id, String password, String name) {
         try {
-            Socket socket = SocketIOBuilder.getSocket();
-            socket.on("registerCallback", new Emitter.Listener() {
+            SocketIOBuilder.getInstance().register(id, password, name, new Emitter.Listener() {
                 @Override
                 public void call(final Object... args) {
                     Game.instance.runOnUiThread(new Runnable() {
@@ -85,7 +81,6 @@ public class RegisterButton extends GameObject {
                     });
                 }
             });
-            socket.emit("register", new JSONObject("{username: \""+id+"\", password: \""+password+"\", nickname: \""+name+"\"}"));
         } catch (Exception e) {
             e.printStackTrace();
         }

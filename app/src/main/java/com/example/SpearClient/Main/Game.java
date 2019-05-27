@@ -48,8 +48,6 @@ public class Game extends AppCompatActivity {
         // 시간 초기화
         preTime = System.currentTimeMillis();
 
-        startSocketCommunication();
-
         super.onCreate(savedInstanceState); // 조명 항상켜기
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
@@ -89,19 +87,6 @@ public class Game extends AppCompatActivity {
         GLView.defaultWidth = 10 * screenWidth / screenDiagonal;
         GLView.nowHeight = GLView.defaultHeight;
         GLView.nowWidth = GLView.defaultWidth;
-    }
-
-    private void startSocketCommunication() {
-
-
-
-/*        JSONObject jsonObject;
-        try { // json 만드는 코드
-            jsonObject = new JSONObject("{\"data\": \"message data\"}");
-        } catch (JSONException e) { // json 문법 오류시
-            throw new Error(e);
-        }
-        socket.emit("messageName", jsonObject); //이벤트네임, 데이터(JSONObject - json 포멧 데이터)*/
     }
 
     @Override
