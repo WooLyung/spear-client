@@ -44,12 +44,11 @@ public class GameStart extends GameObject {
 
         for (int i = 0; i < 5; i++) {
             if (Input.getTouchState(i) == Input.TOUCH_STATE.DOWN) {
-                if (Math.abs(Input.getTouchUIPos(i).x - transform.position.x) <= 300 / 100f
-                        && Math.abs(Input.getTouchUIPos(i).y - transform.position.y) <= 60 / 100f) { // 버튼을 클릭했을 경우
+                if (Math.abs(Input.getTouchWorldPos(i).x - transform.position.x) <= 300 / 100f
+                        && Math.abs(Input.getTouchWorldPos(i).y - transform.position.y) <= 60 / 100f) { // 버튼을 클릭했을 경우
                     enter();
 
                     Log.i("main", "button_gamestart");
-                    Game.engine.changeScene(new InGameScene());
                 }
             }
         }
@@ -70,6 +69,8 @@ public class GameStart extends GameObject {
                             }
                             else if (message.equals("enter complete")) {
                                 Toast.makeText(Game.instance, "빠른 매칭 성공, 룸아이디 : " + jsonObject.getInt("roomid"), Toast.LENGTH_SHORT).show();
+
+                                Game.engine.changeScene(new InGameScene());
                             }
                         }
                         catch (Exception e) {
