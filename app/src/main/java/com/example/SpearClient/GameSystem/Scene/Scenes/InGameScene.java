@@ -31,6 +31,9 @@ public class InGameScene extends Scene {
         objs.add(moveRight);
         objs.add(new Background());
         objs.add(new Cloud());
+
+        camera.setZoomX(0.7f);
+        camera.setZoomY(0.7f);
     }
 
     @Override

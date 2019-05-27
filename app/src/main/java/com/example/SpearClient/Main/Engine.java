@@ -14,7 +14,7 @@ public class Engine {
     public Scene nowScene;
 
     public Engine() {
-        changeScene(new InGameScene());
+        changeScene(new IntroScene());
         start();
     }
 

@@ -66,10 +66,6 @@ public class Player extends GameObject {
     @Override
     public void update() {
         super.update();
-
-        if (animationComponent.getNowAnim() == -1) {
-            animationComponent.play(2);
-        }
     }
 
     private void createHorse() {

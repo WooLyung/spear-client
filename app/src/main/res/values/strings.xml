@@ -384,6 +384,76 @@
 		"end":0,
 		"time":0.4
 	}]
+}, {
+	"name":"horse_head",
+	"rot":[{
+		"start":0,
+		"end":0,
+		"time":0.1
+	}]
+}, {
+	"name":"horse_body",
+	"rot":[{
+		"start":0,
+		"end":0,
+		"time":0.1
+	}]
+}, {
+	"name":"horse_leg_right_front_top",
+	"rot":[{
+		"start":0,
+		"end":0,
+		"time":0.1
+	}]
+}, {
+	"name":"horse_leg_right_front_bottom",
+	"rot":[{
+		"start":0,
+		"end":0,
+		"time":0.1
+	}]
+}, {
+	"name":"horse_leg_left_front_top",
+	"rot":[{
+		"start":0,
+		"end":0,
+		"time":0.1
+	}]
+}, {
+	"name":"horse_leg_left_front_bottom",
+	"rot":[{
+		"start":0,
+		"end":0,
+		"time":0.1
+	}]
+}, {
+	"name":"horse_leg_right_back_top",
+	"rot":[{
+		"start":0,
+		"end":0,
+		"time":0.1
+	}]
+}, {
+	"name":"horse_leg_right_back_bottom",
+	"rot":[{
+		"start":0,
+		"end":0,
+		"time":0.1
+	}]
+}, {
+	"name":"horse_leg_left_back_top",
+	"rot":[{
+		"start":0,
+		"end":0,
+		"time":0.1
+	}]
+}, {
+	"name":"horse_leg_left_back_bottom",
+	"rot":[{
+		"start":0,
+		"end":0,
+		"time":0.1
+	}]
 }]
 	</string>
 </resources>

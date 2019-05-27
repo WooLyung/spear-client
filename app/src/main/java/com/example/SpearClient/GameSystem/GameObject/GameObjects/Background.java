@@ -19,6 +19,7 @@ public class Background extends GameObject {
 
         transform = new Transform();
         attachComponent(transform);
+        transform.position.y = 2.5f;
 
         GameObject ground = new GameObject() {
             @Override
@@ -30,7 +31,7 @@ public class Background extends GameObject {
 
                 transform = new Transform();
                 transform.anchor.y = 0;
-                transform.position.y = -2;
+                transform.position.y = -4.5f;
             }
         };
 
