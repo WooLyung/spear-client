@@ -7,6 +7,7 @@ import com.example.SpearClient.GameIO.Input;
 import com.example.SpearClient.GameSystem.Component.Components.RendererComponent.Renderers.SpriteRenderer;
 import com.example.SpearClient.GameSystem.Component.Components.TransformComponent.Transforms.Transform;
 import com.example.SpearClient.GameSystem.GameObject.GameObject;
+import com.example.SpearClient.GameSystem.Scene.Scenes.InGameScene;
 import com.example.SpearClient.GraphicSystem.GL.GLRenderer;
 import com.example.SpearClient.GraphicSystem.GL.GLView;
 import com.example.SpearClient.Main.Game;
@@ -48,6 +49,7 @@ public class GameStart extends GameObject {
                     enter();
 
                     Log.i("main", "button_gamestart");
+                    Game.engine.changeScene(new InGameScene());
                 }
             }
         }

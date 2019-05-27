@@ -99,6 +99,10 @@ public class GLRenderer implements GLSurfaceView.Renderer {
         addImage(R.drawable.board_skin, "board_skin");
         addImage(R.drawable.board_gray, "board_gray");
 
+        // UI
+        addImage(R.drawable.hpbar_back, "hpbar_back");
+        addImage(R.drawable.hpbar_front, "hpbar_front");
+
         // 기타
         addImage(R.drawable.left_bricks, "left_bricks");
         addImage(R.drawable.right_bricks, "right_bricks");
