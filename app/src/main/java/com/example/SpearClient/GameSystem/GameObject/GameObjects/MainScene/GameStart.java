@@ -69,8 +69,6 @@ public class GameStart extends GameObject {
                             }
                             else if (message.equals("enter complete")) {
                                 Toast.makeText(Game.instance, "빠른 매칭 성공, 룸아이디 : " + jsonObject.getInt("roomid"), Toast.LENGTH_SHORT).show();
-
-                                Game.engine.changeScene(new InGameScene());
                             }
                         }
                         catch (Exception e) {

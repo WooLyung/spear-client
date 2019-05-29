@@ -24,7 +24,7 @@ public class MyHP extends GameObject {
                 spriteRenderer = new SpriteRenderer();
                 attachComponent(spriteRenderer);
                 spriteRenderer.bindingImage(GLRenderer.findImage("hpbar_front"));
-                spriteRenderer.setZ_index(21);
+                spriteRenderer.setZ_index(51);
 
                 transform = new Transform();
                 attachComponent(transform);
@@ -40,7 +40,7 @@ public class MyHP extends GameObject {
         spriteRenderer = new SpriteRenderer();
         attachComponent(spriteRenderer);
         spriteRenderer.bindingImage(GLRenderer.findImage("hpbar_back"));
-        spriteRenderer.setZ_index(20);
+        spriteRenderer.setZ_index(50);
 
         transform = new GUITransform();
         attachComponent(transform);

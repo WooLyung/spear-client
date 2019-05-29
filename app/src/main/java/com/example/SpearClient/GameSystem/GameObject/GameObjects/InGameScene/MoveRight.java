@@ -25,7 +25,7 @@ public class MoveRight extends GameObject {
         spriteRenderer = new SpriteRenderer();
         attachComponent(spriteRenderer);
         spriteRenderer.bindingImage(GLRenderer.findImage("button_move_right"));
-        spriteRenderer.setZ_index(20);
+        spriteRenderer.setZ_index(50);
 
         transform = new GUITransform();
         attachComponent(transform);
