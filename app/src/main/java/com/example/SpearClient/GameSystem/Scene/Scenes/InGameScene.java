@@ -56,12 +56,14 @@ public class InGameScene extends Scene {
 
         time += Game.deltaTime;
 
-        camera.position.x = (player.getTransform().position.x + enemy.getTransform().position.x) / 2f;
-        float distance = Math.abs(player.getTransform().position.x - enemy.getTransform().position.x);
-        float zoom = Math.min((float)Math.sqrt(GLView.defaultWidth / distance * 2) - 0.3f, 0.7f);
+        if (player != null && enemy != null) {
+            camera.position.x = (player.getTransform().position.x + enemy.getTransform().position.x) / 2f;
+            float distance = Math.abs(player.getTransform().position.x - enemy.getTransform().position.x);
+            float zoom = Math.min((float)Math.sqrt(GLView.defaultWidth / distance * 2) - 0.3f, 0.7f);
 
-        camera.setZoomX(zoom);
-        camera.setZoomY(zoom);
+            camera.setZoomX(zoom);
+            camera.setZoomY(zoom);
+        }
     }
 
     @Override

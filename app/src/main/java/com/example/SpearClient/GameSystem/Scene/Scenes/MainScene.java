@@ -156,7 +156,7 @@ public class MainScene extends Scene {
                 time = 0;
                 state = MAIN_SCENE_STATE.DOWN;
                 camera.position.y = -20.48f;
-                ((TextRenderer)findObjectByName("name").getComponent("textRenderer")).getTextView().setText("보라 기사");
+                ((TextRenderer)findObjectByName("name").getComponent("textRenderer")).setText("보라 기사");
 
                 float[] color2 = {
                         1, 1, 1, 0,

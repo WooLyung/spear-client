@@ -5,6 +5,7 @@ import com.example.SpearClient.GameSystem.Component.Components.RendererComponent
 import com.example.SpearClient.GameSystem.Component.Components.TransformComponent.Transforms.GUITransform;
 import com.example.SpearClient.GameSystem.GameObject.GameObject;
 import com.example.SpearClient.GameSystem.GameObject.GameObjects.LoginScene.LoginBoard.LoginBoard;
+import com.example.SpearClient.GameSystem.Scene.Scenes.LoginScene;
 import com.example.SpearClient.Main.Game;
 import com.example.SpearClient.R;
 
@@ -35,8 +36,7 @@ public class ToLoginBoard extends GameObject {
             if (Input.getTouchState(i) == Input.TOUCH_STATE.DOWN) {
                 if (Math.abs(Input.getTouchUIPos(i).x - transform.position.x) <= 300 / 300f
                         && Math.abs(Input.getTouchUIPos(i).y - transform.position.y) <= 60 / 200f) { // 버튼을 클릭했을 경우
-                    getParent().destroy();
-                    Game.engine.nowScene.objs.add(new LoginBoard());
+                    Game.engine.changeScene(new LoginScene());
                 }
             }
         }

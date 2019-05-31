@@ -88,4 +88,8 @@ public class SocketIOBuilder {
         mSocket.emit("enter");
         mSocket.on("enterCallback", listener);
     }
+
+    public void gamestart (Emitter.Listener listener) {
+        mSocket.on("gamestart", listener);
+    }
 }

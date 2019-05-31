@@ -8,6 +8,7 @@ import com.example.SpearClient.GameSystem.Component.Components.RendererComponent
 import com.example.SpearClient.GameSystem.Component.Components.TransformComponent.Transforms.Transform;
 import com.example.SpearClient.GameSystem.GameObject.GameObject;
 import com.example.SpearClient.GameSystem.Scene.Scenes.InGameScene;
+import com.example.SpearClient.GameSystem.Scene.Scenes.MachingScene;
 import com.example.SpearClient.GraphicSystem.GL.GLRenderer;
 import com.example.SpearClient.GraphicSystem.GL.GLView;
 import com.example.SpearClient.Main.Game;
@@ -47,8 +48,6 @@ public class GameStart extends GameObject {
                 if (Math.abs(Input.getTouchWorldPos(i).x - transform.position.x) <= 300 / 100f
                         && Math.abs(Input.getTouchWorldPos(i).y - transform.position.y) <= 60 / 100f) { // 버튼을 클릭했을 경우
                     enter();
-
-                    Log.i("main", "button_gamestart");
                 }
             }
         }
@@ -68,7 +67,12 @@ public class GameStart extends GameObject {
                                 Toast.makeText(Game.instance, "빠른 매칭에 실패했습니다.", Toast.LENGTH_SHORT).show();
                             }
                             else if (message.equals("enter complete")) {
-                                Toast.makeText(Game.instance, "빠른 매칭 성공, 룸아이디 : " + jsonObject.getInt("roomid"), Toast.LENGTH_SHORT).show();
+                                if (jsonObject.getBoolean("startGame")) {
+                                    Game.engine.changeScene(new InGameScene());
+                                }
+                                else {
+                                    Game.engine.changeScene(new MachingScene());
+                                }
                             }
                         }
                         catch (Exception e) {
