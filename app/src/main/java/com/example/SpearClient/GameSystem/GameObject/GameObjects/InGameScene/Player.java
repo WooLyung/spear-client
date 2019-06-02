@@ -4,6 +4,7 @@ import android.util.Log;
 
 import com.example.SpearClient.GameSystem.Component.Components.AnimationComponent.AnimationComponent;
 import com.example.SpearClient.GameSystem.Component.Components.PlayerMoveComponent;
+import com.example.SpearClient.GameSystem.Component.Components.PlayerStateComponent;
 import com.example.SpearClient.GameSystem.Component.Components.RendererComponent.Renderers.SpriteRenderer;
 import com.example.SpearClient.GameSystem.Component.Components.TransformComponent.Transforms.Transform;
 import com.example.SpearClient.GameSystem.GameObject.GameObject;
@@ -15,6 +16,7 @@ public class Player extends GameObject {
     SpriteRenderer spriteRenderer;
     AnimationComponent animationComponent;
     PlayerMoveComponent playerMoveComponent;
+    PlayerStateComponent playerStateComponent;
 
     GameObject knight, horse;
 
@@ -62,6 +64,9 @@ public class Player extends GameObject {
 
         playerMoveComponent = new PlayerMoveComponent();
         attachComponent(playerMoveComponent);
+
+        playerStateComponent = new PlayerStateComponent();
+        attachComponent(playerStateComponent);
     }
 
     @Override

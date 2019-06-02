@@ -1,6 +1,7 @@
 package com.example.SpearClient.GameSystem.GameObject.GameObjects.InGameScene;
 
 import com.example.SpearClient.GameSystem.Component.Components.AnimationComponent.AnimationComponent;
+import com.example.SpearClient.GameSystem.Component.Components.EnemyStateComponent;
 import com.example.SpearClient.GameSystem.Component.Components.PlayerMoveComponent;
 import com.example.SpearClient.GameSystem.Component.Components.RendererComponent.Renderers.SpriteRenderer;
 import com.example.SpearClient.GameSystem.Component.Components.TransformComponent.Transforms.Transform;
@@ -11,6 +12,7 @@ import com.example.SpearClient.R;
 
 public class Enemy extends GameObject {
     SpriteRenderer spriteRenderer;
+    EnemyStateComponent enemyStateComponent;
 
     GameObject knight, horse;
     GameObject horse_body, horse_head, horse_neck,
@@ -55,6 +57,9 @@ public class Enemy extends GameObject {
         transform.position.y = -0.1f;
         transform.scale.x = 1000/1470f;
         transform.scale.y = 1000/1470f;
+
+        enemyStateComponent = new EnemyStateComponent();
+        attachComponent(enemyStateComponent);
     }
 
     @Override

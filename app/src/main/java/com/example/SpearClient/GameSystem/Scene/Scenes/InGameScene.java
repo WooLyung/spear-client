@@ -12,6 +12,8 @@ import com.example.SpearClient.GameSystem.GameObject.GameObjects.InGameScene.Mov
 import com.example.SpearClient.GameSystem.GameObject.GameObjects.InGameScene.MoveRight;
 import com.example.SpearClient.GameSystem.GameObject.GameObjects.InGameScene.MyHP;
 import com.example.SpearClient.GameSystem.GameObject.GameObjects.InGameScene.Player;
+import com.example.SpearClient.GameSystem.GameObject.GameObjects.InGameScene.Skill1;
+import com.example.SpearClient.GameSystem.GameObject.GameObjects.InGameScene.Skill2;
 import com.example.SpearClient.GameSystem.Scene.Scene;
 import com.example.SpearClient.GraphicSystem.GL.GLView;
 import com.example.SpearClient.Main.Game;
@@ -23,10 +25,12 @@ public class InGameScene extends Scene {
 
     Player player;
     Enemy enemy;
-    MoveLeft moveLeft;
-    MoveRight moveRight;
     MyHP myHP;
     EnemyHP enemyHP;
+    MoveLeft moveLeft;
+    MoveRight moveRight;
+    Skill1 skill1;
+    Skill2 skill2;
 
     public INGAME_SCENE_STATE state = INGAME_SCENE_STATE.WAIT;
     public float time = 0;
@@ -39,6 +43,8 @@ public class InGameScene extends Scene {
         moveRight = new MoveRight();
         myHP = new MyHP();
         enemyHP = new EnemyHP();
+        skill1 = new Skill1();
+        skill2 = new Skill2();
 
         objs.add(player);
         objs.add(enemy);
@@ -46,6 +52,8 @@ public class InGameScene extends Scene {
         objs.add(moveRight);
         objs.add(myHP);
         objs.add(enemyHP);
+        objs.add(skill1);
+        objs.add(skill2);
         objs.add(new Background());
         objs.add(new Cloud());
     }
