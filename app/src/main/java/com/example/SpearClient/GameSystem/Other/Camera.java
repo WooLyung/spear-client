@@ -1,4 +1,4 @@
-package com.example.SpearClient.GameSystem;
+package com.example.SpearClient.GameSystem.Other;
 
 import com.example.SpearClient.GraphicSystem.GL.GLView;
 import com.example.SpearClient.Types.Vector;

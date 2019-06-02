@@ -9,14 +9,12 @@ import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.WindowManager;
 
+import com.example.SpearClient.GameSystem.Other.AnimationManager;
 import com.example.SpearClient.GraphicSystem.GL.GLRenderer;
 import com.example.SpearClient.GraphicSystem.GL.GLView;
 import com.example.SpearClient.GameIO.Input;
 import com.example.SpearClient.R;
-import com.example.SpearClient.SocketIO.SocketIOBuilder;
 import com.example.SpearClient.Types.Vector;
-
-import java.net.URISyntaxException;
 
 import io.socket.client.Socket;
 
@@ -33,6 +31,7 @@ public class Game extends AppCompatActivity {
 
     public static Game instance;
     public static Engine engine;
+    public static AnimationManager animationManager;
     public static int screenWidth;
     public static int screenHeight;
     public static float deltaTime;
@@ -59,6 +58,7 @@ public class Game extends AppCompatActivity {
         view = new GLView(this, renderer); // 렌더가 된 이미지를 출력하는 뷰
         thread = new Thread(new MainLoop()); // 게임이 돌아가는 스레드
         engine = new Engine(); // 게임의 전반적인 부분을 총괄하는 엔진
+        animationManager = new AnimationManager(); // 애니메이션에 대한 데이터들을 저장
 
         // 뷰 설정
         setContentView(R.layout.activity_main);

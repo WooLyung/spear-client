@@ -92,4 +92,9 @@ public class SocketIOBuilder {
     public void gamestart (Emitter.Listener listener) {
         mSocket.on("gamestart", listener);
     }
+
+    public void playerUpdate (Emitter.Listener listener) {
+        mSocket.emit("playerUpdate");
+        mSocket.on("enterCallback", listener);
+    }
 }

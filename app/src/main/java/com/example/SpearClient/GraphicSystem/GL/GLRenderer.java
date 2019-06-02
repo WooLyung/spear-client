@@ -30,7 +30,7 @@ public class GLRenderer implements GLSurfaceView.Renderer {
     private Context context;
 
     // 이미지에 대한 정보를 저장
-    private void addImage(int image, String name) {
+    public static void addImage(int image, String name) {
         ImageData imgData = new ImageData();
         imgData.setName(name);
         imgData.setImgCode(image);

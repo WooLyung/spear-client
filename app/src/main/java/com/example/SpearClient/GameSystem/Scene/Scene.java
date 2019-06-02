@@ -1,6 +1,6 @@
 package com.example.SpearClient.GameSystem.Scene;
 
-import com.example.SpearClient.GameSystem.Camera;
+import com.example.SpearClient.GameSystem.Other.Camera;
 import com.example.SpearClient.GameSystem.GameObject.GameObject;
 
 import java.util.ArrayList;

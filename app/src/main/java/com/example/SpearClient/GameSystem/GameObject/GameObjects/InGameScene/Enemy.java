@@ -51,7 +51,7 @@ public class Enemy extends GameObject {
 
         transform = new Transform();
         attachComponent(transform);
-        transform.position.x = 2.5f;
+        transform.position.x = 7f;
         transform.position.y = -0.1f;
         transform.scale.x = 1000/1470f;
         transform.scale.y = 1000/1470f;
