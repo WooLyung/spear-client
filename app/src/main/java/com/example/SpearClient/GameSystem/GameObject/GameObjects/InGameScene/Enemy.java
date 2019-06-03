@@ -32,7 +32,7 @@ public class Enemy extends GameObject {
 
                 spriteRenderer = new SpriteRenderer();
                 attachComponent(spriteRenderer);
-                spriteRenderer.bindingImage(GLRenderer.findImage("knight_purple_ingame"));
+                spriteRenderer.bindingImage(GLRenderer.findImage("knight_purple_default"));
                 spriteRenderer.setZ_index(9);
 
                 transform = new Transform();

@@ -86,7 +86,76 @@ public class GLRenderer implements GLSurfaceView.Renderer {
 
         // 기사 스킨들
         addImage(R.drawable.knight_purple, "knight_purple");
-        addImage(R.drawable.knight_purple_ingame, "knight_purple_ingame");
+        addImage(R.drawable.knight_purple_default, "knight_purple_default");
+
+        addImage(R.drawable.knight_purple_shallow_stab_00 , "knight_purple_shallow_stab_00");
+        addImage(R.drawable.knight_purple_shallow_stab_01 , "knight_purple_shallow_stab_01");
+        addImage(R.drawable.knight_purple_shallow_stab_02 , "knight_purple_shallow_stab_02");
+        addImage(R.drawable.knight_purple_shallow_stab_03 , "knight_purple_shallow_stab_03");
+        addImage(R.drawable.knight_purple_shallow_stab_04 , "knight_purple_shallow_stab_04");
+        addImage(R.drawable.knight_purple_shallow_stab_05 , "knight_purple_shallow_stab_05");
+        addImage(R.drawable.knight_purple_shallow_stab_06 , "knight_purple_shallow_stab_06");
+        addImage(R.drawable.knight_purple_shallow_stab_07 , "knight_purple_shallow_stab_07");
+        addImage(R.drawable.knight_purple_shallow_stab_08 , "knight_purple_shallow_stab_08");
+        addImage(R.drawable.knight_purple_shallow_stab_09 , "knight_purple_shallow_stab_09");
+        addImage(R.drawable.knight_purple_shallow_stab_10 , "knight_purple_shallow_stab_10");
+        addImage(R.drawable.knight_purple_shallow_stab_11 , "knight_purple_shallow_stab_11");
+        addImage(R.drawable.knight_purple_shallow_stab_12 , "knight_purple_shallow_stab_12");
+        addImage(R.drawable.knight_purple_shallow_stab_13 , "knight_purple_shallow_stab_13");
+        addImage(R.drawable.knight_purple_shallow_stab_14 , "knight_purple_shallow_stab_14");
+        addImage(R.drawable.knight_purple_shallow_stab_15 , "knight_purple_shallow_stab_15");
+
+        addImage(R.drawable.knight_purple_fall_00 , "knight_purple_fall_00");
+        addImage(R.drawable.knight_purple_fall_01 , "knight_purple_fall_01");
+        addImage(R.drawable.knight_purple_fall_02 , "knight_purple_fall_02");
+        addImage(R.drawable.knight_purple_fall_03 , "knight_purple_fall_03");
+
+        addImage(R.drawable.knight_purple_rush_00 , "knight_purple_rush_00");
+        addImage(R.drawable.knight_purple_rush_01 , "knight_purple_rush_01");
+        addImage(R.drawable.knight_purple_rush_02 , "knight_purple_rush_02");
+
+        addImage(R.drawable.knight_purple_rush_stab_00 , "knight_purple_rush_stab_00");
+        addImage(R.drawable.knight_purple_rush_stab_01 , "knight_purple_rush_stab_01");
+        addImage(R.drawable.knight_purple_rush_stab_02 , "knight_purple_rush_stab_02");
+        addImage(R.drawable.knight_purple_rush_stab_03 , "knight_purple_rush_stab_03");
+        addImage(R.drawable.knight_purple_rush_stab_04 , "knight_purple_rush_stab_04");
+        addImage(R.drawable.knight_purple_rush_stab_05 , "knight_purple_rush_stab_05");
+        addImage(R.drawable.knight_purple_rush_stab_06 , "knight_purple_rush_stab_06");
+        addImage(R.drawable.knight_purple_rush_stab_07 , "knight_purple_rush_stab_07");
+
+        addImage(R.drawable.knight_purple_deep_stab_00 , "knight_purple_deep_stab_00");
+        addImage(R.drawable.knight_purple_deep_stab_01 , "knight_purple_deep_stab_01");
+        addImage(R.drawable.knight_purple_deep_stab_02 , "knight_purple_deep_stab_02");
+        addImage(R.drawable.knight_purple_deep_stab_03 , "knight_purple_deep_stab_03");
+        addImage(R.drawable.knight_purple_deep_stab_04 , "knight_purple_deep_stab_04");
+        addImage(R.drawable.knight_purple_deep_stab_05 , "knight_purple_deep_stab_05");
+        addImage(R.drawable.knight_purple_deep_stab_06 , "knight_purple_deep_stab_06");
+        addImage(R.drawable.knight_purple_deep_stab_07 , "knight_purple_deep_stab_07");
+        addImage(R.drawable.knight_purple_deep_stab_08 , "knight_purple_deep_stab_08");
+        addImage(R.drawable.knight_purple_deep_stab_09 , "knight_purple_deep_stab_09");
+        addImage(R.drawable.knight_purple_deep_stab_10 , "knight_purple_deep_stab_10");
+        addImage(R.drawable.knight_purple_deep_stab_11 , "knight_purple_deep_stab_11");
+        addImage(R.drawable.knight_purple_deep_stab_12 , "knight_purple_deep_stab_12");
+        addImage(R.drawable.knight_purple_deep_stab_13 , "knight_purple_deep_stab_13");
+        addImage(R.drawable.knight_purple_deep_stab_14 , "knight_purple_deep_stab_14");
+
+        addImage(R.drawable.knight_purple_skim_00 , "knight_purple_skim_00");
+        addImage(R.drawable.knight_purple_skim_01 , "knight_purple_skim_01");
+        addImage(R.drawable.knight_purple_skim_02 , "knight_purple_skim_02");
+        addImage(R.drawable.knight_purple_skim_03 , "knight_purple_skim_03");
+        addImage(R.drawable.knight_purple_skim_04 , "knight_purple_skim_04");
+        addImage(R.drawable.knight_purple_skim_05 , "knight_purple_skim_05");
+        addImage(R.drawable.knight_purple_skim_06 , "knight_purple_skim_06");
+        addImage(R.drawable.knight_purple_skim_07 , "knight_purple_skim_07");
+        addImage(R.drawable.knight_purple_skim_08 , "knight_purple_skim_08");
+        addImage(R.drawable.knight_purple_skim_09 , "knight_purple_skim_09");
+        addImage(R.drawable.knight_purple_skim_10 , "knight_purple_skim_10");
+        addImage(R.drawable.knight_purple_skim_11 , "knight_purple_skim_11");
+        addImage(R.drawable.knight_purple_skim_12 , "knight_purple_skim_12");
+        addImage(R.drawable.knight_purple_skim_13 , "knight_purple_skim_13");
+        addImage(R.drawable.knight_purple_skim_14 , "knight_purple_skim_14");
+        addImage(R.drawable.knight_purple_skim_15 , "knight_purple_skim_15");
+        addImage(R.drawable.knight_purple_skim_16 , "knight_purple_skim_16");
 
         // 말 파츠
         addImage(R.drawable.horse_body, "horse_body");
