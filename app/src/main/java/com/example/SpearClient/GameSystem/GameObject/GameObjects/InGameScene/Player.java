@@ -5,9 +5,11 @@ import android.util.Log;
 import com.example.SpearClient.GameSystem.Component.Components.AnimationComponent.AnimationComponent;
 import com.example.SpearClient.GameSystem.Component.Components.PlayerMoveComponent;
 import com.example.SpearClient.GameSystem.Component.Components.PlayerStateComponent;
+import com.example.SpearClient.GameSystem.Component.Components.RendererComponent.Renderers.AnimationRenderer;
 import com.example.SpearClient.GameSystem.Component.Components.RendererComponent.Renderers.SpriteRenderer;
 import com.example.SpearClient.GameSystem.Component.Components.TransformComponent.Transforms.Transform;
 import com.example.SpearClient.GameSystem.GameObject.GameObject;
+import com.example.SpearClient.GameSystem.Other.AnimationManager;
 import com.example.SpearClient.GraphicSystem.GL.GLRenderer;
 import com.example.SpearClient.Main.Game;
 import com.example.SpearClient.R;
@@ -25,14 +27,18 @@ public class Player extends GameObject {
         setName("player");
 
         knight = new GameObject() {
+            AnimationRenderer animationRenderer;
+
             @Override
             public void start() {
                 setName("knight");
 
-                spriteRenderer = new SpriteRenderer();
-                attachComponent(spriteRenderer);
-                spriteRenderer.bindingImage(GLRenderer.findImage("knight_purple_default"));
-                spriteRenderer.setZ_index(19);
+                animationRenderer = new AnimationRenderer();
+                attachComponent(animationRenderer);
+                animationRenderer.bindingImage(AnimationManager.playerAnims.get(0).get(0));
+                animationRenderer.setLoop(true);
+                animationRenderer.setInterval(0.1f);
+                animationRenderer.setZ_index(19);
 
                 transform = new Transform();
                 attachComponent(transform);

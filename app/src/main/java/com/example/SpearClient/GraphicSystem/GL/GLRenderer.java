@@ -6,7 +6,10 @@ import android.graphics.BitmapFactory;
 import android.opengl.GLSurfaceView;
 import android.opengl.GLUtils;
 
+import com.example.SpearClient.GameSystem.Component.Components.AnimationComponent.AnimSupportClasses.Animation;
 import com.example.SpearClient.GameSystem.Component.Components.RendererComponent.RendererComponent;
+import com.example.SpearClient.GameSystem.Component.Components.RendererComponent.Renderers.AnimationRenderer;
+import com.example.SpearClient.GameSystem.Other.AnimationManager;
 import com.example.SpearClient.GraphicSystem.ImageData;
 import com.example.SpearClient.GraphicSystem.RenderTarget;
 import com.example.SpearClient.Main.Game;
@@ -179,6 +182,66 @@ public class GLRenderer implements GLSurfaceView.Renderer {
         addImage(R.drawable.right_bricks, "right_bricks");
         addImage(R.drawable.place, "place");
         addImage(R.drawable.empty, "empty");
+
+        AnimationManager.playerAnims.add(new ArrayList<int[]>());
+        ArrayList<int[]> anim = AnimationManager.playerAnims.get(0);
+
+        int[] anim_default = { findImage("knight_purple_default") };
+        anim.add(anim_default);
+
+        int[] anim_shallow_stab = new int[16];
+        for (int i = 0; i < 16; i++) {
+            if (i >= 10)
+                anim_shallow_stab[i] = findImage("knight_purple_shallow_stab_" + i);
+            else
+                anim_shallow_stab[i] =  findImage("knight_purple_shallow_stab_0" + i);
+        }
+        anim.add(anim_shallow_stab);
+
+        int[] anim_deep_stab = new int[15];
+        for (int i = 0; i < 15; i++) {
+            if (i >= 10)
+                anim_deep_stab[i] = findImage("knight_purple_deep_stab_" + i);
+            else
+                anim_deep_stab[i] =  findImage("knight_purple_deep_stab_0" + i);
+        }
+        anim.add(anim_deep_stab);
+
+        int[] anim_rush_stab = new int[8];
+        for (int i = 0; i < 8; i++) {
+            if (i >= 10)
+                anim_rush_stab[i] = findImage("knight_purple_rush_stab_" + i);
+            else
+                anim_rush_stab[i] =  findImage("knight_purple_rush_stab_0" + i);
+        }
+        anim.add(anim_rush_stab);
+
+        int[] anim_rush = new int[3];
+        for (int i = 0; i < 3; i++) {
+            if (i >= 10)
+                anim_rush[i] = findImage("knight_purple_rush_" + i);
+            else
+                anim_rush[i] =  findImage("knight_purple_rush_0" + i);
+        }
+        anim.add(anim_rush);
+
+        int[] anim_skim = new int[17];
+        for (int i = 0; i < 17; i++) {
+            if (i >= 10)
+                anim_skim[i] = findImage("knight_purple_skim_" + i);
+            else
+                anim_skim[i] =  findImage("knight_purple_skim_0" + i);
+        }
+        anim.add(anim_skim);
+
+        int[] anim_fall = new int[4];
+        for (int i = 0; i < 4; i++) {
+            if (i >= 10)
+                anim_fall[i] = findImage("knight_purple_fall_" + i);
+            else
+                anim_fall[i] =  findImage("knight_purple_fall_0" + i);
+        }
+        anim.add(anim_fall);
     }
 
     @Override
