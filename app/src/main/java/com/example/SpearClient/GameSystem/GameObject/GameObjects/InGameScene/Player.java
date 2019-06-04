@@ -36,8 +36,7 @@ public class Player extends GameObject {
                 animationRenderer = new AnimationRenderer();
                 attachComponent(animationRenderer);
                 animationRenderer.bindingImage(AnimationManager.playerAnims.get(0).get(0));
-                animationRenderer.setLoop(true);
-                animationRenderer.setInterval(0.1f);
+                animationRenderer.setLoop(false);
                 animationRenderer.setZ_index(19);
 
                 transform = new Transform();

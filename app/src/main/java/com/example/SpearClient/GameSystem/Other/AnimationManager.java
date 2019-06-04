@@ -1,5 +1,7 @@
 package com.example.SpearClient.GameSystem.Other;
 
+import com.example.SpearClient.GameSystem.Component.Components.PlayerStateComponent;
+
 import java.util.ArrayList;
 
 public class AnimationManager {
@@ -15,13 +17,22 @@ public class AnimationManager {
     public static KNIGHT_SKIN knight_skin = KNIGHT_SKIN.DEFAULT;
     public static HORSE_SKIN horse_skin = HORSE_SKIN.DEFAULT;
 
+    public static int skinToCode() {
+        switch(knight_skin) {
+            case DEFAULT:
+                return 0;
+        }
+
+        return -1;
+    }
+
     /*
-    0 : default
-    1 : shallow stab
-    2 : deep stab
-    3 : rush stab
-    4 : rush
-    5 : skim
-    6 : fall
+    0 : default 기본
+    1 : shallow stab 얕게 찌르기
+    2 : deep stab 깊게 찌르기
+    3 : rush stab 돌진하며 찌르기
+    4 : rush 돌진
+    5 : skim 걷어내기
+    6 : fall 숙이기
     */
 }

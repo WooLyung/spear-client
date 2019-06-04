@@ -4,6 +4,7 @@ import android.util.Log;
 
 import com.example.SpearClient.GameIO.Input;
 import com.example.SpearClient.GameSystem.Component.Components.PlayerMoveComponent;
+import com.example.SpearClient.GameSystem.Component.Components.PlayerStateComponent;
 import com.example.SpearClient.GameSystem.Component.Components.RendererComponent.Renderers.AnimationRenderer;
 import com.example.SpearClient.GameSystem.Component.Components.RendererComponent.Renderers.SpriteRenderer;
 import com.example.SpearClient.GameSystem.Component.Components.TransformComponent.Transforms.GUITransform;
@@ -16,7 +17,8 @@ import com.example.SpearClient.Types.Vector;
 
 public class Skill1 extends GameObject {
     private SpriteRenderer spriteRenderer;
-    private int img = 0;
+    private Player player;
+    private PlayerStateComponent playerStateComponent;
 
     @Override
     public void start() {
@@ -37,12 +39,16 @@ public class Skill1 extends GameObject {
     public void update() {
         super.update();
 
+        if (player == null && Game.engine.nowScene.findObjectByName("player") != null)
+            player = (Player)Game.engine.nowScene.findObjectByName("player");
+
+        if (playerStateComponent == null && player != null && player.getComponent("playerStateComponent") != null)
+            playerStateComponent = (PlayerStateComponent)player.getComponent("playerStateComponent");
+
         for (int i = 0; i < 5; i++) {
             if (Vector.distanceDouble(Input.getTouchUIPos(i), transform.position) <= 150/147f * 150/147f) { // 버튼을 클릭했을 경우
                 if (Input.getTouchState(i) == Input.TOUCH_STATE.DOWN) {
-                    ((AnimationRenderer)Game.engine.nowScene.findObjectByName("knight").getRenderer()).bindingImage(
-                            AnimationManager.playerAnims.get(0).get((img = ((img + 1) % 7)))
-                    );
+                    playerStateComponent.changeState(PlayerStateComponent.ACTION.DEEP_STAB);
                 }
             }
         }

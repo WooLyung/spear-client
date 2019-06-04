@@ -49,10 +49,9 @@ public class AnimationRenderer extends RendererComponent {
     public void update() {
         // 이미지 프레임 변경
         lapse += Game.deltaTime;
-        if (lapse >= interval)
-        {
+        if (lapse >= interval && (loop || (nowFrame + 1 < image.length))) {
             nowFrame = (nowFrame + 1);
-            if (loop) nowFrame %= image.length;
+            nowFrame %= image.length;
             lapse -= interval;
         }
     }
