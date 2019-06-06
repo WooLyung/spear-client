@@ -21,6 +21,8 @@ public class PlayerMoveComponent extends Component {
     public STATE state = STATE.IDLE;
     private AnimationComponent animationComponent;
     private SpriteRenderer spriteRenderer;
+    private PlayerStateComponent playerStateComponent;
+    private float time = 0;
 
     @Override
     public void start() {
@@ -29,21 +31,33 @@ public class PlayerMoveComponent extends Component {
 
     @Override
     public void update() {
+        time += Game.deltaTime;
+
         if (animationComponent == null) {
             animationComponent = (AnimationComponent) object.getComponent("animationComponent");
             spriteRenderer = (SpriteRenderer) object.getComponent("spriteRenderer");
+            playerStateComponent = (PlayerStateComponent) object.getComponent("playerStateComponent");
         }
 
         if (state == STATE.IDLE) {
             if (animationComponent.getNowAnim() != 2) {
                 animationComponent.play(2);
             }
+
+            if (playerStateComponent.action == PlayerStateComponent.ACTION.RUN
+                || playerStateComponent.action == PlayerStateComponent.ACTION.WALK)
+                playerStateComponent.changeState(PlayerStateComponent.ACTION.DEFAULT);
         }
         else if (state == STATE.WALK) {
             if (animationComponent.getNowAnim() != 0) {
                 animationComponent.play(0);
             }
 
+            if (time >= 0.7f) {
+                setState(STATE.RUN);
+            }
+
+            playerStateComponent.changeState(PlayerStateComponent.ACTION.WALK);
             object.getTransform().position.x += Game.deltaTime * 3f * ((dir == DIR.RIGHT) ? 1 : -1);
         }
         else if (state == STATE.RUN) {
@@ -51,7 +65,10 @@ public class PlayerMoveComponent extends Component {
                 animationComponent.play(1);
             }
 
-            object.getTransform().position.x += Game.deltaTime * 6f * ((dir == DIR.RIGHT) ? 1 : -1);
+            playerStateComponent.changeState(PlayerStateComponent.ACTION.RUN);
+
+            float speed = 0.5f + ((time > 1) ? 1 : time);
+            object.getTransform().position.x += Game.deltaTime * 6f * ((dir == DIR.RIGHT) ? 1 : -1) * speed;
         }
     }
 
@@ -74,14 +91,20 @@ public class PlayerMoveComponent extends Component {
     }
 
     public void setState(STATE state) {
-        if (state == STATE.IDLE) {
+        if (state == STATE.IDLE
+            && this.state != STATE.IDLE) {
             this.state = STATE.IDLE;
+            time = 0;
         }
-        else if (state == STATE.WALK) {
+        else if (state == STATE.WALK
+            && this.state != STATE.WALK) {
             this.state = STATE.WALK;
+            time = 0;
         }
-        else if (state == STATE.RUN) {
+        else if (state == STATE.RUN
+            && this.state != STATE.RUN) {
             this.state = STATE.RUN;
+            time = 0;
         }
     }
 }
