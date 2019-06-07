@@ -9,6 +9,7 @@ import com.example.SpearClient.GameSystem.Component.Components.TransformComponen
 import com.example.SpearClient.GameSystem.GameObject.GameObject;
 import com.example.SpearClient.GameSystem.Scene.Scenes.MainScene;
 import com.example.SpearClient.GraphicSystem.GL.GLRenderer;
+import com.example.SpearClient.Main.Engine;
 import com.example.SpearClient.Main.Game;
 import com.example.SpearClient.SocketIO.SocketIOBuilder;
 
@@ -46,6 +47,7 @@ public class LoginButton extends GameObject {
                     String id = ((EditTextRenderer) Game.engine.nowScene.findObjectByName("input_id").getComponent("editTextRenderer")).getEditText().getText().toString();
                     String password = ((EditTextRenderer) Game.engine.nowScene.findObjectByName("input_password").getComponent("editTextRenderer")).getEditText().getText().toString();
 
+                    Engine.id = id;
                     login(id, password);
                 }
             }

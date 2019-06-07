@@ -12,9 +12,10 @@ import javax.microedition.khronos.opengles.GL10;
 public class Engine {
 
     public Scene nowScene;
+    public static String id = "";
 
     public Engine() {
-        changeScene(new InGameScene());
+        changeScene(new IntroScene());
         start();
     }
 

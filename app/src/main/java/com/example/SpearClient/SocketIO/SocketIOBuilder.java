@@ -21,11 +21,13 @@ public class SocketIOBuilder {
     private Socket mSocket;
     private static final String TAG = "SocketIO";
     private static SocketIOBuilder instance = null;
+    public static String id = null;
 
     private SocketIOBuilder(String serverUri) throws URISyntaxException {
         IO.Options opts = new IO.Options();
         mSocket = IO.socket(new URI(serverUri),opts);
         mSocket.connect();
+        id = mSocket.id();
 
         mSocket.on(Socket.EVENT_CONNECT, new Emitter.Listener() {
             @Override
@@ -93,8 +95,11 @@ public class SocketIOBuilder {
         mSocket.on("gamestart", listener);
     }
 
-    public void playerUpdate (Emitter.Listener listener) {
-        mSocket.emit("playerUpdate");
-        mSocket.on("enterCallback", listener);
+    public void playerUpdate (JSONObject jsonObject) {
+        mSocket.emit("playerUpdate", jsonObject);
+    }
+
+    public void update_player (Emitter.Listener listener) {
+        mSocket.on("update_player", listener);
     }
 }

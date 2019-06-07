@@ -29,8 +29,6 @@ public class PlayerStateComponent extends Component {
 
     // 이미지 코드
     public int imageCode_skin = 0;
-    public int imageCode_action = 0;
-    public int imageCode_frame = 0;
 
     // 동작
     public ACTION action = ACTION.REST;
@@ -155,8 +153,6 @@ public class PlayerStateComponent extends Component {
     }
 
     private void actionUpdate() {
-        Log.i("playerAction", "" + action + "           " + time);
-
         if (action == ACTION.DEEP_STAB) {
             if (time >= 1) {
                 changeState(ACTION.REST);
@@ -172,6 +168,37 @@ public class PlayerStateComponent extends Component {
                 changeState(ACTION.DEFAULT);
             }
         }
+    }
+
+    public int getActionCode() {
+        switch(action) {
+            case DEFAULT:
+                return 0;
+            case WALK:
+                return 1;
+            case RUN:
+                return 2;
+            case SHALLOW_STAB:
+                return 3;
+            case DEEP_STAB:
+                return 4;
+            case RUSH:
+                return 5;
+            case FALL:
+                return 6;
+            case REST:
+                return 7;
+            case SKIM:
+                return 8;
+            case AVOID:
+                return 9;
+            case DEFENSELESS:
+                return 10;
+            case LOSE:
+                return 11;
+        }
+
+        return -1;
     }
 
     @Override

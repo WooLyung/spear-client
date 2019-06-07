@@ -67,7 +67,7 @@ public class PlayerMoveComponent extends Component {
 
             playerStateComponent.changeState(PlayerStateComponent.ACTION.RUN);
 
-            float speed = 0.5f + ((time > 1) ? 1 : time);
+            float speed = 0.5f + ((time > 1.7f) ? 1.7f : time);
             object.getTransform().position.x += Game.deltaTime * 6f * ((dir == DIR.RIGHT) ? 1 : -1) * speed;
         }
     }

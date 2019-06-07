@@ -1,5 +1,7 @@
 package com.example.SpearClient.GameSystem.Component.Components.RendererComponent.Renderers;
 
+import android.util.Log;
+
 import com.example.SpearClient.GameSystem.Component.Components.RendererComponent.RendererComponent;
 import com.example.SpearClient.GraphicSystem.GL.GLRenderer;
 import com.example.SpearClient.GraphicSystem.RenderTarget;
@@ -113,5 +115,9 @@ public class AnimationRenderer extends RendererComponent {
 
     public DIRECTION getDir() {
         return dir;
+    }
+
+    public int[] getImage() {
+        return image;
     }
 }

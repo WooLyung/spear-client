@@ -43,7 +43,6 @@ public class Tutorial extends GameObject {
             if (Input.getTouchState(i) == Input.TOUCH_STATE.DOWN) {
                 if (Vector.distanceDouble(Input.getTouchWorldPos(i), transform.position) <= 350/147f * 350/147f) { // 버튼을 클릭했을 경우
 
-                    Log.i("main", "button_tutorial");
                 }
             }
         }

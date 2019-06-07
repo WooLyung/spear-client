@@ -4,22 +4,24 @@ import com.example.SpearClient.GameSystem.Component.Component;
 
 public class EnemyStateComponent extends Component {
     public enum ACTION {
-        SHALLOW_STAB, // 얕게 찌르기
-        DEEP_STAB,    // 깊게 찌르기
-        RUSH_STAB,    // 돌진하며 찌르기
-        RUSH,         // 돌진
-        FALL,         // 빠지기
-        REST,         // 휴식 (중간 텀)
-        SKIM,         // 걷어내기
-        AVOID,        // 흘리기
-        DEFENSELESS,  // 무방비 상태
-        LOSE          // 패배
+        DEFAULT,      // 기본
+        WALK,         // 걷기
+        RUN,          // 달리기
+        SHALLOW_STAB, // * 얕게 찌르기
+        DEEP_STAB,    // * 깊게 찌르기
+        RUSH_STAB,    // * 돌진하며 찌르기
+        RUSH,         // * 돌진
+        FALL,         // * 빠지기
+        REST,         // * 휴식 (중간 텀)
+        SKIM,         // * 걷어내기
+        AVOID,        // * 흘리기
+        DEFENSELESS,  // * 무방비 상태
+        LOSE          // * 패배
     }
 
     // 동작
     public ACTION action = ACTION.REST;
     public float time = 0;
-    public float invincible = 0;
 
     @Override
     public void start() {
@@ -32,5 +34,46 @@ public class EnemyStateComponent extends Component {
 
     @Override
     public void finish() {
+    }
+
+    public void setAction(int code) {
+        switch (code) {
+            case 0:
+                action = ACTION.DEFAULT;
+                break;
+            case 1:
+                action = ACTION.WALK;
+                break;
+            case 2:
+                action = ACTION.RUN;
+                break;
+            case 3:
+                action = ACTION.SHALLOW_STAB;
+                break;
+            case 4:
+                action = ACTION.DEEP_STAB;
+                break;
+            case 5:
+                action = ACTION.RUSH_STAB;
+                break;
+            case 6:
+                action = ACTION.RUSH;
+                break;
+            case 7:
+                action = ACTION.FALL;
+                break;
+            case 8:
+                action = ACTION.SKIM;
+                break;
+            case 9:
+                action = ACTION.AVOID;
+                break;
+            case 10:
+                action = ACTION.DEFENSELESS;
+                break;
+            case 11:
+                action = ACTION.LOSE;
+                break;
+        }
     }
 }

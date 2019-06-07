@@ -2,6 +2,7 @@ package com.example.SpearClient.GameSystem.GameObject.GameObjects.InGameScene;
 
 import android.util.Log;
 
+import com.example.SpearClient.GameSystem.Component.Components.AnimationComponent.AnimSupportClasses.Animation;
 import com.example.SpearClient.GameSystem.Component.Components.AnimationComponent.AnimationComponent;
 import com.example.SpearClient.GameSystem.Component.Components.PlayerMoveComponent;
 import com.example.SpearClient.GameSystem.Component.Components.PlayerStateComponent;
@@ -13,6 +14,12 @@ import com.example.SpearClient.GameSystem.Other.AnimationManager;
 import com.example.SpearClient.GraphicSystem.GL.GLRenderer;
 import com.example.SpearClient.Main.Game;
 import com.example.SpearClient.R;
+import com.example.SpearClient.SocketIO.SocketIOBuilder;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import io.socket.emitter.Emitter;
 
 public class Player extends GameObject {
     SpriteRenderer spriteRenderer;
@@ -21,13 +28,18 @@ public class Player extends GameObject {
     PlayerStateComponent playerStateComponent;
 
     GameObject knight, horse;
+    GameObject horse_head, horse_neck, horse_body,
+                horse_leg_left_front_top, horse_leg_left_front_bottom,
+                horse_leg_left_back_top, horse_leg_left_back_bottom,
+                horse_leg_right_front_top, horse_leg_right_front_bottom,
+                horse_leg_right_back_top, horse_leg_right_back_bottom;
 
     @Override
     public void start() {
         setName("player");
 
         knight = new GameObject() {
-            AnimationRenderer animationRenderer;
+            public AnimationRenderer animationRenderer;
 
             @Override
             public void start() {
@@ -82,12 +94,83 @@ public class Player extends GameObject {
             transform.position.x = 30;
         else if (transform.position.x < -30)
             transform.position.x = -30;
+
+        try {
+            AnimationRenderer animationRenderer = (AnimationRenderer)knight.getComponent("animationRenderer");
+
+            SocketIOBuilder.getInstance().playerUpdate(new JSONObject("\n" +
+                    "\n" +
+                    "{\n" +
+                    "\"player_image\":" + animationRenderer.getImage()[animationRenderer.getNowFrame()] + ",\n" +
+                    "\"player_direction\":" + animationRenderer.getIsFlip() + ",\n" +
+                    "\"player_action\":" + playerStateComponent.getActionCode() + ",\n" +
+                    "\"player_action_time\":" + 1 + ",\n" +
+                    "\"player_pos\":{\n" +
+                    "\"x\":" + transform.position.x + ",\n" +
+                    "\"y\":" + transform.position.y + "\n" +
+                    "}, \"object\":{\n" +
+                    "\"horse_head\":{\n" +
+                    "\"x\":" + horse_head.getTransform().position.x + ",\n" +
+                    "\"y\":" + horse_head.getTransform().position.y + ",\n" +
+                    "\"angle\":" + horse_head.getTransform().angle + "\n" +
+                    "}, \"horse_neck\":{\n" +
+                    "\"x\":" + horse_neck.getTransform().position.x + ",\n" +
+                    "\"y\":" + horse_neck.getTransform().position.y + ",\n" +
+                    "\"angle\":" + horse_neck.getTransform().angle + "\n" +
+                    "}, \"horse_body\":{\n" +
+                    "\"x\":" + horse_body.getTransform().position.x + ",\n" +
+                    "\"y\":" + horse_body.getTransform().position.y + ",\n" +
+                    "\"angle\":" + horse_body.getTransform().angle + "\n" +
+                    "}, \"horse_leg_right_front_top\":{\n" +
+                    "\"x\":" + horse_leg_right_front_top.getTransform().position.x + ",\n" +
+                    "\"y\":" + horse_leg_right_front_top.getTransform().position.y + ",\n" +
+                    "\"angle\":" + horse_leg_right_front_top.getTransform().angle + "\n" +
+                    "}, \"horse_leg_right_front_bottom\":{\n" +
+                    "\"x\":" + horse_leg_right_front_bottom.getTransform().position.x + ",\n" +
+                    "\"y\":" + horse_leg_right_front_bottom.getTransform().position.y + ",\n" +
+                    "\"angle\":" + horse_leg_right_front_bottom.getTransform().angle + "\n" +
+                    "}, \"horse_leg_right_back_top\":{\n" +
+                    "\"x\":" + horse_leg_right_back_top.getTransform().position.x + ",\n" +
+                    "\"y\":" + horse_leg_right_back_top.getTransform().position.y + ",\n" +
+                    "\"angle\":" + horse_leg_right_back_top.getTransform().angle + "\n" +
+                    "}, \"horse_leg_right_back_bottom\":{\n" +
+                    "\"x\":" + horse_leg_right_back_bottom.getTransform().position.x + ",\n" +
+                    "\"y\":" + horse_leg_right_back_bottom.getTransform().position.y + ",\n" +
+                    "\"angle\":" + horse_leg_right_back_bottom.getTransform().angle + "\n" +
+                    "}, \"horse_leg_left_front_top\":{\n" +
+                    "\"x\":" + horse_leg_left_front_top.getTransform().position.x + ",\n" +
+                    "\"y\":" + horse_leg_left_front_top.getTransform().position.y + ",\n" +
+                    "\"angle\":" + horse_leg_left_front_top.getTransform().angle + "\n" +
+                    "}, \"horse_leg_left_front_bottom\":{\n" +
+                    "\"x\":" + horse_leg_left_front_bottom.getTransform().position.x + ",\n" +
+                    "\"y\":" + horse_leg_left_front_bottom.getTransform().position.y + ",\n" +
+                    "\"angle\":" + horse_leg_left_front_bottom.getTransform().angle + "\n" +
+                    "}, \"horse_leg_left_back_top\":{\n" +
+                    "\"x\":" + horse_leg_left_back_top.getTransform().position.x + ",\n" +
+                    "\"y\":" + horse_leg_left_back_top.getTransform().position.y + ",\n" +
+                    "\"angle\":" + horse_leg_left_back_top.getTransform().angle + "\n" +
+                    "}, \"horse_leg_left_back_bottom\":{\n" +
+                    "\"x\":" + horse_leg_left_back_bottom.getTransform().position.x + ",\n" +
+                    "\"y\":" + horse_leg_left_back_bottom.getTransform().position.y + ",\n" +
+                    "\"angle\":" + horse_leg_left_back_bottom.getTransform().angle + "\n" +
+                    "}, \"knight\":{\n" +
+                    "\"x\":" + knight.getTransform().position.x + ",\n" +
+                    "\"y\":" + knight.getTransform().position.y + ",\n" +
+                    "\"angle\":" + knight.getTransform().angle + "\n" +
+                    "}\n" +
+                    "}\n" +
+                    "}"));
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     private void createHorse() {
         horse = new GameObject() {
             @Override
             public void start() {
+                horse_body = this;
                 setName("horse_body");
 
                 spriteRenderer = new SpriteRenderer();
@@ -103,6 +186,7 @@ public class Player extends GameObject {
                 appendChild(new GameObject() {
                     @Override
                     public void start() {
+                        horse_neck = this;
                         setName("horse_neck");
 
                         spriteRenderer = new SpriteRenderer();
@@ -120,6 +204,7 @@ public class Player extends GameObject {
                         appendChild(new GameObject() {
                             @Override
                             public void start() {
+                                horse_head = this;
                                 setName("horse_head");
 
                                 spriteRenderer = new SpriteRenderer();
@@ -141,6 +226,7 @@ public class Player extends GameObject {
                 appendChild(new GameObject() {
                     @Override
                     public void start() {
+                        horse_leg_right_front_top = this;
                         setName("horse_leg_right_front_top");
 
                         spriteRenderer = new SpriteRenderer();
@@ -158,6 +244,7 @@ public class Player extends GameObject {
                         appendChild(new GameObject() {
                             @Override
                             public void start() {
+                                horse_leg_right_front_bottom = this;
                                 setName("horse_leg_right_front_bottom");
 
                                 spriteRenderer = new SpriteRenderer();
@@ -177,6 +264,7 @@ public class Player extends GameObject {
                 appendChild(new GameObject() {
                     @Override
                     public void start() {
+                        horse_leg_left_front_top = this;
                         setName("horse_leg_left_front_top");
 
                         spriteRenderer = new SpriteRenderer();
@@ -194,6 +282,7 @@ public class Player extends GameObject {
                         appendChild(new GameObject() {
                             @Override
                             public void start() {
+                                horse_leg_left_front_bottom = this;
                                 setName("horse_leg_left_front_bottom");
 
                                 spriteRenderer = new SpriteRenderer();
@@ -213,6 +302,7 @@ public class Player extends GameObject {
                 appendChild(new GameObject() {
                     @Override
                     public void start() {
+                        horse_leg_right_back_top = this;
                         setName("horse_leg_right_back_top");
 
                         spriteRenderer = new SpriteRenderer();
@@ -230,6 +320,7 @@ public class Player extends GameObject {
                         appendChild(new GameObject() {
                             @Override
                             public void start() {
+                                horse_leg_right_back_bottom = this;
                                 setName("horse_leg_right_back_bottom");
 
                                 spriteRenderer = new SpriteRenderer();
@@ -249,6 +340,7 @@ public class Player extends GameObject {
                 appendChild(new GameObject() {
                     @Override
                     public void start() {
+                        horse_leg_left_back_top = this;
                         setName("horse_leg_left_back_top");
 
                         spriteRenderer = new SpriteRenderer();
@@ -266,6 +358,7 @@ public class Player extends GameObject {
                         appendChild(new GameObject() {
                             @Override
                             public void start() {
+                                horse_leg_left_back_bottom = this;
                                 setName("horse_leg_left_back_bottom");
 
                                 spriteRenderer = new SpriteRenderer();
