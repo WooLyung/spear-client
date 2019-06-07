@@ -54,7 +54,7 @@ public class LoginButton extends GameObject {
         }
     }
 
-    private void login(String id, String password) {
+    private void login(final String id, String password) {
         try {
             SocketIOBuilder.getInstance().login(id, password, new Emitter.Listener() {
                 @Override
@@ -69,6 +69,7 @@ public class LoginButton extends GameObject {
                                     Toast.makeText(Game.instance, "로그인에 실패했습니다.", Toast.LENGTH_SHORT).show();
                                 }
                                 else if (message.equals("login complete")) {
+                                    SocketIOBuilder.id = id;
                                     Game.engine.changeScene(new MainScene());
                                 }
                             }

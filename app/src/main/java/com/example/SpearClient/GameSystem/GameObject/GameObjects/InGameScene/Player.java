@@ -22,6 +22,8 @@ import org.json.JSONObject;
 import io.socket.emitter.Emitter;
 
 public class Player extends GameObject {
+    float emitTime = 0;
+
     SpriteRenderer spriteRenderer;
     AnimationComponent animationComponent;
     PlayerMoveComponent playerMoveComponent;
@@ -90,79 +92,85 @@ public class Player extends GameObject {
     public void update() {
         super.update();
 
+        emitTime += Game.deltaTime;
+
         if (transform.position.x > 30)
             transform.position.x = 30;
         else if (transform.position.x < -30)
             transform.position.x = -30;
 
-        try {
-            AnimationRenderer animationRenderer = (AnimationRenderer)knight.getComponent("animationRenderer");
+        if (emitTime >= 0.02f) {
+            emitTime = 0;
 
-            SocketIOBuilder.getInstance().playerUpdate(new JSONObject("\n" +
-                    "\n" +
-                    "{\n" +
-                    "\"player_image\":" + animationRenderer.getImage()[animationRenderer.getNowFrame()] + ",\n" +
-                    "\"player_direction\":" + animationRenderer.getIsFlip() + ",\n" +
-                    "\"player_action\":" + playerStateComponent.getActionCode() + ",\n" +
-                    "\"player_action_time\":" + 1 + ",\n" +
-                    "\"player_pos\":{\n" +
-                    "\"x\":" + transform.position.x + ",\n" +
-                    "\"y\":" + transform.position.y + "\n" +
-                    "}, \"object\":{\n" +
-                    "\"horse_head\":{\n" +
-                    "\"x\":" + horse_head.getTransform().position.x + ",\n" +
-                    "\"y\":" + horse_head.getTransform().position.y + ",\n" +
-                    "\"angle\":" + horse_head.getTransform().angle + "\n" +
-                    "}, \"horse_neck\":{\n" +
-                    "\"x\":" + horse_neck.getTransform().position.x + ",\n" +
-                    "\"y\":" + horse_neck.getTransform().position.y + ",\n" +
-                    "\"angle\":" + horse_neck.getTransform().angle + "\n" +
-                    "}, \"horse_body\":{\n" +
-                    "\"x\":" + horse_body.getTransform().position.x + ",\n" +
-                    "\"y\":" + horse_body.getTransform().position.y + ",\n" +
-                    "\"angle\":" + horse_body.getTransform().angle + "\n" +
-                    "}, \"horse_leg_right_front_top\":{\n" +
-                    "\"x\":" + horse_leg_right_front_top.getTransform().position.x + ",\n" +
-                    "\"y\":" + horse_leg_right_front_top.getTransform().position.y + ",\n" +
-                    "\"angle\":" + horse_leg_right_front_top.getTransform().angle + "\n" +
-                    "}, \"horse_leg_right_front_bottom\":{\n" +
-                    "\"x\":" + horse_leg_right_front_bottom.getTransform().position.x + ",\n" +
-                    "\"y\":" + horse_leg_right_front_bottom.getTransform().position.y + ",\n" +
-                    "\"angle\":" + horse_leg_right_front_bottom.getTransform().angle + "\n" +
-                    "}, \"horse_leg_right_back_top\":{\n" +
-                    "\"x\":" + horse_leg_right_back_top.getTransform().position.x + ",\n" +
-                    "\"y\":" + horse_leg_right_back_top.getTransform().position.y + ",\n" +
-                    "\"angle\":" + horse_leg_right_back_top.getTransform().angle + "\n" +
-                    "}, \"horse_leg_right_back_bottom\":{\n" +
-                    "\"x\":" + horse_leg_right_back_bottom.getTransform().position.x + ",\n" +
-                    "\"y\":" + horse_leg_right_back_bottom.getTransform().position.y + ",\n" +
-                    "\"angle\":" + horse_leg_right_back_bottom.getTransform().angle + "\n" +
-                    "}, \"horse_leg_left_front_top\":{\n" +
-                    "\"x\":" + horse_leg_left_front_top.getTransform().position.x + ",\n" +
-                    "\"y\":" + horse_leg_left_front_top.getTransform().position.y + ",\n" +
-                    "\"angle\":" + horse_leg_left_front_top.getTransform().angle + "\n" +
-                    "}, \"horse_leg_left_front_bottom\":{\n" +
-                    "\"x\":" + horse_leg_left_front_bottom.getTransform().position.x + ",\n" +
-                    "\"y\":" + horse_leg_left_front_bottom.getTransform().position.y + ",\n" +
-                    "\"angle\":" + horse_leg_left_front_bottom.getTransform().angle + "\n" +
-                    "}, \"horse_leg_left_back_top\":{\n" +
-                    "\"x\":" + horse_leg_left_back_top.getTransform().position.x + ",\n" +
-                    "\"y\":" + horse_leg_left_back_top.getTransform().position.y + ",\n" +
-                    "\"angle\":" + horse_leg_left_back_top.getTransform().angle + "\n" +
-                    "}, \"horse_leg_left_back_bottom\":{\n" +
-                    "\"x\":" + horse_leg_left_back_bottom.getTransform().position.x + ",\n" +
-                    "\"y\":" + horse_leg_left_back_bottom.getTransform().position.y + ",\n" +
-                    "\"angle\":" + horse_leg_left_back_bottom.getTransform().angle + "\n" +
-                    "}, \"knight\":{\n" +
-                    "\"x\":" + knight.getTransform().position.x + ",\n" +
-                    "\"y\":" + knight.getTransform().position.y + ",\n" +
-                    "\"angle\":" + knight.getTransform().angle + "\n" +
-                    "}\n" +
-                    "}\n" +
-                    "}"));
-        }
-        catch (Exception e) {
-            e.printStackTrace();
+            try {
+                AnimationRenderer knightAnimationRenderer = (AnimationRenderer)knight.getComponent("animationRenderer");
+
+                SocketIOBuilder.getInstance().playerUpdate(new JSONObject("\n" +
+                        "\n" +
+                        "{\n" +
+                        "\"player_image\":" + knightAnimationRenderer.getImage()[knightAnimationRenderer.getNowFrame()] + ",\n" +
+                        "\"player_direction\":" + spriteRenderer.getIsFlip() + ",\n" +
+                        "\"player_action\":" + playerStateComponent.getActionCode() + ",\n" +
+                        "\"player_action_time\":" + 1 + ",\n" +
+                        "\"player_pos\":{\n" +
+                        "\"x\":" + transform.position.x + ",\n" +
+                        "\"y\":" + transform.position.y + "\n" +
+                        "}, \"object\":{\n" +
+                        "\"horse_head\":{\n" +
+                        "\"x\":" + horse_head.getTransform().position.x + ",\n" +
+                        "\"y\":" + horse_head.getTransform().position.y + ",\n" +
+                        "\"angle\":" + horse_head.getTransform().angle + "\n" +
+                        "}, \"horse_neck\":{\n" +
+                        "\"x\":" + horse_neck.getTransform().position.x + ",\n" +
+                        "\"y\":" + horse_neck.getTransform().position.y + ",\n" +
+                        "\"angle\":" + horse_neck.getTransform().angle + "\n" +
+                        "}, \"horse_body\":{\n" +
+                        "\"x\":" + horse_body.getTransform().position.x + ",\n" +
+                        "\"y\":" + horse_body.getTransform().position.y + ",\n" +
+                        "\"angle\":" + horse_body.getTransform().angle + "\n" +
+                        "}, \"horse_leg_right_front_top\":{\n" +
+                        "\"x\":" + horse_leg_right_front_top.getTransform().position.x + ",\n" +
+                        "\"y\":" + horse_leg_right_front_top.getTransform().position.y + ",\n" +
+                        "\"angle\":" + horse_leg_right_front_top.getTransform().angle + "\n" +
+                        "}, \"horse_leg_right_front_bottom\":{\n" +
+                        "\"x\":" + horse_leg_right_front_bottom.getTransform().position.x + ",\n" +
+                        "\"y\":" + horse_leg_right_front_bottom.getTransform().position.y + ",\n" +
+                        "\"angle\":" + horse_leg_right_front_bottom.getTransform().angle + "\n" +
+                        "}, \"horse_leg_right_back_top\":{\n" +
+                        "\"x\":" + horse_leg_right_back_top.getTransform().position.x + ",\n" +
+                        "\"y\":" + horse_leg_right_back_top.getTransform().position.y + ",\n" +
+                        "\"angle\":" + horse_leg_right_back_top.getTransform().angle + "\n" +
+                        "}, \"horse_leg_right_back_bottom\":{\n" +
+                        "\"x\":" + horse_leg_right_back_bottom.getTransform().position.x + ",\n" +
+                        "\"y\":" + horse_leg_right_back_bottom.getTransform().position.y + ",\n" +
+                        "\"angle\":" + horse_leg_right_back_bottom.getTransform().angle + "\n" +
+                        "}, \"horse_leg_left_front_top\":{\n" +
+                        "\"x\":" + horse_leg_left_front_top.getTransform().position.x + ",\n" +
+                        "\"y\":" + horse_leg_left_front_top.getTransform().position.y + ",\n" +
+                        "\"angle\":" + horse_leg_left_front_top.getTransform().angle + "\n" +
+                        "}, \"horse_leg_left_front_bottom\":{\n" +
+                        "\"x\":" + horse_leg_left_front_bottom.getTransform().position.x + ",\n" +
+                        "\"y\":" + horse_leg_left_front_bottom.getTransform().position.y + ",\n" +
+                        "\"angle\":" + horse_leg_left_front_bottom.getTransform().angle + "\n" +
+                        "}, \"horse_leg_left_back_top\":{\n" +
+                        "\"x\":" + horse_leg_left_back_top.getTransform().position.x + ",\n" +
+                        "\"y\":" + horse_leg_left_back_top.getTransform().position.y + ",\n" +
+                        "\"angle\":" + horse_leg_left_back_top.getTransform().angle + "\n" +
+                        "}, \"horse_leg_left_back_bottom\":{\n" +
+                        "\"x\":" + horse_leg_left_back_bottom.getTransform().position.x + ",\n" +
+                        "\"y\":" + horse_leg_left_back_bottom.getTransform().position.y + ",\n" +
+                        "\"angle\":" + horse_leg_left_back_bottom.getTransform().angle + "\n" +
+                        "}, \"knight\":{\n" +
+                        "\"x\":" + knight.getTransform().position.x + ",\n" +
+                        "\"y\":" + knight.getTransform().position.y + ",\n" +
+                        "\"angle\":" + knight.getTransform().angle + "\n" +
+                        "}\n" +
+                        "}\n" +
+                        "}"));
+            }
+            catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }
 

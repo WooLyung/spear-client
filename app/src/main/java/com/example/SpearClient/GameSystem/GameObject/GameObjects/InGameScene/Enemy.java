@@ -75,22 +75,22 @@ public class Enemy extends GameObject {
             @Override
             public void call(Object... args) {
                 try {
-                    Log.i("update", SocketIOBuilder.id + " : " + args[0].toString());
-                    JSONArray array = new JSONArray(args[0].toString());
+                    JSONArray array = (new JSONObject(args[0].toString())).getJSONArray("users");
                     JSONObject jsonObject;
 
-                    if (array.getJSONObject(0).getString("id") == SocketIOBuilder.id) {
+                    if (array.getJSONObject(0).getString("username").equals(SocketIOBuilder.id)) {
                         jsonObject = array.getJSONObject(1);
                     }
                     else {
                         jsonObject = array.getJSONObject(0);
                     }
+                    Log.i("update_on", jsonObject.toString());
 
                     SpriteRenderer enemySprite = ((SpriteRenderer)knight.getComponent("spriteRenderer"));
                     enemySprite.bindingImage(jsonObject.getInt("player_image"));
-                    enemySprite.setIsFlip(!jsonObject.getBoolean("player_direction"));
+                    spriteRenderer.setIsFlip(!jsonObject.getBoolean("player_direction"));
                     enemyStateComponent.setAction(jsonObject.getInt("player_action"));
-                    enemyStateComponent.time = jsonObject.getLong("player_action_time");
+                    enemyStateComponent.time = (float)jsonObject.getDouble("player_action_time");
 
                     JSONObject player_pos = jsonObject.getJSONObject("player_pos");
                     JSONObject objects = jsonObject.getJSONObject("object");
@@ -106,44 +106,44 @@ public class Enemy extends GameObject {
                     JSONObject horse_leg_left_back_top_t = objects.getJSONObject("horse_leg_left_back_top");
                     JSONObject horse_leg_left_back_bottom_t = objects.getJSONObject("horse_leg_left_back_bottom");
 
-                    transform.position.x = player_pos.getLong("x");
-                    transform.position.y = player_pos.getLong("y");
+                    transform.position.x = -(float)player_pos.getDouble("x");
+                    transform.position.y = (float)player_pos.getDouble("y");
 
-                    horse_head.getTransform().position.x = horse_head_t.getLong("x");
-                    horse_head.getTransform().position.y = horse_head_t.getLong("y");
-                    horse_head.getTransform().angle = horse_head_t.getLong("angle");
-                    horse_neck.getTransform().position.x = horse_neck_t.getLong("x");
-                    horse_neck.getTransform().position.y = horse_neck_t.getLong("y");
-                    horse_neck.getTransform().angle = horse_neck_t.getLong("angle");
-                    horse_body.getTransform().position.x = horse_body_t.getLong("x");
-                    horse_body.getTransform().position.y = horse_body_t.getLong("y");
-                    horse_body.getTransform().angle = horse_body_t.getLong("angle");
+                    horse_head.getTransform().position.x = (float)horse_head_t.getDouble("x");
+                    horse_head.getTransform().position.y = (float)horse_head_t.getDouble("y");
+                    horse_head.getTransform().angle = (float)horse_head_t.getDouble("angle");
+                    horse_neck.getTransform().position.x = (float)horse_neck_t.getDouble("x");
+                    horse_neck.getTransform().position.y = (float)horse_neck_t.getDouble("y");
+                    horse_neck.getTransform().angle = (float)horse_neck_t.getDouble("angle");
+                    horse_body.getTransform().position.x = (float)horse_body_t.getDouble("x");
+                    horse_body.getTransform().position.y = (float)horse_body_t.getDouble("y");
+                    horse_body.getTransform().angle = (float)horse_body_t.getDouble("angle");
 
-                    horse_leg_right_front_top.getTransform().position.x = horse_leg_right_front_top_t.getLong("x");
-                    horse_leg_right_front_top.getTransform().position.y = horse_leg_right_front_top_t.getLong("y");
-                    horse_leg_right_front_top.getTransform().angle = horse_leg_right_front_top_t.getLong("angle");
-                    horse_leg_right_front_bottom.getTransform().position.x = horse_leg_right_front_bottom_t.getLong("x");
-                    horse_leg_right_front_bottom.getTransform().position.y = horse_leg_right_front_bottom_t.getLong("y");
-                    horse_leg_right_front_bottom.getTransform().angle = horse_leg_right_front_bottom_t.getLong("angle");
-                    horse_leg_right_back_top.getTransform().position.x = horse_leg_right_back_top_t.getLong("x");
-                    horse_leg_right_back_top.getTransform().position.y = horse_leg_right_back_top_t.getLong("y");
-                    horse_leg_right_back_top.getTransform().angle = horse_leg_right_back_top_t.getLong("angle");
-                    horse_leg_right_back_bottom.getTransform().position.x = horse_leg_right_back_bottom_t.getLong("x");
-                    horse_leg_right_back_bottom.getTransform().position.y = horse_leg_right_back_bottom_t.getLong("y");
-                    horse_leg_right_back_bottom.getTransform().angle = horse_leg_right_back_bottom_t.getLong("angle");
+                    horse_leg_right_front_top.getTransform().position.x = (float)horse_leg_right_front_top_t.getDouble("x");
+                    horse_leg_right_front_top.getTransform().position.y = (float)horse_leg_right_front_top_t.getDouble("y");
+                    horse_leg_right_front_top.getTransform().angle = (float)horse_leg_right_front_top_t.getDouble("angle");
+                    horse_leg_right_front_bottom.getTransform().position.x = (float)horse_leg_right_front_bottom_t.getDouble("x");
+                    horse_leg_right_front_bottom.getTransform().position.y = (float)horse_leg_right_front_bottom_t.getDouble("y");
+                    horse_leg_right_front_bottom.getTransform().angle = (float)horse_leg_right_front_bottom_t.getDouble("angle");
+                    horse_leg_right_back_top.getTransform().position.x = (float)horse_leg_right_back_top_t.getDouble("x");
+                    horse_leg_right_back_top.getTransform().position.y = (float)horse_leg_right_back_top_t.getDouble("y");
+                    horse_leg_right_back_top.getTransform().angle = (float)horse_leg_right_back_top_t.getDouble("angle");
+                    horse_leg_right_back_bottom.getTransform().position.x = (float)horse_leg_right_back_bottom_t.getDouble("x");
+                    horse_leg_right_back_bottom.getTransform().position.y = (float)horse_leg_right_back_bottom_t.getDouble("y");
+                    horse_leg_right_back_bottom.getTransform().angle = (float)horse_leg_right_back_bottom_t.getDouble("angle");
 
-                    horse_leg_left_front_top.getTransform().position.x = horse_leg_left_front_top_t.getLong("x");
-                    horse_leg_left_front_top.getTransform().position.y = horse_leg_left_front_top_t.getLong("y");
-                    horse_leg_left_front_top.getTransform().angle = horse_leg_left_front_top_t.getLong("angle");
-                    horse_leg_left_front_bottom.getTransform().position.x = horse_leg_left_front_bottom_t.getLong("x");
-                    horse_leg_left_front_bottom.getTransform().position.y = horse_leg_left_front_bottom_t.getLong("y");
-                    horse_leg_left_front_bottom.getTransform().angle = horse_leg_left_front_bottom_t.getLong("angle");
-                    horse_leg_left_back_top.getTransform().position.x = horse_leg_left_back_top_t.getLong("x");
-                    horse_leg_left_back_top.getTransform().position.y = horse_leg_left_back_top_t.getLong("y");
-                    horse_leg_left_back_top.getTransform().angle = horse_leg_left_back_top_t.getLong("angle");
-                    horse_leg_left_back_bottom.getTransform().position.x = horse_leg_left_back_bottom_t.getLong("x");
-                    horse_leg_left_back_bottom.getTransform().position.y = horse_leg_left_back_bottom_t.getLong("y");
-                    horse_leg_left_back_bottom.getTransform().angle = horse_leg_left_back_bottom_t.getLong("angle");
+                    horse_leg_left_front_top.getTransform().position.x = (float)horse_leg_left_front_top_t.getDouble("x");
+                    horse_leg_left_front_top.getTransform().position.y = (float)horse_leg_left_front_top_t.getDouble("y");
+                    horse_leg_left_front_top.getTransform().angle = (float)horse_leg_left_front_top_t.getDouble("angle");
+                    horse_leg_left_front_bottom.getTransform().position.x = (float)horse_leg_left_front_bottom_t.getDouble("x");
+                    horse_leg_left_front_bottom.getTransform().position.y = (float)horse_leg_left_front_bottom_t.getDouble("y");
+                    horse_leg_left_front_bottom.getTransform().angle = (float)horse_leg_left_front_bottom_t.getDouble("angle");
+                    horse_leg_left_back_top.getTransform().position.x = (float)horse_leg_left_back_top_t.getDouble("x");
+                    horse_leg_left_back_top.getTransform().position.y = (float)horse_leg_left_back_top_t.getDouble("y");
+                    horse_leg_left_back_top.getTransform().angle = (float)horse_leg_left_back_top_t.getDouble("angle");
+                    horse_leg_left_back_bottom.getTransform().position.x = (float)horse_leg_left_back_bottom_t.getDouble("x");
+                    horse_leg_left_back_bottom.getTransform().position.y = (float)horse_leg_left_back_bottom_t.getDouble("y");
+                    horse_leg_left_back_bottom.getTransform().angle = (float)horse_leg_left_back_bottom_t.getDouble("angle");
                 }
                 catch (JSONException e) {
                     e.printStackTrace();

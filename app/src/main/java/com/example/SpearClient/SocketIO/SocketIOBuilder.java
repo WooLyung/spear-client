@@ -27,7 +27,6 @@ public class SocketIOBuilder {
         IO.Options opts = new IO.Options();
         mSocket = IO.socket(new URI(serverUri),opts);
         mSocket.connect();
-        id = mSocket.id();
 
         mSocket.on(Socket.EVENT_CONNECT, new Emitter.Listener() {
             @Override
@@ -96,6 +95,8 @@ public class SocketIOBuilder {
     }
 
     public void playerUpdate (JSONObject jsonObject) {
+        Log.i("update_emit", jsonObject.toString());
+
         mSocket.emit("playerUpdate", jsonObject);
     }
 
