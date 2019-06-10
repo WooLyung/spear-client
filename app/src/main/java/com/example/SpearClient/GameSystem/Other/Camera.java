@@ -30,9 +30,6 @@ public class Camera {
         }
 
         public void update() {
-            Log.i("power", "x : " + nowPower.x);
-            Log.i("power", "y : " + nowPower.y);
-
             if (time > 0) {
                 time -= Game.deltaTime;
                 if (time < 0) {

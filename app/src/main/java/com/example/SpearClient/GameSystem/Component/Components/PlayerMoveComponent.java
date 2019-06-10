@@ -14,7 +14,7 @@ public class PlayerMoveComponent extends Component {
     }
 
     public enum STATE {
-        IDLE, WALK, RUN
+        IDLE, WALK, RUN, RUSH, RUSH_STAB
     }
 
     public DIR dir = DIR.RIGHT;
@@ -70,6 +70,17 @@ public class PlayerMoveComponent extends Component {
             float speed = 0.5f + ((time > 1.7f) ? 1.7f : time);
             object.getTransform().position.x += Game.deltaTime * 6f * ((dir == DIR.RIGHT) ? 1 : -1) * speed;
         }
+        else if (state == STATE.RUSH ||
+                state == STATE.RUSH_STAB) {
+            if (animationComponent.getNowAnim() != 1) {
+                animationComponent.play(1);
+            }
+
+            playerStateComponent.changeState(PlayerStateComponent.ACTION.RUN);
+
+            float speed = 1.5f + ((time > 0.7f) ? 0.7f : time);
+            object.getTransform().position.x += Game.deltaTime * 9f * ((dir == DIR.RIGHT) ? 1 : -1) * speed;
+        }
     }
 
     @Override
@@ -78,7 +89,11 @@ public class PlayerMoveComponent extends Component {
     }
 
     public void setDir(DIR dir) {
-        if (this.dir != dir) {
+        if (this.dir != dir && (
+                playerStateComponent.action == PlayerStateComponent.ACTION.RUN
+            || playerStateComponent.action == PlayerStateComponent.ACTION.WALK
+            || playerStateComponent.action == PlayerStateComponent.ACTION.DEFAULT
+            || playerStateComponent.action == PlayerStateComponent.ACTION.REST)) {
             if (dir == DIR.LEFT) {
                 spriteRenderer.setIsFlip(true);
                 this.dir = dir;
@@ -91,20 +106,43 @@ public class PlayerMoveComponent extends Component {
     }
 
     public void setState(STATE state) {
-        if (state == STATE.IDLE
-            && this.state != STATE.IDLE) {
-            this.state = STATE.IDLE;
+        if (state == STATE.RUSH
+                && this.state != STATE.RUSH) {
+            this.state = STATE.RUSH;
             time = 0;
         }
-        else if (state == STATE.WALK
-            && this.state != STATE.WALK) {
-            this.state = STATE.WALK;
+        else if (state == STATE.RUSH_STAB
+                && this.state != STATE.RUSH_STAB) {
+            this.state = STATE.RUSH_STAB;
             time = 0;
         }
-        else if (state == STATE.RUN
-            && this.state != STATE.RUN) {
-            this.state = STATE.RUN;
-            time = 0;
+        else if (playerStateComponent.action == PlayerStateComponent.ACTION.RUN
+            || playerStateComponent.action == PlayerStateComponent.ACTION.WALK
+            || playerStateComponent.action == PlayerStateComponent.ACTION.DEFAULT
+            || playerStateComponent.action == PlayerStateComponent.ACTION.REST) {
+            if (state == STATE.IDLE
+                    && this.state != STATE.IDLE) {
+                this.state = STATE.IDLE;
+                time = 0;
+            }
+            else if (state == STATE.WALK
+                    && this.state != STATE.WALK) {
+                this.state = STATE.WALK;
+                time = 0;
+            }
+            else if (state == STATE.RUN
+                    && this.state != STATE.RUN) {
+                this.state = STATE.RUN;
+                time = 0;
+            }
         }
+    }
+
+    public void setTime(float time) {
+        this.time = time;
+    }
+
+    public float getTime() {
+        return time;
     }
 }

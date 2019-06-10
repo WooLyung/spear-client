@@ -45,7 +45,7 @@ public class Skill2 extends GameObject {
         for (int i = 0; i < 5; i++) {
             if (Vector.distanceDouble(Input.getTouchUIPos(i), transform.position) <= 150/147f * 150/147f) { // 버튼을 클릭했을 경우
                 if (Input.getTouchState(i) == Input.TOUCH_STATE.DOWN) {
-                    playerStateComponent.changeState(PlayerStateComponent.ACTION.SKIM);
+                    playerStateComponent.changeState(PlayerStateComponent.ACTION.RUSH);
                 }
             }
         }

@@ -35,6 +35,7 @@ public class PlayerStateComponent extends Component {
     private boolean isAttacked = false;
     private Enemy enemy;
     private EnemyStateComponent enemyStateComponent;
+    private PlayerMoveComponent playerMoveComponent;
 
     public boolean changeState(ACTION action) {
         int skinCode = AnimationManager.skinToCode();
@@ -62,7 +63,9 @@ public class PlayerStateComponent extends Component {
                 isChanged = true;
 
                 anim = AnimationManager.playerAnims.get(skinCode).get(3);
-                animationRenderer.setInterval(0.03f);
+                animationRenderer.setInterval(1.3f / 30f);
+
+                playerMoveComponent.setState(PlayerMoveComponent.STATE.RUSH);
             }
         }
         else if (action == ACTION.RUSH) {
@@ -71,6 +74,8 @@ public class PlayerStateComponent extends Component {
 
                 anim = AnimationManager.playerAnims.get(skinCode).get(4);
                 animationRenderer.setInterval(0.06f);
+
+                playerMoveComponent.setState(PlayerMoveComponent.STATE.RUSH);
             }
         }
         else if (action == ACTION.SKIM) {
@@ -158,12 +163,15 @@ public class PlayerStateComponent extends Component {
                 enemyStateComponent = (EnemyStateComponent) enemy.getComponent("enemyStateComponent");
             }
         }
+        if (playerMoveComponent == null) {
+            playerMoveComponent = (PlayerMoveComponent) object.getComponent("playerMoveComponent");
+        }
 
         actionUpdate();
     }
 
     private void actionUpdate() {
-        if (action == ACTION.DEEP_STAB) { // 작업중
+        if (action == ACTION.DEEP_STAB) {
             if (time >= 0.4f && !isAttacked) {
                 isAttacked = true;
 
@@ -193,6 +201,30 @@ public class PlayerStateComponent extends Component {
             }
             if (time >= 0.6f) {
                 changeState(ACTION.REST);
+            }
+        }
+        else if (action == ACTION.RUSH) {
+            if (time >= 1.3f) {
+                changeState(ACTION.REST);
+                playerMoveComponent.setState(PlayerMoveComponent.STATE.RUN);
+                playerMoveComponent.setTime(1.7f);
+            }
+        }
+        else if (action == ACTION.RUSH_STAB) {
+            if (!isAttacked) {
+                if (enemyStateComponent.action != EnemyStateComponent.ACTION.AVOID) { // 회피중이 아닐 때
+                    int dir = (object.getRenderer().getIsFlip() ? 1 : -1);
+                    if (enemy.getTransform().position.x * dir <= object.getTransform().position.x * dir
+                            && Math.abs(enemy.getTransform().position.x - object.getTransform().position.x) <= 5) { // 충돌 판정
+                        isAttacked = true;
+                        Log.i("attack", "rush stab!");
+                    }
+                }
+            }
+            if (time >= 1.3f) {
+                changeState(ACTION.REST);
+                playerMoveComponent.setState(PlayerMoveComponent.STATE.RUN);
+                playerMoveComponent.setTime(1.7f);
             }
         }
         else if (action == ACTION.SKIM) {

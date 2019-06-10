@@ -207,13 +207,19 @@ public class GLRenderer implements GLSurfaceView.Renderer {
         }
         anim.add(anim_deep_stab);
 
-        int[] anim_rush_stab = new int[8];
-        for (int i = 0; i < 8; i++) {
-            if (i >= 10)
-                anim_rush_stab[i] = findImage("knight_purple_rush_stab_" + i);
-            else
-                anim_rush_stab[i] =  findImage("knight_purple_rush_stab_0" + i);
+        int[] anim_rush_stab = new int[30];
+        anim_rush_stab[0] = findImage("knight_purple_rush_stab_00");
+        anim_rush_stab[1] = findImage("knight_purple_rush_stab_01");
+        anim_rush_stab[2] = findImage("knight_purple_rush_stab_02");
+        anim_rush_stab[3] = findImage("knight_purple_rush_stab_03");
+        for (int i = 4; i <= 26; i++) {
+            anim_rush_stab[i] = findImage("knight_purple_rush_stab_04");
         }
+        anim_rush_stab[27] = findImage("knight_purple_rush_stab_05");
+        anim_rush_stab[28] = findImage("knight_purple_rush_stab_06");
+        anim_rush_stab[29] = findImage("knight_purple_rush_stab_07");
+
+
         anim.add(anim_rush_stab);
 
         int[] anim_rush = new int[3];
