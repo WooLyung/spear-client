@@ -10,6 +10,7 @@ import com.example.SpearClient.GameSystem.Component.Components.RendererComponent
 import com.example.SpearClient.GameSystem.Component.Components.TransformComponent.Transforms.GUITransform;
 import com.example.SpearClient.GameSystem.GameObject.GameObject;
 import com.example.SpearClient.GameSystem.Other.AnimationManager;
+import com.example.SpearClient.GameSystem.Other.Camera;
 import com.example.SpearClient.GraphicSystem.GL.GLRenderer;
 import com.example.SpearClient.GraphicSystem.GL.GLView;
 import com.example.SpearClient.Main.Game;
@@ -49,6 +50,16 @@ public class Skill1 extends GameObject {
             if (Vector.distanceDouble(Input.getTouchUIPos(i), transform.position) <= 150/147f * 150/147f) { // 버튼을 클릭했을 경우
                 if (Input.getTouchState(i) == Input.TOUCH_STATE.DOWN) {
                     playerStateComponent.changeState(PlayerStateComponent.ACTION.RUSH_STAB);
+
+                    Camera.Vibration_move vm = Game.engine.nowScene.camera.vibration_move;
+                    vm.maxPower.x = 2 * Game.engine.nowScene.camera.getZoomX();
+                    vm.power.x = 50;
+                    vm.maxPower.y = 2 * Game.engine.nowScene.camera.getZoomY();
+                    vm.power.y = 30;
+
+                    Camera.Vibration_rot vt = Game.engine.nowScene.camera.vibration_rot;
+                    vt.maxPower = 4;
+                    vt.power = 100;
                 }
             }
         }

@@ -12,15 +12,15 @@ public class PlayerStateComponent extends Component {
     private AnimationRenderer animationRenderer;
 
     public enum ACTION {
-        DEFAULT,      // 기본
-        WALK,         // 걷기
-        RUN,          // 달리기
-        SHALLOW_STAB, // * 얕게 찌르기
-        DEEP_STAB,    // * 깊게 찌르기
-        RUSH_STAB,    // * 돌진하며 찌르기
-        RUSH,         // * 돌진
+        DEFAULT,      // 기본 (V)
+        WALK,         // 걷기 (V)
+        RUN,          // 달리기 (V)
+        SHALLOW_STAB, // * 얕게 찌르기 (V)
+        DEEP_STAB,    // * 깊게 찌르기 (V)
+        RUSH_STAB,    // * 돌진하며 찌르기 (V)
+        RUSH,         // * 돌진 (V)
         FALL,         // * 빠지기
-        REST,         // * 휴식 (중간 텀)
+        REST,         // * 휴식 (중간 텀) (V)
         SKIM,         // * 걷어내기
         AVOID,        // * 흘리기
         DEFENSELESS,  // * 무방비 상태

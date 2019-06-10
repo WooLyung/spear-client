@@ -9,11 +9,9 @@ import com.example.SpearClient.Types.Vector;
 public class Camera {
 
     public class Vibration_move {
-        public float time = 0;
         public Vector power = new Vector();
         public Vector nowPower = new Vector();
         public Vector maxPower = new Vector();
-        public Vector minPower = new Vector();
         public Vector sign = new Vector();
 
         public Vibration_move() {
@@ -23,37 +21,69 @@ public class Camera {
             nowPower.y = 0;
             maxPower.x = 0;
             maxPower.y = 0;
-            minPower.x = 0;
-            minPower.y = 0;
             sign.x = 1;
             sign.y = 1;
         }
 
         public void update() {
-            if (time > 0) {
-                time -= Game.deltaTime;
-                if (time < 0) {
-                    time = 0;
-
-                    nowPower.x = 0;
-                    nowPower.y = 0;
-                }
-
+            if (maxPower.x != 0) {
                 nowPower.x += power.x * sign.x * Game.deltaTime;
+                maxPower.x -= Game.deltaTime * 4.5f;
+                power.x -= Game.deltaTime / 8;
                 if (sign.x == 1 && nowPower.x >= maxPower.x) {
                     sign.x = -1;
                 }
-                else if (sign.x == -1 && nowPower.x <= minPower.x) {
+                else if (sign.x == -1 && nowPower.x <= -maxPower.x) {
                     sign.x = 1;
                 }
 
+                if (maxPower.x < 0)
+                    maxPower.x = 0;
+            }
+            if (maxPower.y != 0) {
                 nowPower.y += power.y * sign.y * Game.deltaTime;
+                maxPower.y -= Game.deltaTime * 4.5f;
+                power.y -= Game.deltaTime / 8;
                 if (sign.y == 1 && nowPower.y >= maxPower.y) {
                     sign.y = -1;
                 }
-                else if (sign.y == -1 && nowPower.y <= minPower.y) {
+                else if (sign.y == -1 && nowPower.y <= -maxPower.y) {
                     sign.y = 1;
                 }
+
+                if (maxPower.y < 0)
+                    maxPower.y = 0;
+            }
+        }
+    }
+
+    public class Vibration_rot {
+        public float power = 0;
+        public float nowPower = 0;
+        public float maxPower = 0;
+        public int sign = 0;
+
+        public Vibration_rot() {
+            power = 0;
+            nowPower = 0;
+            maxPower = 0;
+            sign = 1;
+        }
+
+        public void update() {
+            if (maxPower != 0) {
+                nowPower += power * sign * Game.deltaTime;
+                maxPower -= Game.deltaTime * 7f;
+                power -= Game.deltaTime / 8;
+                if (sign == 1 && nowPower >= maxPower) {
+                    sign = -1;
+                }
+                else if (sign == -1 && nowPower <= -maxPower) {
+                    sign = 1;
+                }
+
+                if (maxPower < 0)
+                    maxPower = 0;
             }
         }
     }
@@ -63,22 +93,21 @@ public class Camera {
     private Vector zoom = new Vector(1, 1);
 
     public Vibration_move vibration_move = new Vibration_move();
+    public Vibration_rot vibration_rot = new Vibration_rot();
 
     public Camera() {
-        vibration_move.maxPower.x = 1;
-        vibration_move.maxPower.y = 1;
-        vibration_move.minPower.x = -1;
-        vibration_move.minPower.y = -1;
-        vibration_move.power.x = 16.6f;
-        vibration_move.power.y = 14f;
     }
 
     public void setAngle(float angle) {
         this.angle = angle;
     }
 
-    public float getAngle() {
+    public float getAngleNone() {
         return angle;
+    }
+
+    public float getAngle() {
+        return angle + vibration_rot.nowPower;
     }
 
     public void setPosition(Vector position) {
@@ -114,5 +143,6 @@ public class Camera {
 
     public void update() {
         vibration_move.update();
+        vibration_rot.update();
     }
 }
