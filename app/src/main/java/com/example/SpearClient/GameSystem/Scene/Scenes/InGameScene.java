@@ -17,6 +17,7 @@ import com.example.SpearClient.GameSystem.GameObject.GameObjects.InGameScene.Ski
 import com.example.SpearClient.GameSystem.Scene.Scene;
 import com.example.SpearClient.GraphicSystem.GL.GLView;
 import com.example.SpearClient.Main.Game;
+import com.example.SpearClient.Types.Vector;
 
 public class InGameScene extends Scene {
     public enum INGAME_SCENE_STATE {
@@ -65,7 +66,7 @@ public class InGameScene extends Scene {
         time += Game.deltaTime;
 
         if (player != null && enemy != null) {
-            camera.position.x = (player.getTransform().position.x + enemy.getTransform().position.x) / 2f;
+            camera.setPosition(new Vector((player.getTransform().position.x + enemy.getTransform().position.x) / 2f, camera.getPositionNone().y) );
             float distance = Math.abs(player.getTransform().position.x - enemy.getTransform().position.x);
             float zoom = Math.min((float)Math.sqrt(GLView.defaultWidth / distance * 2) - 0.3f, 0.7f);
 

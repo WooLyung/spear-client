@@ -16,6 +16,8 @@ abstract public class Scene {
     abstract public void start();
 
     public void update() {
+        camera.update();
+
         Iterator<GameObject> iter = objs.iterator();
         while (iter.hasNext()) {
             try {

@@ -3,11 +3,9 @@ package com.example.SpearClient.GameSystem.Component.Components;
 import android.util.Log;
 
 import com.example.SpearClient.GameSystem.Component.Component;
-import com.example.SpearClient.GameSystem.Component.Components.AnimationComponent.AnimSupportClasses.Animation;
 import com.example.SpearClient.GameSystem.Component.Components.RendererComponent.Renderers.AnimationRenderer;
 import com.example.SpearClient.GameSystem.GameObject.GameObjects.InGameScene.Enemy;
 import com.example.SpearClient.GameSystem.Other.AnimationManager;
-import com.example.SpearClient.Main.Engine;
 import com.example.SpearClient.Main.Game;
 
 public class PlayerStateComponent extends Component {

@@ -89,8 +89,8 @@ public class Input {
 
     public static Vector getTouchWorldPos() {
         Vector pos = new Vector();
-        pos.x = 2 * (touchPos.x - Game.screenWidth / 2) * (float)GLView.nowWidth / Game.screenWidth + Game.engine.nowScene.camera.position.x;
-        pos.y = 2 * (Game.screenHeight - touchPos.y - Game.screenHeight / 2) * (float)GLView.nowHeight / Game.screenHeight + Game.engine.nowScene.camera.position.y;
+        pos.x = 2 * (touchPos.x - Game.screenWidth / 2) * (float)GLView.nowWidth / Game.screenWidth + Game.engine.nowScene.camera.getPosition().x;
+        pos.y = 2 * (Game.screenHeight - touchPos.y - Game.screenHeight / 2) * (float)GLView.nowHeight / Game.screenHeight + Game.engine.nowScene.camera.getPosition().y;
 
         return pos;
     }
@@ -113,8 +113,8 @@ public class Input {
         if (id == 0)
             return getTouchWorldPos();
         Vector pos = new Vector();
-        pos.x = 2 * (multiTouchPos[id - 1].x - Game.screenWidth / 2) * (float)GLView.nowWidth / Game.screenWidth + Game.engine.nowScene.camera.position.x;
-        pos.y = 2 * (Game.screenHeight - multiTouchPos[id - 1].y - Game.screenHeight / 2) * (float)GLView.nowHeight / Game.screenHeight + Game.engine.nowScene.camera.position.y;
+        pos.x = 2 * (multiTouchPos[id - 1].x - Game.screenWidth / 2) * (float)GLView.nowWidth / Game.screenWidth + Game.engine.nowScene.camera.getPosition().x;
+        pos.y = 2 * (Game.screenHeight - multiTouchPos[id - 1].y - Game.screenHeight / 2) * (float)GLView.nowHeight / Game.screenHeight + Game.engine.nowScene.camera.getPosition().y;
 
         return pos;
     }

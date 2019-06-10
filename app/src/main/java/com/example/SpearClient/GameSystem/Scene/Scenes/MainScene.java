@@ -143,7 +143,7 @@ public class MainScene extends Scene {
 
         if (state == MAIN_SCENE_STATE.MOVE_DOWN) {
             time += Game.deltaTime;
-            camera.position.y = -time * 20.48f;
+            camera.getPosition().y = -time * 20.48f;
             float[] color = {
                     1, 1, 1, (time <= 0.5f) ? time * 2 : (1 - (time - 0.5f) * 2),
                     1, 1, 1, (time <= 0.5f) ? time * 2 : (1 - (time - 0.5f) * 2),
@@ -155,7 +155,7 @@ public class MainScene extends Scene {
             if (time >= 1) {
                 time = 0;
                 state = MAIN_SCENE_STATE.DOWN;
-                camera.position.y = -20.48f;
+                camera.getPosition().y = -20.48f;
                 ((TextRenderer)findObjectByName("name").getComponent("textRenderer")).setText("보라 기사");
 
                 float[] color2 = {
@@ -170,7 +170,7 @@ public class MainScene extends Scene {
         else if (state == MAIN_SCENE_STATE.MOVE_UP) {
             ((TextRenderer)findObjectByName("name").getComponent("textRenderer")).getTextView().setText("");
             time += Game.deltaTime;
-            camera.position.y = 20.48f -time * 20.48f;
+            camera.getPosition().y = 20.48f -time * 20.48f;
             float[] color = {
                     1, 1, 1, (time <= 0.5f) ? time * 2 : (1 - (time - 0.5f) * 2),
                     1, 1, 1, (time <= 0.5f) ? time * 2 : (1 - (time - 0.5f) * 2),
@@ -182,7 +182,7 @@ public class MainScene extends Scene {
             if (time >= 1) {
                 time = 0;
                 state = MAIN_SCENE_STATE.UP;
-                camera.position.y = 0;
+                camera.getPosition().y = 0;
 
                 float[] color2 = {
                         1, 1, 1, 0,

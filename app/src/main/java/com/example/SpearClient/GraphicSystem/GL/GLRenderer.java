@@ -252,8 +252,8 @@ public class GLRenderer implements GLSurfaceView.Renderer {
         // 카메라의 정보를 행렬 스택에 담음
         gl.glLoadIdentity();
         gl.glScalef(Game.engine.nowScene.camera.getZoomX() / (float)GLView.defaultWidth, Game.engine.nowScene.camera.getZoomY() / (float)GLView.defaultHeight, 1);
-        gl.glRotatef(Game.engine.nowScene.camera.angle, 0, 0, 1);
-        gl.glTranslatef(-Game.engine.nowScene.camera.position.x, -Game.engine.nowScene.camera.position.y, 0);
+        gl.glRotatef(Game.engine.nowScene.camera.getAngle(), 0, 0, 1);
+        gl.glTranslatef(-Game.engine.nowScene.camera.getPosition().x, -Game.engine.nowScene.camera.getPosition().y, 0);
         gl.glPushMatrix();
         gl.glLoadIdentity();
 
