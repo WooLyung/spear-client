@@ -84,7 +84,6 @@ public class Enemy extends GameObject {
                     else {
                         jsonObject = array.getJSONObject(0);
                     }
-                    Log.i("update_on", jsonObject.toString());
 
                     SpriteRenderer enemySprite = ((SpriteRenderer)knight.getComponent("spriteRenderer"));
                     enemySprite.bindingImage(jsonObject.getInt("player_image"));

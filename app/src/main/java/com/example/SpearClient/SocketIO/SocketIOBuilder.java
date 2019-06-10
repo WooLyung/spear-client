@@ -95,8 +95,6 @@ public class SocketIOBuilder {
     }
 
     public void playerUpdate (JSONObject jsonObject) {
-        Log.i("update_emit", jsonObject.toString());
-
         mSocket.emit("playerUpdate", jsonObject);
     }
 

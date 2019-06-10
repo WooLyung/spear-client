@@ -5,7 +5,9 @@ import android.util.Log;
 import com.example.SpearClient.GameSystem.Component.Component;
 import com.example.SpearClient.GameSystem.Component.Components.AnimationComponent.AnimSupportClasses.Animation;
 import com.example.SpearClient.GameSystem.Component.Components.RendererComponent.Renderers.AnimationRenderer;
+import com.example.SpearClient.GameSystem.GameObject.GameObjects.InGameScene.Enemy;
 import com.example.SpearClient.GameSystem.Other.AnimationManager;
+import com.example.SpearClient.Main.Engine;
 import com.example.SpearClient.Main.Game;
 
 public class PlayerStateComponent extends Component {
@@ -27,15 +29,16 @@ public class PlayerStateComponent extends Component {
         LOSE          // * 패배
     }
 
-    // 이미지 코드
-    public int imageCode_skin = 0;
-
     // 동작
     public ACTION action = ACTION.REST;
     public float time = 0;
-    public float invincible = 0;
 
-    public void changeState(ACTION action) {
+    // 값
+    private boolean isAttacked = false;
+    private Enemy enemy;
+    private EnemyStateComponent enemyStateComponent;
+
+    public boolean changeState(ACTION action) {
         int skinCode = AnimationManager.skinToCode();
         int[] anim = { 0 };
         boolean isChanged = false;
@@ -45,7 +48,7 @@ public class PlayerStateComponent extends Component {
                 isChanged = true;
 
                 anim = AnimationManager.playerAnims.get(skinCode).get(1);
-                animationRenderer.setInterval(0.03f);
+                animationRenderer.setInterval(0.6f / 16f);
             }
         }
         else if (action == ACTION.DEEP_STAB) {
@@ -53,7 +56,7 @@ public class PlayerStateComponent extends Component {
                 isChanged = true;
 
                 anim = AnimationManager.playerAnims.get(skinCode).get(2);
-                animationRenderer.setInterval(0.03f);
+                animationRenderer.setInterval(0.8f / 15f);
             }
         }
         else if (action == ACTION.RUSH_STAB) {
@@ -124,10 +127,13 @@ public class PlayerStateComponent extends Component {
 
         if (isChanged) {
             this.action = action;
+            this.isAttacked = false;
             time = 0;
 
             animationRenderer.bindingImage(anim);
         }
+
+        return isChanged;
     }
 
     @Override
@@ -148,13 +154,46 @@ public class PlayerStateComponent extends Component {
                 }
             }
         }
+        if (enemy == null) {
+            if (Game.engine.nowScene.findObjectByName("enemy") != null) {
+                enemy = (Enemy) Game.engine.nowScene.findObjectByName("enemy");
+                enemyStateComponent = (EnemyStateComponent) enemy.getComponent("enemyStateComponent");
+            }
+        }
 
         actionUpdate();
     }
 
     private void actionUpdate() {
-        if (action == ACTION.DEEP_STAB) {
-            if (time >= 1) {
+        if (action == ACTION.DEEP_STAB) { // 작업중
+            if (time >= 0.4f && !isAttacked) {
+                isAttacked = true;
+
+                if (enemyStateComponent.action != EnemyStateComponent.ACTION.AVOID) { // 회피중이 아닐 때
+                    int dir = (object.getRenderer().getIsFlip() ? 1 : -1);
+                    if (enemy.getTransform().position.x * dir <= object.getTransform().position.x * dir
+                            && Math.abs(enemy.getTransform().position.x - object.getTransform().position.x) <= 5) { // 충돌 판정
+                        Log.i("attack", "deep stab!");
+                    }
+                }
+            }
+            if (time >= 0.8f) {
+                changeState(ACTION.REST);
+            }
+        }
+        else if (action == ACTION.SHALLOW_STAB) {
+            if (time >= 0.3f && !isAttacked) {
+                isAttacked = true;
+
+                if (enemyStateComponent.action != EnemyStateComponent.ACTION.AVOID) { // 회피중이 아닐 때
+                    int dir = (object.getRenderer().getIsFlip() ? 1 : -1);
+                    if (enemy.getTransform().position.x * dir <= object.getTransform().position.x * dir
+                            && Math.abs(enemy.getTransform().position.x - object.getTransform().position.x) <= 5) { // 충돌 판정
+                        Log.i("attack", "shallow stab!");
+                    }
+                }
+            }
+            if (time >= 0.6f) {
                 changeState(ACTION.REST);
             }
         }
@@ -163,8 +202,8 @@ public class PlayerStateComponent extends Component {
                 changeState(ACTION.REST);
             }
         }
-        else if (action == ACTION.REST) {
-            if (time >= 1) {
+        else if (action == ACTION.REST) { // 작업중
+            if (time >= 0.5f) {
                 changeState(ACTION.DEFAULT);
             }
         }
