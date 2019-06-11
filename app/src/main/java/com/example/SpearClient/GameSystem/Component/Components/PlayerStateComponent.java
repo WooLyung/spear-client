@@ -7,6 +7,9 @@ import com.example.SpearClient.GameSystem.Component.Components.RendererComponent
 import com.example.SpearClient.GameSystem.GameObject.GameObjects.InGameScene.Enemy;
 import com.example.SpearClient.GameSystem.Other.AnimationManager;
 import com.example.SpearClient.Main.Game;
+import com.example.SpearClient.SocketIO.SocketIOBuilder;
+
+import org.json.JSONObject;
 
 public class PlayerStateComponent extends Component {
     private AnimationRenderer animationRenderer;
@@ -86,11 +89,27 @@ public class PlayerStateComponent extends Component {
 
                 if (enemyStateComponent.action == EnemyStateComponent.ACTION.DEEP_STAB
                     && enemyStateComponent.time <= 0.35f) {
-                    Log.i("attack", "skim, deep stab");
+
+                    try {
+                        SocketIOBuilder.getInstance().skill_emit(new JSONObject("{\n" +
+                                "\t\"event\":\"skim\"\n" +
+                                "}"));
+                    }
+                    catch (Exception e) {
+                        e.printStackTrace();
+                    }
                 }
                 else if (enemyStateComponent.action == EnemyStateComponent.ACTION.SHALLOW_STAB
                         && enemyStateComponent.time <= 0.28f) {
-                    Log.i("attack", "skim, shallow stab");
+
+                    try {
+                        SocketIOBuilder.getInstance().skill_emit(new JSONObject("{\n" +
+                                "\t\"event\":\"skim\"\n" +
+                                "}"));
+                    }
+                    catch (Exception e) {
+                        e.printStackTrace();
+                    }
                 }
             }
         }
@@ -179,7 +198,16 @@ public class PlayerStateComponent extends Component {
                     int dir = (object.getRenderer().getIsFlip() ? 1 : -1);
                     if (enemy.getTransform().position.x * dir <= object.getTransform().position.x * dir
                             && Math.abs(enemy.getTransform().position.x - object.getTransform().position.x) <= 5) { // 충돌 판정
-                        Log.i("attack", "deep stab!");
+
+                        try {
+                            SocketIOBuilder.getInstance().skill_emit(new JSONObject("{\n" +
+                                    "\t\"event\":\"damage\",\n" +
+                                    "\t\"damage\":" + 20 + "\n" +
+                                    "}"));
+                        }
+                        catch (Exception e) {
+                            e.printStackTrace();
+                        }
                     }
                 }
             }
@@ -195,7 +223,16 @@ public class PlayerStateComponent extends Component {
                     int dir = (object.getRenderer().getIsFlip() ? 1 : -1);
                     if (enemy.getTransform().position.x * dir <= object.getTransform().position.x * dir
                             && Math.abs(enemy.getTransform().position.x - object.getTransform().position.x) <= 5) { // 충돌 판정
-                        Log.i("attack", "shallow stab!");
+
+                        try {
+                            SocketIOBuilder.getInstance().skill_emit(new JSONObject("{\n" +
+                                    "\t\"event\":\"damage\",\n" +
+                                    "\t\"damage\":" + 10 + "\n" +
+                                    "}"));
+                        }
+                        catch (Exception e) {
+                            e.printStackTrace();
+                        }
                     }
                 }
             }
@@ -218,6 +255,16 @@ public class PlayerStateComponent extends Component {
                             && Math.abs(enemy.getTransform().position.x - object.getTransform().position.x) <= 5) { // 충돌 판정
                         isAttacked = true;
                         Log.i("attack", "rush stab!");
+
+                        try {
+                            SocketIOBuilder.getInstance().skill_emit(new JSONObject("{\n" +
+                                    "\t\"event\":\"damage\",\n" +
+                                    "\t\"damage\":" + 15 + "\n" +
+                                    "}"));
+                        }
+                        catch (Exception e) {
+                            e.printStackTrace();
+                        }
                     }
                 }
             }

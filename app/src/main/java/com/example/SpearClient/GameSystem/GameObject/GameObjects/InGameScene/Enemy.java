@@ -8,6 +8,8 @@ import com.example.SpearClient.GameSystem.Component.Components.PlayerMoveCompone
 import com.example.SpearClient.GameSystem.Component.Components.RendererComponent.Renderers.SpriteRenderer;
 import com.example.SpearClient.GameSystem.Component.Components.TransformComponent.Transforms.Transform;
 import com.example.SpearClient.GameSystem.GameObject.GameObject;
+import com.example.SpearClient.GameSystem.Other.GameManager;
+import com.example.SpearClient.GameSystem.Scene.Scenes.InGameScene;
 import com.example.SpearClient.GraphicSystem.GL.GLRenderer;
 import com.example.SpearClient.Main.Engine;
 import com.example.SpearClient.Main.Game;
@@ -30,6 +32,8 @@ public class Enemy extends GameObject {
             horse_leg_left_back_top, horse_leg_left_back_bottom,
             horse_leg_right_front_top, horse_leg_right_front_bottom,
             horse_leg_right_back_top, horse_leg_right_back_bottom;
+
+    GameManager gameManager;
 
     @Override
     public void start() {
@@ -80,9 +84,19 @@ public class Enemy extends GameObject {
 
                     if (array.getJSONObject(0).getString("username").equals(SocketIOBuilder.id)) {
                         jsonObject = array.getJSONObject(1);
+
+                        if (gameManager != null) {
+                            gameManager.setMyHP((float)array.getJSONObject(0).getDouble("player_health"));
+                            gameManager.setEnemyHP((float)array.getJSONObject(1).getDouble("player_health"));
+                        }
                     }
                     else {
                         jsonObject = array.getJSONObject(0);
+
+                        if (gameManager != null) {
+                            gameManager.setMyHP((float)array.getJSONObject(1).getDouble("player_health"));
+                            gameManager.setEnemyHP((float)array.getJSONObject(0).getDouble("player_health"));
+                        }
                     }
 
                     SpriteRenderer enemySprite = ((SpriteRenderer)knight.getComponent("spriteRenderer"));
@@ -90,8 +104,6 @@ public class Enemy extends GameObject {
                     spriteRenderer.setIsFlip(!jsonObject.getBoolean("player_direction"));
                     enemyStateComponent.setAction(jsonObject.getInt("player_action"));
                     enemyStateComponent.time = (float)jsonObject.getDouble("player_action_time");
-                    Log.i("action-time", enemyStateComponent.time + "");
-                    Log.i("action", enemyStateComponent.action + "");
 
                     JSONObject player_pos = jsonObject.getJSONObject("player_pos");
                     JSONObject objects = jsonObject.getJSONObject("object");
@@ -156,6 +168,12 @@ public class Enemy extends GameObject {
     @Override
     public void update() {
         super.update();
+
+        if (gameManager == null) {
+            if (((InGameScene)Game.engine.nowScene).gameManager != null) {
+                gameManager = ((InGameScene)Game.engine.nowScene).gameManager;
+            }
+        }
     }
 
     private void createHorse() {

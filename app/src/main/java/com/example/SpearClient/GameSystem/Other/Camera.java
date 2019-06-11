@@ -145,4 +145,14 @@ public class Camera {
         vibration_move.update();
         vibration_rot.update();
     }
+
+    public void vibrate() {
+        vibration_move.maxPower.x = 2 * Game.engine.nowScene.camera.getZoomX();
+        vibration_move.power.x = 50;
+        vibration_move.maxPower.y = 2 * Game.engine.nowScene.camera.getZoomY();
+        vibration_move.power.y = 30;
+
+        vibration_rot.maxPower = 4;
+        vibration_rot.power = 100;
+    }
 }

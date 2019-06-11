@@ -14,6 +14,7 @@ import com.example.SpearClient.GameSystem.GameObject.GameObjects.InGameScene.MyH
 import com.example.SpearClient.GameSystem.GameObject.GameObjects.InGameScene.Player;
 import com.example.SpearClient.GameSystem.GameObject.GameObjects.InGameScene.Skill1;
 import com.example.SpearClient.GameSystem.GameObject.GameObjects.InGameScene.Skill2;
+import com.example.SpearClient.GameSystem.Other.GameManager;
 import com.example.SpearClient.GameSystem.Scene.Scene;
 import com.example.SpearClient.GraphicSystem.GL.GLView;
 import com.example.SpearClient.Main.Game;
@@ -29,6 +30,7 @@ public class InGameScene extends Scene {
     Skill1 skill1;
     Skill2 skill2;
 
+    public GameManager gameManager = new GameManager();
     public float time = 0;
 
     @Override
@@ -57,6 +59,7 @@ public class InGameScene extends Scene {
     @Override
     public void update() {
         super.update();
+        gameManager.update();
 
         time += Game.deltaTime;
 

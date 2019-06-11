@@ -12,12 +12,12 @@ import com.example.SpearClient.Main.Game;
 public class EnemyHP extends GameObject {
     SpriteRenderer spriteRenderer, front_spriteRenderer, smooth_spriteRenderer;
     GUITransform transform;
-    GameObject front, smooth;
-
-    float fill = 1;
+    public GameObject front, smooth;
 
     @Override
     public void start() {
+        setName("enemyHP");
+
         front = new GameObject() {
             @Override
             public void start() {
@@ -74,21 +74,15 @@ public class EnemyHP extends GameObject {
     public void update() {
         super.update();
 
-        fill -= Game.deltaTime * 0.5f;
-        if (fill < 0)
-            fill = 1;
-
-        front_spriteRenderer.setFill(fill);
-
         if (front_spriteRenderer.getFill() != smooth_spriteRenderer.getFill()) {
             if (front_spriteRenderer.getFill() > smooth_spriteRenderer.getFill()) {
-                smooth_spriteRenderer.setFill(smooth_spriteRenderer.getFill() + Game.deltaTime);
+                smooth_spriteRenderer.setFill(smooth_spriteRenderer.getFill() + Game.deltaTime / 3);
                 if (front_spriteRenderer.getFill() < smooth_spriteRenderer.getFill()) {
                     smooth_spriteRenderer.setFill(front_spriteRenderer.getFill());
                 }
             }
             else {
-                smooth_spriteRenderer.setFill(smooth_spriteRenderer.getFill() - Game.deltaTime);
+                smooth_spriteRenderer.setFill(smooth_spriteRenderer.getFill() - Game.deltaTime / 3);
                 if (front_spriteRenderer.getFill() > smooth_spriteRenderer.getFill()) {
                     smooth_spriteRenderer.setFill(front_spriteRenderer.getFill());
                 }

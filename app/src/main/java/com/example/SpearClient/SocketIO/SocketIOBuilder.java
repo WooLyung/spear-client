@@ -106,7 +106,15 @@ public class SocketIOBuilder {
         mSocket.on("update_player", listener);
     }
 
-    public void event (Emitter.Listener listener) {
+    public void update_roomInfo (Emitter.Listener listener) {
+        mSocket.on("update_roomInfo", listener);
+    }
 
+    public void skill_emit (JSONObject jsonObject) {
+        mSocket.emit("skill", jsonObject);
+    }
+
+    public void skill_on (Emitter.Listener listener) {
+        mSocket.on("skill", listener);
     }
 }
