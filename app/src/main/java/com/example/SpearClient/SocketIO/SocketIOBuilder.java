@@ -98,7 +98,15 @@ public class SocketIOBuilder {
         mSocket.emit("playerUpdate", jsonObject);
     }
 
+    public void playerFastUpdate (JSONObject jsonObject) {
+        mSocket.emit("playerFastUpdate", jsonObject);
+    }
+
     public void update_player (Emitter.Listener listener) {
         mSocket.on("update_player", listener);
+    }
+
+    public void event (Emitter.Listener listener) {
+
     }
 }

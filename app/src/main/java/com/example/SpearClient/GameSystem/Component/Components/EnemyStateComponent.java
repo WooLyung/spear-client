@@ -11,7 +11,6 @@ public class EnemyStateComponent extends Component {
         DEEP_STAB,    // * 깊게 찌르기
         RUSH_STAB,    // * 돌진하며 찌르기
         RUSH,         // * 돌진
-        FALL,         // * 빠지기
         REST,         // * 휴식 (중간 텀)
         SKIM,         // * 걷어내기
         AVOID,        // * 흘리기
@@ -60,19 +59,19 @@ public class EnemyStateComponent extends Component {
                 action = ACTION.RUSH;
                 break;
             case 7:
-                action = ACTION.FALL;
-                break;
-            case 8:
                 action = ACTION.SKIM;
                 break;
-            case 9:
+            case 8:
                 action = ACTION.AVOID;
                 break;
-            case 10:
+            case 9:
                 action = ACTION.DEFENSELESS;
                 break;
-            case 11:
+            case 10:
                 action = ACTION.LOSE;
+                break;
+            case 11:
+                action = ACTION.REST;
                 break;
         }
     }

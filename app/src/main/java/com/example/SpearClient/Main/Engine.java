@@ -15,7 +15,7 @@ public class Engine {
     public static String id = "";
 
     public Engine() {
-        changeScene(new InGameScene());
+        changeScene(new IntroScene());
         start();
     }
 

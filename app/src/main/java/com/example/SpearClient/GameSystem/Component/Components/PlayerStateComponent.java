@@ -19,10 +19,9 @@ public class PlayerStateComponent extends Component {
         DEEP_STAB,    // * 깊게 찌르기 (V)
         RUSH_STAB,    // * 돌진하며 찌르기 (V)
         RUSH,         // * 돌진 (V)
-        FALL,         // * 빠지기
         REST,         // * 휴식 (중간 텀) (V)
-        SKIM,         // * 걷어내기
-        AVOID,        // * 흘리기
+        SKIM,         // * 걷어내기 (V)
+        AVOID,        // * 흘리기 (V)
         DEFENSELESS,  // * 무방비 상태
         LOSE          // * 패배
     }
@@ -84,14 +83,15 @@ public class PlayerStateComponent extends Component {
 
                 anim = AnimationManager.playerAnims.get(skinCode).get(5);
                 animationRenderer.setInterval(0.03f);
-            }
-        }
-        else if (action == ACTION.FALL) {
-            if (this.action == ACTION.DEFAULT || this.action == ACTION.RUN) {
-                isChanged = true;
 
-                anim = AnimationManager.playerAnims.get(skinCode).get(4);
-                animationRenderer.setInterval(0.06f);
+                if (enemyStateComponent.action == EnemyStateComponent.ACTION.DEEP_STAB
+                    && enemyStateComponent.time <= 0.35f) {
+                    Log.i("attack", "skim, deep stab");
+                }
+                else if (enemyStateComponent.action == EnemyStateComponent.ACTION.SHALLOW_STAB
+                        && enemyStateComponent.time <= 0.28f) {
+                    Log.i("attack", "skim, shallow stab");
+                }
             }
         }
         else if (action == ACTION.AVOID) {
@@ -227,12 +227,17 @@ public class PlayerStateComponent extends Component {
                 playerMoveComponent.setTime(1.7f);
             }
         }
+        else if (action == ACTION.AVOID) {
+            if (time >= 0.8f) {
+                changeState(ACTION.REST);
+            }
+        }
         else if (action == ACTION.SKIM) {
             if (time >= 1) {
                 changeState(ACTION.REST);
             }
         }
-        else if (action == ACTION.REST) { // 작업중
+        else if (action == ACTION.REST) {
             if (time >= 0.5f) {
                 changeState(ACTION.DEFAULT);
             }
@@ -251,19 +256,19 @@ public class PlayerStateComponent extends Component {
                 return 3;
             case DEEP_STAB:
                 return 4;
-            case RUSH:
+            case RUSH_STAB:
                 return 5;
-            case FALL:
+            case RUSH:
                 return 6;
-            case REST:
-                return 7;
             case SKIM:
-                return 8;
+                return 7;
             case AVOID:
-                return 9;
+                return 8;
             case DEFENSELESS:
-                return 10;
+                return 9;
             case LOSE:
+                return 10;
+            case REST:
                 return 11;
         }
 

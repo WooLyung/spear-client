@@ -111,7 +111,6 @@ public class GLRenderer implements GLSurfaceView.Renderer {
         addImage(R.drawable.knight_purple_fall_00 , "knight_purple_fall_00");
         addImage(R.drawable.knight_purple_fall_01 , "knight_purple_fall_01");
         addImage(R.drawable.knight_purple_fall_02 , "knight_purple_fall_02");
-        addImage(R.drawable.knight_purple_fall_03 , "knight_purple_fall_03");
 
         addImage(R.drawable.knight_purple_rush_00 , "knight_purple_rush_00");
         addImage(R.drawable.knight_purple_rush_01 , "knight_purple_rush_01");
@@ -176,6 +175,7 @@ public class GLRenderer implements GLSurfaceView.Renderer {
         // UI
         addImage(R.drawable.hpbar_back, "hpbar_back");
         addImage(R.drawable.hpbar_front, "hpbar_front");
+        addImage(R.drawable.hpbar_smooth, "hpbar_smooth");
 
         // 기타
         addImage(R.drawable.left_bricks, "left_bricks");
@@ -240,8 +240,8 @@ public class GLRenderer implements GLSurfaceView.Renderer {
         }
         anim.add(anim_skim);
 
-        int[] anim_fall = new int[4];
-        for (int i = 0; i < 4; i++) {
+        int[] anim_fall = new int[3];
+        for (int i = 0; i < 3; i++) {
             if (i >= 10)
                 anim_fall[i] = findImage("knight_purple_fall_" + i);
             else

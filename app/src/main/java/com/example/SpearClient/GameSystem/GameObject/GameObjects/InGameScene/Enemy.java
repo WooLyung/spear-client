@@ -90,6 +90,8 @@ public class Enemy extends GameObject {
                     spriteRenderer.setIsFlip(!jsonObject.getBoolean("player_direction"));
                     enemyStateComponent.setAction(jsonObject.getInt("player_action"));
                     enemyStateComponent.time = (float)jsonObject.getDouble("player_action_time");
+                    Log.i("action-time", enemyStateComponent.time + "");
+                    Log.i("action", enemyStateComponent.action + "");
 
                     JSONObject player_pos = jsonObject.getJSONObject("player_pos");
                     JSONObject objects = jsonObject.getJSONObject("object");

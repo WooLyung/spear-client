@@ -20,10 +20,6 @@ import com.example.SpearClient.Main.Game;
 import com.example.SpearClient.Types.Vector;
 
 public class InGameScene extends Scene {
-    public enum INGAME_SCENE_STATE {
-        WAIT, GAME, FINISH, RESULT
-    }
-
     Player player;
     Enemy enemy;
     MyHP myHP;
@@ -33,7 +29,6 @@ public class InGameScene extends Scene {
     Skill1 skill1;
     Skill2 skill2;
 
-    public INGAME_SCENE_STATE state = INGAME_SCENE_STATE.WAIT;
     public float time = 0;
 
     @Override

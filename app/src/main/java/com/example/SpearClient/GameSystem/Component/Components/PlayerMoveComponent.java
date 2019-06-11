@@ -70,8 +70,17 @@ public class PlayerMoveComponent extends Component {
             float speed = 0.5f + ((time > 1.7f) ? 1.7f : time);
             object.getTransform().position.x += Game.deltaTime * 6f * ((dir == DIR.RIGHT) ? 1 : -1) * speed;
         }
-        else if (state == STATE.RUSH ||
-                state == STATE.RUSH_STAB) {
+        else if (state == STATE.RUSH) {
+            if (animationComponent.getNowAnim() != 1) {
+                animationComponent.play(1);
+            }
+
+            playerStateComponent.changeState(PlayerStateComponent.ACTION.RUN);
+
+            float speed = 1.5f + ((time > 0.7f) ? 0.7f : time);
+            object.getTransform().position.x += Game.deltaTime * 10f * ((dir == DIR.RIGHT) ? 1 : -1) * speed;
+        }
+        else if (state == STATE.RUSH_STAB) {
             if (animationComponent.getNowAnim() != 1) {
                 animationComponent.play(1);
             }

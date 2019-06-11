@@ -10,9 +10,9 @@ import com.example.SpearClient.GraphicSystem.GL.GLView;
 import com.example.SpearClient.Main.Game;
 
 public class EnemyHP extends GameObject {
-    SpriteRenderer spriteRenderer, front_spriteRenderer;
+    SpriteRenderer spriteRenderer, front_spriteRenderer, smooth_spriteRenderer;
     GUITransform transform;
-    GameObject front;
+    GameObject front, smooth;
 
     float fill = 1;
 
@@ -24,6 +24,20 @@ public class EnemyHP extends GameObject {
                 spriteRenderer = new SpriteRenderer();
                 attachComponent(spriteRenderer);
                 spriteRenderer.bindingImage(GLRenderer.findImage("hpbar_front"));
+                spriteRenderer.setZ_index(52);
+
+                transform = new Transform();
+                attachComponent(transform);
+                transform.anchor.x = 0;
+                transform.anchor.y = 0;
+            }
+        };
+        smooth = new GameObject() {
+            @Override
+            public void start() {
+                spriteRenderer = new SpriteRenderer();
+                attachComponent(spriteRenderer);
+                spriteRenderer.bindingImage(GLRenderer.findImage("hpbar_smooth"));
                 spriteRenderer.setZ_index(51);
 
                 transform = new Transform();
@@ -32,10 +46,11 @@ public class EnemyHP extends GameObject {
                 transform.anchor.y = 0;
             }
         };
-
         appendChild(front);
+        appendChild(smooth);
 
         front_spriteRenderer = (SpriteRenderer) front.getComponent("spriteRenderer");
+        smooth_spriteRenderer = (SpriteRenderer) smooth.getComponent("spriteRenderer");
 
         spriteRenderer = new SpriteRenderer();
         attachComponent(spriteRenderer);
@@ -52,6 +67,7 @@ public class EnemyHP extends GameObject {
         transform.anchor.y = 0;
 
         front_spriteRenderer.setDir(RendererComponent.DIRECTION.RIGHT);
+        smooth_spriteRenderer.setDir(RendererComponent.DIRECTION.RIGHT);
     }
 
     @Override
@@ -63,5 +79,20 @@ public class EnemyHP extends GameObject {
             fill = 1;
 
         front_spriteRenderer.setFill(fill);
+
+        if (front_spriteRenderer.getFill() != smooth_spriteRenderer.getFill()) {
+            if (front_spriteRenderer.getFill() > smooth_spriteRenderer.getFill()) {
+                smooth_spriteRenderer.setFill(smooth_spriteRenderer.getFill() + Game.deltaTime);
+                if (front_spriteRenderer.getFill() < smooth_spriteRenderer.getFill()) {
+                    smooth_spriteRenderer.setFill(front_spriteRenderer.getFill());
+                }
+            }
+            else {
+                smooth_spriteRenderer.setFill(smooth_spriteRenderer.getFill() - Game.deltaTime);
+                if (front_spriteRenderer.getFill() > smooth_spriteRenderer.getFill()) {
+                    smooth_spriteRenderer.setFill(front_spriteRenderer.getFill());
+                }
+            }
+        }
     }
 }

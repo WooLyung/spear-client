@@ -17,6 +17,8 @@ import com.example.SpearClient.GameSystem.Scene.Scene;
 import com.example.SpearClient.GraphicSystem.GL.GLRenderer;
 import com.example.SpearClient.GraphicSystem.GL.GLView;
 import com.example.SpearClient.Main.Game;
+import com.example.SpearClient.SocketIO.SocketIOBuilder;
+import com.example.SpearClient.Types.Vector;
 
 public class MainScene extends Scene {
     public enum MAIN_SCENE_STATE {
@@ -143,7 +145,7 @@ public class MainScene extends Scene {
 
         if (state == MAIN_SCENE_STATE.MOVE_DOWN) {
             time += Game.deltaTime;
-            camera.getPosition().y = -time * 20.48f;
+            camera.setPosition(new Vector(camera.getPosition().x, -time * 20.48f));
             float[] color = {
                     1, 1, 1, (time <= 0.5f) ? time * 2 : (1 - (time - 0.5f) * 2),
                     1, 1, 1, (time <= 0.5f) ? time * 2 : (1 - (time - 0.5f) * 2),
@@ -155,8 +157,8 @@ public class MainScene extends Scene {
             if (time >= 1) {
                 time = 0;
                 state = MAIN_SCENE_STATE.DOWN;
-                camera.getPosition().y = -20.48f;
-                ((TextRenderer)findObjectByName("name").getComponent("textRenderer")).setText("보라 기사");
+                camera.setPosition(new Vector(camera.getPosition().x, -20.48f));
+                ((TextRenderer)findObjectByName("name").getComponent("textRenderer")).setText(SocketIOBuilder.id);
 
                 float[] color2 = {
                         1, 1, 1, 0,
@@ -170,7 +172,7 @@ public class MainScene extends Scene {
         else if (state == MAIN_SCENE_STATE.MOVE_UP) {
             ((TextRenderer)findObjectByName("name").getComponent("textRenderer")).getTextView().setText("");
             time += Game.deltaTime;
-            camera.getPosition().y = 20.48f -time * 20.48f;
+            camera.setPosition(new Vector(camera.getPosition().x, 20.48f -time * 20.48f));
             float[] color = {
                     1, 1, 1, (time <= 0.5f) ? time * 2 : (1 - (time - 0.5f) * 2),
                     1, 1, 1, (time <= 0.5f) ? time * 2 : (1 - (time - 0.5f) * 2),
@@ -182,7 +184,8 @@ public class MainScene extends Scene {
             if (time >= 1) {
                 time = 0;
                 state = MAIN_SCENE_STATE.UP;
-                camera.getPosition().y = 0;
+                camera.setPosition(new Vector(camera.getPosition().x, 0));
+
 
                 float[] color2 = {
                         1, 1, 1, 0,
