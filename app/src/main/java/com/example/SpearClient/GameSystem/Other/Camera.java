@@ -27,9 +27,9 @@ public class Camera {
 
         public void update() {
             if (maxPower.x != 0) {
-                nowPower.x += power.x * sign.x * Game.deltaTime;
-                maxPower.x -= Game.deltaTime * 4.5f;
-                power.x -= Game.deltaTime / 8;
+                nowPower.x += power.x * sign.x * Game.getDeltaTime();
+                maxPower.x -= Game.getDeltaTime() * 4.5f;
+                power.x -= Game.getDeltaTime() / 8;
                 if (sign.x == 1 && nowPower.x >= maxPower.x) {
                     sign.x = -1;
                 }
@@ -41,9 +41,9 @@ public class Camera {
                     maxPower.x = 0;
             }
             if (maxPower.y != 0) {
-                nowPower.y += power.y * sign.y * Game.deltaTime;
-                maxPower.y -= Game.deltaTime * 4.5f;
-                power.y -= Game.deltaTime / 8;
+                nowPower.y += power.y * sign.y * Game.getDeltaTime();
+                maxPower.y -= Game.getDeltaTime() * 4.5f;
+                power.y -= Game.getDeltaTime() / 8;
                 if (sign.y == 1 && nowPower.y >= maxPower.y) {
                     sign.y = -1;
                 }
@@ -72,9 +72,9 @@ public class Camera {
 
         public void update() {
             if (maxPower != 0) {
-                nowPower += power * sign * Game.deltaTime;
-                maxPower -= Game.deltaTime * 7f;
-                power -= Game.deltaTime / 8;
+                nowPower += power * sign * Game.getDeltaTime();
+                maxPower -= Game.getDeltaTime() * 7f;
+                power -= Game.getDeltaTime() / 8;
                 if (sign == 1 && nowPower >= maxPower) {
                     sign = -1;
                 }

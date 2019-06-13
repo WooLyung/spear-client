@@ -31,7 +31,7 @@ public class PlayerMoveComponent extends Component {
 
     @Override
     public void update() {
-        time += Game.deltaTime;
+        time += Game.getDeltaTime();
 
         if (animationComponent == null) {
             animationComponent = (AnimationComponent) object.getComponent("animationComponent");
@@ -58,7 +58,7 @@ public class PlayerMoveComponent extends Component {
             }
 
             playerStateComponent.changeState(PlayerStateComponent.ACTION.WALK);
-            object.getTransform().position.x += Game.deltaTime * 3f * ((dir == DIR.RIGHT) ? 1 : -1);
+            object.getTransform().position.x += Game.getDeltaTime() * 3f * ((dir == DIR.RIGHT) ? 1 : -1);
         }
         else if (state == STATE.RUN) {
             if (animationComponent.getNowAnim() != 1) {
@@ -68,7 +68,7 @@ public class PlayerMoveComponent extends Component {
             playerStateComponent.changeState(PlayerStateComponent.ACTION.RUN);
 
             float speed = 0.5f + ((time > 1.7f) ? 1.7f : time);
-            object.getTransform().position.x += Game.deltaTime * 6f * ((dir == DIR.RIGHT) ? 1 : -1) * speed;
+            object.getTransform().position.x += Game.getDeltaTime() * 6f * ((dir == DIR.RIGHT) ? 1 : -1) * speed;
         }
         else if (state == STATE.RUSH) {
             if (animationComponent.getNowAnim() != 1) {
@@ -78,7 +78,7 @@ public class PlayerMoveComponent extends Component {
             playerStateComponent.changeState(PlayerStateComponent.ACTION.RUN);
 
             float speed = 1.5f + ((time > 0.7f) ? 0.7f : time);
-            object.getTransform().position.x += Game.deltaTime * 10f * ((dir == DIR.RIGHT) ? 1 : -1) * speed;
+            object.getTransform().position.x += Game.getDeltaTime() * 10f * ((dir == DIR.RIGHT) ? 1 : -1) * speed;
         }
         else if (state == STATE.RUSH_STAB) {
             if (animationComponent.getNowAnim() != 1) {
@@ -88,7 +88,7 @@ public class PlayerMoveComponent extends Component {
             playerStateComponent.changeState(PlayerStateComponent.ACTION.RUN);
 
             float speed = 1.5f + ((time > 0.7f) ? 0.7f : time);
-            object.getTransform().position.x += Game.deltaTime * 9f * ((dir == DIR.RIGHT) ? 1 : -1) * speed;
+            object.getTransform().position.x += Game.getDeltaTime() * 9f * ((dir == DIR.RIGHT) ? 1 : -1) * speed;
         }
     }
 

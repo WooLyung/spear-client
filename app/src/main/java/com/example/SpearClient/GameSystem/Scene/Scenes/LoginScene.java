@@ -4,6 +4,7 @@ import com.example.SpearClient.GameSystem.GameObject.GameObjects.Background;
 import com.example.SpearClient.GameSystem.GameObject.GameObjects.Cloud;
 import com.example.SpearClient.GameSystem.GameObject.GameObjects.LoginScene.LoginBoard.LoginBoard;
 import com.example.SpearClient.GameSystem.Scene.Scene;
+import com.example.SpearClient.Main.Game;
 
 public class LoginScene extends Scene {
     @Override

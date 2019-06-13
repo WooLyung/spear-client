@@ -34,8 +34,10 @@ public class Game extends AppCompatActivity {
     public static AnimationManager animationManager;
     public static int screenWidth;
     public static int screenHeight;
-    public static float deltaTime;
     public static double screenDiagonal;
+
+    private static float deltaTime;
+    public static float slowTime = 0;
 
     public Game() {
         instance = this;
@@ -138,5 +140,17 @@ public class Game extends AppCompatActivity {
         }
 
         return super.onTouchEvent(event);
+    }
+
+    public static void setDeltaTime(float deltaTime_) {
+        deltaTime = deltaTime_;
+    }
+
+    public static float getDeltaTime() {
+        return deltaTime * ((slowTime != 0) ? 0.3f : 1);
+    }
+
+    public static float getNoneDeltaTime() {
+        return deltaTime;
     }
 }

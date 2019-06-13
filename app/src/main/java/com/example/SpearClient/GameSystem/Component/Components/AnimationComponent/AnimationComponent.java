@@ -51,7 +51,7 @@ public class AnimationComponent extends Component {
 
                 if (animationState.getRot() != null) { // 각도 변경
                     if (animationState.getRot().getNowMotion() != -1) { // 이미 끝난 상태가 아닐 경우
-                        animationState.getRot().setTime(animationState.getRot().getTime() + Game.deltaTime);
+                        animationState.getRot().setTime(animationState.getRot().getTime() + Game.getDeltaTime());
                         float value = animationData.getRot().get(animationState.getRot().getNowMotion()).getStart()
                                 + (animationData.getRot().get(animationState.getRot().getNowMotion()).getEnd() - animationData.getRot().get(animationState.getRot().getNowMotion()).getStart())
                                 / animationData.getRot().get(animationState.getRot().getNowMotion()).getTime() * animationState.getRot().getTime();
@@ -75,7 +75,7 @@ public class AnimationComponent extends Component {
                 }
                 if (animationState.getPosX() != null) { // 위치 x 변경
                     if (animationState.getPosX().getNowMotion() != -1) { // 이미 끝난 상태가 아닐 경우
-                        animationState.getPosX().setTime(animationState.getPosX().getTime() + Game.deltaTime);
+                        animationState.getPosX().setTime(animationState.getPosX().getTime() + Game.getDeltaTime());
                         float value = animationData.getPosX().get(animationState.getPosX().getNowMotion()).getStart()
                                 + (animationData.getPosX().get(animationState.getPosX().getNowMotion()).getEnd() - animationData.getPosX().get(animationState.getPosX().getNowMotion()).getStart())
                                 / animationData.getPosX().get(animationState.getPosX().getNowMotion()).getTime() * animationState.getPosX().getTime();
@@ -99,7 +99,7 @@ public class AnimationComponent extends Component {
                 }
                 if (animationState.getPosY() != null) { // 위치 y 변경
                     if (animationState.getPosY().getNowMotion() != -1) { // 이미 끝난 상태가 아닐 경우
-                        animationState.getPosY().setTime(animationState.getPosY().getTime() + Game.deltaTime);
+                        animationState.getPosY().setTime(animationState.getPosY().getTime() + Game.getDeltaTime());
                         float value = animationData.getPosY().get(animationState.getPosY().getNowMotion()).getStart()
                                 + (animationData.getPosY().get(animationState.getPosY().getNowMotion()).getEnd() - animationData.getPosY().get(animationState.getPosY().getNowMotion()).getStart())
                                 / animationData.getPosY().get(animationState.getPosY().getNowMotion()).getTime() * animationState.getPosY().getTime();
@@ -123,7 +123,7 @@ public class AnimationComponent extends Component {
                 }
                 if (animationState.getScaleX() != null) { // 크기 x 변경
                     if (animationState.getScaleX().getNowMotion() != -1) { // 이미 끝난 상태가 아닐 경우
-                        animationState.getScaleX().setTime(animationState.getScaleX().getTime() + Game.deltaTime);
+                        animationState.getScaleX().setTime(animationState.getScaleX().getTime() + Game.getDeltaTime());
                         float value = animationData.getScaleX().get(animationState.getScaleX().getNowMotion()).getStart()
                                 + (animationData.getScaleX().get(animationState.getScaleX().getNowMotion()).getEnd() - animationData.getScaleX().get(animationState.getScaleX().getNowMotion()).getStart())
                                 / animationData.getScaleX().get(animationState.getScaleX().getNowMotion()).getTime() * animationState.getScaleX().getTime();
@@ -147,7 +147,7 @@ public class AnimationComponent extends Component {
                 }
                 if (animationState.getScaleY() != null) { // 크기 y 변경
                     if (animationState.getScaleY().getNowMotion() != -1) { // 이미 끝난 상태가 아닐 경우
-                        animationState.getScaleY().setTime(animationState.getScaleY().getTime() + Game.deltaTime);
+                        animationState.getScaleY().setTime(animationState.getScaleY().getTime() + Game.getDeltaTime());
                         float value = animationData.getScaleY().get(animationState.getScaleY().getNowMotion()).getStart()
                                 + (animationData.getScaleY().get(animationState.getScaleY().getNowMotion()).getEnd() - animationData.getScaleY().get(animationState.getScaleY().getNowMotion()).getStart())
                                 / animationData.getScaleY().get(animationState.getScaleY().getNowMotion()).getTime() * animationState.getScaleY().getTime();

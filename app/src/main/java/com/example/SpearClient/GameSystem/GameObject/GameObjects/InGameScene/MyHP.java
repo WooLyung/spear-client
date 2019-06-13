@@ -76,13 +76,13 @@ public class MyHP extends GameObject {
 
         if (front_spriteRenderer.getFill() != smooth_spriteRenderer.getFill()) {
             if (front_spriteRenderer.getFill() > smooth_spriteRenderer.getFill()) {
-                smooth_spriteRenderer.setFill(smooth_spriteRenderer.getFill() + Game.deltaTime / 2);
+                smooth_spriteRenderer.setFill(smooth_spriteRenderer.getFill() + Game.getDeltaTime() / 2);
                 if (front_spriteRenderer.getFill() < smooth_spriteRenderer.getFill()) {
                     smooth_spriteRenderer.setFill(front_spriteRenderer.getFill());
                 }
             }
             else {
-                smooth_spriteRenderer.setFill(smooth_spriteRenderer.getFill() - Game.deltaTime / 2);
+                smooth_spriteRenderer.setFill(smooth_spriteRenderer.getFill() - Game.getDeltaTime() / 2);
                 if (front_spriteRenderer.getFill() > smooth_spriteRenderer.getFill()) {
                     smooth_spriteRenderer.setFill(front_spriteRenderer.getFill());
                 }

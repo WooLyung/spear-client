@@ -165,7 +165,7 @@ public class PlayerStateComponent extends Component {
 
     @Override
     public void update() {
-        time += Game.deltaTime;
+        time += Game.getDeltaTime();
 
         if (animationRenderer == null) {
             if (object != null) {

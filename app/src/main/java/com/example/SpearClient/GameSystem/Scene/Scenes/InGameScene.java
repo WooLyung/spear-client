@@ -61,7 +61,7 @@ public class InGameScene extends Scene {
         super.update();
         gameManager.update();
 
-        time += Game.deltaTime;
+        time += Game.getDeltaTime();
 
         if (player != null && enemy != null) {
             camera.setPosition(new Vector((player.getTransform().position.x + enemy.getTransform().position.x) / 2f, camera.getPositionNone().y) );

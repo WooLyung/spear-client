@@ -64,7 +64,7 @@ public class IntroScene extends Scene {
     }
 
     private void animation() {
-        time += Game.deltaTime;
+        time += Game.getDeltaTime();
 
         if (state == STATE.NONE) { // 아무것도 없음
             if (time >= 1) {

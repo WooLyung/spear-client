@@ -53,7 +53,7 @@ public class Cloud extends GameObject {
     public void update() {
         super.update();
 
-        transform.position.x -= Game.deltaTime;
+        transform.position.x -= Game.getDeltaTime();
         if (transform.position.x <= -40.96f) {
             transform.position.x = 0;
         }

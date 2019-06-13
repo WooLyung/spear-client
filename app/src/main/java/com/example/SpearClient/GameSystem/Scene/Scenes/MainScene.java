@@ -144,7 +144,7 @@ public class MainScene extends Scene {
         super.update();
 
         if (state == MAIN_SCENE_STATE.MOVE_DOWN) {
-            time += Game.deltaTime;
+            time += Game.getDeltaTime();
             camera.setPosition(new Vector(camera.getPosition().x, -time * 20.48f));
             float[] color = {
                     1, 1, 1, (time <= 0.5f) ? time * 2 : (1 - (time - 0.5f) * 2),
@@ -171,7 +171,7 @@ public class MainScene extends Scene {
         }
         else if (state == MAIN_SCENE_STATE.MOVE_UP) {
             ((TextRenderer)findObjectByName("name").getComponent("textRenderer")).getTextView().setText("");
-            time += Game.deltaTime;
+            time += Game.getDeltaTime();
             camera.setPosition(new Vector(camera.getPosition().x, 20.48f -time * 20.48f));
             float[] color = {
                     1, 1, 1, (time <= 0.5f) ? time * 2 : (1 - (time - 0.5f) * 2),

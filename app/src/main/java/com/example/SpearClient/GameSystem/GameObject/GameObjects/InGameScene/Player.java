@@ -93,8 +93,8 @@ public class Player extends GameObject {
     public void update() {
         super.update();
 
-        emitTime1 += Game.deltaTime;
-        emitTime2 += Game.deltaTime;
+        emitTime1 += Game.getDeltaTime();
+        emitTime2 += Game.getDeltaTime();
 
         if (transform.position.x > 30)
             transform.position.x = 30;
