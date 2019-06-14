@@ -78,6 +78,8 @@ public class GLRenderer implements GLSurfaceView.Renderer {
         addImage(R.drawable.button_move_right, "button_move_right");
         addImage(R.drawable.button_skill1, "button_skill1");
         addImage(R.drawable.button_skill2, "button_skill2");
+        addImage(R.drawable.button_regame, "button_regame");
+        addImage(R.drawable.button_home, "button_home");
 
         // 배경들
         addImage(R.drawable.background_ground, "background_ground");
@@ -193,6 +195,20 @@ public class GLRenderer implements GLSurfaceView.Renderer {
         addImage(R.drawable.hpbar_back, "hpbar_back");
         addImage(R.drawable.hpbar_front, "hpbar_front");
         addImage(R.drawable.hpbar_smooth, "hpbar_smooth");
+
+        // 스킬
+        addImage(R.drawable.skill_avoid, "skill_avoid");
+        addImage(R.drawable.skill_rush, "skill_rush");
+        addImage(R.drawable.skill_skim, "skill_skim");
+        addImage(R.drawable.skill_shallow_stab, "skill_shallow_stab");
+        addImage(R.drawable.skill_deep_stab, "skill_deep_stab");
+        addImage(R.drawable.skill_rush_stab, "skill_rush_stab");
+        addImage(R.drawable.skill_avoid_black, "skill_avoid_black");
+        addImage(R.drawable.skill_rush_black, "skill_rush_black");
+        addImage(R.drawable.skill_skim_black, "skill_skim_black");
+        addImage(R.drawable.skill_shallow_stab_black, "skill_shallow_stab_black");
+        addImage(R.drawable.skill_deep_stab_black, "skill_deep_stab_black");
+        addImage(R.drawable.skill_rush_stab_black, "skill_rush_stab_black");
 
         // 기타
         addImage(R.drawable.left_bricks, "left_bricks");

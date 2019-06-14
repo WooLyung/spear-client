@@ -118,9 +118,14 @@ public class Enemy extends GameObject {
                     JSONObject horse_leg_left_front_bottom_t = objects.getJSONObject("horse_leg_left_front_bottom");
                     JSONObject horse_leg_left_back_top_t = objects.getJSONObject("horse_leg_left_back_top");
                     JSONObject horse_leg_left_back_bottom_t = objects.getJSONObject("horse_leg_left_back_bottom");
+                    JSONObject knight_t = objects.getJSONObject("knight");
 
                     transform.position.x = -(float)player_pos.getDouble("x");
                     transform.position.y = (float)player_pos.getDouble("y");
+
+                    knight.getTransform().position.x = (float)knight_t.getDouble("x");
+                    knight.getTransform().position.y = (float)knight_t.getDouble("y");
+                    knight.getTransform().angle = (float)knight_t.getDouble("angle");
 
                     horse_head.getTransform().position.x = (float)horse_head_t.getDouble("x");
                     horse_head.getTransform().position.y = (float)horse_head_t.getDouble("y");

@@ -1,40 +1,39 @@
-package com.example.SpearClient.GameSystem.GameObject.GameObjects.MainScene;
+package com.example.SpearClient.GameSystem.GameObject.GameObjects.InGameScene.ResultBoard;
 
-import android.util.Log;
 import android.widget.Toast;
 
 import com.example.SpearClient.GameIO.Input;
+import com.example.SpearClient.GameSystem.Component.Components.RendererComponent.Renderers.EditTextRenderer;
 import com.example.SpearClient.GameSystem.Component.Components.RendererComponent.Renderers.SpriteRenderer;
-import com.example.SpearClient.GameSystem.Component.Components.TransformComponent.Transforms.Transform;
+import com.example.SpearClient.GameSystem.Component.Components.TransformComponent.Transforms.GUITransform;
 import com.example.SpearClient.GameSystem.GameObject.GameObject;
 import com.example.SpearClient.GameSystem.Scene.Scenes.InGameScene;
 import com.example.SpearClient.GameSystem.Scene.Scenes.MachingScene;
+import com.example.SpearClient.GameSystem.Scene.Scenes.MainScene;
 import com.example.SpearClient.GraphicSystem.GL.GLRenderer;
-import com.example.SpearClient.GraphicSystem.GL.GLView;
+import com.example.SpearClient.Main.Engine;
 import com.example.SpearClient.Main.Game;
 import com.example.SpearClient.SocketIO.SocketIOBuilder;
-import com.example.SpearClient.Types.Vector;
 
 import org.json.JSONObject;
 
-import io.socket.client.Socket;
 import io.socket.emitter.Emitter;
 
-public class GameStart extends GameObject {
+public class RegameButton extends GameObject {
     private SpriteRenderer spriteRenderer;
-    private Transform transform;
+    private GUITransform transform;
 
     @Override
     public void start() {
         spriteRenderer = new SpriteRenderer();
         attachComponent(spriteRenderer);
-        spriteRenderer.bindingImage(GLRenderer.findImage("button_gamestart"));
-        spriteRenderer.setZ_index(-9);
+        spriteRenderer.bindingImage(GLRenderer.findImage("button_regame"));
 
-        transform = new Transform();
+        transform = new GUITransform();
         attachComponent(transform);
-        transform.position.y = -20.48f - 3.5f;
-        transform.position.x = -(float) GLView.nowWidth + 4;
+        spriteRenderer.setZ_index(61);
+        transform.position.x = -1.6f;
+        transform.position.y = -2.6f;
         transform.scale.x = 1000/1470f;
         transform.scale.y = 1000/1470f;
     }
@@ -45,11 +44,9 @@ public class GameStart extends GameObject {
 
         for (int i = 0; i < 5; i++) {
             if (Input.getTouchState(i) == Input.TOUCH_STATE.DOWN) {
-                Log.i("touch", "default : " + GLView.defaultWidth);
-                Log.i("touch", "now : " + GLView.nowWidth);
+                if (Math.abs(Input.getTouchUIPos(i).x - transform.position.x) <= 150 / 100f
+                    && Math.abs(Input.getTouchUIPos(i).y - transform.position.y) <= 60 / 100f) { // 버튼을 클릭했을 경우
 
-                if (Math.abs(Input.getTouchWorldPos(i).x - transform.position.x) <= 300 / 100f
-                        && Math.abs(Input.getTouchWorldPos(i).y - transform.position.y) <= 60 / 100f) { // 버튼을 클릭했을 경우
                     enter();
                 }
             }

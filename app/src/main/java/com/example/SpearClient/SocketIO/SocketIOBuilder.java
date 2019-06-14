@@ -4,6 +4,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.example.SpearClient.GameSystem.GameObject.GameObjects.LoginScene.LoginBoard.LoginBoard;
+import com.example.SpearClient.GameSystem.Other.ActionManager;
 import com.example.SpearClient.Main.Game;
 
 import org.json.JSONException;
@@ -67,6 +68,36 @@ public class SocketIOBuilder {
         return instance;
     }
 
+    public void getSkill1 (Emitter.Listener listener) {
+        try {
+            mSocket.emit("getSkill1");
+            mSocket.on("getSkill1Callback", listener);
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void getSkill2 (Emitter.Listener listener) {
+        try {
+            mSocket.emit("getSkill2");
+            mSocket.on("getSkill2Callback", listener);
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void getNickname (Emitter.Listener listener) {
+        try {
+            mSocket.emit("getNickname");
+            mSocket.on("getNicknameCallback", listener);
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     public void register (String id, String password, String nickname, Emitter.Listener listener) {
         try {
             mSocket.emit("register", new JSONObject("{username: \""+id+"\", password: \""+password+"\", nickname: \""+nickname+"\"}"));
@@ -116,5 +147,9 @@ public class SocketIOBuilder {
 
     public void skill_on (Emitter.Listener listener) {
         mSocket.on("skill", listener);
+    }
+
+    public void gameover (Emitter.Listener listener) {
+        mSocket.on("gameover", listener);
     }
 }

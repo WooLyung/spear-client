@@ -13,6 +13,7 @@ import com.example.SpearClient.GameSystem.GameObject.GameObjects.MainScene.Perso
 import com.example.SpearClient.GameSystem.GameObject.GameObjects.MainScene.Place;
 import com.example.SpearClient.GameSystem.GameObject.GameObjects.MainScene.Settings;
 import com.example.SpearClient.GameSystem.GameObject.GameObjects.MainScene.Tutorial;
+import com.example.SpearClient.GameSystem.Other.Camera;
 import com.example.SpearClient.GameSystem.Scene.Scene;
 import com.example.SpearClient.GraphicSystem.GL.GLRenderer;
 import com.example.SpearClient.GraphicSystem.GL.GLView;
@@ -142,6 +143,9 @@ public class MainScene extends Scene {
     @Override
     public void update() {
         super.update();
+
+        camera.setZoomY(1);
+        camera.setZoomX(1);
 
         if (state == MAIN_SCENE_STATE.MOVE_DOWN) {
             time += Game.getDeltaTime();

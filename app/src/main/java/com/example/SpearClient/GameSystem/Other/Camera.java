@@ -96,6 +96,9 @@ public class Camera {
     public Vibration_rot vibration_rot = new Vibration_rot();
 
     public Camera() {
+        setAngle(0);
+        setZoomX(1);
+        setZoomY(1);
     }
 
     public void setAngle(float angle) {

@@ -7,6 +7,7 @@ import com.example.SpearClient.GameSystem.Component.Components.PlayerMoveCompone
 import com.example.SpearClient.GameSystem.Component.Components.RendererComponent.Renderers.SpriteRenderer;
 import com.example.SpearClient.GameSystem.Component.Components.TransformComponent.Transforms.GUITransform;
 import com.example.SpearClient.GameSystem.GameObject.GameObject;
+import com.example.SpearClient.GameSystem.Other.GameManager;
 import com.example.SpearClient.GraphicSystem.GL.GLRenderer;
 import com.example.SpearClient.GraphicSystem.GL.GLView;
 import com.example.SpearClient.Main.Game;
@@ -43,7 +44,8 @@ public class MoveLeft extends GameObject {
         }
 
         for (int i = 0; i < 5; i++) {
-            if (Vector.distanceDouble(Input.getTouchUIPos(i), transform.position) <= 150/147f * 150/147f) { // 버튼을 클릭했을 경우
+            if (Vector.distanceDouble(Input.getTouchUIPos(i), transform.position) <= 150/147f * 150/147f
+                    && GameManager.getInstance().state == GameManager.STATE.GAMING) { // 버튼을 클릭했을 경우
                 lastClickIndex = i;
 
                 if (Input.getTouchState(i) == Input.TOUCH_STATE.DOWN

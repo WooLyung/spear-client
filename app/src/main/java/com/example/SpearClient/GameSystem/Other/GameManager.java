@@ -8,6 +8,7 @@ import com.example.SpearClient.GameSystem.GameObject.GameObjects.InGameScene.Ene
 import com.example.SpearClient.GameSystem.GameObject.GameObjects.InGameScene.EnemyHP;
 import com.example.SpearClient.GameSystem.GameObject.GameObjects.InGameScene.MyHP;
 import com.example.SpearClient.GameSystem.GameObject.GameObjects.InGameScene.Player;
+import com.example.SpearClient.GameSystem.GameObject.GameObjects.InGameScene.ResultBoard.ResultBoard;
 import com.example.SpearClient.Main.Game;
 import com.example.SpearClient.SocketIO.SocketIOBuilder;
 
@@ -16,13 +17,15 @@ import org.json.JSONObject;
 import io.socket.emitter.Emitter;
 
 public class GameManager {
-    enum STATE {
+    public enum STATE {
         WAITING,
         GAMING,
         RESULT
     }
 
     public STATE state = STATE.GAMING;
+
+    private static GameManager instance;
     private MyHP myHP;
     private EnemyHP enemyHP;
     private Player player;
@@ -30,6 +33,8 @@ public class GameManager {
     private PlayerStateComponent playerStateComponent;
 
     public GameManager() {
+        instance = this;
+
         SocketIOBuilder.getInstance().skill_on(new Emitter.Listener() {
             @Override
             public void call(Object... args) {
@@ -51,6 +56,8 @@ public class GameManager {
                         Game.slowTime = 1;
 
                         if (subject.equals(SocketIOBuilder.id)) { // 공격을 튕겨냄
+                            playerStateComponent.isSkim = true;
+                            playerStateComponent.time = 0.2f;
                         }
                         else { // 무방비 상태가 됨
                             playerStateComponent.changeState(PlayerStateComponent.ACTION.DEFENCELESS);
@@ -62,17 +69,35 @@ public class GameManager {
                 }
             }
         });
+
+        SocketIOBuilder.getInstance().gameover(new Emitter.Listener() {
+            @Override
+            public void call(Object... args) {
+                state = STATE.RESULT;
+                Game.engine.nowScene.objs.add(new ResultBoard());
+                Log.i("gameover", args[0].toString());
+            }
+        });
     }
 
     public void update() {
         if (myHP == null) {
-            myHP = (MyHP) Game.engine.nowScene.findObjectByName("myHP");
+            if (Game.engine.nowScene.findObjectByName("myHP") != null) {
+                myHP = (MyHP) Game.engine.nowScene.findObjectByName("myHP");
+            }
         }
         if (enemyHP == null) {
-            enemyHP = (EnemyHP) Game.engine.nowScene.findObjectByName("enemyHP");
+            if (Game.engine.nowScene.findObjectByName("enemyHP") != null) {
+                enemyHP = (EnemyHP) Game.engine.nowScene.findObjectByName("enemyHP");
+
+            }
         }
         if (player == null) {
-            player = (Player) Game.engine.nowScene.findObjectByName("player");
+            if (Game.engine.nowScene.findObjectByName("player") != null) {
+                player = (Player) Game.engine.nowScene.findObjectByName("player");
+            }
+        }
+        else if (playerStateComponent == null) {Q
             playerStateComponent = (PlayerStateComponent) player.getComponent("playerStateComponent");
         }
     }
@@ -87,5 +112,9 @@ public class GameManager {
         if (enemyHP != null) {
             ((SpriteRenderer) enemyHP.front.getRenderer()).setFill(hp / 100f);
         }
+    }
+
+    public static GameManager getInstance() {
+        return instance;
     }
 }

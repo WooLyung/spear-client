@@ -59,7 +59,7 @@ abstract public class RendererComponent extends Component {
 
         gl.glPopMatrix();
         gl.glPushMatrix();
-    };
+    }
 
     public int getZ_index() {
         return z_index;

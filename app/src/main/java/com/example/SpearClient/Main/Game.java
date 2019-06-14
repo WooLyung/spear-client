@@ -87,8 +87,8 @@ public class Game extends AppCompatActivity {
         screenDiagonal = Math.sqrt(point.x * point.x + point.y * point.y);
         GLView.defaultHeight = 10 * screenHeight / screenDiagonal;
         GLView.defaultWidth = 10 * screenWidth / screenDiagonal;
-        GLView.nowHeight = GLView.defaultHeight;
-        GLView.nowWidth = GLView.defaultWidth;
+        GLView.nowHeight = 10 * screenHeight / screenDiagonal;
+        GLView.nowWidth = 10 * screenWidth / screenDiagonal;
     }
 
     @Override
@@ -147,7 +147,7 @@ public class Game extends AppCompatActivity {
     }
 
     public static float getDeltaTime() {
-        return deltaTime * ((slowTime != 0) ? 0.3f : 1);
+        return deltaTime * ((slowTime != 0) ? 0.6f : 1);
     }
 
     public static float getNoneDeltaTime() {

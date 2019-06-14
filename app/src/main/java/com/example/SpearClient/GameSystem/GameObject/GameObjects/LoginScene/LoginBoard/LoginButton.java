@@ -1,5 +1,6 @@
 package com.example.SpearClient.GameSystem.GameObject.GameObjects.LoginScene.LoginBoard;
 
+import android.util.Log;
 import android.widget.Toast;
 
 import com.example.SpearClient.GameIO.Input;

@@ -36,6 +36,7 @@ public class PlayerStateComponent extends Component {
     // 동작
     public ACTION action = ACTION.REST;
     public float time = 0;
+    public boolean isSkim = false;
 
     // 값
     private boolean isAttacked = false;
@@ -89,10 +90,10 @@ public class PlayerStateComponent extends Component {
                 isChanged = true;
 
                 anim = AnimationManager.playerAnims.get(skinCode).get(5);
-                animationRenderer.setInterval(0.03f);
+                animationRenderer.setInterval(0.8f / 17);
 
                 if (enemyStateComponent.action == EnemyStateComponent.ACTION.DEEP_STAB
-                    && enemyStateComponent.time <= 0.35f) {
+                    && enemyStateComponent.time <= 0.4f) {
 
                     try {
                         SocketIOBuilder.getInstance().skill_emit(new JSONObject("{\n" +
@@ -104,7 +105,7 @@ public class PlayerStateComponent extends Component {
                     }
                 }
                 else if (enemyStateComponent.action == EnemyStateComponent.ACTION.SHALLOW_STAB
-                        && enemyStateComponent.time <= 0.28f) {
+                        && enemyStateComponent.time <= 0.3f) {
 
                     try {
                         SocketIOBuilder.getInstance().skill_emit(new JSONObject("{\n" +
@@ -129,8 +130,9 @@ public class PlayerStateComponent extends Component {
             isChanged = true;
 
             anim = AnimationManager.playerAnims.get(skinCode).get(7);
-            animationRenderer.setInterval(1f / 16f);
-            playerMoveComponent.setState(PlayerMoveComponent.STATE.WALK);
+            animationRenderer.setInterval(1.4f / 16f);
+            if (playerMoveComponent.state != PlayerMoveComponent.STATE.IDLE)
+                playerMoveComponent.setState(PlayerMoveComponent.STATE.WALK);
         }
         else if (action == ACTION.REST) {
             isChanged = true;
@@ -164,10 +166,10 @@ public class PlayerStateComponent extends Component {
             time = 0;
 
             if (action == ACTION.DEFENCELESS) {
-                knight.getTransform().position.y = 2.56f;
+                knight.getTransform().position.y = 2.26f;
             }
             else {
-                knight.getTransform().position.y = 0;
+                knight.getTransform().position.y = -0.3f;
             }
 
             animationRenderer.bindingImage(anim);
@@ -212,7 +214,7 @@ public class PlayerStateComponent extends Component {
 
     private void actionUpdate() {
         if (action == ACTION.DEEP_STAB) {
-            if (time >= 0.4f && !isAttacked) {
+            if (time >= 0.5f && !isAttacked) {
                 isAttacked = true;
 
                 if (enemyStateComponent.action != EnemyStateComponent.ACTION.AVOID) { // 회피중이 아닐 때
@@ -242,7 +244,7 @@ public class PlayerStateComponent extends Component {
             }
         }
         else if (action == ACTION.SHALLOW_STAB) {
-            if (time >= 0.3f && !isAttacked) {
+            if (time >= 0.35f && !isAttacked) {
                 isAttacked = true;
 
                 if (enemyStateComponent.action != EnemyStateComponent.ACTION.AVOID) { // 회피중이 아닐 때
@@ -316,17 +318,18 @@ public class PlayerStateComponent extends Component {
             }
         }
         else if (action == ACTION.SKIM) {
-            if (time >= 1) {
-                changeState(ACTION.REST);
-            }
-        }
-        else if (action == ACTION.DEFENCELESS) {
             if (time >= 0.8f) {
                 changeState(ACTION.REST);
             }
         }
+        else if (action == ACTION.DEFENCELESS) {
+            if (time >= 1.4f) {
+                changeState(ACTION.REST);
+            }
+        }
         else if (action == ACTION.REST) {
-            if (time >= 0.5f) {
+            if (time >= 0.5f || isSkim) {
+                isSkim = false;
                 changeState(ACTION.DEFAULT);
             }
         }
