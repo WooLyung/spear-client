@@ -34,5 +34,6 @@ public class AnimationManager {
     4 : rush 돌진
     5 : skim 걷어내기
     6 : fall 숙이기
+    7 : defenceless 무방비 상태
     */
 }

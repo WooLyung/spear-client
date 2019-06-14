@@ -29,7 +29,7 @@ public class GLRenderer implements GLSurfaceView.Renderer {
 
     public static ArrayList<RenderTarget> renderTargets;
     public static ArrayList<ImageData> imageDatas;
-    public static int[] imageCode = new int[100];
+    public static int[] imageCode = new int[200];
     private Context context;
 
     // 이미지에 대한 정보를 저장
@@ -159,6 +159,23 @@ public class GLRenderer implements GLSurfaceView.Renderer {
         addImage(R.drawable.knight_purple_skim_15 , "knight_purple_skim_15");
         addImage(R.drawable.knight_purple_skim_16 , "knight_purple_skim_16");
 
+        addImage(R.drawable.knight_purple_defenceless_00, "knight_purple_defenceless_00");
+        addImage(R.drawable.knight_purple_defenceless_01, "knight_purple_defenceless_01");
+        addImage(R.drawable.knight_purple_defenceless_02, "knight_purple_defenceless_02");
+        addImage(R.drawable.knight_purple_defenceless_03, "knight_purple_defenceless_03");
+        addImage(R.drawable.knight_purple_defenceless_04, "knight_purple_defenceless_04");
+        addImage(R.drawable.knight_purple_defenceless_05, "knight_purple_defenceless_05");
+        addImage(R.drawable.knight_purple_defenceless_06, "knight_purple_defenceless_06");
+        addImage(R.drawable.knight_purple_defenceless_07, "knight_purple_defenceless_07");
+        addImage(R.drawable.knight_purple_defenceless_08, "knight_purple_defenceless_08");
+        addImage(R.drawable.knight_purple_defenceless_09, "knight_purple_defenceless_09");
+        addImage(R.drawable.knight_purple_defenceless_10, "knight_purple_defenceless_10");
+        addImage(R.drawable.knight_purple_defenceless_11, "knight_purple_defenceless_11");
+        addImage(R.drawable.knight_purple_defenceless_12, "knight_purple_defenceless_12");
+        addImage(R.drawable.knight_purple_defenceless_13, "knight_purple_defenceless_13");
+        addImage(R.drawable.knight_purple_defenceless_14, "knight_purple_defenceless_14");
+        addImage(R.drawable.knight_purple_defenceless_15, "knight_purple_defenceless_15");
+
         // 말 파츠
         addImage(R.drawable.horse_body, "horse_body");
         addImage(R.drawable.horse_head, "horse_head");
@@ -248,6 +265,15 @@ public class GLRenderer implements GLSurfaceView.Renderer {
                 anim_fall[i] =  findImage("knight_purple_fall_0" + i);
         }
         anim.add(anim_fall);
+
+        int[] anim_defenceless = new int[16];
+        for (int i = 0; i < 16; i++) {
+            if (i >= 10)
+                anim_defenceless[i] = findImage("knight_purple_defenceless_" + i);
+            else
+                anim_defenceless[i] =  findImage("knight_purple_defenceless_0" + i);
+        }
+        anim.add(anim_defenceless);
     }
 
     @Override
@@ -411,7 +437,7 @@ public class GLRenderer implements GLSurfaceView.Renderer {
         gl.glClearColor(0f, 0f, 0f, 1f);
         gl.glHint(GL10.GL_PERSPECTIVE_CORRECTION_HINT, GL10.GL_FASTEST);
         gl.glEnable(GL10.GL_TEXTURE_2D);
-        gl.glGenTextures(100, imageCode, 0);
+        gl.glGenTextures(200, imageCode, 0);
 
         Bitmap bitmap;
 

@@ -4,7 +4,9 @@ import android.util.Log;
 
 import com.example.SpearClient.GameSystem.Component.Component;
 import com.example.SpearClient.GameSystem.Component.Components.RendererComponent.Renderers.AnimationRenderer;
+import com.example.SpearClient.GameSystem.GameObject.GameObject;
 import com.example.SpearClient.GameSystem.GameObject.GameObjects.InGameScene.Enemy;
+import com.example.SpearClient.GameSystem.GameObject.GameObjects.InGameScene.Player;
 import com.example.SpearClient.GameSystem.Other.AnimationManager;
 import com.example.SpearClient.Main.Game;
 import com.example.SpearClient.SocketIO.SocketIOBuilder;
@@ -25,9 +27,11 @@ public class PlayerStateComponent extends Component {
         REST,         // * 휴식 (중간 텀) (V)
         SKIM,         // * 걷어내기 (V)
         AVOID,        // * 흘리기 (V)
-        DEFENSELESS,  // * 무방비 상태
+        DEFENCELESS,  // * 무방비 상태
         LOSE          // * 패배
     }
+
+    private GameObject knight;
 
     // 동작
     public ACTION action = ACTION.REST;
@@ -121,6 +125,13 @@ public class PlayerStateComponent extends Component {
                 animationRenderer.setInterval(0.03f);
             }
         }
+        else if (action == ACTION.DEFENCELESS) {
+            isChanged = true;
+
+            anim = AnimationManager.playerAnims.get(skinCode).get(7);
+            animationRenderer.setInterval(1f / 16f);
+            playerMoveComponent.setState(PlayerMoveComponent.STATE.WALK);
+        }
         else if (action == ACTION.REST) {
             isChanged = true;
 
@@ -151,6 +162,13 @@ public class PlayerStateComponent extends Component {
             this.action = action;
             this.isAttacked = false;
             time = 0;
+
+            if (action == ACTION.DEFENCELESS) {
+                knight.getTransform().position.y = 2.56f;
+            }
+            else {
+                knight.getTransform().position.y = 0;
+            }
 
             animationRenderer.bindingImage(anim);
         }
@@ -185,6 +203,9 @@ public class PlayerStateComponent extends Component {
         if (playerMoveComponent == null) {
             playerMoveComponent = (PlayerMoveComponent) object.getComponent("playerMoveComponent");
         }
+        if (knight == null) {
+            knight = ((Player)object).findOfName("knight");
+        }
 
         actionUpdate();
     }
@@ -200,9 +221,14 @@ public class PlayerStateComponent extends Component {
                             && Math.abs(enemy.getTransform().position.x - object.getTransform().position.x) <= 5) { // 충돌 판정
 
                         try {
+                            float damage = 20;
+                            if (enemyStateComponent.action == EnemyStateComponent.ACTION.DEFENCELESS) {
+                                damage *= 1.5f;
+                            }
+
                             SocketIOBuilder.getInstance().skill_emit(new JSONObject("{\n" +
                                     "\t\"event\":\"damage\",\n" +
-                                    "\t\"damage\":" + 20 + "\n" +
+                                    "\t\"damage\":" + damage + "\n" +
                                     "}"));
                         }
                         catch (Exception e) {
@@ -225,9 +251,14 @@ public class PlayerStateComponent extends Component {
                             && Math.abs(enemy.getTransform().position.x - object.getTransform().position.x) <= 5) { // 충돌 판정
 
                         try {
+                            float damage = 10;
+                            if (enemyStateComponent.action == EnemyStateComponent.ACTION.DEFENCELESS) {
+                                damage *= 1.5f;
+                            }
+
                             SocketIOBuilder.getInstance().skill_emit(new JSONObject("{\n" +
                                     "\t\"event\":\"damage\",\n" +
-                                    "\t\"damage\":" + 10 + "\n" +
+                                    "\t\"damage\":" + damage + "\n" +
                                     "}"));
                         }
                         catch (Exception e) {
@@ -257,9 +288,14 @@ public class PlayerStateComponent extends Component {
                         Log.i("attack", "rush stab!");
 
                         try {
+                            float damage = 15;
+                            if (enemyStateComponent.action == EnemyStateComponent.ACTION.DEFENCELESS) {
+                                damage *= 1.5f;
+                            }
+
                             SocketIOBuilder.getInstance().skill_emit(new JSONObject("{\n" +
                                     "\t\"event\":\"damage\",\n" +
-                                    "\t\"damage\":" + 15 + "\n" +
+                                    "\t\"damage\":" + damage + "\n" +
                                     "}"));
                         }
                         catch (Exception e) {
@@ -281,6 +317,11 @@ public class PlayerStateComponent extends Component {
         }
         else if (action == ACTION.SKIM) {
             if (time >= 1) {
+                changeState(ACTION.REST);
+            }
+        }
+        else if (action == ACTION.DEFENCELESS) {
+            if (time >= 0.8f) {
                 changeState(ACTION.REST);
             }
         }
@@ -311,7 +352,7 @@ public class PlayerStateComponent extends Component {
                 return 7;
             case AVOID:
                 return 8;
-            case DEFENSELESS:
+            case DEFENCELESS:
                 return 9;
             case LOSE:
                 return 10;

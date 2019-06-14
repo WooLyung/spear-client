@@ -14,7 +14,7 @@ public class EnemyStateComponent extends Component {
         REST,         // * 휴식 (중간 텀)
         SKIM,         // * 걷어내기
         AVOID,        // * 흘리기
-        DEFENSELESS,  // * 무방비 상태
+        DEFENCELESS,  // * 무방비 상태
         LOSE          // * 패배
     }
 
@@ -65,7 +65,7 @@ public class EnemyStateComponent extends Component {
                 action = ACTION.AVOID;
                 break;
             case 9:
-                action = ACTION.DEFENSELESS;
+                action = ACTION.DEFENCELESS;
                 break;
             case 10:
                 action = ACTION.LOSE;

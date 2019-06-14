@@ -13,9 +13,10 @@ public class Engine {
 
     public Scene nowScene;
     public static String id = "";
+    public static String nickname = "";
 
     public Engine() {
-        changeScene(new IntroScene());
+        changeScene(new InGameScene());
         start();
     }
 
