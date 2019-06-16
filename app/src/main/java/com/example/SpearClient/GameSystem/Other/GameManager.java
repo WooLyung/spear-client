@@ -97,7 +97,7 @@ public class GameManager {
                 player = (Player) Game.engine.nowScene.findObjectByName("player");
             }
         }
-        else if (playerStateComponent == null) {Q
+        else if (playerStateComponent == null) {
             playerStateComponent = (PlayerStateComponent) player.getComponent("playerStateComponent");
         }
     }

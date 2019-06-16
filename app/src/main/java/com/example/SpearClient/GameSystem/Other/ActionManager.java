@@ -10,8 +10,8 @@ public class ActionManager {
     * 5 : 걷어내기
     */
 
-    public static int[] skill1 = { 1, 1, 1, 1 };
-    public static int[] skill2 = { 5, 5, 5, 5 };
+    public static int[] skill1 = { 0, 1, 2, 3 };
+    public static int[] skill2 = { 4, 5, 0, 1 };
     private static int nowAction1 = 0;
     private static int nowAction2 = 0;
     private static float cool1 = 0;
