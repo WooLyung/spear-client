@@ -8,8 +8,10 @@ public class Input {
 
     public static boolean isDown = false;
     public static boolean[] multiIsDown = new boolean[4];
+    public static boolean isBackkeyDown = false;
     public static TOUCH_STATE touchState = TOUCH_STATE.NONE;
     public static TOUCH_STATE[] multiTouchState = new TOUCH_STATE[4];
+    public static boolean backkeyDown = false;
     public static int touchCount = 0;
     public static Vector touchPos = new Vector();
     public static Vector[] multiTouchPos = new Vector[4];
@@ -80,6 +82,14 @@ public class Input {
                     Input.multiTouchState[i] = Input.TOUCH_STATE.UP;
                 }
             }
+        }
+
+        if (isBackkeyDown) {
+            isBackkeyDown = false;
+            backkeyDown = true;
+        }
+        else {
+            backkeyDown = false;
         }
     }
 

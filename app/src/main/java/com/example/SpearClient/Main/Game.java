@@ -4,6 +4,7 @@ import android.graphics.Point;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Display;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
@@ -15,6 +16,8 @@ import com.example.SpearClient.GraphicSystem.GL.GLView;
 import com.example.SpearClient.GameIO.Input;
 import com.example.SpearClient.R;
 import com.example.SpearClient.Types.Vector;
+
+import java.security.Key;
 
 import io.socket.client.Socket;
 
@@ -94,6 +97,11 @@ public class Game extends AppCompatActivity {
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event)
     {
+        if (keyCode == 4) {
+            Input.isBackkeyDown = true;
+            return false;
+        }
+
         return super.onKeyDown(keyCode, event);
     }
 

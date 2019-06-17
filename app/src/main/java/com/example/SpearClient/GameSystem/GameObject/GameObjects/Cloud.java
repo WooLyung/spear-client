@@ -44,7 +44,55 @@ public class Cloud extends GameObject {
                 spriteRenderer.setZ_index(-9);
 
                 transform = new Transform();
-                transform.position.x = 81.92f;
+                transform.position.x = 40.96f * 2;
+            }
+        });
+        appendChild(new GameObject() {
+            @Override
+            public void start() {
+                SpriteRenderer spriteRenderer = new SpriteRenderer();
+                attachComponent(spriteRenderer);
+                spriteRenderer.bindingImage(GLRenderer.findImage("background_cloud"));
+                spriteRenderer.setZ_index(-9);
+
+                transform = new Transform();
+                transform.position.x = 40.96f * 3;
+            }
+        });
+        appendChild(new GameObject() {
+            @Override
+            public void start() {
+                SpriteRenderer spriteRenderer = new SpriteRenderer();
+                attachComponent(spriteRenderer);
+                spriteRenderer.bindingImage(GLRenderer.findImage("background_cloud"));
+                spriteRenderer.setZ_index(-9);
+
+                transform = new Transform();
+                transform.position.x = 40.96f * -1;
+            }
+        });
+        appendChild(new GameObject() {
+            @Override
+            public void start() {
+                SpriteRenderer spriteRenderer = new SpriteRenderer();
+                attachComponent(spriteRenderer);
+                spriteRenderer.bindingImage(GLRenderer.findImage("background_cloud"));
+                spriteRenderer.setZ_index(-9);
+
+                transform = new Transform();
+                transform.position.x = 40.96f * -2;
+            }
+        });
+        appendChild(new GameObject() {
+            @Override
+            public void start() {
+                SpriteRenderer spriteRenderer = new SpriteRenderer();
+                attachComponent(spriteRenderer);
+                spriteRenderer.bindingImage(GLRenderer.findImage("background_cloud"));
+                spriteRenderer.setZ_index(-9);
+
+                transform = new Transform();
+                transform.position.x = 40.96f * -3;
             }
         });
     }

@@ -1,19 +1,20 @@
 package com.example.SpearClient.GameSystem.Scene.Scenes;
 
+import com.example.SpearClient.GameIO.Input;
 import com.example.SpearClient.GameSystem.Component.Components.RendererComponent.Renderers.SpriteRenderer;
 import com.example.SpearClient.GameSystem.Component.Components.RendererComponent.Renderers.TextRenderer;
 import com.example.SpearClient.GameSystem.Component.Components.TransformComponent.Transforms.GUITransform;
 import com.example.SpearClient.GameSystem.Component.Components.TransformComponent.Transforms.Transform;
 import com.example.SpearClient.GameSystem.GameObject.GameObject;
-import com.example.SpearClient.GameSystem.GameObject.GameObjects.Background;
+import com.example.SpearClient.GameSystem.GameObject.GameObjects.Background_small;
 import com.example.SpearClient.GameSystem.GameObject.GameObjects.Cloud;
 import com.example.SpearClient.GameSystem.GameObject.GameObjects.MainScene.FastMatching;
 import com.example.SpearClient.GameSystem.GameObject.GameObjects.MainScene.GameStart;
-import com.example.SpearClient.GameSystem.GameObject.GameObjects.MainScene.PersonalSettings;
+import com.example.SpearClient.GameSystem.GameObject.GameObjects.MainScene.PersonalSettings.PersonalSettings;
+import com.example.SpearClient.GameSystem.GameObject.GameObjects.MainScene.PersonalSettings.Skill_slot1;
 import com.example.SpearClient.GameSystem.GameObject.GameObjects.MainScene.Place;
 import com.example.SpearClient.GameSystem.GameObject.GameObjects.MainScene.Settings;
 import com.example.SpearClient.GameSystem.GameObject.GameObjects.MainScene.Tutorial;
-import com.example.SpearClient.GameSystem.Other.Camera;
 import com.example.SpearClient.GameSystem.Scene.Scene;
 import com.example.SpearClient.GraphicSystem.GL.GLRenderer;
 import com.example.SpearClient.GraphicSystem.GL.GLView;
@@ -33,6 +34,8 @@ public class MainScene extends Scene {
     Place place;
     PersonalSettings personalSettings;
     GameObject black;
+
+    Skill_slot1 skill_slot1;
 
     public String selectedGame = "fast";
     public MAIN_SCENE_STATE state = MAIN_SCENE_STATE.UP;
@@ -74,7 +77,7 @@ public class MainScene extends Scene {
         objs.add(place);
         objs.add(personalSettings);
         objs.add(black);
-        objs.add(new Background());
+        objs.add(new Background_small());
         objs.add(new Cloud());
         objs.add(new GameObject() {
             @Override
@@ -138,27 +141,58 @@ public class MainScene extends Scene {
                 transform.anchor.x = 0;
             }
         });
+
+        skillSet();
+    }
+
+    private void skillSet() {
+        skill_slot1 = new Skill_slot1();
+
+        objs.add(skill_slot1);
     }
 
     @Override
     public void update() {
         super.update();
 
+        if (Input.backkeyDown) {
+            if (state == MAIN_SCENE_STATE.DOWN) {
+                state = MAIN_SCENE_STATE.MOVE_UP;
+            }
+            else if (state == MAIN_SCENE_STATE.UP) {
+                Game.instance.finish();
+            }
+        }
+
         camera.setZoomY(1);
         camera.setZoomX(1);
 
         if (state == MAIN_SCENE_STATE.MOVE_DOWN) {
+
             time += Game.getDeltaTime();
-            camera.setPosition(new Vector(camera.getPosition().x, -time * 20.48f));
+            float time2 = (time > 1) ? 1 : time;
+
+            camera.setPosition(new Vector(camera.getPosition().x, -time2 * 20.48f));
+            float alpha = 0;
+            if (time <= 0.5f) {
+                alpha = time * 2;
+            }
+            else if (time <= 1) {
+                alpha = 1;
+            }
+            else {
+                alpha = 1 - (time - 1) * 2;
+            }
+
             float[] color = {
-                    1, 1, 1, (time <= 0.5f) ? time * 2 : (1 - (time - 0.5f) * 2),
-                    1, 1, 1, (time <= 0.5f) ? time * 2 : (1 - (time - 0.5f) * 2),
-                    1, 1, 1, (time <= 0.5f) ? time * 2 : (1 - (time - 0.5f) * 2),
-                    1, 1, 1, (time <= 0.5f) ? time * 2 : (1 - (time - 0.5f) * 2)
+                    1, 1, 1, alpha,
+                    1, 1, 1, alpha,
+                    1, 1, 1, alpha,
+                    1, 1, 1, alpha
             };
             GLRenderer.imageDatas.get(GLRenderer.findImage("background_black")).setColors(color);
 
-            if (time >= 1) {
+            if (time >= 1.5f) {
                 time = 0;
                 state = MAIN_SCENE_STATE.DOWN;
                 camera.setPosition(new Vector(camera.getPosition().x, -20.48f));
@@ -175,17 +209,31 @@ public class MainScene extends Scene {
         }
         else if (state == MAIN_SCENE_STATE.MOVE_UP) {
             ((TextRenderer)findObjectByName("name").getComponent("textRenderer")).getTextView().setText("");
+
             time += Game.getDeltaTime();
-            camera.setPosition(new Vector(camera.getPosition().x, 20.48f -time * 20.48f));
+            float time2 = (time < 0.5f) ? 0 : time - 0.5f;
+
+            camera.setPosition(new Vector(camera.getPosition().x, -20.48f + time2 * 20.48f));
+            float alpha = 0;
+            if (time <= 0.5f) {
+                alpha = time * 2;
+            }
+            else if (time <= 1) {
+                alpha = 1;
+            }
+            else {
+                alpha = 1 - (time - 1) * 2;
+            }
+
             float[] color = {
-                    1, 1, 1, (time <= 0.5f) ? time * 2 : (1 - (time - 0.5f) * 2),
-                    1, 1, 1, (time <= 0.5f) ? time * 2 : (1 - (time - 0.5f) * 2),
-                    1, 1, 1, (time <= 0.5f) ? time * 2 : (1 - (time - 0.5f) * 2),
-                    1, 1, 1, (time <= 0.5f) ? time * 2 : (1 - (time - 0.5f) * 2)
+                    1, 1, 1, alpha,
+                    1, 1, 1, alpha,
+                    1, 1, 1, alpha,
+                    1, 1, 1, alpha
             };
             GLRenderer.imageDatas.get(GLRenderer.findImage("background_black")).setColors(color);
 
-            if (time >= 1) {
+            if (time >= 1.5f) {
                 time = 0;
                 state = MAIN_SCENE_STATE.UP;
                 camera.setPosition(new Vector(camera.getPosition().x, 0));

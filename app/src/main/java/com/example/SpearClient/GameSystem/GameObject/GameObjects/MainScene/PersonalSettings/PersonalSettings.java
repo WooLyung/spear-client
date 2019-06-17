@@ -1,4 +1,4 @@
-package com.example.SpearClient.GameSystem.GameObject.GameObjects.MainScene;
+package com.example.SpearClient.GameSystem.GameObject.GameObjects.MainScene.PersonalSettings;
 
 import com.example.SpearClient.GameSystem.Component.Components.RendererComponent.Renderers.SpriteRenderer;
 import com.example.SpearClient.GameSystem.Component.Components.TransformComponent.Transforms.Transform;

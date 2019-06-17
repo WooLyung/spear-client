@@ -49,7 +49,7 @@ public class GameManager {
 
                         }
                         else { // 피해를 받음
-                            Game.engine.nowScene.camera.vibrate();
+                            Game.engine.nowScene.camera.vibrateMiddle();
                         }
                     }
                     else if (event.equals("skim")) { // 누군가가 공격을 튕겨냈을 때

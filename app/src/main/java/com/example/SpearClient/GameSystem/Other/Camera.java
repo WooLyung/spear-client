@@ -37,8 +37,10 @@ public class Camera {
                     sign.x = 1;
                 }
 
-                if (maxPower.x < 0)
+                if (maxPower.x < 0) {
                     maxPower.x = 0;
+                    nowPower.x = 0;
+                }
             }
             if (maxPower.y != 0) {
                 nowPower.y += power.y * sign.y * Game.getDeltaTime();
@@ -51,8 +53,10 @@ public class Camera {
                     sign.y = 1;
                 }
 
-                if (maxPower.y < 0)
+                if (maxPower.y < 0) {
                     maxPower.y = 0;
+                    nowPower.y = 0;
+                }
             }
         }
     }
@@ -82,8 +86,10 @@ public class Camera {
                     sign = 1;
                 }
 
-                if (maxPower < 0)
+                if (maxPower < 0) {
                     maxPower = 0;
+                    nowPower = 0;
+                }
             }
         }
     }
@@ -149,13 +155,33 @@ public class Camera {
         vibration_rot.update();
     }
 
-    public void vibrate() {
+    public void vibrateMiddle() {
         vibration_move.maxPower.x = 2 * Game.engine.nowScene.camera.getZoomX();
         vibration_move.power.x = 50;
         vibration_move.maxPower.y = 2 * Game.engine.nowScene.camera.getZoomY();
         vibration_move.power.y = 30;
 
-        vibration_rot.maxPower = 4;
+        vibration_rot.maxPower = 3;
+        vibration_rot.power = 100;
+    }
+
+    public void vibrateLight() {
+        vibration_move.maxPower.x = 0.8f * Game.engine.nowScene.camera.getZoomX();
+        vibration_move.power.x = 50;
+        vibration_move.maxPower.y = 0.8f * Game.engine.nowScene.camera.getZoomY();
+        vibration_move.power.y = 30;
+
+        vibration_rot.maxPower = 1.3f;
+        vibration_rot.power = 100;
+    }
+
+    public void vibrateHeavy() {
+        vibration_move.maxPower.x = 2.5f * Game.engine.nowScene.camera.getZoomX();
+        vibration_move.power.x = 50;
+        vibration_move.maxPower.y = 2.5f * Game.engine.nowScene.camera.getZoomY();
+        vibration_move.power.y = 30;
+
+        vibration_rot.maxPower = 4f;
         vibration_rot.power = 100;
     }
 }

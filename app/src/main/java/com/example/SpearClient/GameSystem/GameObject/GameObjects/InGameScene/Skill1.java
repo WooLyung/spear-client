@@ -14,6 +14,7 @@ import com.example.SpearClient.GameSystem.Other.ActionManager;
 import com.example.SpearClient.GameSystem.Other.AnimationManager;
 import com.example.SpearClient.GameSystem.Other.Camera;
 import com.example.SpearClient.GameSystem.Other.GameManager;
+import com.example.SpearClient.GameSystem.Scene.Scenes.InGameScene;
 import com.example.SpearClient.GraphicSystem.GL.GLRenderer;
 import com.example.SpearClient.GraphicSystem.GL.GLView;
 import com.example.SpearClient.Main.Game;
@@ -128,6 +129,9 @@ public class Skill1 extends GameObject {
                         ActionManager.setNowAction1((ActionManager.getNowAction1() + 1) % 4);
                         spriteRenderer.bindingImage(front_images[ActionManager.skill1[ActionManager.getNowAction1()]]);
                         back_sr.bindingImage(back_images[ActionManager.skill1[ActionManager.getNowAction1()]]);
+
+                        ((InGameScene)Game.engine.nowScene).bloodTime = 1;
+                        Game.engine.nowScene.camera.vibrateMiddle();
                     }
                 }
             }

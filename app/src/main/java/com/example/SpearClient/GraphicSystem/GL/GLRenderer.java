@@ -82,6 +82,7 @@ public class GLRenderer implements GLSurfaceView.Renderer {
         addImage(R.drawable.button_home, "button_home");
 
         // 배경들
+        addImage(R.drawable.background_ground_small, "background_ground_small");
         addImage(R.drawable.background_ground, "background_ground");
         addImage(R.drawable.background_sky, "background_sky");
         addImage(R.drawable.background_cloud, "background_cloud");
@@ -215,6 +216,7 @@ public class GLRenderer implements GLSurfaceView.Renderer {
         addImage(R.drawable.right_bricks, "right_bricks");
         addImage(R.drawable.place, "place");
         addImage(R.drawable.empty, "empty");
+        addImage(R.drawable.blood, "blood");
 
         AnimationManager.playerAnims.add(new ArrayList<int[]>());
         ArrayList<int[]> anim = AnimationManager.playerAnims.get(0);
