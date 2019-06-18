@@ -3,6 +3,7 @@ package com.example.SpearClient.GameSystem.GameObject.GameObjects.InGameScene.Re
 import com.example.SpearClient.GameSystem.Component.Components.RendererComponent.Renderers.TextRenderer;
 import com.example.SpearClient.GameSystem.Component.Components.TransformComponent.Transforms.GUITransform;
 import com.example.SpearClient.GameSystem.GameObject.GameObject;
+import com.example.SpearClient.GameSystem.Other.GameManager;
 import com.example.SpearClient.Main.Game;
 import com.example.SpearClient.R;
 
@@ -18,9 +19,17 @@ public class ResultTitle extends GameObject {
         textRenderer = new TextRenderer();
         attachComponent(textRenderer);
 
-        textRenderer.getTextView().setTextColor(Game.instance.getResources().getColor(R.color.loginColor));
-        textRenderer.getTextView().setText("승리했습니다!");
-        textRenderer.getTextView().setTextSize(33);
+        Game.instance.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                textRenderer.getTextView().setTextColor(Game.instance.getResources().getColor(R.color.loginColor));
+                if (GameManager.isWin)
+                    textRenderer.getTextView().setText("승리했습니다!");
+                else
+                    textRenderer.getTextView().setText("패배했습니다.");
+                textRenderer.getTextView().setTextSize(33);
+            }
+        });
         transform.position.x = 0;
         transform.position.y = 2.6f;
     }

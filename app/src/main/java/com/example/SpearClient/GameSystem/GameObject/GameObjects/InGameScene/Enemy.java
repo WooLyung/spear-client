@@ -79,7 +79,7 @@ public class Enemy extends GameObject {
             @Override
             public void call(Object... args) {
                 try {
-                    JSONArray array = (new JSONObject(args[0].toString())).getJSONArray("users");
+                    JSONArray array =  (new JSONObject(args[0].toString())).getJSONArray("users");
                     JSONObject jsonObject;
 
                     if (array.getJSONObject(0).getString("username").equals(SocketIOBuilder.id)) {

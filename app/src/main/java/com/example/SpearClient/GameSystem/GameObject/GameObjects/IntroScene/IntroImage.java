@@ -17,8 +17,8 @@ public class IntroImage extends GameObject {
 
         transform = new Transform();
         attachComponent(transform);
-        transform.scale.x = 0.5f;
-        transform.scale.y = 0.5f;
+        transform.scale.x = 0.47f;
+        transform.scale.y = 0.47f;
     }
 
     @Override

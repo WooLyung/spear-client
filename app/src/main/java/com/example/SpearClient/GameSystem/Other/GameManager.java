@@ -24,6 +24,7 @@ public class GameManager {
         RESULT
     }
 
+    public static boolean isWin = false;
     public STATE state = STATE.GAMING;
 
     private static GameManager instance;
@@ -44,9 +45,10 @@ public class GameManager {
                     JSONObject jsonObject = new JSONObject(args[0].toString());
                     String subject = jsonObject.getString("subject");
                     String event = jsonObject.getString("event");
-                    boolean isCrit = jsonObject.getBoolean("isCrit");
 
                     if (event.equals("damage")) { // 누군가가 피해를 받았을 때
+                        boolean isCrit = jsonObject.getBoolean("isCrit");
+
                         if (subject.equals(SocketIOBuilder.id)) { // 피해를 줌
                             Game.engine.nowScene.camera.vibrateLight();
                         }
@@ -85,7 +87,16 @@ public class GameManager {
             public void call(Object... args) {
                 state = STATE.RESULT;
                 Game.engine.nowScene.objs.add(new ResultBoard());
-                Log.i("gameover", args[0].toString());
+
+                try {
+                    JSONObject jsonObject = new JSONObject(args[0].toString());
+
+                    JSONObject winner = jsonObject.getJSONObject("winner");
+                    GameManager.isWin = winner.getString("username").equals(SocketIOBuilder.id);
+                }
+                catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
         });
     }

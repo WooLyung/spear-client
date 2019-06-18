@@ -40,8 +40,9 @@ public class Selected_skill2_1 extends GameObject {
 
         for (int i = 0; i < 5; i++) {
             if (Input.getTouchState(i) == Input.TOUCH_STATE.DOWN) {
-                if (Vector.distanceDouble(Input.getTouchWorldPos(i), transform.position) <= 130/147f * 130/147f) { // 버튼을 클릭했을 경우
-                    ActionManager.skill2[0] = ActionManager.selectedSkill;
+                if (Vector.distanceDouble(Input.getTouchWorldPos(i), transform.position) <= 140/147f * 140/147f) { // 버튼을 클릭했을 경우
+                    if (ActionManager.selectedSkill != -1)
+                        ActionManager.skill2[0] = ActionManager.selectedSkill;
                     ActionManager.selectedSkill = -1;
 
                     try {
