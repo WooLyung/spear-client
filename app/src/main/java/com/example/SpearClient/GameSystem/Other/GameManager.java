@@ -85,10 +85,8 @@ public class GameManager {
         SocketIOBuilder.getInstance().gameover(new Emitter.Listener() {
             @Override
             public void call(Object... args) {
-                state = STATE.RESULT;
-                Game.engine.nowScene.objs.add(new ResultBoard());
-
                 try {
+                    Log.i("gameover", args[0].toString());
                     JSONObject jsonObject = new JSONObject(args[0].toString());
 
                     JSONObject winner = jsonObject.getJSONObject("winner");
@@ -97,6 +95,9 @@ public class GameManager {
                 catch (Exception e) {
                     e.printStackTrace();
                 }
+
+                state = STATE.RESULT;
+                Game.engine.nowScene.objs.add(new ResultBoard());
             }
         });
     }
