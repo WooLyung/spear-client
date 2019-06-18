@@ -6,6 +6,7 @@ import com.example.SpearClient.GameSystem.Component.Component;
 import com.example.SpearClient.GameSystem.Component.Components.AnimationComponent.AnimationComponent;
 import com.example.SpearClient.GameSystem.Component.Components.RendererComponent.Renderers.AnimationRenderer;
 import com.example.SpearClient.GameSystem.Component.Components.RendererComponent.Renderers.SpriteRenderer;
+import com.example.SpearClient.GameSystem.GameObject.GameObjects.InGameScene.Player;
 import com.example.SpearClient.Main.Game;
 
 public class PlayerMoveComponent extends Component {
@@ -23,6 +24,7 @@ public class PlayerMoveComponent extends Component {
     private SpriteRenderer spriteRenderer;
     private PlayerStateComponent playerStateComponent;
     private float time = 0;
+    private float particleTime = 0;
 
     @Override
     public void start() {
@@ -61,6 +63,12 @@ public class PlayerMoveComponent extends Component {
             object.getTransform().position.x += Game.getDeltaTime() * 3f * ((dir == DIR.RIGHT) ? 1 : -1);
         }
         else if (state == STATE.RUN) {
+            particleTime += Game.getDeltaTime();
+            if (particleTime > 0.2f) {
+                particleTime = 0;
+                ((Player)object).summonDirtParticle();
+            }
+
             if (animationComponent.getNowAnim() != 1) {
                 animationComponent.play(1);
             }
@@ -119,11 +127,13 @@ public class PlayerMoveComponent extends Component {
                 && this.state != STATE.RUSH) {
             this.state = STATE.RUSH;
             time = 0;
+            particleTime = 0;
         }
         else if (state == STATE.RUSH_STAB
                 && this.state != STATE.RUSH_STAB) {
             this.state = STATE.RUSH_STAB;
             time = 0;
+            particleTime = 0;
         }
         else if (playerStateComponent.action == PlayerStateComponent.ACTION.RUN
             || playerStateComponent.action == PlayerStateComponent.ACTION.WALK
@@ -133,16 +143,19 @@ public class PlayerMoveComponent extends Component {
                     && this.state != STATE.IDLE) {
                 this.state = STATE.IDLE;
                 time = 0;
+                particleTime = 0;
             }
             else if (state == STATE.WALK
                     && this.state != STATE.WALK) {
                 this.state = STATE.WALK;
                 time = 0;
+                particleTime = 0;
             }
             else if (state == STATE.RUN
                     && this.state != STATE.RUN) {
                 this.state = STATE.RUN;
                 time = 0;
+                particleTime = 0;
             }
         }
     }

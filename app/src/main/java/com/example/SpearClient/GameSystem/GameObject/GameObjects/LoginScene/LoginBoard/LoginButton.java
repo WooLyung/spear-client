@@ -71,6 +71,7 @@ public class LoginButton extends GameObject {
                                 }
                                 else if (message.equals("login complete")) {
                                     SocketIOBuilder.id = id;
+                                    Engine.nickname = jsonObject.getString("nickname");
                                     Game.engine.changeScene(new MainScene());
                                 }
                             }

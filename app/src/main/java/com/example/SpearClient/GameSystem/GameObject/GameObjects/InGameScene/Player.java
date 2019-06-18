@@ -400,4 +400,17 @@ public class Player extends GameObject {
             }
         };
     }
+
+    public void summonDirtParticle() {
+        DirtParticle dirtParticle;
+
+
+        /*for (int i = 0; i < 1; i++) {
+            dirtParticle = new DirtParticle();
+            dirtParticle.transform.position.x = transform.position.x;
+            dirtParticle.transform.position.y = transform.position.y;
+
+            Game.engine.nowScene.objs.add(dirtParticle);
+        }*/
+    }
 }

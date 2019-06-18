@@ -68,36 +68,6 @@ public class SocketIOBuilder {
         return instance;
     }
 
-    public void getSkill1 (Emitter.Listener listener) {
-        try {
-            mSocket.emit("getSkill1");
-            mSocket.on("getSkill1Callback", listener);
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void getSkill2 (Emitter.Listener listener) {
-        try {
-            mSocket.emit("getSkill2");
-            mSocket.on("getSkill2Callback", listener);
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void getNickname (Emitter.Listener listener) {
-        try {
-            mSocket.emit("getNickname");
-            mSocket.on("getNicknameCallback", listener);
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
     public void register (String id, String password, String nickname, Emitter.Listener listener) {
         try {
             mSocket.emit("register", new JSONObject("{username: \""+id+"\", password: \""+password+"\", nickname: \""+nickname+"\"}"));
@@ -151,5 +121,14 @@ public class SocketIOBuilder {
 
     public void gameover (Emitter.Listener listener) {
         mSocket.on("gameover", listener);
+    }
+
+    public void getSkill (JSONObject jsonObject, Emitter.Listener listener) {
+        mSocket.emit("getSkill", jsonObject);
+        mSocket.on("getSkillCallback", listener);
+    }
+
+    public void setSkill (JSONObject jsonObject) {
+        mSocket.emit("setSkill", jsonObject);
     }
 }

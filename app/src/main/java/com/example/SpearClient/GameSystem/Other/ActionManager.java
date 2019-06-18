@@ -12,6 +12,8 @@ public class ActionManager {
 
     public static int[] skill1 = { 0, 1, 2, 3 };
     public static int[] skill2 = { 4, 5, 0, 1 };
+    public static int selectedSkill = -1;
+
     private static int nowAction1 = 0;
     private static int nowAction2 = 0;
     private static float cool1 = 0;

@@ -230,6 +230,7 @@ public class PlayerStateComponent extends Component {
 
                             SocketIOBuilder.getInstance().skill_emit(new JSONObject("{\n" +
                                     "\t\"event\":\"damage\",\n" +
+                                    "\t\"isCrit\":" + (enemyStateComponent.action == EnemyStateComponent.ACTION.DEFENCELESS) + ",\n" +
                                     "\t\"damage\":" + damage + "\n" +
                                     "}"));
                         }
@@ -260,6 +261,7 @@ public class PlayerStateComponent extends Component {
 
                             SocketIOBuilder.getInstance().skill_emit(new JSONObject("{\n" +
                                     "\t\"event\":\"damage\",\n" +
+                                    "\t\"isCrit\":" + (enemyStateComponent.action == EnemyStateComponent.ACTION.DEFENCELESS) + ",\n" +
                                     "\t\"damage\":" + damage + "\n" +
                                     "}"));
                         }
@@ -287,7 +289,6 @@ public class PlayerStateComponent extends Component {
                     if (enemy.getTransform().position.x * dir <= object.getTransform().position.x * dir
                             && Math.abs(enemy.getTransform().position.x - object.getTransform().position.x) <= 5) { // 충돌 판정
                         isAttacked = true;
-                        Log.i("attack", "rush stab!");
 
                         try {
                             float damage = 15;
@@ -297,6 +298,7 @@ public class PlayerStateComponent extends Component {
 
                             SocketIOBuilder.getInstance().skill_emit(new JSONObject("{\n" +
                                     "\t\"event\":\"damage\",\n" +
+                                    "\t\"isCrit\":" + (enemyStateComponent.action == EnemyStateComponent.ACTION.DEFENCELESS) + ",\n" +
                                     "\t\"damage\":" + damage + "\n" +
                                     "}"));
                         }

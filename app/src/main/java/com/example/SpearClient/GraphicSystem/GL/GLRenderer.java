@@ -89,6 +89,7 @@ public class GLRenderer implements GLSurfaceView.Renderer {
         addImage(R.drawable.background_soil, "background_soil");
         addImage(R.drawable.background_under, "background_under");
         addImage(R.drawable.background_black, "background_black");
+        addImage(R.drawable.background_maching, "background_maching");
 
         // 기사 스킨들
         addImage(R.drawable.knight_purple, "knight_purple");
@@ -196,8 +197,10 @@ public class GLRenderer implements GLSurfaceView.Renderer {
         addImage(R.drawable.hpbar_back, "hpbar_back");
         addImage(R.drawable.hpbar_front, "hpbar_front");
         addImage(R.drawable.hpbar_smooth, "hpbar_smooth");
+        addImage(R.drawable.line, "line");
 
         // 스킬
+        addImage(R.drawable.skill_none, "skill_none");
         addImage(R.drawable.skill_avoid, "skill_avoid");
         addImage(R.drawable.skill_rush, "skill_rush");
         addImage(R.drawable.skill_skim, "skill_skim");
@@ -210,6 +213,9 @@ public class GLRenderer implements GLSurfaceView.Renderer {
         addImage(R.drawable.skill_shallow_stab_black, "skill_shallow_stab_black");
         addImage(R.drawable.skill_deep_stab_black, "skill_deep_stab_black");
         addImage(R.drawable.skill_rush_stab_black, "skill_rush_stab_black");
+
+        // 파티클
+        addImage(R.drawable.particle_dirt, "particle_dirt");
 
         // 기타
         addImage(R.drawable.left_bricks, "left_bricks");

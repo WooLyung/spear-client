@@ -9,6 +9,7 @@ import com.example.SpearClient.GameSystem.GameObject.GameObjects.InGameScene.Ene
 import com.example.SpearClient.GameSystem.GameObject.GameObjects.InGameScene.MyHP;
 import com.example.SpearClient.GameSystem.GameObject.GameObjects.InGameScene.Player;
 import com.example.SpearClient.GameSystem.GameObject.GameObjects.InGameScene.ResultBoard.ResultBoard;
+import com.example.SpearClient.GameSystem.Scene.Scenes.InGameScene;
 import com.example.SpearClient.Main.Game;
 import com.example.SpearClient.SocketIO.SocketIOBuilder;
 
@@ -43,17 +44,26 @@ public class GameManager {
                     JSONObject jsonObject = new JSONObject(args[0].toString());
                     String subject = jsonObject.getString("subject");
                     String event = jsonObject.getString("event");
+                    boolean isCrit = jsonObject.getBoolean("isCrit");
 
                     if (event.equals("damage")) { // 누군가가 피해를 받았을 때
                         if (subject.equals(SocketIOBuilder.id)) { // 피해를 줌
-
+                            Game.engine.nowScene.camera.vibrateLight();
                         }
                         else { // 피해를 받음
-                            Game.engine.nowScene.camera.vibrateMiddle();
+                            ((InGameScene)Game.engine.nowScene).bloodTime = 1;
+
+                            if (isCrit) {
+                                Game.engine.nowScene.camera.vibrateHeavy();
+                            }
+                            else {
+                                Game.engine.nowScene.camera.vibrateMiddle();
+                            }
                         }
                     }
                     else if (event.equals("skim")) { // 누군가가 공격을 튕겨냈을 때
                         Game.slowTime = 1;
+                        Game.engine.nowScene.camera.vibrateLight();
 
                         if (subject.equals(SocketIOBuilder.id)) { // 공격을 튕겨냄
                             playerStateComponent.isSkim = true;

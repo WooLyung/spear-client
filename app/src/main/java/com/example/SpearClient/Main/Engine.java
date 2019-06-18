@@ -5,6 +5,7 @@ import com.example.SpearClient.GameIO.Input;
 import com.example.SpearClient.GameSystem.Scene.Scenes.InGameScene;
 import com.example.SpearClient.GameSystem.Scene.Scenes.IntroScene;
 import com.example.SpearClient.GameSystem.Scene.Scenes.LoginScene;
+import com.example.SpearClient.GameSystem.Scene.Scenes.MachingScene;
 import com.example.SpearClient.GameSystem.Scene.Scenes.MainScene;
 
 import javax.microedition.khronos.opengles.GL10;
@@ -16,7 +17,7 @@ public class Engine {
     public static String nickname = "";
 
     public Engine() {
-        changeScene(new MainScene());
+        changeScene(new IntroScene());
         start();
     }
 

@@ -19,6 +19,8 @@ public class Background_small extends GameObject {
         transform = new Transform();
         attachComponent(transform);
         transform.position.y = 5.5f;
+        transform.scale.x = 2;
+        transform.scale.y = 2;
 
         appendChild(new GameObject() {
             @Override
@@ -30,7 +32,9 @@ public class Background_small extends GameObject {
 
                 transform = new Transform();
                 transform.anchor.y = 0;
-                transform.position.y = -7.5f;
+                transform.position.y = -7.5f / 2;
+                transform.scale.x = 0.5f;
+                transform.scale.y = 0.5f;
             }
         });
     }

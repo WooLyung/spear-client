@@ -129,9 +129,6 @@ public class Skill1 extends GameObject {
                         ActionManager.setNowAction1((ActionManager.getNowAction1() + 1) % 4);
                         spriteRenderer.bindingImage(front_images[ActionManager.skill1[ActionManager.getNowAction1()]]);
                         back_sr.bindingImage(back_images[ActionManager.skill1[ActionManager.getNowAction1()]]);
-
-                        ((InGameScene)Game.engine.nowScene).bloodTime = 1;
-                        Game.engine.nowScene.camera.vibrateMiddle();
                     }
                 }
             }
