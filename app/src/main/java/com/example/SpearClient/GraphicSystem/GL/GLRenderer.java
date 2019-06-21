@@ -342,7 +342,7 @@ public class GLRenderer implements GLSurfaceView.Renderer {
 
             // 버텍스, 텍스쳐, 컬러, 인덱스 버퍼를 적용시킴
             float[] vertex = new float[8], texture = new float[8];
-            
+
             if (renderTarget.dir == RendererComponent.DIRECTION.RIGHT) {
                 vertex = new float[]{
                         renderTarget.fill * -2 + 1, 1,

@@ -62,6 +62,11 @@ public class GameManager {
                             else {
                                 Game.engine.nowScene.camera.vibrateMiddle();
                             }
+
+                            if (playerStateComponent.action == PlayerStateComponent.ACTION.RUSH_STAB) {
+                                playerMoveComponent.setCompulsionState(PlayerMoveComponent.STATE.WALK);
+                                playerStateComponent.changeState(PlayerStateComponent.ACTION.REST);
+                            }
                         }
                     }
                     else if (event.equals("skim")) { // 누군가가 공격을 튕겨냈을 때
@@ -73,7 +78,7 @@ public class GameManager {
                             playerStateComponent.time = 0.2f;
                         }
                         else { // 무방비 상태가 됨
-                            playerMoveComponent.setState(PlayerMoveComponent.STATE.WALK);
+                            playerMoveComponent.setCompulsionState(PlayerMoveComponent.STATE.WALK);
                             playerStateComponent.changeState(PlayerStateComponent.ACTION.DEFENCELESS);
                         }
                     }

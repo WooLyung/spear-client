@@ -33,7 +33,7 @@ public class Skill_slot6 extends GameObject {
 
         for (int i = 0; i < 5; i++) {
             if (Input.getTouchState(i) == Input.TOUCH_STATE.DOWN) {
-                if (Vector.distanceDouble(Input.getTouchWorldPos(i), transform.position) <= 140/147f * 140/147f) { // 버튼을 클릭했을 경우
+                if (Vector.distanceDouble(Input.getTouchWorldPos(i), transform.position) <= 170/147f * 170/147f) { // 버튼을 클릭했을 경우
                     ActionManager.selectedSkill = 5;
                 }
             }

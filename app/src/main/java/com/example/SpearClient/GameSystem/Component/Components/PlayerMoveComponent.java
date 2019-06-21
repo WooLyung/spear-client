@@ -119,6 +119,12 @@ public class PlayerMoveComponent extends Component {
         }
     }
 
+    public void setCompulsionState(STATE state) {
+        this.state = state;
+        time = 0;
+        particleTime = 0;
+    }
+
     public void setState(STATE state) {
         if (state == STATE.RUSH
                 && this.state != STATE.RUSH) {

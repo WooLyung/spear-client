@@ -1,7 +1,5 @@
 package com.example.SpearClient.GameSystem.Scene.Scenes;
 
-import android.util.Log;
-
 import com.example.SpearClient.GameIO.Input;
 import com.example.SpearClient.GameSystem.Component.Components.RendererComponent.Renderers.SpriteRenderer;
 import com.example.SpearClient.GameSystem.Component.Components.RendererComponent.Renderers.TextRenderer;

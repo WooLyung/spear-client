@@ -15,6 +15,7 @@ public class Background_small extends GameObject {
         attachComponent(spriteRenderer);
         spriteRenderer.bindingImage(GLRenderer.findImage("background_sky"));
         spriteRenderer.setZ_index(-10);
+        spriteRenderer.lengthX = 5;
 
         transform = new Transform();
         attachComponent(transform);
@@ -29,12 +30,11 @@ public class Background_small extends GameObject {
                 attachComponent(spriteRenderer);
                 spriteRenderer.bindingImage(GLRenderer.findImage("background_ground_small"));
                 spriteRenderer.setZ_index(-2);
+                spriteRenderer.lengthX = 5;
 
                 transform = new Transform();
                 transform.anchor.y = 0;
                 transform.position.y = -7.5f / 2;
-                transform.scale.x = 0.5f;
-                transform.scale.y = 0.5f;
             }
         });
     }
