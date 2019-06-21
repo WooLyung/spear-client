@@ -1,12 +1,9 @@
 package com.example.SpearClient.GameSystem.Component.Components;
 
-import android.util.Log;
-
 import com.example.SpearClient.GameSystem.Component.Component;
 import com.example.SpearClient.GameSystem.Component.Components.AnimationComponent.AnimationComponent;
-import com.example.SpearClient.GameSystem.Component.Components.RendererComponent.Renderers.AnimationRenderer;
 import com.example.SpearClient.GameSystem.Component.Components.RendererComponent.Renderers.SpriteRenderer;
-import com.example.SpearClient.GameSystem.GameObject.GameObjects.InGameScene.Player;
+import com.example.SpearClient.GameSystem.GameObject.GameObjects.InGameScene.Player.Player;
 import com.example.SpearClient.Main.Game;
 
 public class PlayerMoveComponent extends Component {

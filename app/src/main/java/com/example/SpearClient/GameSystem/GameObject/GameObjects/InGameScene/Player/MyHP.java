@@ -1,4 +1,4 @@
-package com.example.SpearClient.GameSystem.GameObject.GameObjects.InGameScene;
+package com.example.SpearClient.GameSystem.GameObject.GameObjects.InGameScene.Player;
 
 import com.example.SpearClient.GameSystem.Component.Components.RendererComponent.RendererComponent;
 import com.example.SpearClient.GameSystem.Component.Components.RendererComponent.Renderers.SpriteRenderer;

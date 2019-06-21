@@ -4,10 +4,9 @@ import android.util.Log;
 
 import com.example.SpearClient.GameSystem.Component.Components.PlayerStateComponent;
 import com.example.SpearClient.GameSystem.Component.Components.RendererComponent.Renderers.SpriteRenderer;
-import com.example.SpearClient.GameSystem.GameObject.GameObjects.InGameScene.Enemy;
-import com.example.SpearClient.GameSystem.GameObject.GameObjects.InGameScene.EnemyHP;
-import com.example.SpearClient.GameSystem.GameObject.GameObjects.InGameScene.MyHP;
-import com.example.SpearClient.GameSystem.GameObject.GameObjects.InGameScene.Player;
+import com.example.SpearClient.GameSystem.GameObject.GameObjects.InGameScene.Enemy.EnemyHP;
+import com.example.SpearClient.GameSystem.GameObject.GameObjects.InGameScene.Player.MyHP;
+import com.example.SpearClient.GameSystem.GameObject.GameObjects.InGameScene.Player.Player;
 import com.example.SpearClient.GameSystem.GameObject.GameObjects.InGameScene.ResultBoard.ResultBoard;
 import com.example.SpearClient.GameSystem.Scene.Scenes.InGameScene;
 import com.example.SpearClient.Main.Game;

@@ -1,20 +1,14 @@
-package com.example.SpearClient.GameSystem.GameObject.GameObjects.InGameScene;
-
-import android.util.Log;
+package com.example.SpearClient.GameSystem.GameObject.GameObjects.InGameScene.UI;
 
 import com.example.SpearClient.GameIO.Input;
-import com.example.SpearClient.GameSystem.Component.Components.PlayerMoveComponent;
 import com.example.SpearClient.GameSystem.Component.Components.PlayerStateComponent;
 import com.example.SpearClient.GameSystem.Component.Components.RendererComponent.RendererComponent;
-import com.example.SpearClient.GameSystem.Component.Components.RendererComponent.Renderers.AnimationRenderer;
 import com.example.SpearClient.GameSystem.Component.Components.RendererComponent.Renderers.SpriteRenderer;
 import com.example.SpearClient.GameSystem.Component.Components.TransformComponent.Transforms.GUITransform;
 import com.example.SpearClient.GameSystem.GameObject.GameObject;
+import com.example.SpearClient.GameSystem.GameObject.GameObjects.InGameScene.Player.Player;
 import com.example.SpearClient.GameSystem.Other.ActionManager;
-import com.example.SpearClient.GameSystem.Other.AnimationManager;
-import com.example.SpearClient.GameSystem.Other.Camera;
 import com.example.SpearClient.GameSystem.Other.GameManager;
-import com.example.SpearClient.GameSystem.Scene.Scenes.InGameScene;
 import com.example.SpearClient.GraphicSystem.GL.GLRenderer;
 import com.example.SpearClient.GraphicSystem.GL.GLView;
 import com.example.SpearClient.Main.Game;

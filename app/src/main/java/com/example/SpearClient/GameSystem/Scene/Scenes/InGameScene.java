@@ -1,20 +1,19 @@
 package com.example.SpearClient.GameSystem.Scene.Scenes;
 
-import android.util.Log;
-
 import com.example.SpearClient.GameSystem.Component.Components.RendererComponent.Renderers.SpriteRenderer;
-import com.example.SpearClient.GameSystem.GameObject.GameObject;
 import com.example.SpearClient.GameSystem.GameObject.GameObjects.Background;
 import com.example.SpearClient.GameSystem.GameObject.GameObjects.Cloud;
 import com.example.SpearClient.GameSystem.GameObject.GameObjects.InGameScene.Blood;
-import com.example.SpearClient.GameSystem.GameObject.GameObjects.InGameScene.Enemy;
-import com.example.SpearClient.GameSystem.GameObject.GameObjects.InGameScene.EnemyHP;
-import com.example.SpearClient.GameSystem.GameObject.GameObjects.InGameScene.MoveLeft;
-import com.example.SpearClient.GameSystem.GameObject.GameObjects.InGameScene.MoveRight;
-import com.example.SpearClient.GameSystem.GameObject.GameObjects.InGameScene.MyHP;
-import com.example.SpearClient.GameSystem.GameObject.GameObjects.InGameScene.Player;
-import com.example.SpearClient.GameSystem.GameObject.GameObjects.InGameScene.Skill1;
-import com.example.SpearClient.GameSystem.GameObject.GameObjects.InGameScene.Skill2;
+import com.example.SpearClient.GameSystem.GameObject.GameObjects.InGameScene.Enemy.Enemy;
+import com.example.SpearClient.GameSystem.GameObject.GameObjects.InGameScene.Enemy.EnemyHP;
+import com.example.SpearClient.GameSystem.GameObject.GameObjects.InGameScene.Enemy.EnemyPointer;
+import com.example.SpearClient.GameSystem.GameObject.GameObjects.InGameScene.Player.PlayerPointer;
+import com.example.SpearClient.GameSystem.GameObject.GameObjects.InGameScene.UI.MoveLeft;
+import com.example.SpearClient.GameSystem.GameObject.GameObjects.InGameScene.UI.MoveRight;
+import com.example.SpearClient.GameSystem.GameObject.GameObjects.InGameScene.Player.MyHP;
+import com.example.SpearClient.GameSystem.GameObject.GameObjects.InGameScene.Player.Player;
+import com.example.SpearClient.GameSystem.GameObject.GameObjects.InGameScene.UI.Skill1;
+import com.example.SpearClient.GameSystem.GameObject.GameObjects.InGameScene.UI.Skill2;
 import com.example.SpearClient.GameSystem.Other.GameManager;
 import com.example.SpearClient.GameSystem.Scene.Scene;
 import com.example.SpearClient.GraphicSystem.GL.GLRenderer;
@@ -26,12 +25,19 @@ public class InGameScene extends Scene {
     Cloud cloud;
     Player player;
     Enemy enemy;
+
     MyHP myHP;
     EnemyHP enemyHP;
+
     MoveLeft moveLeft;
     MoveRight moveRight;
+
     Skill1 skill1;
     Skill2 skill2;
+
+    EnemyPointer enemyPointer;
+    PlayerPointer playerPointer;
+
     Blood[] bloods = { new Blood(), new Blood(), new Blood(), new Blood()};
 
     public GameManager gameManager = new GameManager();
@@ -50,6 +56,8 @@ public class InGameScene extends Scene {
         skill1 = new Skill1();
         skill2 = new Skill2();
         cloud = new Cloud();
+        enemyPointer = new EnemyPointer();
+        playerPointer = new PlayerPointer();
         cloud.getTransform().position.y = 9;
 
         objs.add(player);
@@ -61,6 +69,8 @@ public class InGameScene extends Scene {
         objs.add(skill1);
         objs.add(skill2);
         objs.add(cloud);
+        objs.add(enemyPointer);
+        objs.add(playerPointer);
         objs.add(new Background());
 
         bloodSetting();
@@ -107,8 +117,22 @@ public class InGameScene extends Scene {
         time += Game.getDeltaTime();
 
         if (player != null && enemy != null) {
-            camera.setPosition(new Vector((player.getTransform().position.x + enemy.getTransform().position.x) / 2f, camera.getPositionNone().y) );
             float distance = Math.abs(player.getTransform().position.x - enemy.getTransform().position.x);
+
+            if (distance >= 28) {
+                if (player.getTransform().position.x > enemy.getTransform().position.x) {
+                    camera.setPosition(new Vector(player.getTransform().position.x - 14, camera.getPositionNone().y) );
+                }
+                else {
+                    camera.setPosition(new Vector(player.getTransform().position.x + 14, camera.getPositionNone().y) );
+                }
+
+                distance = 28;
+            }
+            else {
+                camera.setPosition(new Vector((player.getTransform().position.x + enemy.getTransform().position.x) / 2f, camera.getPositionNone().y) );
+            }
+
             float zoom = Math.min((float)Math.sqrt(GLView.defaultWidth / distance * 2) - 0.3f, 0.7f);
 
             camera.setZoomX(zoom);
