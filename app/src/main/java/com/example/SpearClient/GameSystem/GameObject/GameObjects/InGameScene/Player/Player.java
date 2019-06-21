@@ -97,10 +97,10 @@ public class Player extends GameObject {
         emitTime1 += Game.getDeltaTime();
         emitTime2 += Game.getDeltaTime();
 
-        if (transform.position.x > 40)
-            transform.position.x = 40;
-        else if (transform.position.x < -40)
-            transform.position.x = -40;
+        if (transform.position.x > 35)
+            transform.position.x = 35;
+        else if (transform.position.x < -35)
+            transform.position.x = -35;
 
         if (emitTime2 >= 0.01f) {
             emitTime2 = 0;

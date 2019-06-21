@@ -218,10 +218,10 @@ public class PlayerStateComponent extends Component {
                 if (enemyStateComponent.action != EnemyStateComponent.ACTION.AVOID) { // 회피중이 아닐 때
                     int dir = (object.getRenderer().getIsFlip() ? 1 : -1);
                     if (enemy.getTransform().position.x * dir <= object.getTransform().position.x * dir
-                            && Math.abs(enemy.getTransform().position.x - object.getTransform().position.x) <= 5) { // 충돌 판정
+                            && Math.abs(enemy.getTransform().position.x - object.getTransform().position.x) <= 7) { // 충돌 판정
 
                         try {
-                            float damage = 20;
+                            float damage = 25;
                             if (enemyStateComponent.action == EnemyStateComponent.ACTION.DEFENCELESS) {
                                 damage *= 1.5f;
                             }
@@ -249,10 +249,10 @@ public class PlayerStateComponent extends Component {
                 if (enemyStateComponent.action != EnemyStateComponent.ACTION.AVOID) { // 회피중이 아닐 때
                     int dir = (object.getRenderer().getIsFlip() ? 1 : -1);
                     if (enemy.getTransform().position.x * dir <= object.getTransform().position.x * dir
-                            && Math.abs(enemy.getTransform().position.x - object.getTransform().position.x) <= 5) { // 충돌 판정
+                            && Math.abs(enemy.getTransform().position.x - object.getTransform().position.x) <= 7) { // 충돌 판정
 
                         try {
-                            float damage = 10;
+                            float damage = 15;
                             if (enemyStateComponent.action == EnemyStateComponent.ACTION.DEFENCELESS) {
                                 damage *= 1.5f;
                             }
@@ -289,7 +289,7 @@ public class PlayerStateComponent extends Component {
                         isAttacked = true;
 
                         try {
-                            float damage = 15;
+                            float damage = 7;
                             if (enemyStateComponent.action == EnemyStateComponent.ACTION.DEFENCELESS) {
                                 damage *= 1.5f;
                             }
@@ -328,7 +328,7 @@ public class PlayerStateComponent extends Component {
             }
         }
         else if (action == ACTION.REST) {
-            if (time >= 0.5f || isSkim) {
+            if (time >= 0.35f || isSkim) {
                 isSkim = false;
                 changeState(ACTION.DEFAULT);
             }

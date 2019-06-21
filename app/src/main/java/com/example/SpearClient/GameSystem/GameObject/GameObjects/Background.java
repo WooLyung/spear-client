@@ -5,6 +5,7 @@ import com.example.SpearClient.GameSystem.Component.Components.TransformComponen
 import com.example.SpearClient.GameSystem.Component.Components.TransformComponent.Transforms.Transform;
 import com.example.SpearClient.GameSystem.GameObject.GameObject;
 import com.example.SpearClient.GraphicSystem.GL.GLRenderer;
+import com.example.SpearClient.Main.Game;
 
 public class Background extends GameObject {
     private SpriteRenderer spriteRenderer;
@@ -16,6 +17,7 @@ public class Background extends GameObject {
         attachComponent(spriteRenderer);
         spriteRenderer.bindingImage(GLRenderer.findImage("background_sky"));
         spriteRenderer.setZ_index(-10);
+        spriteRenderer.lengthX = 5;
 
         transform = new Transform();
         attachComponent(transform);
@@ -30,6 +32,7 @@ public class Background extends GameObject {
                 attachComponent(spriteRenderer);
                 spriteRenderer.bindingImage(GLRenderer.findImage("background_ground"));
                 spriteRenderer.setZ_index(-2);
+                spriteRenderer.lengthX = 5;
 
                 transform = new Transform();
                 transform.anchor.y = 0;

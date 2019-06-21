@@ -10,6 +10,8 @@ abstract public class RendererComponent extends Component {
 
     public int[] image;
     private boolean isVisible = true;
+    public float lengthX = 1;
+    public float lengthY = 1;
     private int z_index = 0;
     public enum DIRECTION {
         UP, DOWN, RIGHT, LEFT

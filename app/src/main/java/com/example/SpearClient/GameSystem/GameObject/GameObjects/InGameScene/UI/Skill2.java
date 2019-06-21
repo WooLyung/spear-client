@@ -79,8 +79,8 @@ public class Skill2 extends GameObject {
 
         if (ActionManager.getNowAction2() != 0)
             ActionManager.setCool2(ActionManager.getCool2() + Game.getDeltaTime());
-        spriteRenderer.setFill((3.5f - ActionManager.getCool2()) / 3.5f);
-        if (ActionManager.getCool2() > 3.5f) {
+        spriteRenderer.setFill((4.5f - ActionManager.getCool2()) / 4.5f);
+        if (ActionManager.getCool2() > 4.5f) {
             ActionManager.setCool2(0);
             ActionManager.setNowAction2(0);
             spriteRenderer.bindingImage(front_images[ActionManager.skill2[ActionManager.getNowAction2()]]);

@@ -28,6 +28,8 @@ public class SpriteRenderer extends RendererComponent {
         renderTarget.fill = getFill();
         renderTarget.dir = getDir();
         renderTarget.anchor = object.getTransform().anchor;
+        renderTarget.lengthX = this.lengthX;
+        renderTarget.lengthY = this.lengthY;
         GLRenderer.renderTargets.add(renderTarget);
 
         // 렌더 타겟 추가 마무리

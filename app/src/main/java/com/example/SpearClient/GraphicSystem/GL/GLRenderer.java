@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.opengl.GLSurfaceView;
 import android.opengl.GLUtils;
+import android.util.Log;
 
 import com.example.SpearClient.GameSystem.Component.Components.AnimationComponent.AnimSupportClasses.Animation;
 import com.example.SpearClient.GameSystem.Component.Components.RendererComponent.RendererComponent;
@@ -340,93 +341,93 @@ public class GLRenderer implements GLSurfaceView.Renderer {
             gl.glEnable(GL10.GL_BLEND);
 
             // 버텍스, 텍스쳐, 컬러, 인덱스 버퍼를 적용시킴
-            if (renderTarget.fill == 1 && renderTarget.anchor.x == 0.5f && renderTarget.anchor.y == 0.5f) { // fill과 앵커에 따라 버텍스 조절
-                gl.glVertexPointer(2, GL10.GL_FLOAT, 0, GLRenderer.imageDatas.get(renderTarget.imageCode).getVertexBuffer());
-                gl.glTexCoordPointer(2, GL10.GL_FLOAT, 0, GLRenderer.imageDatas.get(renderTarget.imageCode).getTextureBuffer());
+            float[] vertex = new float[8], texture = new float[8];
+            
+            if (renderTarget.dir == RendererComponent.DIRECTION.RIGHT) {
+                vertex = new float[]{
+                        renderTarget.fill * -2 + 1, 1,
+                        1, 1,
+                        1, -1,
+                        renderTarget.fill * -2 + 1, -1
+                };
+                texture = new float[]{
+                        1 - renderTarget.fill, 0,
+                        1, 0,
+                        1, 1,
+                        1 - renderTarget.fill, 1
+                };
             }
-            else {
-                float[] vertex = new float[8], texture = new float[8];
-
-                if (renderTarget.dir == RendererComponent.DIRECTION.RIGHT) {
-                    vertex = new float[]{
-                            renderTarget.fill * -2 + 1, 1,
-                            1, 1,
-                            1, -1,
-                            renderTarget.fill * -2 + 1, -1
-                    };
-                    texture = new float[]{
-                            1 - renderTarget.fill, 0,
-                            1, 0,
-                            1, 1,
-                            1 - renderTarget.fill, 1
-                    };
-                }
-                else if (renderTarget.dir == RendererComponent.DIRECTION.LEFT) {
-                    vertex = new float[]{
-                            -1, 1,
-                            renderTarget.fill * 2 - 1, 1,
-                            renderTarget.fill * 2 - 1, -1,
-                            -1, -1
-                    };
-                    texture = new float[]{
-                            0, 0,
-                            renderTarget.fill, 0,
-                            renderTarget.fill, 1,
-                            0, 1
-                    };
-                }
-                else if (renderTarget.dir == RendererComponent.DIRECTION.UP) {
-                    vertex = new float[]{
-                            -1, 1,
-                            1, 1,
-                            1, renderTarget.fill * -2 + 1,
-                            -1, renderTarget.fill * -2 + 1
-                    };
-                    texture = new float[]{
-                            0, 0,
-                            1, 0,
-                            1, renderTarget.fill,
-                            0, renderTarget.fill
-                    };
-                }
-                else if (renderTarget.dir == RendererComponent.DIRECTION.DOWN) {
-                    vertex = new float[]{
-                            -1, renderTarget.fill * 2 - 1,
-                            1, renderTarget.fill * 2 - 1,
-                            1, -1,
-                            -1, -1
-                    };
-                    texture = new float[]{
-                            0, 1 - renderTarget.fill,
-                            1, 1 - renderTarget.fill,
-                            1, 1,
-                            0, 1
-                    };
-                }
-
-                for (int i = 0; i < 8; i++) {
-                    vertex[i] += ((i % 2 == 1) ? (renderTarget.anchor.y - 0.5f) : (renderTarget.anchor.x - 0.5f)) * 2;
-                    vertex[i] *= (i % 2 == 1) ? GLRenderer.imageDatas.get(renderTarget.imageCode).getHeight() : GLRenderer.imageDatas.get(renderTarget.imageCode).getWidth();
-                    vertex[i] /= 100f;
-                }
-
-                // 버퍼 설정
-                ByteBuffer byteBuf = ByteBuffer.allocateDirect(vertex.length * 4);
-                byteBuf.order(ByteOrder.nativeOrder());
-                FloatBuffer vertexBuffer = byteBuf.asFloatBuffer();
-                vertexBuffer.put(vertex);
-                vertexBuffer.position(0);
-
-                byteBuf = ByteBuffer.allocateDirect(texture.length * 4);
-                byteBuf.order(ByteOrder.nativeOrder());
-                FloatBuffer textureBuffer = byteBuf.asFloatBuffer();
-                textureBuffer.put(texture);
-                textureBuffer.position(0);
-
-                // 버퍼 적용
-                gl.glVertexPointer(2, GL10.GL_FLOAT, 0, vertexBuffer);
-                gl.glTexCoordPointer(2, GL10.GL_FLOAT, 0, textureBuffer);
+            else if (renderTarget.dir == RendererComponent.DIRECTION.LEFT) {
+                vertex = new float[]{
+                        -1, 1,
+                        renderTarget.fill * 2 - 1, 1,
+                        renderTarget.fill * 2 - 1, -1,
+                        -1, -1
+                };
+                texture = new float[]{
+                        0, 0,
+                        renderTarget.fill, 0,
+                        renderTarget.fill, 1,
+                        0, 1
+                };
             }
+            else if (renderTarget.dir == RendererComponent.DIRECTION.UP) {
+                vertex = new float[]{
+                        -1, 1,
+                        1, 1,
+                        1, renderTarget.fill * -2 + 1,
+                        -1, renderTarget.fill * -2 + 1
+                };
+                texture = new float[]{
+                        0, 0,
+                        1, 0,
+                        1, renderTarget.fill,
+                        0, renderTarget.fill
+                };
+            }
+            else if (renderTarget.dir == RendererComponent.DIRECTION.DOWN) {
+                vertex = new float[]{
+                        -1, renderTarget.fill * 2 - 1,
+                        1, renderTarget.fill * 2 - 1,
+                        1, -1,
+                        -1, -1
+                };
+                texture = new float[]{
+                        0, 1 - renderTarget.fill,
+                        1, 1 - renderTarget.fill,
+                        1, 1,
+                        0, 1
+                };
+            }
+
+            for (int i = 0; i < 8; i++) { // 앵커와 길이 설정
+                vertex[i] += ((i % 2 == 1) ? (renderTarget.anchor.y - 0.5f) : (renderTarget.anchor.x - 0.5f)) * 2;
+                vertex[i] *= (i % 2 == 1) ? GLRenderer.imageDatas.get(renderTarget.imageCode).getHeight() : GLRenderer.imageDatas.get(renderTarget.imageCode).getWidth();
+                vertex[i] /= 100f;
+            }
+
+            for (int i = 0; i < 8; i++) { // 확장
+                vertex[i] *= ((i % 2 == 0) ? renderTarget.lengthX : renderTarget.lengthY);
+                texture[i] *= ((i % 2 == 0) ? renderTarget.lengthX : renderTarget.lengthY);
+            }
+
+            // 버퍼 설정
+            ByteBuffer byteBuf = ByteBuffer.allocateDirect(vertex.length * 4);
+            byteBuf.order(ByteOrder.nativeOrder());
+            FloatBuffer vertexBuffer = byteBuf.asFloatBuffer();
+            vertexBuffer.put(vertex);
+            vertexBuffer.position(0);
+
+            byteBuf = ByteBuffer.allocateDirect(texture.length * 4);
+            byteBuf.order(ByteOrder.nativeOrder());
+            FloatBuffer textureBuffer = byteBuf.asFloatBuffer();
+            textureBuffer.put(texture);
+            textureBuffer.position(0);
+
+            // 버퍼 적용
+            gl.glVertexPointer(2, GL10.GL_FLOAT, 0, vertexBuffer);
+            gl.glTexCoordPointer(2, GL10.GL_FLOAT, 0, textureBuffer);
+
             gl.glBindTexture(GL10.GL_TEXTURE_2D, GLRenderer.imageCode[renderTarget.imageCode]);
             gl.glColorPointer(4, GL10.GL_FLOAT, 0, GLRenderer.imageDatas.get(renderTarget.imageCode).getColorBuffer());
 

@@ -2,6 +2,7 @@ package com.example.SpearClient.GameSystem.Other;
 
 import android.util.Log;
 
+import com.example.SpearClient.GameSystem.Component.Components.PlayerMoveComponent;
 import com.example.SpearClient.GameSystem.Component.Components.PlayerStateComponent;
 import com.example.SpearClient.GameSystem.Component.Components.RendererComponent.Renderers.SpriteRenderer;
 import com.example.SpearClient.GameSystem.GameObject.GameObjects.InGameScene.Enemy.EnemyHP;
@@ -32,6 +33,7 @@ public class GameManager {
     private Player player;
 
     private PlayerStateComponent playerStateComponent;
+    private PlayerMoveComponent playerMoveComponent;
 
     public GameManager() {
         instance = this;
@@ -71,6 +73,7 @@ public class GameManager {
                             playerStateComponent.time = 0.2f;
                         }
                         else { // 무방비 상태가 됨
+                            playerMoveComponent.setState(PlayerMoveComponent.STATE.WALK);
                             playerStateComponent.changeState(PlayerStateComponent.ACTION.DEFENCELESS);
                         }
                     }
@@ -120,6 +123,9 @@ public class GameManager {
         }
         else if (playerStateComponent == null) {
             playerStateComponent = (PlayerStateComponent) player.getComponent("playerStateComponent");
+        }
+        else if (playerMoveComponent == null) {
+            playerMoveComponent = (PlayerMoveComponent) player.getComponent("playerMoveComponent");
         }
     }
 

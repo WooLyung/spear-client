@@ -11,6 +11,8 @@ public class RenderTarget {
     public float fill;
     public int z_index;
     public int imageCode;
+    public float lengthX = 1;
+    public float lengthY = 1;
     public Vector anchor;
     public RendererComponent.DIRECTION dir;
 }
