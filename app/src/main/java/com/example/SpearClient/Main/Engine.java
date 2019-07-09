@@ -1,5 +1,10 @@
 package com.example.SpearClient.Main;
 
+import android.media.MediaPlayer;
+import android.provider.MediaStore;
+
+import com.example.SpearClient.GameIO.MediaPlayers.MediaPlayerHelper;
+import com.example.SpearClient.GameIO.MediaPlayers.MediaPlayerHolder;
 import com.example.SpearClient.GameSystem.Scene.*;
 import com.example.SpearClient.GameIO.Input;
 import com.example.SpearClient.GameSystem.Scene.Scenes.InGameScene;
@@ -13,6 +18,7 @@ import javax.microedition.khronos.opengles.GL10;
 public class Engine {
 
     public Scene nowScene;
+    public MediaPlayerHelper mediaPlayerHelper = new MediaPlayerHelper();
     public static String id = "";
     public static String nickname = "";
 
@@ -28,6 +34,7 @@ public class Engine {
     public void update() {
         nowScene.update();
         Input.update();
+        mediaPlayerHelper.update();
     }
 
     public void render(GL10 gl) {

@@ -1,12 +1,13 @@
 package com.example.SpearClient.GameIO;
 
 import android.content.Context;
-import android.content.res.AssetFileDescriptor;
 import android.media.AudioAttributes;
-import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.media.SoundPool;
-import android.net.Uri;
+import android.util.Log;
+
+import com.example.SpearClient.GameIO.MediaPlayers.MediaPlayerHelper;
+import com.example.SpearClient.GameIO.MediaPlayers.MediaPlayerHolder;
 
 public class SoundPlayer {
     public static void playSound (Context context, int resource, final float speed) {
@@ -29,11 +30,18 @@ public class SoundPlayer {
         soundPool.load(context, resource, 1);
     }
 
-    public static MediaPlayer playBackgroundSound (Context context, int resource) {
-        MediaPlayer mp = MediaPlayer.create(context, resource);
-        mp.setLooping(true);
-        mp.start();
+    public static MediaPlayerHolder playBackgroundSound (Context context, int resource, boolean isFade) {
+        MediaPlayerHolder findMPH = MediaPlayerHelper.getInstance().findMediaPlayerHolder(resource);
 
-        return mp;
+        if (findMPH != null) {
+            return findMPH;
+        }
+        else {
+            MediaPlayer mp = MediaPlayer.create(context, resource);
+            mp.setLooping(true);
+            mp.start();
+
+            return MediaPlayerHelper.getInstance().addMedia(mp, resource, isFade);
+        }
     }
 }

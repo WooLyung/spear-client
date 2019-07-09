@@ -4,6 +4,8 @@ import android.media.MediaPlayer;
 import android.util.Log;
 
 import com.example.SpearClient.GameIO.Input;
+import com.example.SpearClient.GameIO.MediaPlayers.MediaPlayerHelper;
+import com.example.SpearClient.GameIO.MediaPlayers.MediaPlayerHolder;
 import com.example.SpearClient.GameIO.SoundPlayer;
 import com.example.SpearClient.GameSystem.GameObject.GameObjects.IntroScene.IntroImage;
 import com.example.SpearClient.GameSystem.GameObject.GameObjects.IntroScene.LoadingImage1;
@@ -31,7 +33,7 @@ public class IntroScene extends Scene {
     private STATE state = STATE.NONE;
     private float time = 0;
 
-    private MediaPlayer mp;
+    private MediaPlayerHolder mph;
 
     @Override
     public void start() {
@@ -160,14 +162,14 @@ public class IntroScene extends Scene {
         else if (state == STATE.TERM2) { // 아무것도 없음
             if (time >= 0.5f) {
                 state = STATE.INTRO_APPEAR;
-
-                mp = SoundPlayer.playBackgroundSound(Game.instance, R.raw.intro);
             }
         }
         else if (state == STATE.INTRO_APPEAR) { // 인트로이미지 나타남
             if (time >= 1) {
                 state = STATE.INTRO;
                 time = 0;
+
+                mph = SoundPlayer.playBackgroundSound(Game.instance, R.raw.intro, true);
             }
             else {
                 float[] color = {
@@ -179,5 +181,12 @@ public class IntroScene extends Scene {
                 introData.setColors(color);
             }
         }
+    }
+
+    @Override
+    public void finish() {
+        super.finish();
+
+        MediaPlayerHelper.getInstance().delMedia(mph);
     }
 }

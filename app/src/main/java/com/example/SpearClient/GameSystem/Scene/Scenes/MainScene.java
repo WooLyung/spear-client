@@ -1,6 +1,11 @@
 package com.example.SpearClient.GameSystem.Scene.Scenes;
 
+import android.media.MediaPlayer;
+
 import com.example.SpearClient.GameIO.Input;
+import com.example.SpearClient.GameIO.MediaPlayers.MediaPlayerHelper;
+import com.example.SpearClient.GameIO.MediaPlayers.MediaPlayerHolder;
+import com.example.SpearClient.GameIO.SoundPlayer;
 import com.example.SpearClient.GameSystem.Component.Components.RendererComponent.Renderers.SpriteRenderer;
 import com.example.SpearClient.GameSystem.Component.Components.RendererComponent.Renderers.TextRenderer;
 import com.example.SpearClient.GameSystem.Component.Components.TransformComponent.Transforms.GUITransform;
@@ -34,6 +39,7 @@ import com.example.SpearClient.GraphicSystem.GL.GLRenderer;
 import com.example.SpearClient.GraphicSystem.GL.GLView;
 import com.example.SpearClient.Main.Engine;
 import com.example.SpearClient.Main.Game;
+import com.example.SpearClient.R;
 import com.example.SpearClient.SocketIO.SocketIOBuilder;
 import com.example.SpearClient.Types.Vector;
 
@@ -74,8 +80,18 @@ public class MainScene extends Scene {
     public MAIN_SCENE_STATE state = MAIN_SCENE_STATE.UP;
     public float time = 0;
 
+    MediaPlayerHolder mph;
+
     @Override
     public void start() {
+        if (MediaPlayerHelper.getInstance().mphHolder != null) {
+            mph = MediaPlayerHelper.getInstance().mphHolder;
+            MediaPlayerHelper.getInstance().mphHolder = null;
+        }
+        else {
+            mph = SoundPlayer.playBackgroundSound(Game.instance, R.raw.intro, true);
+        }
+
         fastMatching = new FastMatching();
         settings = new Settings();
         tutorial = new Tutorial();
@@ -395,5 +411,7 @@ public class MainScene extends Scene {
     @Override
     public void finish() {
         super.finish();
+
+        MediaPlayerHelper.getInstance().delMedia(mph);
     }
 }
