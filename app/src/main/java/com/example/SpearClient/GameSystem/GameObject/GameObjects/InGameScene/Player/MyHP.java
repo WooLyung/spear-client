@@ -2,6 +2,7 @@ package com.example.SpearClient.GameSystem.GameObject.GameObjects.InGameScene.Pl
 
 import com.example.SpearClient.GameSystem.Component.Components.RendererComponent.RendererComponent;
 import com.example.SpearClient.GameSystem.Component.Components.RendererComponent.Renderers.SpriteRenderer;
+import com.example.SpearClient.GameSystem.Component.Components.RendererComponent.Renderers.TextRenderer;
 import com.example.SpearClient.GameSystem.Component.Components.TransformComponent.Transforms.GUITransform;
 import com.example.SpearClient.GameSystem.Component.Components.TransformComponent.Transforms.Transform;
 import com.example.SpearClient.GameSystem.GameObject.GameObject;
@@ -12,12 +13,35 @@ import com.example.SpearClient.Main.Game;
 public class MyHP extends GameObject {
     SpriteRenderer spriteRenderer, front_spriteRenderer, smooth_spriteRenderer;
     GUITransform transform;
-    public GameObject front, smooth;
+    public GameObject front, smooth, nickname;
 
     @Override
     public void start() {
         setName("myHP");
 
+        nickname = new GameObject() {
+            TextRenderer textRenderer;
+            GUITransform transform;
+
+            @Override
+            public void start() {
+                Game.instance.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        textRenderer = new TextRenderer();
+                        attachComponent(textRenderer);
+                        textRenderer.getTextView().setText("이건 무려 플레이어의 체력");
+                        textRenderer.getTextView().setTextSize(14);
+                        textRenderer.setHorizontal(0);
+                    }
+                });
+
+                transform = new GUITransform();
+                attachComponent(transform);
+                transform.position.x = -(float) GLView.defaultWidth + 0.5f;
+                transform.position.y = (float) GLView.defaultHeight - 0.45f;
+            }
+        };
         front = new GameObject() {
             @Override
             public void start() {
@@ -46,6 +70,7 @@ public class MyHP extends GameObject {
                 transform.anchor.y = 0;
             }
         };
+        appendChild(nickname);
         appendChild(front);
         appendChild(smooth);
 
@@ -60,7 +85,7 @@ public class MyHP extends GameObject {
         transform = new GUITransform();
         attachComponent(transform);
         transform.position.x = -(float) GLView.defaultWidth + 0.3f;
-        transform.position.y = (float) GLView.defaultHeight - 0.3f;
+        transform.position.y = (float) GLView.defaultHeight - 0.6f;
         transform.scale.x = 1000/1470f;
         transform.scale.y = 1000/1470f;
         transform.anchor.x = 1;

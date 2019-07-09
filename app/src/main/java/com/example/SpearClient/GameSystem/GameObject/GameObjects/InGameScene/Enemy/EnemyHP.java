@@ -2,6 +2,7 @@ package com.example.SpearClient.GameSystem.GameObject.GameObjects.InGameScene.En
 
 import com.example.SpearClient.GameSystem.Component.Components.RendererComponent.RendererComponent;
 import com.example.SpearClient.GameSystem.Component.Components.RendererComponent.Renderers.SpriteRenderer;
+import com.example.SpearClient.GameSystem.Component.Components.RendererComponent.Renderers.TextRenderer;
 import com.example.SpearClient.GameSystem.Component.Components.TransformComponent.Transforms.GUITransform;
 import com.example.SpearClient.GameSystem.Component.Components.TransformComponent.Transforms.Transform;
 import com.example.SpearClient.GameSystem.GameObject.GameObject;
@@ -12,12 +13,35 @@ import com.example.SpearClient.Main.Game;
 public class EnemyHP extends GameObject {
     SpriteRenderer spriteRenderer, front_spriteRenderer, smooth_spriteRenderer;
     GUITransform transform;
-    public GameObject front, smooth;
+    public GameObject front, smooth, nickname;
 
     @Override
     public void start() {
         setName("enemyHP");
 
+        nickname = new GameObject() {
+            TextRenderer textRenderer;
+            GUITransform transform;
+
+            @Override
+            public void start() {
+                Game.instance.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        textRenderer = new TextRenderer();
+                        attachComponent(textRenderer);
+                        textRenderer.getTextView().setText("이건 무려 적의 체력");
+                        textRenderer.getTextView().setTextSize(14);
+                        textRenderer.setHorizontal(2);
+                    }
+                });
+
+                transform = new GUITransform();
+                attachComponent(transform);
+                transform.position.x = (float) GLView.defaultWidth - 0.5f;
+                transform.position.y = (float) GLView.defaultHeight - 0.45f;
+            }
+        };
         front = new GameObject() {
             @Override
             public void start() {
@@ -48,6 +72,7 @@ public class EnemyHP extends GameObject {
         };
         appendChild(front);
         appendChild(smooth);
+        appendChild(nickname);
 
         front_spriteRenderer = (SpriteRenderer) front.getComponent("spriteRenderer");
         smooth_spriteRenderer = (SpriteRenderer) smooth.getComponent("spriteRenderer");
@@ -60,7 +85,7 @@ public class EnemyHP extends GameObject {
         transform = new GUITransform();
         attachComponent(transform);
         transform.position.x = (float) GLView.defaultWidth - 0.3f;
-        transform.position.y = (float) GLView.defaultHeight - 0.3f;
+        transform.position.y = (float) GLView.defaultHeight - 0.6f;
         transform.scale.x = 1000/1470f;
         transform.scale.y = 1000/1470f;
         transform.anchor.x = 0;
