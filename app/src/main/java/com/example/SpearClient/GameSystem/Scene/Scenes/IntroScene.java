@@ -1,6 +1,10 @@
 package com.example.SpearClient.GameSystem.Scene.Scenes;
 
+import android.media.MediaPlayer;
+import android.util.Log;
+
 import com.example.SpearClient.GameIO.Input;
+import com.example.SpearClient.GameIO.SoundPlayer;
 import com.example.SpearClient.GameSystem.GameObject.GameObjects.IntroScene.IntroImage;
 import com.example.SpearClient.GameSystem.GameObject.GameObjects.IntroScene.LoadingImage1;
 import com.example.SpearClient.GameSystem.GameObject.GameObjects.IntroScene.LoadingImage2;
@@ -8,6 +12,7 @@ import com.example.SpearClient.GameSystem.Scene.Scene;
 import com.example.SpearClient.GraphicSystem.GL.GLRenderer;
 import com.example.SpearClient.GraphicSystem.ImageData;
 import com.example.SpearClient.Main.Game;
+import com.example.SpearClient.R;
 
 public class IntroScene extends Scene {
     private enum STATE {
@@ -25,6 +30,8 @@ public class IntroScene extends Scene {
     private ImageData imgData1, imgData2, introData;
     private STATE state = STATE.NONE;
     private float time = 0;
+
+    private MediaPlayer mp;
 
     @Override
     public void start() {
@@ -153,7 +160,8 @@ public class IntroScene extends Scene {
         else if (state == STATE.TERM2) { // 아무것도 없음
             if (time >= 0.5f) {
                 state = STATE.INTRO_APPEAR;
-                time = 0;
+
+                mp = SoundPlayer.playBackgroundSound(Game.instance, R.raw.intro);
             }
         }
         else if (state == STATE.INTRO_APPEAR) { // 인트로이미지 나타남

@@ -1,11 +1,15 @@
 package com.example.SpearClient.GameIO;
 
 import android.content.Context;
+import android.content.res.AssetFileDescriptor;
 import android.media.AudioAttributes;
+import android.media.AudioManager;
+import android.media.MediaPlayer;
 import android.media.SoundPool;
+import android.net.Uri;
 
 public class SoundPlayer {
-    public static void PlaySound (Context context, int resource, final float speed) {
+    public static void playSound (Context context, int resource, final float speed) {
         SoundPool soundPool = new SoundPool
                 .Builder()
                 .setAudioAttributes(new AudioAttributes.Builder()
@@ -23,5 +27,13 @@ public class SoundPlayer {
         });
 
         soundPool.load(context, resource, 1);
+    }
+
+    public static MediaPlayer playBackgroundSound (Context context, int resource) {
+        MediaPlayer mp = MediaPlayer.create(context, resource);
+        mp.setLooping(true);
+        mp.start();
+
+        return mp;
     }
 }

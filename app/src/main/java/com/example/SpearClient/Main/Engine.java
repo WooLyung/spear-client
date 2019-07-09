@@ -17,7 +17,7 @@ public class Engine {
     public static String nickname = "";
 
     public Engine() {
-        changeScene(new MainScene());
+        changeScene(new IntroScene());
         start();
     }
 
