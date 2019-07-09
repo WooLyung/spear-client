@@ -47,6 +47,8 @@ public class InGameScene extends Scene {
 
     @Override
     public void start() {
+        GameManager.getInstance().state = GameManager.STATE.WAITING1;
+
         player = new Player();
         enemy = new Enemy();
         moveLeft = new MoveLeft();
@@ -116,28 +118,7 @@ public class InGameScene extends Scene {
 
         time += Game.getDeltaTime();
 
-        if (player != null && enemy != null) {
-            float distance = Math.abs(player.getTransform().position.x - enemy.getTransform().position.x);
-
-            if (distance >= 28) {
-                if (player.getTransform().position.x > enemy.getTransform().position.x) {
-                    camera.setPosition(new Vector(player.getTransform().position.x - 14, camera.getPositionNone().y) );
-                }
-                else {
-                    camera.setPosition(new Vector(player.getTransform().position.x + 14, camera.getPositionNone().y) );
-                }
-
-                distance = 28;
-            }
-            else {
-                camera.setPosition(new Vector((player.getTransform().position.x + enemy.getTransform().position.x) / 2f, camera.getPositionNone().y) );
-            }
-
-            float zoom = Math.min((float)Math.sqrt(GLView.defaultWidth / distance * 2) - 0.3f, 0.7f);
-
-            camera.setZoomX(zoom);
-            camera.setZoomY(zoom);
-        }
+        camUpdate();
 
         if (bloodTime > 0) {
             bloodTime -= Game.getDeltaTime();
@@ -159,6 +140,51 @@ public class InGameScene extends Scene {
                         1, 1, 1, 0
                 };
                 GLRenderer.imageDatas.get(bloodCode).setColors(color2);
+            }
+        }
+    }
+
+    private void camUpdate() {
+        if (player != null && enemy != null) {
+            float distance = Math.abs(player.getTransform().position.x - enemy.getTransform().position.x);
+
+            if (distance >= 28) {
+                if (player.getTransform().position.x > enemy.getTransform().position.x) {
+                    camera.setPosition(new Vector(player.getTransform().position.x - 14, (float) GLView.nowHeight - 6));
+                } else {
+                    camera.setPosition(new Vector(player.getTransform().position.x + 14, (float) GLView.nowHeight - 6));
+                }
+
+                distance = 28;
+            } else {
+                camera.setPosition(new Vector((player.getTransform().position.x + enemy.getTransform().position.x) / 2f, (float) GLView.nowHeight - 6));
+            }
+
+            if (GameManager.getInstance().state == GameManager.STATE.GAMING) {
+                float zoom = Math.min((float) Math.sqrt(GLView.defaultWidth / distance * 2) - 0.3f, 0.7f);
+
+                camera.setZoomX(zoom);
+                camera.setZoomY(zoom);
+            } else if (GameManager.getInstance().state == GameManager.STATE.WAITING1) {
+                float zoom = Math.min((float) Math.sqrt(GLView.defaultWidth / distance * 2) - 0.3f, 0.7f);
+
+                camera.setZoomX(zoom * 0.6f);
+                camera.setZoomY(zoom * 0.6f);
+
+                if (time >= 3) {
+                    time = 0;
+                    GameManager.getInstance().state = GameManager.STATE.WAITING2;
+                }
+            } else if (GameManager.getInstance().state == GameManager.STATE.WAITING2) {
+                float zoom = Math.min((float) Math.sqrt(GLView.defaultWidth / distance * 2) - 0.3f, 0.7f);
+
+                camera.setZoomX(zoom * (0.6f + time * 0.2f));
+                camera.setZoomY(zoom * (0.6f + time * 0.2f));
+
+                if (time >= 2) {
+                    time = 0;
+                    GameManager.getInstance().state = GameManager.STATE.GAMING;
+                }
             }
         }
     }

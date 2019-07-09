@@ -45,12 +45,10 @@ public class GameStart extends GameObject {
 
         for (int i = 0; i < 5; i++) {
             if (Input.getTouchState(i) == Input.TOUCH_STATE.DOWN) {
-                Log.i("touch", "default : " + GLView.defaultWidth);
-                Log.i("touch", "now : " + GLView.nowWidth);
-
                 if (Math.abs(Input.getTouchWorldPos(i).x - transform.position.x) <= 300 / 100f
                         && Math.abs(Input.getTouchWorldPos(i).y - transform.position.y) <= 60 / 100f) { // 버튼을 클릭했을 경우
-                    enter();
+                    Game.engine.changeScene(new InGameScene());
+                    //enter();
                 }
             }
         }

@@ -19,7 +19,8 @@ import io.socket.emitter.Emitter;
 
 public class GameManager {
     public enum STATE {
-        WAITING,
+        WAITING1,
+        WAITING2,
         GAMING,
         RESULT
     }
