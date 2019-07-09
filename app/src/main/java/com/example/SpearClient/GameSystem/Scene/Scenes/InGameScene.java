@@ -3,6 +3,7 @@ package com.example.SpearClient.GameSystem.Scene.Scenes;
 import com.example.SpearClient.GameSystem.Component.Components.RendererComponent.Renderers.SpriteRenderer;
 import com.example.SpearClient.GameSystem.GameObject.GameObjects.Background;
 import com.example.SpearClient.GameSystem.GameObject.GameObjects.Cloud;
+import com.example.SpearClient.GameSystem.GameObject.GameObjects.InGameScene.BlackPanel;
 import com.example.SpearClient.GameSystem.GameObject.GameObjects.InGameScene.Blood;
 import com.example.SpearClient.GameSystem.GameObject.GameObjects.InGameScene.Enemy.Enemy;
 import com.example.SpearClient.GameSystem.GameObject.GameObjects.InGameScene.Enemy.EnemyHP;
@@ -14,6 +15,7 @@ import com.example.SpearClient.GameSystem.GameObject.GameObjects.InGameScene.Pla
 import com.example.SpearClient.GameSystem.GameObject.GameObjects.InGameScene.Player.Player;
 import com.example.SpearClient.GameSystem.GameObject.GameObjects.InGameScene.UI.Skill1;
 import com.example.SpearClient.GameSystem.GameObject.GameObjects.InGameScene.UI.Skill2;
+import com.example.SpearClient.GameSystem.GameObject.GameObjects.InGameScene.UI.VS;
 import com.example.SpearClient.GameSystem.Other.GameManager;
 import com.example.SpearClient.GameSystem.Scene.Scene;
 import com.example.SpearClient.GraphicSystem.GL.GLRenderer;
@@ -37,6 +39,8 @@ public class InGameScene extends Scene {
 
     EnemyPointer enemyPointer;
     PlayerPointer playerPointer;
+    VS vs;
+    BlackPanel blackPanel;
 
     Blood[] bloods = { new Blood(), new Blood(), new Blood(), new Blood()};
 
@@ -60,7 +64,11 @@ public class InGameScene extends Scene {
         cloud = new Cloud();
         enemyPointer = new EnemyPointer();
         playerPointer = new PlayerPointer();
-        cloud.getTransform().position.y = 9;
+        vs = new VS();
+        blackPanel = new BlackPanel();
+        cloud.getTransform().position.y = 14;
+        cloud.getTransform().scale.x *= 1.5f;
+        cloud.getTransform().scale.y *= 1.5f;
 
         objs.add(player);
         objs.add(enemy);
@@ -73,6 +81,8 @@ public class InGameScene extends Scene {
         objs.add(cloud);
         objs.add(enemyPointer);
         objs.add(playerPointer);
+        objs.add(vs);
+        objs.add(blackPanel);
         objs.add(new Background());
 
         bloodSetting();
@@ -166,6 +176,7 @@ public class InGameScene extends Scene {
                 camera.setZoomX(zoom);
                 camera.setZoomY(zoom);
             } else if (GameManager.getInstance().state == GameManager.STATE.WAITING1) {
+                vs.updateImage(time, true);
                 float zoom = Math.min((float) Math.sqrt(GLView.defaultWidth / distance * 2) - 0.3f, 0.7f);
 
                 camera.setZoomX(zoom * 0.6f);
@@ -176,6 +187,8 @@ public class InGameScene extends Scene {
                     GameManager.getInstance().state = GameManager.STATE.WAITING2;
                 }
             } else if (GameManager.getInstance().state == GameManager.STATE.WAITING2) {
+                vs.updateImage(time, false);
+                blackPanel.updateImage(time);
                 float zoom = Math.min((float) Math.sqrt(GLView.defaultWidth / distance * 2) - 0.3f, 0.7f);
 
                 camera.setZoomX(zoom * (0.6f + time * 0.2f));

@@ -201,6 +201,7 @@ public class GLRenderer implements GLSurfaceView.Renderer {
         addImage(R.drawable.line, "line");
         addImage(R.drawable.pointer_enemy, "pointer_enemy");
         addImage(R.drawable.pointer_player, "pointer_player");
+        addImage(R.drawable.vs, "vs");
 
         // 스킬
         addImage(R.drawable.skill_none, "skill_none");
