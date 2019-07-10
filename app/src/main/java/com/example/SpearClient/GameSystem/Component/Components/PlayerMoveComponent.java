@@ -149,7 +149,7 @@ public class PlayerMoveComponent extends Component {
                 });
             }
 
-            if (player.sp_run == null) {
+            if (player.sp_run == null && time > 0.3f) {
                 player.sp_run = SoundPlayer.playSound(Game.instance, R.raw.run, -1, 1, 3);
             }
         }
@@ -171,7 +171,7 @@ public class PlayerMoveComponent extends Component {
                     1, 1, 1, alpha
             });
 
-            if (player.sp_run == null) {
+            if (player.sp_run == null && time > 0.3f) {
                 player.sp_run = SoundPlayer.playSound(Game.instance, R.raw.run, -1, 1, 3);
             }
         }
@@ -199,7 +199,7 @@ public class PlayerMoveComponent extends Component {
                     1, 1, 1, alpha
             });
 
-            if (player.sp_run == null) {
+            if (player.sp_run == null && time > 0.3f) {
                 player.sp_run = SoundPlayer.playSound(Game.instance, R.raw.run, -1, 1, 3);
             }
         }

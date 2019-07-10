@@ -1,4 +1,4 @@
-package com.example.SpearClient.GameSystem.GameObject.GameObjects.InGameScene.UI;
+package com.example.SpearClient.GameSystem.GameObject.GameObjects.InGameScene.Start;
 
 import com.example.SpearClient.GameSystem.Component.Components.AnimationComponent.AnimationComponent;
 import com.example.SpearClient.GameSystem.Component.Components.PlayerMoveComponent;

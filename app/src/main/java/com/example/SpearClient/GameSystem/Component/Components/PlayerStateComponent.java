@@ -1,5 +1,6 @@
 package com.example.SpearClient.GameSystem.Component.Components;
 
+import com.example.SpearClient.GameIO.SoundPlayer;
 import com.example.SpearClient.GameSystem.Component.Component;
 import com.example.SpearClient.GameSystem.Component.Components.RendererComponent.Renderers.AnimationRenderer;
 import com.example.SpearClient.GameSystem.GameObject.GameObject;
@@ -7,6 +8,7 @@ import com.example.SpearClient.GameSystem.GameObject.GameObjects.InGameScene.Ene
 import com.example.SpearClient.GameSystem.GameObject.GameObjects.InGameScene.Player.Player;
 import com.example.SpearClient.GameSystem.Other.AnimationManager;
 import com.example.SpearClient.Main.Game;
+import com.example.SpearClient.R;
 import com.example.SpearClient.SocketIO.SocketIOBuilder;
 
 import org.json.JSONObject;
@@ -54,6 +56,8 @@ public class PlayerStateComponent extends Component {
 
                 anim = AnimationManager.playerAnims.get(skinCode).get(1);
                 animationRenderer.setInterval(0.6f / 16f);
+
+                SoundPlayer.playSound(Game.instance, R.raw.shallow_stab, 0, 1, 4);
             }
         }
         else if (action == ACTION.DEEP_STAB) {
@@ -64,6 +68,7 @@ public class PlayerStateComponent extends Component {
                 animationRenderer.setInterval(0.8f / 15f);
 
                 player.playerEffect_deepStab.play();
+                SoundPlayer.playSound(Game.instance, R.raw.deep_stab, 0, 1.4f, 4);
             }
         }
         else if (action == ACTION.RUSH_STAB) {
@@ -117,6 +122,7 @@ public class PlayerStateComponent extends Component {
                         e.printStackTrace();
                     }
                 }
+                SoundPlayer.playSound(Game.instance, R.raw.deep_stab, 0, 1, 2);
             }
         }
         else if (action == ACTION.AVOID) {

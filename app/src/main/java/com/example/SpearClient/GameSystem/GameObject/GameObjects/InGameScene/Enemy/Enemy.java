@@ -89,6 +89,7 @@ public class Enemy extends GameObject {
                                 jsonObject = array.getJSONObject(1);
 
                                 if (gameManager != null) {
+                                    gameManager.playerHealth = (float)array.getJSONObject(0).getDouble("player_health");
                                     gameManager.setMyHP((float)array.getJSONObject(0).getDouble("player_health"));
                                     gameManager.setEnemyHP((float)array.getJSONObject(1).getDouble("player_health"));
                                 }
@@ -97,6 +98,7 @@ public class Enemy extends GameObject {
                                 jsonObject = array.getJSONObject(0);
 
                                 if (gameManager != null) {
+                                    gameManager.playerHealth = (float)array.getJSONObject(0).getDouble("player_health");
                                     gameManager.setMyHP((float)array.getJSONObject(1).getDouble("player_health"));
                                     gameManager.setEnemyHP((float)array.getJSONObject(0).getDouble("player_health"));
                                 }

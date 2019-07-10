@@ -25,6 +25,7 @@ public class GameManager {
         RESULT
     }
 
+    public float playerHealth = 100;
     public static boolean isWin = false;
     public STATE state = STATE.GAMING;
 

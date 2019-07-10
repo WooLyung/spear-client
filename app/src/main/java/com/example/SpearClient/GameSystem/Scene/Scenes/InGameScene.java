@@ -10,19 +10,21 @@ import com.example.SpearClient.GameSystem.Component.Components.TransformComponen
 import com.example.SpearClient.GameSystem.GameObject.GameObject;
 import com.example.SpearClient.GameSystem.GameObject.GameObjects.Background;
 import com.example.SpearClient.GameSystem.GameObject.GameObjects.Cloud;
-import com.example.SpearClient.GameSystem.GameObject.GameObjects.InGameScene.BlackPanel;
+import com.example.SpearClient.GameSystem.GameObject.GameObjects.InGameScene.Start.BlackPanel;
 import com.example.SpearClient.GameSystem.GameObject.GameObjects.InGameScene.Blood;
 import com.example.SpearClient.GameSystem.GameObject.GameObjects.InGameScene.Enemy.Enemy;
 import com.example.SpearClient.GameSystem.GameObject.GameObjects.InGameScene.Enemy.EnemyHP;
 import com.example.SpearClient.GameSystem.GameObject.GameObjects.InGameScene.Enemy.EnemyPointer;
 import com.example.SpearClient.GameSystem.GameObject.GameObjects.InGameScene.Player.PlayerPointer;
+import com.example.SpearClient.GameSystem.GameObject.GameObjects.InGameScene.Start.NicknameEnemy;
+import com.example.SpearClient.GameSystem.GameObject.GameObjects.InGameScene.Start.NicknamePlayer;
 import com.example.SpearClient.GameSystem.GameObject.GameObjects.InGameScene.UI.MoveLeft;
 import com.example.SpearClient.GameSystem.GameObject.GameObjects.InGameScene.UI.MoveRight;
 import com.example.SpearClient.GameSystem.GameObject.GameObjects.InGameScene.Player.MyHP;
 import com.example.SpearClient.GameSystem.GameObject.GameObjects.InGameScene.Player.Player;
 import com.example.SpearClient.GameSystem.GameObject.GameObjects.InGameScene.UI.Skill1;
 import com.example.SpearClient.GameSystem.GameObject.GameObjects.InGameScene.UI.Skill2;
-import com.example.SpearClient.GameSystem.GameObject.GameObjects.InGameScene.UI.VS;
+import com.example.SpearClient.GameSystem.GameObject.GameObjects.InGameScene.Start.VS;
 import com.example.SpearClient.GameSystem.Other.GameManager;
 import com.example.SpearClient.GameSystem.Scene.Scene;
 import com.example.SpearClient.GraphicSystem.GL.GLRenderer;
@@ -50,6 +52,8 @@ public class InGameScene extends Scene {
     PlayerPointer playerPointer;
     VS vs;
     BlackPanel blackPanel;
+    NicknamePlayer nicknamePlayer;
+    NicknameEnemy nicknameEnemy;
 
     Blood[] bloods = { new Blood(), new Blood(), new Blood(), new Blood()};
 
@@ -79,6 +83,8 @@ public class InGameScene extends Scene {
         playerPointer = new PlayerPointer();
         vs = new VS();
         blackPanel = new BlackPanel();
+        nicknamePlayer = new NicknamePlayer();
+        nicknameEnemy = new NicknameEnemy();
         cloud.getTransform().position.y = 14;
         cloud.getTransform().scale.x *= 1.5f;
         cloud.getTransform().scale.y *= 1.5f;
@@ -96,6 +102,8 @@ public class InGameScene extends Scene {
         objs.add(playerPointer);
         objs.add(vs);
         objs.add(blackPanel);
+        objs.add(nicknamePlayer);
+        objs.add(nicknameEnemy);
         objs.add(new Background());
 
         bloodSetting();
@@ -110,7 +118,7 @@ public class InGameScene extends Scene {
                 attachComponent(spriteRenderer);
                 spriteRenderer.bindingImage(GLRenderer.findImage("background_wall"));
                 spriteRenderer.setZ_index(-8);
-                spriteRenderer.lengthX = 8;
+                spriteRenderer.lengthX = 5;
 
                 Transform transform = new Transform();
                 attachComponent(transform);
@@ -127,7 +135,7 @@ public class InGameScene extends Scene {
                 attachComponent(spriteRenderer);
                 spriteRenderer.bindingImage(GLRenderer.findImage("background_tunnel"));
                 spriteRenderer.setZ_index(-7);
-                spriteRenderer.lengthX = 8;
+                spriteRenderer.lengthX = 5;
 
                 Transform transform = new Transform();
                 attachComponent(transform);
@@ -144,7 +152,7 @@ public class InGameScene extends Scene {
                 attachComponent(spriteRenderer);
                 spriteRenderer.bindingImage(GLRenderer.findImage("background_people"));
                 spriteRenderer.setZ_index(-6);
-                spriteRenderer.lengthX = 8;
+                spriteRenderer.lengthX = 5;
 
                 Transform transform = new Transform();
                 attachComponent(transform);
@@ -161,7 +169,7 @@ public class InGameScene extends Scene {
                 attachComponent(spriteRenderer);
                 spriteRenderer.bindingImage(GLRenderer.findImage("background_front_wall"));
                 spriteRenderer.setZ_index(-5);
-                spriteRenderer.lengthX = 8;
+                spriteRenderer.lengthX = 5;
 
                 Transform transform = new Transform();
                 attachComponent(transform);
@@ -215,28 +223,27 @@ public class InGameScene extends Scene {
 
         camUpdate();
 
-        if (bloodTime > 0) {
-            bloodTime -= Game.getDeltaTime();
-            float[] color = {
-                    1, 1, 1, bloodTime,
-                    1, 1, 1, bloodTime,
-                    1, 1, 1, bloodTime,
-                    1, 1, 1, bloodTime
-            };
-            GLRenderer.imageDatas.get(bloodCode).setColors(color);
-
-            if (bloodTime < 0) {
-                bloodTime = 0;
-
-                float[] color2 = {
-                        1, 1, 1, 0,
-                        1, 1, 1, 0,
-                        1, 1, 1, 0,
-                        1, 1, 1, 0
-                };
-                GLRenderer.imageDatas.get(bloodCode).setColors(color2);
-            }
+        bloodTime -= Game.getDeltaTime();
+        if (bloodTime < 0) {
+            bloodTime = 0;
         }
+
+        float alpha = bloodTime;
+        if (gameManager.playerHealth < 25f) {
+            float hurt = ((float) Math.cos(3 * time) + 2) / 4;
+            alpha = Math.max(alpha, hurt);
+        } else if (gameManager.playerHealth < 50f) {
+            float hurt = ((float) Math.cos(3 * time) + 1) / 5;
+            alpha = Math.max(alpha, hurt);
+        }
+
+        float[] color = {
+                1, 1, 1, alpha,
+                1, 1, 1, alpha,
+                1, 1, 1, alpha,
+                1, 1, 1, alpha
+        };
+        GLRenderer.imageDatas.get(bloodCode).setColors(color);
     }
 
     private void camUpdate() {

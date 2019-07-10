@@ -9,6 +9,7 @@ import com.example.SpearClient.GameSystem.GameObject.GameObject;
 import com.example.SpearClient.GameSystem.GameObject.GameObjects.InGameScene.Player.Player;
 import com.example.SpearClient.GameSystem.Other.ActionManager;
 import com.example.SpearClient.GameSystem.Other.GameManager;
+import com.example.SpearClient.GameSystem.Scene.Scenes.InGameScene;
 import com.example.SpearClient.GraphicSystem.GL.GLRenderer;
 import com.example.SpearClient.GraphicSystem.GL.GLView;
 import com.example.SpearClient.Main.Game;
