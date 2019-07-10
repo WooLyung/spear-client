@@ -194,7 +194,6 @@ public class MainScene extends Scene {
 
         skillSet();
 
-
         try {
             SocketIOBuilder.getInstance().getSkill(new JSONObject("{\"username\":" + SocketIOBuilder.id + "}"), new Emitter.Listener() {
                 @Override

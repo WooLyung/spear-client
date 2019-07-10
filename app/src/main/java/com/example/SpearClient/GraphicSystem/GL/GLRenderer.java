@@ -91,6 +91,10 @@ public class GLRenderer implements GLSurfaceView.Renderer {
         addImage(R.drawable.background_under, "background_under");
         addImage(R.drawable.background_black, "background_black");
         addImage(R.drawable.background_maching, "background_maching");
+        addImage(R.drawable.background_front_wall, "background_front_wall");
+        addImage(R.drawable.background_people, "background_people");
+        addImage(R.drawable.background_tunnel, "background_tunnel");
+        addImage(R.drawable.background_wall, "background_wall");
 
         // 기사 스킨들
         addImage(R.drawable.knight_purple, "knight_purple");

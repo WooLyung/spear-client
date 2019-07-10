@@ -10,7 +10,7 @@ import com.example.SpearClient.GameIO.MediaPlayers.MediaPlayerHelper;
 import com.example.SpearClient.GameIO.MediaPlayers.MediaPlayerHolder;
 
 public class SoundPlayer {
-    public static void playSound (Context context, int resource, final float speed) {
+    public static SoundPool playSound (Context context, int resource, final int loop, final float speed) {
         SoundPool soundPool = new SoundPool
                 .Builder()
                 .setAudioAttributes(new AudioAttributes.Builder()
@@ -23,11 +23,35 @@ public class SoundPlayer {
         soundPool.setOnLoadCompleteListener(new SoundPool.OnLoadCompleteListener() {
             @Override
             public void onLoadComplete(SoundPool soundPool, int sampleId, int status) {
-                soundPool.play(sampleId, 1f, 1f, 0, 0, speed);
+                soundPool.play(sampleId, 1f, 1f, 0, loop, speed);
             }
         });
 
         soundPool.load(context, resource, 1);
+
+        return soundPool;
+    }
+
+    public static SoundPool playSound (Context context, int resource, final int loop, final float speed, final float volume) {
+        SoundPool soundPool = new SoundPool
+                .Builder()
+                .setAudioAttributes(new AudioAttributes.Builder()
+                        .setContentType(AudioAttributes.CONTENT_TYPE_MUSIC)
+                        .setUsage(AudioAttributes.USAGE_GAME)
+                        .build()
+                )
+                .build();
+
+        soundPool.setOnLoadCompleteListener(new SoundPool.OnLoadCompleteListener() {
+            @Override
+            public void onLoadComplete(SoundPool soundPool, int sampleId, int status) {
+                soundPool.play(sampleId, volume, volume, 0, loop, speed);
+            }
+        });
+
+        soundPool.load(context, resource, 1);
+
+        return soundPool;
     }
 
     public static MediaPlayerHolder playBackgroundSound (Context context, int resource, boolean isFade) {
@@ -42,6 +66,21 @@ public class SoundPlayer {
             mp.start();
 
             return MediaPlayerHelper.getInstance().addMedia(mp, resource, isFade);
+        }
+    }
+
+    public static MediaPlayerHolder playBackgroundSound (Context context, int resource, boolean isFade, float volume) {
+        MediaPlayerHolder findMPH = MediaPlayerHelper.getInstance().findMediaPlayerHolder(resource);
+
+        if (findMPH != null) {
+            return findMPH;
+        }
+        else {
+            MediaPlayer mp = MediaPlayer.create(context, resource);
+            mp.setLooping(true);
+            mp.start();
+
+            return MediaPlayerHelper.getInstance().addMedia(mp, resource, isFade, volume);
         }
     }
 }

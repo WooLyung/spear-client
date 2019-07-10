@@ -31,7 +31,7 @@ public class Background extends GameObject {
                 SpriteRenderer spriteRenderer = new SpriteRenderer();
                 attachComponent(spriteRenderer);
                 spriteRenderer.bindingImage(GLRenderer.findImage("background_ground"));
-                spriteRenderer.setZ_index(-2);
+                spriteRenderer.setZ_index(-9);
                 spriteRenderer.lengthX = 5;
 
                 transform = new Transform();

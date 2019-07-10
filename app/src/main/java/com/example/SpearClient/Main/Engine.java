@@ -21,6 +21,7 @@ public class Engine {
     public MediaPlayerHelper mediaPlayerHelper = new MediaPlayerHelper();
     public static String id = "";
     public static String nickname = "";
+    public static String enemyNickname = "";
 
     public Engine() {
         changeScene(new MainScene());

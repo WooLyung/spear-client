@@ -1,7 +1,12 @@
 package com.example.SpearClient.GameSystem.GameObject.GameObjects.InGameScene.Player;
 
+import android.media.MediaPlayer;
+import android.media.SoundPool;
 import android.util.Log;
 
+import com.example.SpearClient.GameIO.MediaPlayers.MediaPlayerHelper;
+import com.example.SpearClient.GameIO.MediaPlayers.MediaPlayerHolder;
+import com.example.SpearClient.GameIO.SoundPlayer;
 import com.example.SpearClient.GameSystem.Component.Components.AnimationComponent.AnimSupportClasses.Animation;
 import com.example.SpearClient.GameSystem.Component.Components.AnimationComponent.AnimationComponent;
 import com.example.SpearClient.GameSystem.Component.Components.EffectComponent;
@@ -41,6 +46,7 @@ public class Player extends GameObject {
     public PlayerEffect_rush playerEffect_rush;
     public PlayerEffect_deepStab playerEffect_deepStab;
     public PlayerEffect_rushStab playerEffect_rushStab;
+    public SoundPool sp_run;
 
     @Override
     public void start() {
@@ -422,5 +428,12 @@ public class Player extends GameObject {
 
             Game.engine.nowScene.objs.add(dirtParticle);
         }*/
+    }
+
+    @Override
+    public void finish() {
+        super.finish();
+
+        if (sp_run != null) sp_run.release();
     }
 }

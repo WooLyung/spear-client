@@ -5,4 +5,5 @@
     <color name="colorAccent">#000000</color>
     <color name="loginColor">#48300c</color>
     <color name="loginColorHint">#8848300c</color>
+    <color name="white">#ffffff</color>
 </resources>

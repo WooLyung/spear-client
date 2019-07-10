@@ -8,6 +8,7 @@ import com.example.SpearClient.GameSystem.Component.Components.TransformComponen
 import com.example.SpearClient.GameSystem.GameObject.GameObject;
 import com.example.SpearClient.GraphicSystem.GL.GLRenderer;
 import com.example.SpearClient.GraphicSystem.GL.GLView;
+import com.example.SpearClient.Main.Engine;
 import com.example.SpearClient.Main.Game;
 
 public class MyHP extends GameObject {
@@ -30,7 +31,7 @@ public class MyHP extends GameObject {
                     public void run() {
                         textRenderer = new TextRenderer();
                         attachComponent(textRenderer);
-                        textRenderer.getTextView().setText("이건 무려 플레이어의 체력");
+                        textRenderer.getTextView().setText(Engine.nickname);
                         textRenderer.getTextView().setTextSize(14);
                         textRenderer.setHorizontal(0);
                     }
@@ -40,6 +41,20 @@ public class MyHP extends GameObject {
                 attachComponent(transform);
                 transform.position.x = -(float) GLView.defaultWidth + 0.5f;
                 transform.position.y = (float) GLView.defaultHeight - 0.45f;
+            }
+
+            @Override
+            public void update() {
+                super.update();
+
+                if (!Engine.enemyNickname.equals("") && textRenderer.getTextView().getText().equals("기본값")) {
+                    Game.instance.runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            textRenderer.getTextView().setText(Engine.enemyNickname);
+                        }
+                    });
+                }
             }
         };
         front = new GameObject() {

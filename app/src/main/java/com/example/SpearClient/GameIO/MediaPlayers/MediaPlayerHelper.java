@@ -32,6 +32,13 @@ public class MediaPlayerHelper {
         return mph;
     }
 
+    public MediaPlayerHolder addMedia(MediaPlayer mp, int resource, boolean isFade, float volume) {
+        MediaPlayerHolder mph = new MediaPlayerHolder(mp, resource, isFade, volume);
+        mediaPlayerHolders.add(mph);
+
+        return mph;
+    }
+
     public void delMedia(MediaPlayerHolder mph) {
         mph.isDelete = true;
         mph.time = 0;
@@ -51,14 +58,14 @@ public class MediaPlayerHelper {
                     deleteMphs.add(mph);
                 }
                 else {
-                    mph.mp.setVolume(1 - mph.time, 1 - mph.time);
+                    mph.mp.setVolume((1 - mph.time) * mph.volume, (1 - mph.time) * mph.volume);
                 }
             }
             else if (mph.time >= 1 || !mph.isFade){
-                mph.mp.setVolume(1, 1);
+                mph.mp.setVolume(mph.volume, mph.volume);
             }
             else {
-                mph.mp.setVolume(mph.time, mph.time);
+                mph.mp.setVolume(mph.time * mph.volume, mph.time * mph.volume);
             }
 
         }

@@ -1,10 +1,14 @@
 package com.example.SpearClient.GameSystem.Component.Components;
 
+import android.util.Log;
+
+import com.example.SpearClient.GameIO.SoundPlayer;
 import com.example.SpearClient.GameSystem.Component.Component;
 import com.example.SpearClient.GameSystem.Component.Components.AnimationComponent.AnimationComponent;
 import com.example.SpearClient.GameSystem.Component.Components.RendererComponent.Renderers.SpriteRenderer;
 import com.example.SpearClient.GameSystem.GameObject.GameObjects.InGameScene.Player.Player;
 import com.example.SpearClient.Main.Game;
+import com.example.SpearClient.R;
 
 public class PlayerMoveComponent extends Component {
     public enum DIR {
@@ -62,6 +66,11 @@ public class PlayerMoveComponent extends Component {
                         1, 1, 1, alpha
                 });
             }
+
+            if (player.sp_run != null) {
+                player.sp_run.release();
+                player.sp_run = null;
+            }
         }
         else if (state == STATE.WALK) {
             if (animationComponent.getNowAnim() != 0) {
@@ -95,6 +104,11 @@ public class PlayerMoveComponent extends Component {
                         1, 1, 1, alpha,
                         1, 1, 1, alpha
                 });
+            }
+
+            if (player.sp_run != null) {
+                player.sp_run.release();
+                player.sp_run = null;
             }
         }
         else if (state == STATE.RUN) {
@@ -134,6 +148,10 @@ public class PlayerMoveComponent extends Component {
                         1, 1, 1, alpha
                 });
             }
+
+            if (player.sp_run == null) {
+                player.sp_run = SoundPlayer.playSound(Game.instance, R.raw.run, -1, 1, 3);
+            }
         }
         else if (state == STATE.RUSH) {
             if (animationComponent.getNowAnim() != 1) {
@@ -152,6 +170,10 @@ public class PlayerMoveComponent extends Component {
                     1, 1, 1, alpha,
                     1, 1, 1, alpha
             });
+
+            if (player.sp_run == null) {
+                player.sp_run = SoundPlayer.playSound(Game.instance, R.raw.run, -1, 1, 3);
+            }
         }
         else if (state == STATE.RUSH_STAB) {
             if (animationComponent.getNowAnim() != 1) {
@@ -164,18 +186,22 @@ public class PlayerMoveComponent extends Component {
             object.getTransform().position.x += Game.getDeltaTime() * 9f * ((dir == DIR.RIGHT) ? 1 : -1) * speed;
 
             float alpha = ((time > 0.25f) ? 1 : time * 4);
-            player.playerEffect_rush.effectComponent.setColors(new float[] {
+            player.playerEffect_rush.effectComponent.setColors(new float[]{
                     1, 1, 1, alpha,
                     1, 1, 1, alpha,
                     1, 1, 1, alpha,
                     1, 1, 1, alpha
             });
-            player.playerEffect_rushStab.effectComponent.setColors(new float[] {
+            player.playerEffect_rushStab.effectComponent.setColors(new float[]{
                     1, 1, 1, alpha,
                     1, 1, 1, alpha,
                     1, 1, 1, alpha,
                     1, 1, 1, alpha
             });
+
+            if (player.sp_run == null) {
+                player.sp_run = SoundPlayer.playSound(Game.instance, R.raw.run, -1, 1, 3);
+            }
         }
     }
 

@@ -2,7 +2,12 @@ package com.example.SpearClient.GameSystem.Scene.Scenes;
 
 import android.util.Log;
 
+import com.example.SpearClient.GameIO.MediaPlayers.MediaPlayerHelper;
+import com.example.SpearClient.GameIO.MediaPlayers.MediaPlayerHolder;
+import com.example.SpearClient.GameIO.SoundPlayer;
 import com.example.SpearClient.GameSystem.Component.Components.RendererComponent.Renderers.SpriteRenderer;
+import com.example.SpearClient.GameSystem.Component.Components.TransformComponent.Transforms.Transform;
+import com.example.SpearClient.GameSystem.GameObject.GameObject;
 import com.example.SpearClient.GameSystem.GameObject.GameObjects.Background;
 import com.example.SpearClient.GameSystem.GameObject.GameObjects.Cloud;
 import com.example.SpearClient.GameSystem.GameObject.GameObjects.InGameScene.BlackPanel;
@@ -22,7 +27,9 @@ import com.example.SpearClient.GameSystem.Other.GameManager;
 import com.example.SpearClient.GameSystem.Scene.Scene;
 import com.example.SpearClient.GraphicSystem.GL.GLRenderer;
 import com.example.SpearClient.GraphicSystem.GL.GLView;
+import com.example.SpearClient.Main.Engine;
 import com.example.SpearClient.Main.Game;
+import com.example.SpearClient.R;
 import com.example.SpearClient.Types.Vector;
 
 public class InGameScene extends Scene {
@@ -51,9 +58,13 @@ public class InGameScene extends Scene {
     public float bloodTime = 0;
     private int bloodCode;
 
+    private MediaPlayerHolder mph;
+
     @Override
     public void start() {
         GameManager.getInstance().state = GameManager.STATE.WAITING1;
+        Engine.enemyNickname = "";
+        mph = SoundPlayer.playBackgroundSound(Game.instance, R.raw.ingame, true);
 
         player = new Player();
         enemy = new Enemy();
@@ -88,6 +99,78 @@ public class InGameScene extends Scene {
         objs.add(new Background());
 
         bloodSetting();
+        createBackgrounds();
+    }
+
+    private void createBackgrounds() {
+        objs.add(new GameObject() {
+            @Override
+            public void start() {
+                SpriteRenderer spriteRenderer = new SpriteRenderer();
+                attachComponent(spriteRenderer);
+                spriteRenderer.bindingImage(GLRenderer.findImage("background_wall"));
+                spriteRenderer.setZ_index(-8);
+                spriteRenderer.lengthX = 8;
+
+                Transform transform = new Transform();
+                attachComponent(transform);
+                transform.anchor.y = 1;
+                transform.scale.x = 0.7f;
+                transform.scale.y = 0.7f;
+                transform.position.y = -2f;
+            }
+        });
+        objs.add(new GameObject() {
+            @Override
+            public void start() {
+                SpriteRenderer spriteRenderer = new SpriteRenderer();
+                attachComponent(spriteRenderer);
+                spriteRenderer.bindingImage(GLRenderer.findImage("background_tunnel"));
+                spriteRenderer.setZ_index(-7);
+                spriteRenderer.lengthX = 8;
+
+                Transform transform = new Transform();
+                attachComponent(transform);
+                transform.anchor.y = 1;
+                transform.scale.x = 0.7f;
+                transform.scale.y = 0.7f;
+                transform.position.y = -2f;
+            }
+        });
+        objs.add(new GameObject() {
+            @Override
+            public void start() {
+                SpriteRenderer spriteRenderer = new SpriteRenderer();
+                attachComponent(spriteRenderer);
+                spriteRenderer.bindingImage(GLRenderer.findImage("background_people"));
+                spriteRenderer.setZ_index(-6);
+                spriteRenderer.lengthX = 8;
+
+                Transform transform = new Transform();
+                attachComponent(transform);
+                transform.anchor.y = 1;
+                transform.scale.x = 0.7f;
+                transform.scale.y = 0.7f;
+                transform.position.y = -2f;
+            }
+        });
+        objs.add(new GameObject() {
+            @Override
+            public void start() {
+                SpriteRenderer spriteRenderer = new SpriteRenderer();
+                attachComponent(spriteRenderer);
+                spriteRenderer.bindingImage(GLRenderer.findImage("background_front_wall"));
+                spriteRenderer.setZ_index(-5);
+                spriteRenderer.lengthX = 8;
+
+                Transform transform = new Transform();
+                attachComponent(transform);
+                transform.anchor.y = 1;
+                transform.scale.x = 0.7f;
+                transform.scale.y = 0.7f;
+                transform.position.y = -2f;
+            }
+        });
     }
 
     private void bloodSetting() {
@@ -178,7 +261,7 @@ public class InGameScene extends Scene {
                 camera.setZoomX(zoom);
                 camera.setZoomY(zoom);
             } else if (GameManager.getInstance().state == GameManager.STATE.WAITING1) {
-                vs.updateImage(time, true);
+                if (vs != null) vs.updateImage(time, true);
                 float zoom = Math.min((float) Math.sqrt(GLView.defaultWidth / distance * 2) - 0.3f, 0.7f);
 
                 camera.setZoomX(zoom * 0.6f);
@@ -207,5 +290,7 @@ public class InGameScene extends Scene {
     @Override
     public void finish() {
         super.finish();
+
+        MediaPlayerHelper.getInstance().delMedia(mph);
     }
 }
