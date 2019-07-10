@@ -41,6 +41,7 @@ public class PlayerStateComponent extends Component {
     private Enemy enemy;
     private EnemyStateComponent enemyStateComponent;
     private PlayerMoveComponent playerMoveComponent;
+    private Player player;
 
     public boolean changeState(ACTION action) {
         int skinCode = AnimationManager.skinToCode();
@@ -61,6 +62,8 @@ public class PlayerStateComponent extends Component {
 
                 anim = AnimationManager.playerAnims.get(skinCode).get(2);
                 animationRenderer.setInterval(0.8f / 15f);
+
+                player.playerEffect_deepStab.play();
             }
         }
         else if (action == ACTION.RUSH_STAB) {
@@ -70,7 +73,7 @@ public class PlayerStateComponent extends Component {
                 anim = AnimationManager.playerAnims.get(skinCode).get(3);
                 animationRenderer.setInterval(1.3f / 30f);
 
-                playerMoveComponent.setState(PlayerMoveComponent.STATE.RUSH);
+                playerMoveComponent.setState(PlayerMoveComponent.STATE.RUSH_STAB);
             }
         }
         else if (action == ACTION.RUSH) {
@@ -185,6 +188,9 @@ public class PlayerStateComponent extends Component {
     public void update() {
         time += Game.getDeltaTime();
 
+        if (player == null) {
+            player = (Player)object;
+        }
         if (animationRenderer == null) {
             if (object != null) {
                 if (object.findOfName("knight") != null) {

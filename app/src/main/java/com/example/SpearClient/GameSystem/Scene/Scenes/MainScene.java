@@ -1,6 +1,7 @@
 package com.example.SpearClient.GameSystem.Scene.Scenes;
 
 import android.media.MediaPlayer;
+import android.util.Log;
 
 import com.example.SpearClient.GameIO.Input;
 import com.example.SpearClient.GameIO.MediaPlayers.MediaPlayerHelper;
@@ -89,7 +90,7 @@ public class MainScene extends Scene {
             MediaPlayerHelper.getInstance().mphHolder = null;
         }
         else {
-            mph = SoundPlayer.playBackgroundSound(Game.instance, R.raw.intro, true);
+            mph = SoundPlayer.playBackgroundSound(Game.instance, R.raw.main, true);
         }
 
         fastMatching = new FastMatching();

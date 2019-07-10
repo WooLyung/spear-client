@@ -22,6 +22,7 @@ public class PlayerMoveComponent extends Component {
     private PlayerStateComponent playerStateComponent;
     private float time = 0;
     private float particleTime = 0;
+    private Player player;
 
     @Override
     public void start() {
@@ -38,6 +39,10 @@ public class PlayerMoveComponent extends Component {
             playerStateComponent = (PlayerStateComponent) object.getComponent("playerStateComponent");
         }
 
+        if (player == null) {
+            player = (Player)object;
+        }
+
         if (state == STATE.IDLE) {
             if (animationComponent.getNowAnim() != 2) {
                 animationComponent.play(2);
@@ -46,6 +51,17 @@ public class PlayerMoveComponent extends Component {
             if (playerStateComponent.action == PlayerStateComponent.ACTION.RUN
                 || playerStateComponent.action == PlayerStateComponent.ACTION.WALK)
                 playerStateComponent.changeState(PlayerStateComponent.ACTION.DEFAULT);
+
+            if (player.playerEffect_rush.effectComponent.getColors()[3] != 0) {
+                float alpha = player.playerEffect_rush.effectComponent.getColors()[3] - Game.getDeltaTime() * 2;
+                if (alpha < 0) alpha = 0;
+                player.playerEffect_rush.effectComponent.setColors(new float[] {
+                        1, 1, 1, alpha,
+                        1, 1, 1, alpha,
+                        1, 1, 1, alpha,
+                        1, 1, 1, alpha
+                });
+            }
         }
         else if (state == STATE.WALK) {
             if (animationComponent.getNowAnim() != 0) {
@@ -58,6 +74,28 @@ public class PlayerMoveComponent extends Component {
 
             playerStateComponent.changeState(PlayerStateComponent.ACTION.WALK);
             object.getTransform().position.x += Game.getDeltaTime() * 3f * ((dir == DIR.RIGHT) ? 1 : -1);
+
+            if (player.playerEffect_rush.effectComponent.getColors()[3] != 0) {
+                float alpha = player.playerEffect_rush.effectComponent.getColors()[3] - Game.getDeltaTime() * 4;
+                if (alpha < 0) alpha = 0;
+                player.playerEffect_rush.effectComponent.setColors(new float[] {
+                        1, 1, 1, alpha,
+                        1, 1, 1, alpha,
+                        1, 1, 1, alpha,
+                        1, 1, 1, alpha
+                });
+            }
+
+            if (player.playerEffect_rushStab.effectComponent.getColors()[3] != 0) {
+                float alpha = player.playerEffect_rushStab.effectComponent.getColors()[3] - Game.getDeltaTime() * 4;
+                if (alpha < 0) alpha = 0;
+                player.playerEffect_rushStab.effectComponent.setColors(new float[] {
+                        1, 1, 1, alpha,
+                        1, 1, 1, alpha,
+                        1, 1, 1, alpha,
+                        1, 1, 1, alpha
+                });
+            }
         }
         else if (state == STATE.RUN) {
             particleTime += Game.getDeltaTime();
@@ -74,6 +112,28 @@ public class PlayerMoveComponent extends Component {
 
             float speed = 0.5f + ((time > 1.7f) ? 1.7f : time);
             object.getTransform().position.x += Game.getDeltaTime() * 6f * ((dir == DIR.RIGHT) ? 1 : -1) * speed;
+
+            if (player.playerEffect_rush.effectComponent.getColors()[3] != 0) {
+                float alpha = player.playerEffect_rush.effectComponent.getColors()[3] - Game.getDeltaTime() * 4;
+                if (alpha < 0) alpha = 0;
+                player.playerEffect_rush.effectComponent.setColors(new float[] {
+                        1, 1, 1, alpha,
+                        1, 1, 1, alpha,
+                        1, 1, 1, alpha,
+                        1, 1, 1, alpha
+                });
+            }
+
+            if (player.playerEffect_rushStab.effectComponent.getColors()[3] != 0) {
+                float alpha = player.playerEffect_rushStab.effectComponent.getColors()[3] - Game.getDeltaTime() * 4;
+                if (alpha < 0) alpha = 0;
+                player.playerEffect_rushStab.effectComponent.setColors(new float[] {
+                        1, 1, 1, alpha,
+                        1, 1, 1, alpha,
+                        1, 1, 1, alpha,
+                        1, 1, 1, alpha
+                });
+            }
         }
         else if (state == STATE.RUSH) {
             if (animationComponent.getNowAnim() != 1) {
@@ -84,6 +144,14 @@ public class PlayerMoveComponent extends Component {
 
             float speed = 1.5f + ((time > 0.7f) ? 0.7f : time);
             object.getTransform().position.x += Game.getDeltaTime() * 10f * ((dir == DIR.RIGHT) ? 1 : -1) * speed;
+
+            float alpha = ((time > 0.25f) ? 1 : time * 4);
+            player.playerEffect_rush.effectComponent.setColors(new float[] {
+                    1, 1, 1, alpha,
+                    1, 1, 1, alpha,
+                    1, 1, 1, alpha,
+                    1, 1, 1, alpha
+            });
         }
         else if (state == STATE.RUSH_STAB) {
             if (animationComponent.getNowAnim() != 1) {
@@ -94,6 +162,20 @@ public class PlayerMoveComponent extends Component {
 
             float speed = 1.5f + ((time > 0.7f) ? 0.7f : time);
             object.getTransform().position.x += Game.getDeltaTime() * 9f * ((dir == DIR.RIGHT) ? 1 : -1) * speed;
+
+            float alpha = ((time > 0.25f) ? 1 : time * 4);
+            player.playerEffect_rush.effectComponent.setColors(new float[] {
+                    1, 1, 1, alpha,
+                    1, 1, 1, alpha,
+                    1, 1, 1, alpha,
+                    1, 1, 1, alpha
+            });
+            player.playerEffect_rushStab.effectComponent.setColors(new float[] {
+                    1, 1, 1, alpha,
+                    1, 1, 1, alpha,
+                    1, 1, 1, alpha,
+                    1, 1, 1, alpha
+            });
         }
     }
 

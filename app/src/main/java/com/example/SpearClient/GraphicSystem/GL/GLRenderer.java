@@ -221,7 +221,12 @@ public class GLRenderer implements GLSurfaceView.Renderer {
         // 파티클
         addImage(R.drawable.particle_dirt, "particle_dirt");
 
-        // 기타
+        // 이펙트
+        addImage(R.drawable.effect_deep_stab, "effect_deep_stab");
+        addImage(R.drawable.effect_rush, "effect_rush");
+        addImage(R.drawable.effect_rush_stab, "effect_rush_stab");
+
+       // 기타
         addImage(R.drawable.left_bricks, "left_bricks");
         addImage(R.drawable.right_bricks, "right_bricks");
         addImage(R.drawable.place, "place");
@@ -430,7 +435,7 @@ public class GLRenderer implements GLSurfaceView.Renderer {
             gl.glTexCoordPointer(2, GL10.GL_FLOAT, 0, textureBuffer);
 
             gl.glBindTexture(GL10.GL_TEXTURE_2D, GLRenderer.imageCode[renderTarget.imageCode]);
-            gl.glColorPointer(4, GL10.GL_FLOAT, 0, GLRenderer.imageDatas.get(renderTarget.imageCode).getColorBuffer());
+            gl.glColorPointer(4, GL10.GL_FLOAT, 0, renderTarget.color);
 
             // 행렬을 불러옴
             gl.glMultMatrixf(renderTarget.matrix);

@@ -10,7 +10,7 @@ import java.util.ArrayList;
 public class MediaPlayerHelper {
     private ArrayList<MediaPlayerHolder> mediaPlayerHolders = new ArrayList<>();
     private static MediaPlayerHelper instance;
-    public MediaPlayerHolder mphHolder;
+    public MediaPlayerHolder mphHolder = null;
 
     public MediaPlayerHelper() {
         instance = this;

@@ -4,6 +4,7 @@ import android.util.Log;
 
 import com.example.SpearClient.GameSystem.Component.Components.AnimationComponent.AnimSupportClasses.Animation;
 import com.example.SpearClient.GameSystem.Component.Components.AnimationComponent.AnimationComponent;
+import com.example.SpearClient.GameSystem.Component.Components.EffectComponent;
 import com.example.SpearClient.GameSystem.Component.Components.PlayerMoveComponent;
 import com.example.SpearClient.GameSystem.Component.Components.PlayerStateComponent;
 import com.example.SpearClient.GameSystem.Component.Components.RendererComponent.Renderers.AnimationRenderer;
@@ -37,6 +38,9 @@ public class Player extends GameObject {
                 horse_leg_left_back_top, horse_leg_left_back_bottom,
                 horse_leg_right_front_top, horse_leg_right_front_bottom,
                 horse_leg_right_back_top, horse_leg_right_back_bottom;
+    public PlayerEffect_rush playerEffect_rush;
+    public PlayerEffect_deepStab playerEffect_deepStab;
+    public PlayerEffect_rushStab playerEffect_rushStab;
 
     @Override
     public void start() {
@@ -61,10 +65,16 @@ public class Player extends GameObject {
                 transform.anchor.x = 0.61f;
             }
         };
+        playerEffect_rush = new PlayerEffect_rush();
+        playerEffect_deepStab = new PlayerEffect_deepStab();
+        playerEffect_rushStab = new PlayerEffect_rushStab();
         createHorse();
 
         appendChild(knight);
         appendChild(horse);
+        appendChild(playerEffect_rush);
+        appendChild(playerEffect_deepStab);
+        appendChild(playerEffect_rushStab);
 
         spriteRenderer = new SpriteRenderer();
         attachComponent(spriteRenderer);

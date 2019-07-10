@@ -79,7 +79,8 @@ public class GameManager {
                             playerStateComponent.time = 0.2f;
                         }
                         else { // 무방비 상태가 됨
-                            playerMoveComponent.setCompulsionState(PlayerMoveComponent.STATE.WALK);
+                            if (playerMoveComponent.state != PlayerMoveComponent.STATE.IDLE)
+                                playerMoveComponent.setCompulsionState(PlayerMoveComponent.STATE.WALK);
                             playerStateComponent.changeState(PlayerStateComponent.ACTION.DEFENCELESS);
                         }
                     }

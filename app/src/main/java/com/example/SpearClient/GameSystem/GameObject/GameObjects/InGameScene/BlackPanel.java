@@ -34,10 +34,10 @@ public class BlackPanel extends GameObject {
 
     public void updateImage(float time) {
         float[] color = {
-                1, 1, 1, (1 - time / 2),
-                1, 1, 1, (1 - time / 2),
-                1, 1, 1, (1 - time / 2),
-                1, 1, 1, (1 - time / 2)
+                1, 1, 1, (1 - time / 2) * 0.7f,
+                1, 1, 1, (1 - time / 2) * 0.7f,
+                1, 1, 1, (1 - time / 2) * 0.7f,
+                1, 1, 1, (1 - time / 2) * 0.7f
         };
         GLRenderer.imageDatas.get(imageCode).setColors(color);
     }

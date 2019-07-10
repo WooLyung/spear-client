@@ -8,6 +8,7 @@ import java.nio.FloatBuffer;
 public class RenderTarget {
 
     public FloatBuffer matrix;
+    public FloatBuffer color;
     public float fill;
     public int z_index;
     public int imageCode;
