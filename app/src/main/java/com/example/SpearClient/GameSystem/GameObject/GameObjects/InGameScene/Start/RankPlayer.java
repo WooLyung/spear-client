@@ -7,7 +7,7 @@ import com.example.SpearClient.GraphicSystem.GL.GLView;
 import com.example.SpearClient.Main.Game;
 import com.example.SpearClient.R;
 
-public class NicknameEnemy extends GameObject {
+public class RankPlayer extends GameObject {
     TextRenderer textRenderer;
     GUITransform transform;
     float time;
@@ -16,20 +16,20 @@ public class NicknameEnemy extends GameObject {
     public void start() {
         textRenderer = new TextRenderer();
         attachComponent(textRenderer);
-        textRenderer.setText("상대");
-        textRenderer.setHorizontal(0);
+        textRenderer.setText("골드");
+        textRenderer.setHorizontal(2);
         Game.instance.runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                textRenderer.getTextView().setTextColor(Game.instance.getResources().getColor(R.color.white));
-                textRenderer.getTextView().setTextSize(40);
+                textRenderer.getTextView().setTextColor(Game.instance.getResources().getColor(R.color.gold));
+                textRenderer.getTextView().setTextSize(22);
             }
         });
 
         transform = new GUITransform();
         attachComponent(transform);
-        transform.position.y = 0.5f;
-        transform.position.x = (float)GLView.defaultWidth;
+        transform.position.y = -0.35f;
+        transform.position.x = -(float)GLView.defaultWidth;
     }
 
     @Override
@@ -46,12 +46,12 @@ public class NicknameEnemy extends GameObject {
             else if (time < 2.5f) {
                 float time2 = (2.5f - time) / 1.5f;
                 time2 = 2 * time2 - time2 * time2;
-                transform.position.x = (float)GLView.defaultWidth * time2 + 2.5f;
+                transform.position.x = -(float)GLView.defaultWidth * time2 - 2.5f;
             }
             else if (time > 3.5f) {
                 float time2 = (time - 3.5f) / 1.5f;
                 time2 = 2 * time2 - time2 * time2;
-                transform.position.x = (float)GLView.defaultWidth * time2 + 2.5f;
+                transform.position.x = -(float)GLView.defaultWidth * time2 - 2.5f;
             }
         }
     }

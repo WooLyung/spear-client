@@ -18,6 +18,8 @@ import com.example.SpearClient.GameSystem.GameObject.GameObjects.InGameScene.Ene
 import com.example.SpearClient.GameSystem.GameObject.GameObjects.InGameScene.Player.PlayerPointer;
 import com.example.SpearClient.GameSystem.GameObject.GameObjects.InGameScene.Start.NicknameEnemy;
 import com.example.SpearClient.GameSystem.GameObject.GameObjects.InGameScene.Start.NicknamePlayer;
+import com.example.SpearClient.GameSystem.GameObject.GameObjects.InGameScene.Start.RankEnemy;
+import com.example.SpearClient.GameSystem.GameObject.GameObjects.InGameScene.Start.RankPlayer;
 import com.example.SpearClient.GameSystem.GameObject.GameObjects.InGameScene.UI.MoveLeft;
 import com.example.SpearClient.GameSystem.GameObject.GameObjects.InGameScene.UI.MoveRight;
 import com.example.SpearClient.GameSystem.GameObject.GameObjects.InGameScene.Player.MyHP;
@@ -54,6 +56,8 @@ public class InGameScene extends Scene {
     BlackPanel blackPanel;
     NicknamePlayer nicknamePlayer;
     NicknameEnemy nicknameEnemy;
+    RankPlayer rankPlayer;
+    RankEnemy rankEnemy;
 
     Blood[] bloods = { new Blood(), new Blood(), new Blood(), new Blood()};
 
@@ -85,6 +89,8 @@ public class InGameScene extends Scene {
         blackPanel = new BlackPanel();
         nicknamePlayer = new NicknamePlayer();
         nicknameEnemy = new NicknameEnemy();
+        rankEnemy = new RankEnemy();
+        rankPlayer = new RankPlayer();
         cloud.getTransform().position.y = 14;
         cloud.getTransform().scale.x *= 1.5f;
         cloud.getTransform().scale.y *= 1.5f;
@@ -104,6 +110,8 @@ public class InGameScene extends Scene {
         objs.add(blackPanel);
         objs.add(nicknamePlayer);
         objs.add(nicknameEnemy);
+        objs.add(rankEnemy);
+        objs.add(rankPlayer);
         objs.add(new Background());
 
         bloodSetting();

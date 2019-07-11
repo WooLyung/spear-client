@@ -6,4 +6,7 @@
     <color name="loginColor">#48300c</color>
     <color name="loginColorHint">#8848300c</color>
     <color name="white">#ffffff</color>
+    <color name="gold">#face2f</color>
+    <color name="silver">#c4c4c4</color>
+    <color name="bronze">#a86308</color>
 </resources>

@@ -57,7 +57,7 @@ public class PlayerStateComponent extends Component {
                 anim = AnimationManager.playerAnims.get(skinCode).get(1);
                 animationRenderer.setInterval(0.6f / 16f);
 
-                SoundPlayer.playSound(Game.instance, R.raw.shallow_stab, 0, 1, 4);
+                SoundPlayer.playSound(Game.instance, R.raw.shallow_stab, 0, 1, 8);
             }
         }
         else if (action == ACTION.DEEP_STAB) {

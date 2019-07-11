@@ -7,7 +7,7 @@ import com.example.SpearClient.GraphicSystem.GL.GLView;
 import com.example.SpearClient.Main.Game;
 import com.example.SpearClient.R;
 
-public class NicknameEnemy extends GameObject {
+public class RankEnemy extends GameObject {
     TextRenderer textRenderer;
     GUITransform transform;
     float time;
@@ -16,19 +16,19 @@ public class NicknameEnemy extends GameObject {
     public void start() {
         textRenderer = new TextRenderer();
         attachComponent(textRenderer);
-        textRenderer.setText("상대");
+        textRenderer.setText("브론즈");
         textRenderer.setHorizontal(0);
         Game.instance.runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                textRenderer.getTextView().setTextColor(Game.instance.getResources().getColor(R.color.white));
-                textRenderer.getTextView().setTextSize(40);
+                textRenderer.getTextView().setTextColor(Game.instance.getResources().getColor(R.color.bronze));
+                textRenderer.getTextView().setTextSize(22);
             }
         });
 
         transform = new GUITransform();
         attachComponent(transform);
-        transform.position.y = 0.5f;
+        transform.position.y = -0.35f;
         transform.position.x = (float)GLView.defaultWidth;
     }
 

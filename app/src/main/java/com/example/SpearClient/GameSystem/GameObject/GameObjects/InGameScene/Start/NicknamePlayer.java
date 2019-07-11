@@ -24,13 +24,13 @@ public class NicknamePlayer extends GameObject {
             @Override
             public void run() {
                 textRenderer.getTextView().setTextColor(Game.instance.getResources().getColor(R.color.white));
-                textRenderer.getTextView().setTextSize(30);
+                textRenderer.getTextView().setTextSize(40);
             }
         });
 
         transform = new GUITransform();
         attachComponent(transform);
-        transform.position.y = 0.7f;
+        transform.position.y = 0.5f;
         transform.position.x = -(float)GLView.defaultWidth;
     }
 
