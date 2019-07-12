@@ -3,6 +3,7 @@ package com.example.SpearClient.GameSystem.GameObject.GameObjects.InGameScene.St
 import com.example.SpearClient.GameSystem.Component.Components.RendererComponent.Renderers.TextRenderer;
 import com.example.SpearClient.GameSystem.Component.Components.TransformComponent.Transforms.GUITransform;
 import com.example.SpearClient.GameSystem.GameObject.GameObject;
+import com.example.SpearClient.GameSystem.Scene.Scenes.MainScene;
 import com.example.SpearClient.GraphicSystem.GL.GLView;
 import com.example.SpearClient.Main.Game;
 import com.example.SpearClient.R;
@@ -16,15 +17,21 @@ public class RankPlayer extends GameObject {
     public void start() {
         textRenderer = new TextRenderer();
         attachComponent(textRenderer);
-        textRenderer.setText("골드");
         textRenderer.setHorizontal(2);
-        Game.instance.runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                textRenderer.getTextView().setTextColor(Game.instance.getResources().getColor(R.color.gold));
-                textRenderer.getTextView().setTextSize(22);
-            }
-        });
+
+        if (MainScene.selectedGame == "rank") {
+            textRenderer.setText("골드");
+            Game.instance.runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    textRenderer.getTextView().setTextColor(Game.instance.getResources().getColor(R.color.gold));
+                    textRenderer.getTextView().setTextSize(22);
+                }
+            });
+        }
+        else {
+            textRenderer.setText("");
+        }
 
         transform = new GUITransform();
         attachComponent(transform);

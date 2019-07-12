@@ -58,6 +58,15 @@ public class PlayerStateComponent extends Component {
                 animationRenderer.setInterval(0.6f / 16f);
 
                 SoundPlayer.playSound(Game.instance, R.raw.shallow_stab, 0, 1, 8);
+                try {
+                    SocketIOBuilder.getInstance().skill_emit(new JSONObject("{\n" +
+                            "\t\"event\":\"action\",\n" +
+                            "\t\"action\":\"shallow_stab\"\n" +
+                            "}"));
+                }
+                catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
         }
         else if (action == ACTION.DEEP_STAB) {
@@ -68,7 +77,16 @@ public class PlayerStateComponent extends Component {
                 animationRenderer.setInterval(0.8f / 15f);
 
                 player.playerEffect_deepStab.play();
-                SoundPlayer.playSound(Game.instance, R.raw.deep_stab, 0, 1.4f, 4);
+                SoundPlayer.playSound(Game.instance, R.raw.deep_stab, 0, 1, 4);
+                try {
+                    SocketIOBuilder.getInstance().skill_emit(new JSONObject("{\n" +
+                            "\t\"event\":\"action\",\n" +
+                            "\t\"action\":\"deep_stab\"\n" +
+                            "}"));
+                }
+                catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
         }
         else if (action == ACTION.RUSH_STAB) {
@@ -122,7 +140,17 @@ public class PlayerStateComponent extends Component {
                         e.printStackTrace();
                     }
                 }
-                SoundPlayer.playSound(Game.instance, R.raw.deep_stab, 0, 1, 2);
+
+                SoundPlayer.playSound(Game.instance, R.raw.skim, 0, 1, 2);
+                try {
+                    SocketIOBuilder.getInstance().skill_emit(new JSONObject("{\n" +
+                            "\t\"event\":\"action\",\n" +
+                            "\t\"action\":\"skim\"\n" +
+                            "}"));
+                }
+                catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
         }
         else if (action == ACTION.AVOID) {

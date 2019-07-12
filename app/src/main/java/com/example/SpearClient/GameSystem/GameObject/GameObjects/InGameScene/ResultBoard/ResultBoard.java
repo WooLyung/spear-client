@@ -1,20 +1,32 @@
 package com.example.SpearClient.GameSystem.GameObject.GameObjects.InGameScene.ResultBoard;
 
+import com.example.SpearClient.GameIO.Input;
+import com.example.SpearClient.GameSystem.Component.Components.EffectComponent;
 import com.example.SpearClient.GameSystem.Component.Components.RendererComponent.Renderers.SpriteRenderer;
+import com.example.SpearClient.GameSystem.Component.Components.RendererComponent.Renderers.TextRenderer;
 import com.example.SpearClient.GameSystem.Component.Components.TransformComponent.Transforms.GUITransform;
+import com.example.SpearClient.GameSystem.Component.Components.TransformComponent.Transforms.Transform;
 import com.example.SpearClient.GameSystem.GameObject.GameObject;
 import com.example.SpearClient.GameSystem.GameObject.GameObjects.LoginScene.Input_ID;
 import com.example.SpearClient.GameSystem.GameObject.GameObjects.LoginScene.Input_password;
 import com.example.SpearClient.GameSystem.GameObject.GameObjects.LoginScene.LoginBoard.LoginButton;
 import com.example.SpearClient.GameSystem.GameObject.GameObjects.LoginScene.LoginBoard.LoginTitle;
 import com.example.SpearClient.GameSystem.GameObject.GameObjects.LoginScene.LoginBoard.ToRegisterBoard;
+import com.example.SpearClient.GameSystem.Other.GameManager;
+import com.example.SpearClient.GameSystem.Scene.Scenes.MainScene;
 import com.example.SpearClient.GraphicSystem.GL.GLRenderer;
+import com.example.SpearClient.Main.Game;
+import com.example.SpearClient.R;
 
 public class ResultBoard extends GameObject {
     private SpriteRenderer spriteRenderer;
     private GUITransform transform;
+    private EffectComponent effectComponent1, effectComponent2;
+    private TextRenderer textRenderer;
+    private boolean buttonAppeared = false;
+    private float time = 0;
+    private GameObject rank;
 
-    ResultTitle resultTitle;
     RegameButton regameButton;
     HomeButton homeButton;
 
@@ -22,26 +34,127 @@ public class ResultBoard extends GameObject {
     public void start() {
         spriteRenderer = new SpriteRenderer();
         attachComponent(spriteRenderer);
-        spriteRenderer.bindingImage(GLRenderer.findImage("board"));
+
+        if (GameManager.isWin)
+            spriteRenderer.bindingImage(GLRenderer.findImage("win"));
+        else
+            spriteRenderer.bindingImage(GLRenderer.findImage("lose"));
         spriteRenderer.setZ_index(60);
 
         transform = new GUITransform();
         attachComponent(transform);
-        transform.scale.x = 1000/1470f;
-        transform.scale.y = 1000/1470f;
+        transform.scale.x = 0.5f;
+        transform.scale.y = 0.5f;
 
-        resultTitle = new ResultTitle();
+        effectComponent1 = new EffectComponent();
+        attachComponent(effectComponent1);
+
         regameButton = new RegameButton();
         homeButton = new HomeButton();
 
-        appendChild(resultTitle);
-        appendChild(regameButton);
-        appendChild(homeButton);
+        if (MainScene.selectedGame.equals("fast")) {
+            appendChild(regameButton);
+            appendChild(homeButton);
+            buttonAppeared = true;
+        }
+
+        rank = new GameObject() {
+            @Override
+            public void start() {
+                SpriteRenderer spriteRenderer = new SpriteRenderer();
+                attachComponent(spriteRenderer);
+                spriteRenderer.bindingImage(GLRenderer.findImage("rank_silver"));
+                spriteRenderer.setZ_index(60);
+
+                GUITransform transform = new GUITransform();
+                attachComponent(transform);
+                transform.scale.x = 1.4f;
+                transform.scale.y = 1.4f;
+
+                textRenderer = new TextRenderer();
+                attachComponent(textRenderer);
+                textRenderer.setText("");
+                textRenderer.setHorizontal(1);
+                textRenderer.setVertical(1);
+                Game.instance.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        textRenderer.getTextView().setTextColor(Game.instance.getResources().getColor(R.color.white));
+                        textRenderer.getTextView().setTextSize(60);
+                    }
+                });
+
+                effectComponent2 = new EffectComponent();
+                attachComponent(effectComponent2);
+                effectComponent2.setColors(new float[]{
+                        1, 1, 1, 0,
+                        1, 1, 1, 0,
+                        1, 1, 1, 0,
+                        1, 1, 1, 0
+                });
+            }
+        };
+
+        appendChild(rank);
+        appendChild(new GameObject() {
+            @Override
+            public void start() {
+                SpriteRenderer spriteRenderer = new SpriteRenderer();
+                attachComponent(spriteRenderer);
+                spriteRenderer.bindingImage(GLRenderer.findImage("background_black"));
+                spriteRenderer.setZ_index(55);
+
+                GUITransform transform = new GUITransform();
+                attachComponent(transform);
+
+                EffectComponent effectComponent = new EffectComponent();
+                attachComponent(effectComponent);
+                float[] color = {
+                        1, 1, 1, 0.7f,
+                        1, 1, 1, 0.7f,
+                        1, 1, 1, 0.7f,
+                        1, 1, 1, 0.7f
+                };
+                effectComponent.setColors(color);
+            }
+        });
     }
 
     @Override
     public void update() {
         super.update();
+
+        if (!buttonAppeared) {
+            for (int i = 0; i < 5; i++) {
+                if (Input.getTouchState(i) == Input.TOUCH_STATE.DOWN) {
+                    buttonAppeared = true;
+
+                    appendChild(regameButton);
+                    appendChild(homeButton);
+                }
+            }
+        }
+        else if (MainScene.selectedGame.equals("rank")) {
+            time += Game.getNoneDeltaTime();
+            float alpha = ((time > 0.2f) ? 0.2f : time) * 5;
+
+            effectComponent1.setColors(new float[]{
+                    1, 1, 1, 1 - alpha,
+                    1, 1, 1, 1 - alpha,
+                    1, 1, 1, 1 - alpha,
+                    1, 1, 1, 1 - alpha
+            });
+            effectComponent2.setColors(new float[]{
+                    1, 1, 1, alpha,
+                    1, 1, 1, alpha,
+                    1, 1, 1, alpha,
+                    1, 1, 1, alpha
+            });
+
+            if (alpha >= 1) {
+                textRenderer.setText("5");
+            }
+        }
     }
 
     @Override

@@ -2,6 +2,7 @@ package com.example.SpearClient.GameSystem.Other;
 
 import android.util.Log;
 
+import com.example.SpearClient.GameIO.SoundPlayer;
 import com.example.SpearClient.GameSystem.Component.Components.PlayerMoveComponent;
 import com.example.SpearClient.GameSystem.Component.Components.PlayerStateComponent;
 import com.example.SpearClient.GameSystem.Component.Components.RendererComponent.Renderers.SpriteRenderer;
@@ -11,6 +12,7 @@ import com.example.SpearClient.GameSystem.GameObject.GameObjects.InGameScene.Pla
 import com.example.SpearClient.GameSystem.GameObject.GameObjects.InGameScene.ResultBoard.ResultBoard;
 import com.example.SpearClient.GameSystem.Scene.Scenes.InGameScene;
 import com.example.SpearClient.Main.Game;
+import com.example.SpearClient.R;
 import com.example.SpearClient.SocketIO.SocketIOBuilder;
 
 import org.json.JSONObject;
@@ -26,7 +28,7 @@ public class GameManager {
     }
 
     public float playerHealth = 100;
-    public static boolean isWin = false;
+    public static boolean isWin = true;
     public STATE state = STATE.GAMING;
 
     private static GameManager instance;
@@ -51,6 +53,7 @@ public class GameManager {
 
                     if (event.equals("damage")) { // 누군가가 피해를 받았을 때
                         boolean isCrit = jsonObject.getBoolean("isCrit");
+                        SoundPlayer.playSound(Game.instance, R.raw.hit, 0, 1, 4);
 
                         if (subject.equals(SocketIOBuilder.id)) { // 피해를 줌
                             Game.engine.nowScene.camera.vibrateLight();
@@ -74,6 +77,7 @@ public class GameManager {
                     else if (event.equals("skim")) { // 누군가가 공격을 튕겨냈을 때
                         Game.slowTime = 1;
                         Game.engine.nowScene.camera.vibrateLight();
+                        SoundPlayer.playSound(Game.instance, R.raw.defenseless, 0, 1, 4);
 
                         if (subject.equals(SocketIOBuilder.id)) { // 공격을 튕겨냄
                             playerStateComponent.isSkim = true;
@@ -83,6 +87,21 @@ public class GameManager {
                             if (playerMoveComponent.state != PlayerMoveComponent.STATE.IDLE)
                                 playerMoveComponent.setCompulsionState(PlayerMoveComponent.STATE.WALK);
                             playerStateComponent.changeState(PlayerStateComponent.ACTION.DEFENCELESS);
+                        }
+                    }
+                    else if (event.equals("action")) { // 누군가가 동작을 실행했을 때
+                        if (!subject.equals(SocketIOBuilder.id)) { // 다른 사람이 동작을 실행함
+                            String action = jsonObject.getString("action");
+
+                            if (action.equals("shallow_stab")) {
+                                SoundPlayer.playSound(Game.instance, R.raw.shallow_stab, 0, 1, 8);
+                            }
+                            else if (action.equals("deep_stab")) {
+                                SoundPlayer.playSound(Game.instance, R.raw.deep_stab, 0, 1.4f, 4);
+                            }
+                            else if (action.equals("skim")) {
+                                SoundPlayer.playSound(Game.instance, R.raw.deep_stab, 0, 1, 4);
+                            }
                         }
                     }
                 }
@@ -140,6 +159,7 @@ public class GameManager {
     public void setMyHP(float hp) {
         if (myHP != null) {
             ((SpriteRenderer) myHP.front.getRenderer()).setFill(hp / 100f);
+            playerHealth = hp;
         }
     }
 

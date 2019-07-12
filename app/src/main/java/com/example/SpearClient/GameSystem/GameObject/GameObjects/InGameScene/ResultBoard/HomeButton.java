@@ -30,10 +30,10 @@ public class HomeButton extends GameObject {
         transform = new GUITransform();
         attachComponent(transform);
         spriteRenderer.setZ_index(61);
-        transform.position.x = 1.6f;
+        transform.position.x = 2.6f;
         transform.position.y = -2.6f;
-        transform.scale.x = 1000/1470f;
-        transform.scale.y = 1000/1470f;
+        transform.scale.x = 0.45f;
+        transform.scale.y = 0.45f;
     }
 
     @Override

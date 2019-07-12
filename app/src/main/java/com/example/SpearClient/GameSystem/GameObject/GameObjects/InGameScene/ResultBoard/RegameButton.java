@@ -32,10 +32,10 @@ public class RegameButton extends GameObject {
         transform = new GUITransform();
         attachComponent(transform);
         spriteRenderer.setZ_index(61);
-        transform.position.x = -1.6f;
+        transform.position.x = -2.6f;
         transform.position.y = -2.6f;
-        transform.scale.x = 1000/1470f;
-        transform.scale.y = 1000/1470f;
+        transform.scale.x = 0.45f;
+        transform.scale.y = 0.45f;
     }
 
     @Override
@@ -54,35 +54,44 @@ public class RegameButton extends GameObject {
     }
 
     private void enter() {
-        SocketIOBuilder.getInstance().enter(new Emitter.Listener() {
-            @Override
-            public void call(final Object... args) {
-                Game.instance.runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        try {
-                            JSONObject jsonObject = new JSONObject(args[0].toString());
-                            String message = jsonObject.getString("message");
-                            if (message.equals("enter failed")) {
-                                Toast.makeText(Game.instance, "빠른 매칭에 실패했습니다.", Toast.LENGTH_SHORT).show();
-                            }
-                            else if (message.equals("enter complete")) {
-                                if (jsonObject.getBoolean("startGame")) {
-                                    Game.engine.changeScene(new InGameScene());
-                                }
-                                else {
-                                    Game.engine.changeScene(new MachingScene());
-                                }
-                            }
-                        }
-                        catch (Exception e) {
-                            e.printStackTrace();
-                        }
+        JSONObject jsonObject;
 
-                    }
-                });
-            }
-        });
+        try {
+            jsonObject = new JSONObject("{\"isRank\":" + MainScene.selectedGame.equals("rank") + "}");
+
+            SocketIOBuilder.getInstance().enter(jsonObject, new Emitter.Listener() {
+                @Override
+                public void call(final Object... args) {
+                    Game.instance.runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            try {
+                                JSONObject jsonObject = new JSONObject(args[0].toString());
+                                String message = jsonObject.getString("message");
+                                if (message.equals("enter failed")) {
+                                    Toast.makeText(Game.instance, "빠른 매칭에 실패했습니다.", Toast.LENGTH_SHORT).show();
+                                }
+                                else if (message.equals("enter complete")) {
+                                    if (jsonObject.getBoolean("startGame")) {
+                                        Game.engine.changeScene(new InGameScene());
+                                    }
+                                    else {
+                                        Game.engine.changeScene(new MachingScene());
+                                    }
+                                }
+                            }
+                            catch (Exception e) {
+                                e.printStackTrace();
+                            }
+
+                        }
+                    });
+                }
+            });
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override

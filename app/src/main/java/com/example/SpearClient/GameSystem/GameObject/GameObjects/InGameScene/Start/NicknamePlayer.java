@@ -6,6 +6,7 @@ import com.example.SpearClient.GameSystem.Component.Components.TransformComponen
 import com.example.SpearClient.GameSystem.GameObject.GameObject;
 import com.example.SpearClient.GraphicSystem.GL.GLRenderer;
 import com.example.SpearClient.GraphicSystem.GL.GLView;
+import com.example.SpearClient.Main.Engine;
 import com.example.SpearClient.Main.Game;
 import com.example.SpearClient.R;
 
@@ -18,7 +19,7 @@ public class NicknamePlayer extends GameObject {
     public void start() {
         textRenderer = new TextRenderer();
         attachComponent(textRenderer);
-        textRenderer.setText("플레이어");
+        textRenderer.setText(Engine.nickname);
         textRenderer.setHorizontal(2);
         Game.instance.runOnUiThread(new Runnable() {
             @Override

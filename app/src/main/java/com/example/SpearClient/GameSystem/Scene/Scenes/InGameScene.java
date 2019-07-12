@@ -10,6 +10,7 @@ import com.example.SpearClient.GameSystem.Component.Components.TransformComponen
 import com.example.SpearClient.GameSystem.GameObject.GameObject;
 import com.example.SpearClient.GameSystem.GameObject.GameObjects.Background;
 import com.example.SpearClient.GameSystem.GameObject.GameObjects.Cloud;
+import com.example.SpearClient.GameSystem.GameObject.GameObjects.InGameScene.ResultBoard.ResultBoard;
 import com.example.SpearClient.GameSystem.GameObject.GameObjects.InGameScene.Start.BlackPanel;
 import com.example.SpearClient.GameSystem.GameObject.GameObjects.InGameScene.Blood;
 import com.example.SpearClient.GameSystem.GameObject.GameObjects.InGameScene.Enemy.Enemy;

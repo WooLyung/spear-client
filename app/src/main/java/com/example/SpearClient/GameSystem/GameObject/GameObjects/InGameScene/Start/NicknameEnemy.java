@@ -4,6 +4,7 @@ import com.example.SpearClient.GameSystem.Component.Components.RendererComponent
 import com.example.SpearClient.GameSystem.Component.Components.TransformComponent.Transforms.GUITransform;
 import com.example.SpearClient.GameSystem.GameObject.GameObject;
 import com.example.SpearClient.GraphicSystem.GL.GLView;
+import com.example.SpearClient.Main.Engine;
 import com.example.SpearClient.Main.Game;
 import com.example.SpearClient.R;
 
@@ -16,7 +17,7 @@ public class NicknameEnemy extends GameObject {
     public void start() {
         textRenderer = new TextRenderer();
         attachComponent(textRenderer);
-        textRenderer.setText("상대");
+        textRenderer.setText("기본값");
         textRenderer.setHorizontal(0);
         Game.instance.runOnUiThread(new Runnable() {
             @Override
@@ -35,6 +36,15 @@ public class NicknameEnemy extends GameObject {
     @Override
     public void update() {
         super.update();
+
+        if (!Engine.enemyNickname.equals("") && textRenderer.getTextView().getText().equals("기본값")) {
+            Game.instance.runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    textRenderer.getTextView().setText(Engine.enemyNickname);
+                }
+            });
+        }
 
         time += Game.getDeltaTime();
         if (time > 5)

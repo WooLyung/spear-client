@@ -77,7 +77,7 @@ public class MainScene extends Scene {
     Selected_skill2_3 selected_skill2_3;
     Selected_skill2_4 selected_skill2_4;
 
-    public String selectedGame = "fast";
+    public static String selectedGame = "fast";
     public MAIN_SCENE_STATE state = MAIN_SCENE_STATE.UP;
     public float time = 0;
 

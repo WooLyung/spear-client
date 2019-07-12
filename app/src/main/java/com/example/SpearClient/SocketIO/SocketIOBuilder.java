@@ -86,8 +86,8 @@ public class SocketIOBuilder {
         mSocket.on("loginCallback", listener);
     }
 
-    public void enter (Emitter.Listener listener) {
-        mSocket.emit("enter");
+    public void enter (JSONObject jsonObject, Emitter.Listener listener) {
+        mSocket.emit("enter", jsonObject);
         mSocket.on("enterCallback", listener);
     }
 

@@ -1,5 +1,6 @@
 package com.example.SpearClient.GameSystem.GameObject.GameObjects.InGameScene.Start;
 
+import com.example.SpearClient.GameSystem.Component.Components.EffectComponent;
 import com.example.SpearClient.GameSystem.Component.Components.RendererComponent.Renderers.SpriteRenderer;
 import com.example.SpearClient.GameSystem.Component.Components.TransformComponent.Transforms.GUITransform;
 import com.example.SpearClient.GameSystem.GameObject.GameObject;
@@ -8,6 +9,7 @@ import com.example.SpearClient.GraphicSystem.GL.GLRenderer;
 public class BlackPanel extends GameObject {
     SpriteRenderer spriteRenderer;
     GUITransform transform;
+    EffectComponent effectComponent;
 
     int imageCode;
 
@@ -23,13 +25,15 @@ public class BlackPanel extends GameObject {
         transform = new GUITransform();
         attachComponent(transform);
 
+        effectComponent = new EffectComponent();
+        attachComponent(effectComponent);
         float[] color = {
                 1, 1, 1, 0.7f,
                 1, 1, 1, 0.7f,
                 1, 1, 1, 0.7f,
                 1, 1, 1, 0.7f
         };
-        GLRenderer.imageDatas.get(imageCode).setColors(color);
+        effectComponent.setColors(color);
     }
 
     public void updateImage(float time) {
@@ -39,6 +43,6 @@ public class BlackPanel extends GameObject {
                 1, 1, 1, (1 - time / 2) * 0.7f,
                 1, 1, 1, (1 - time / 2) * 0.7f
         };
-        GLRenderer.imageDatas.get(imageCode).setColors(color);
+        effectComponent.setColors(color);
     }
 }

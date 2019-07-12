@@ -7,6 +7,9 @@ import com.example.SpearClient.GameIO.Input;
 import com.example.SpearClient.GameSystem.Component.Components.RendererComponent.Renderers.SpriteRenderer;
 import com.example.SpearClient.GameSystem.Component.Components.TransformComponent.Transforms.Transform;
 import com.example.SpearClient.GameSystem.GameObject.GameObject;
+import com.example.SpearClient.GameSystem.Scene.Scenes.InGameScene;
+import com.example.SpearClient.GameSystem.Scene.Scenes.MachingScene;
+import com.example.SpearClient.GameSystem.Scene.Scenes.MainScene;
 import com.example.SpearClient.GraphicSystem.GL.GLRenderer;
 import com.example.SpearClient.Main.Game;
 import com.example.SpearClient.SocketIO.SocketIOBuilder;
@@ -46,33 +49,6 @@ public class Tutorial extends GameObject {
                 }
             }
         }
-    }
-
-    private void enter() {
-        SocketIOBuilder.getInstance().enter(new Emitter.Listener() {
-            @Override
-            public void call(final Object... args) {
-                Game.instance.runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        try {
-                            JSONObject jsonObject = new JSONObject(args[0].toString());
-                            String message = jsonObject.getString("message");
-                            if (message.equals("enter failed")) {
-                                Toast.makeText(Game.instance, "빠른 매칭에 실패했습니다.", Toast.LENGTH_SHORT).show();
-                            }
-                            else if (message.equals("enter complete")) {
-                                Toast.makeText(Game.instance, "빠른 매칭 성공, 룸아이디 : " + jsonObject.getInt("roomid"), Toast.LENGTH_SHORT).show();
-                            }
-                        }
-                        catch (Exception e) {
-                            e.printStackTrace();
-                        }
-
-                    }
-                });
-            }
-        });
     }
 
     @Override
