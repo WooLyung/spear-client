@@ -1,5 +1,6 @@
 package com.example.SpearClient.GameSystem.Scene.Scenes;
 
+import android.util.Log;
 import android.widget.Toast;
 
 import com.example.SpearClient.GameIO.MediaPlayers.MediaPlayerHelper;
@@ -9,6 +10,7 @@ import com.example.SpearClient.GameSystem.Component.Components.RendererComponent
 import com.example.SpearClient.GameSystem.Component.Components.RendererComponent.Renderers.TextRenderer;
 import com.example.SpearClient.GameSystem.Component.Components.TransformComponent.Transforms.GUITransform;
 import com.example.SpearClient.GameSystem.GameObject.GameObject;
+import com.example.SpearClient.GameSystem.Other.GameManager;
 import com.example.SpearClient.GameSystem.Scene.Scene;
 import com.example.SpearClient.GraphicSystem.GL.GLRenderer;
 import com.example.SpearClient.GraphicSystem.GL.GLView;
@@ -16,6 +18,7 @@ import com.example.SpearClient.Main.Game;
 import com.example.SpearClient.R;
 import com.example.SpearClient.SocketIO.SocketIOBuilder;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import io.socket.emitter.Emitter;
@@ -24,6 +27,9 @@ public class MachingScene extends Scene {
     @Override
     public void start() {
         mph = SoundPlayer.playBackgroundSound(Game.instance, R.raw.maching, true);
+        GameManager.ratings[0] = -1;
+        GameManager.ratings[1] = -1;
+        GameManager.me = -1;
 
         objs.add(new GameObject() {
             @Override
@@ -76,6 +82,10 @@ public class MachingScene extends Scene {
                     @Override
                     public void run() {
                         try {
+                            JSONObject rates = (new JSONObject(args[0].toString())).getJSONObject("rate");
+                            GameManager.ratings[0] = rates.getInt("one");
+                            GameManager.ratings[1] = rates.getInt("two");
+
                             Game.engine.changeScene(new InGameScene());
                         }
                         catch (Exception e) {

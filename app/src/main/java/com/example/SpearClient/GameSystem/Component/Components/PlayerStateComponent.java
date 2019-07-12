@@ -258,7 +258,7 @@ public class PlayerStateComponent extends Component {
                 if (enemyStateComponent.action != EnemyStateComponent.ACTION.AVOID) { // 회피중이 아닐 때
                     int dir = (object.getRenderer().getIsFlip() ? 1 : -1);
                     if (enemy.getTransform().position.x * dir <= object.getTransform().position.x * dir
-                            && Math.abs(enemy.getTransform().position.x - object.getTransform().position.x) <= 7) { // 충돌 판정
+                            && Math.abs(enemy.getTransform().position.x - object.getTransform().position.x) <= 8) { // 충돌 판정
 
                         try {
                             float damage = 15;
@@ -325,8 +325,8 @@ public class PlayerStateComponent extends Component {
                 if (enemyStateComponent.action != EnemyStateComponent.ACTION.AVOID) { // 회피중이 아닐 때
                     int dir = (object.getRenderer().getIsFlip() ? 1 : -1);
                     if (enemy.getTransform().position.x * dir <= object.getTransform().position.x * dir
-                            && Math.abs(enemy.getTransform().position.x - object.getTransform().position.x) <= 3) { // 충돌 판정
-                        isAttacked = true;
+                            && Math.abs(enemy.getTransform().position.x - object.getTransform().position.x) <= 1.5f) { // 충돌 판정
+                        isAttacked = true;8
 
                         try {
                             float damage = 10;

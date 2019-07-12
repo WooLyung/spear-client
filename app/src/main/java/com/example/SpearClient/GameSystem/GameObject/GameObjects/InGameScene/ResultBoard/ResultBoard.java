@@ -1,5 +1,7 @@
 package com.example.SpearClient.GameSystem.GameObject.GameObjects.InGameScene.ResultBoard;
 
+import android.util.Log;
+
 import com.example.SpearClient.GameIO.Input;
 import com.example.SpearClient.GameSystem.Component.Components.EffectComponent;
 import com.example.SpearClient.GameSystem.Component.Components.RendererComponent.Renderers.SpriteRenderer;
@@ -63,8 +65,25 @@ public class ResultBoard extends GameObject {
             public void start() {
                 SpriteRenderer spriteRenderer = new SpriteRenderer();
                 attachComponent(spriteRenderer);
-                spriteRenderer.bindingImage(GLRenderer.findImage("rank_silver"));
                 spriteRenderer.setZ_index(60);
+                if (GameManager.isWin) {
+                    GameManager.ratings[GameManager.me]++;
+                }
+                else {
+                    GameManager.ratings[GameManager.me]--;
+                    if (GameManager.ratings[GameManager.me] <= 0)
+                        GameManager.ratings[GameManager.me] = 1;
+                }
+
+                if (GameManager.ratings[GameManager.me]<= 5) {
+                    spriteRenderer.bindingImage(GLRenderer.findImage("rank_bronze"));
+                }
+                else if (GameManager.ratings[GameManager.me]<= 10) {
+                    spriteRenderer.bindingImage(GLRenderer.findImage("rank_silver"));
+                }
+                else if (GameManager.ratings[GameManager.me]<= 15) {
+                    spriteRenderer.bindingImage(GLRenderer.findImage("rank_gold"));
+                }
 
                 GUITransform transform = new GUITransform();
                 attachComponent(transform);
@@ -152,7 +171,10 @@ public class ResultBoard extends GameObject {
             });
 
             if (alpha >= 1) {
-                textRenderer.setText("5");
+                Log.i("rating", "인덱스1 : " + GameManager.ratings[0]+ "");
+                Log.i("rating", "인덱스2 : " + GameManager.ratings[1]+ "");
+                Log.i("rating", "나는? : " + GameManager.me + "");
+                textRenderer.setText((5 - (GameManager.ratings[GameManager.me]- 1) % 5) + "");
             }
         }
     }

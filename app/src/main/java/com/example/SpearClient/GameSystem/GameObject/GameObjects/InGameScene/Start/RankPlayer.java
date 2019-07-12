@@ -3,6 +3,7 @@ package com.example.SpearClient.GameSystem.GameObject.GameObjects.InGameScene.St
 import com.example.SpearClient.GameSystem.Component.Components.RendererComponent.Renderers.TextRenderer;
 import com.example.SpearClient.GameSystem.Component.Components.TransformComponent.Transforms.GUITransform;
 import com.example.SpearClient.GameSystem.GameObject.GameObject;
+import com.example.SpearClient.GameSystem.Other.GameManager;
 import com.example.SpearClient.GameSystem.Scene.Scenes.MainScene;
 import com.example.SpearClient.GraphicSystem.GL.GLView;
 import com.example.SpearClient.Main.Game;
@@ -20,11 +21,10 @@ public class RankPlayer extends GameObject {
         textRenderer.setHorizontal(2);
 
         if (MainScene.selectedGame == "rank") {
-            textRenderer.setText("골드");
+            textRenderer.setText("RANK");
             Game.instance.runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    textRenderer.getTextView().setTextColor(Game.instance.getResources().getColor(R.color.gold));
                     textRenderer.getTextView().setTextSize(22);
                 }
             });
@@ -60,6 +60,28 @@ public class RankPlayer extends GameObject {
                 time2 = 2 * time2 - time2 * time2;
                 transform.position.x = -(float)GLView.defaultWidth * time2 - 2.5f;
             }
+        }
+
+        if (GameManager.ratings[0] != -1 && textRenderer.getTextView().getText().equals("RANK") && GameManager.me != -1) {
+            final int index = GameManager.me;
+
+            Game.instance.runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    if (GameManager.ratings[index] <= 5) {
+                        textRenderer.getTextView().setTextColor(Game.instance.getResources().getColor(R.color.bronze));
+                        textRenderer.setText("Bronze");
+                    }
+                    else if (GameManager.ratings[index] <= 10) {
+                        textRenderer.getTextView().setTextColor(Game.instance.getResources().getColor(R.color.silver));
+                        textRenderer.setText("Silver");
+                    }
+                    else if (GameManager.ratings[index] <= 15) {
+                        textRenderer.getTextView().setTextColor(Game.instance.getResources().getColor(R.color.gold));
+                        textRenderer.setText("Gold");
+                    }
+                }
+            });
         }
     }
 }

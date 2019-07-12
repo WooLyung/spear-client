@@ -86,6 +86,7 @@ public class Enemy extends GameObject {
 
                         if (array.length() >= 2) {
                             if (array.getJSONObject(0).getString("username").equals(SocketIOBuilder.id)) {
+                                GameManager.me = 0;
                                 jsonObject = array.getJSONObject(1);
 
                                 if (gameManager != null) {
@@ -95,6 +96,7 @@ public class Enemy extends GameObject {
                                 }
                             }
                             else {
+                                GameManager.me = 1;
                                 jsonObject = array.getJSONObject(0);
 
                                 if (gameManager != null) {

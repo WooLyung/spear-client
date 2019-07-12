@@ -54,9 +54,14 @@ abstract public class Scene {
     }
 
     public GameObject findObjectByName(String name) {
-        for (GameObject gameObject : objs) {
-            if (gameObject.findOfName(name) != null)
-                return gameObject.findOfName(name) ;
+        try {
+            for (GameObject gameObject : objs) {
+                if (gameObject.findOfName(name) != null)
+                    return gameObject.findOfName(name);
+            }
+        }
+        catch (Exception e) {
+            e.printStackTrace();
         }
 
         return null;

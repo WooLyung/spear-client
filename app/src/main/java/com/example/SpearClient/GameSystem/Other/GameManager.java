@@ -28,8 +28,10 @@ public class GameManager {
     }
 
     public float playerHealth = 100;
-    public static boolean isWin = true;
     public STATE state = STATE.GAMING;
+    public static boolean isWin = true;
+    public static int[] ratings = new int[] { -1, -1 };
+    public static int me = -1;
 
     private static GameManager instance;
     private MyHP myHP;
@@ -115,11 +117,12 @@ public class GameManager {
             @Override
             public void call(Object... args) {
                 try {
-                    Log.i("gameover", args[0].toString());
                     JSONObject jsonObject = new JSONObject(args[0].toString());
 
-                    JSONObject winner = jsonObject.getJSONObject("winner");
-                    GameManager.isWin = winner.getString("username").equals(SocketIOBuilder.id);
+                    if (!jsonObject.isNull("winner")) {
+                        JSONObject winner = jsonObject.getJSONObject("winner");
+                        GameManager.isWin = winner.getString("username").equals(SocketIOBuilder.id);
+                    }
                 }
                 catch (Exception e) {
                     e.printStackTrace();
