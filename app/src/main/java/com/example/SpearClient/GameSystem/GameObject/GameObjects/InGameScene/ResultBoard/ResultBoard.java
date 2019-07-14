@@ -81,7 +81,7 @@ public class ResultBoard extends GameObject {
                 else if (GameManager.ratings[GameManager.me]<= 10) {
                     spriteRenderer.bindingImage(GLRenderer.findImage("rank_silver"));
                 }
-                else if (GameManager.ratings[GameManager.me]<= 15) {
+                else {
                     spriteRenderer.bindingImage(GLRenderer.findImage("rank_gold"));
                 }
 

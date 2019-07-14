@@ -1,8 +1,5 @@
 package com.example.SpearClient.GameSystem.Scene.Scenes;
 
-import android.media.MediaPlayer;
-import android.util.Log;
-
 import com.example.SpearClient.GameIO.Input;
 import com.example.SpearClient.GameIO.MediaPlayers.MediaPlayerHelper;
 import com.example.SpearClient.GameIO.MediaPlayers.MediaPlayerHolder;
@@ -33,7 +30,7 @@ import com.example.SpearClient.GameSystem.GameObject.GameObjects.MainScene.Perso
 import com.example.SpearClient.GameSystem.GameObject.GameObjects.MainScene.PersonalSettings.Skill_slot6;
 import com.example.SpearClient.GameSystem.GameObject.GameObjects.MainScene.Place;
 import com.example.SpearClient.GameSystem.GameObject.GameObjects.MainScene.Settings;
-import com.example.SpearClient.GameSystem.GameObject.GameObjects.MainScene.Tutorial;
+import com.example.SpearClient.GameSystem.GameObject.GameObjects.MainScene.Practice;
 import com.example.SpearClient.GameSystem.Other.ActionManager;
 import com.example.SpearClient.GameSystem.Scene.Scene;
 import com.example.SpearClient.GraphicSystem.GL.GLRenderer;
@@ -56,7 +53,7 @@ public class MainScene extends Scene {
 
     FastMatching fastMatching;
     Settings settings;
-    Tutorial tutorial;
+    Practice practice;
     GameStart gameStart;
     Place place;
     PersonalSettings personalSettings;
@@ -95,7 +92,7 @@ public class MainScene extends Scene {
 
         fastMatching = new FastMatching();
         settings = new Settings();
-        tutorial = new Tutorial();
+        practice = new Practice();
         gameStart = new GameStart();
         place = new Place();
         personalSettings = new PersonalSettings();
@@ -122,7 +119,7 @@ public class MainScene extends Scene {
 
         objs.add(fastMatching);
         objs.add(settings);
-        objs.add(tutorial);
+        objs.add(practice);
         objs.add(gameStart);
         objs.add(place);
         objs.add(personalSettings);

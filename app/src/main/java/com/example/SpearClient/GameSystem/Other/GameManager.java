@@ -123,6 +123,9 @@ public class GameManager {
                         JSONObject winner = jsonObject.getJSONObject("winner");
                         GameManager.isWin = winner.getString("username").equals(SocketIOBuilder.id);
                     }
+                    else {
+                        GameManager.isWin = true;
+                    }
                 }
                 catch (Exception e) {
                     e.printStackTrace();

@@ -43,7 +43,7 @@ public class FastMatching extends GameObject {
             if (Input.getTouchState(i) == Input.TOUCH_STATE.DOWN) {
                 if (Vector.distanceDouble(Input.getTouchWorldPos(i), transform.position) <= 450/147f * 450/147f) { // 버튼을 클릭했을 경우
                     ((MainScene)Game.engine.nowScene).state = MainScene.MAIN_SCENE_STATE.MOVE_DOWN;
-                    ((MainScene)Game.engine.nowScene).selectedGame = "rank";
+                    MainScene.selectedGame = "fast";
                     ((MainScene)Game.engine.nowScene).time = 0;
                 }
             }

@@ -326,7 +326,7 @@ public class PlayerStateComponent extends Component {
                     int dir = (object.getRenderer().getIsFlip() ? 1 : -1);
                     if (enemy.getTransform().position.x * dir <= object.getTransform().position.x * dir
                             && Math.abs(enemy.getTransform().position.x - object.getTransform().position.x) <= 1.5f) { // 충돌 판정
-                        isAttacked = true;8
+                        isAttacked = true;
 
                         try {
                             float damage = 10;

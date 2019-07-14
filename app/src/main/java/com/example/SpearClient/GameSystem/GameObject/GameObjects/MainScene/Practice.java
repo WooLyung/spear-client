@@ -10,6 +10,7 @@ import com.example.SpearClient.GameSystem.GameObject.GameObject;
 import com.example.SpearClient.GameSystem.Scene.Scenes.InGameScene;
 import com.example.SpearClient.GameSystem.Scene.Scenes.MachingScene;
 import com.example.SpearClient.GameSystem.Scene.Scenes.MainScene;
+import com.example.SpearClient.GameSystem.Scene.Scenes.PracticeScene;
 import com.example.SpearClient.GraphicSystem.GL.GLRenderer;
 import com.example.SpearClient.Main.Game;
 import com.example.SpearClient.SocketIO.SocketIOBuilder;
@@ -20,7 +21,7 @@ import org.json.JSONObject;
 import io.socket.client.Socket;
 import io.socket.emitter.Emitter;
 
-public class Tutorial extends GameObject {
+public class Practice extends GameObject {
     private SpriteRenderer spriteRenderer;
     private Transform transform;
 
@@ -28,7 +29,7 @@ public class Tutorial extends GameObject {
     public void start() {
         spriteRenderer = new SpriteRenderer();
         attachComponent(spriteRenderer);
-        spriteRenderer.bindingImage(GLRenderer.findImage("button_tutorial"));
+        spriteRenderer.bindingImage(GLRenderer.findImage("button_practice"));
 
         transform = new Transform();
         attachComponent(transform);
@@ -45,7 +46,7 @@ public class Tutorial extends GameObject {
         for (int i = 0; i < 5; i++) {
             if (Input.getTouchState(i) == Input.TOUCH_STATE.DOWN) {
                 if (Vector.distanceDouble(Input.getTouchWorldPos(i), transform.position) <= 350/147f * 350/147f) { // 버튼을 클릭했을 경우
-
+                    Game.engine.changeScene(new PracticeScene());
                 }
             }
         }

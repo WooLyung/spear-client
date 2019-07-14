@@ -71,7 +71,7 @@ public class GLRenderer implements GLSurfaceView.Renderer {
         addImage(R.drawable.button_test, "button_test");
         addImage(R.drawable.button_login, "button_login");
         addImage(R.drawable.button_fastgame, "button_fastgame");
-        addImage(R.drawable.button_tutorial, "button_tutorial");
+        addImage(R.drawable.button_practice, "button_practice");
         addImage(R.drawable.button_settings, "button_settings");
         addImage(R.drawable.button_register, "button_register");
         addImage(R.drawable.button_gamestart, "button_gamestart");
