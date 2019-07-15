@@ -66,23 +66,27 @@ public class ResultBoard extends GameObject {
                 SpriteRenderer spriteRenderer = new SpriteRenderer();
                 attachComponent(spriteRenderer);
                 spriteRenderer.setZ_index(60);
-                if (GameManager.isWin) {
-                    GameManager.ratings[GameManager.me]++;
-                }
-                else {
-                    GameManager.ratings[GameManager.me]--;
-                    if (GameManager.ratings[GameManager.me] <= 0)
-                        GameManager.ratings[GameManager.me] = 1;
-                }
 
-                if (GameManager.ratings[GameManager.me]<= 5) {
-                    spriteRenderer.bindingImage(GLRenderer.findImage("rank_bronze"));
-                }
-                else if (GameManager.ratings[GameManager.me]<= 10) {
-                    spriteRenderer.bindingImage(GLRenderer.findImage("rank_silver"));
-                }
-                else {
-                    spriteRenderer.bindingImage(GLRenderer.findImage("rank_gold"));
+                spriteRenderer.bindingImage(GLRenderer.findImage("none"));
+                if (MainScene.selectedGame.equals("rank")) {
+                    if (GameManager.isWin) {
+                        GameManager.ratings[GameManager.me]++;
+                    }
+                    else {
+                        GameManager.ratings[GameManager.me]--;
+                        if (GameManager.ratings[GameManager.me] <= 0)
+                            GameManager.ratings[GameManager.me] = 1;
+                    }
+
+                    if (GameManager.ratings[GameManager.me]<= 5) {
+                        spriteRenderer.bindingImage(GLRenderer.findImage("rank_bronze"));
+                    }
+                    else if (GameManager.ratings[GameManager.me]<= 10) {
+                        spriteRenderer.bindingImage(GLRenderer.findImage("rank_silver"));
+                    }
+                    else {
+                        spriteRenderer.bindingImage(GLRenderer.findImage("rank_gold"));
+                    }
                 }
 
                 GUITransform transform = new GUITransform();

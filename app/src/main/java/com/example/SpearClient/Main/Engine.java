@@ -24,7 +24,7 @@ public class Engine {
     public static String enemyNickname = "";
 
     public Engine() {
-        changeScene(new MainScene());
+        changeScene(new IntroScene());
         start();
     }
 

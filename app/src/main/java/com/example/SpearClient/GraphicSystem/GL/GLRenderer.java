@@ -106,6 +106,8 @@ public class GLRenderer implements GLSurfaceView.Renderer {
         addImage(R.drawable.background_people, "background_people");
         addImage(R.drawable.background_tunnel, "background_tunnel");
         addImage(R.drawable.background_wall, "background_wall");
+        addImage(R.drawable.background_tree, "background_tree");
+        addImage(R.drawable.background_house, "background_house");
 
         // 세팅
         addImage(R.drawable.setting_board, "setting_board");

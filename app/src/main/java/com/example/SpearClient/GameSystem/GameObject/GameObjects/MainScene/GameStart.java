@@ -51,8 +51,8 @@ public class GameStart extends GameObject {
             if (Input.getTouchState(i) == Input.TOUCH_STATE.DOWN) {
                 if (Math.abs(Input.getTouchWorldPos(i).x - transform.position.x) <= 300 / 100f
                         && Math.abs(Input.getTouchWorldPos(i).y - transform.position.y) <= 60 / 100f) { // 버튼을 클릭했을 경우
-                    Game.engine.changeScene(new InGameScene());
-                    //enter();
+                    //Game.engine.changeScene(new InGameScene());
+                    enter();
                 }
             }
         }
@@ -78,10 +78,11 @@ public class GameStart extends GameObject {
                                 }
                                 else if (message.equals("enter complete")) {
                                     if (jsonObject.getBoolean("startGame")) {
-                                        Log.i("gamestart", args[0].toString());
 
-                                        GameManager.ratings[0] = jsonObject.getJSONObject("rate").getInt("one");
-                                        GameManager.ratings[1] = jsonObject.getJSONObject("rate").getInt("two");
+                                        if (MainScene.selectedGame.equals("rank")) {
+                                            GameManager.ratings[0] = jsonObject.getJSONObject("rate").getInt("one");
+                                            GameManager.ratings[1] = jsonObject.getJSONObject("rate").getInt("two");
+                                        }
 
                                         Game.engine.changeScene(new InGameScene());
                                     }

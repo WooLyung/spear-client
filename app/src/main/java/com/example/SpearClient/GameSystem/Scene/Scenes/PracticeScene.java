@@ -83,15 +83,15 @@ public class PracticeScene extends Scene {
             public void start() {
                 SpriteRenderer spriteRenderer = new SpriteRenderer();
                 attachComponent(spriteRenderer);
-                spriteRenderer.bindingImage(GLRenderer.findImage("background_wall"));
+                spriteRenderer.bindingImage(GLRenderer.findImage("background_tree"));
                 spriteRenderer.setZ_index(-8);
-                spriteRenderer.lengthX = 6;
+                spriteRenderer.lengthX = 4;
 
                 Transform transform = new Transform();
                 attachComponent(transform);
                 transform.anchor.y = 1;
-                transform.scale.x = 0.7f;
-                transform.scale.y = 0.7f;
+                transform.scale.x = 1.8f;
+                transform.scale.y = 1.8f;
                 transform.position.y = -2f;
             }
         });
@@ -100,15 +100,15 @@ public class PracticeScene extends Scene {
             public void start() {
                 SpriteRenderer spriteRenderer = new SpriteRenderer();
                 attachComponent(spriteRenderer);
-                spriteRenderer.bindingImage(GLRenderer.findImage("background_tunnel"));
+                spriteRenderer.bindingImage(GLRenderer.findImage("background_house"));
                 spriteRenderer.setZ_index(-7);
-                spriteRenderer.lengthX = 6;
+                spriteRenderer.lengthX = 5;
 
                 Transform transform = new Transform();
                 attachComponent(transform);
                 transform.anchor.y = 1;
-                transform.scale.x = 0.7f;
-                transform.scale.y = 0.7f;
+                transform.scale.x = 1.6f;
+                transform.scale.y = 1.6f;
                 transform.position.y = -2f;
             }
         });
@@ -117,7 +117,7 @@ public class PracticeScene extends Scene {
             public void start() {
                 SpriteRenderer spriteRenderer = new SpriteRenderer();
                 attachComponent(spriteRenderer);
-                spriteRenderer.bindingImage(GLRenderer.findImage("background_people"));
+                spriteRenderer.bindingImage(GLRenderer.findImage("background_wall"));
                 spriteRenderer.setZ_index(-6);
                 spriteRenderer.lengthX = 6;
 
@@ -134,8 +134,42 @@ public class PracticeScene extends Scene {
             public void start() {
                 SpriteRenderer spriteRenderer = new SpriteRenderer();
                 attachComponent(spriteRenderer);
-                spriteRenderer.bindingImage(GLRenderer.findImage("background_front_wall"));
+                spriteRenderer.bindingImage(GLRenderer.findImage("background_tunnel"));
                 spriteRenderer.setZ_index(-5);
+                spriteRenderer.lengthX = 6;
+
+                Transform transform = new Transform();
+                attachComponent(transform);
+                transform.anchor.y = 1;
+                transform.scale.x = 0.7f;
+                transform.scale.y = 0.7f;
+                transform.position.y = -2f;
+            }
+        });
+        objs.add(new GameObject() {
+            @Override
+            public void start() {
+                SpriteRenderer spriteRenderer = new SpriteRenderer();
+                attachComponent(spriteRenderer);
+                spriteRenderer.bindingImage(GLRenderer.findImage("background_people"));
+                spriteRenderer.setZ_index(-4);
+                spriteRenderer.lengthX = 6;
+
+                Transform transform = new Transform();
+                attachComponent(transform);
+                transform.anchor.y = 1;
+                transform.scale.x = 0.7f;
+                transform.scale.y = 0.7f;
+                transform.position.y = -2f;
+            }
+        });
+        objs.add(new GameObject() {
+            @Override
+            public void start() {
+                SpriteRenderer spriteRenderer = new SpriteRenderer();
+                attachComponent(spriteRenderer);
+                spriteRenderer.bindingImage(GLRenderer.findImage("background_front_wall"));
+                spriteRenderer.setZ_index(-3);
                 spriteRenderer.lengthX = 6;
 
                 Transform transform = new Transform();

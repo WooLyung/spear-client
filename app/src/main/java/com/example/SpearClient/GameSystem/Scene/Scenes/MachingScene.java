@@ -82,9 +82,11 @@ public class MachingScene extends Scene {
                     @Override
                     public void run() {
                         try {
-                            JSONObject rates = (new JSONObject(args[0].toString())).getJSONObject("rate");
-                            GameManager.ratings[0] = rates.getInt("one");
-                            GameManager.ratings[1] = rates.getInt("two");
+                            if (MainScene.selectedGame.equals("rank")) {
+                                JSONObject rates = (new JSONObject(args[0].toString())).getJSONObject("rate");
+                                GameManager.ratings[0] = rates.getInt("one");
+                                GameManager.ratings[1] = rates.getInt("two");
+                            }
 
                             Game.engine.changeScene(new InGameScene());
                         }

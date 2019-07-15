@@ -36,10 +36,11 @@ public class Place extends GameObject {
                 textRenderer.getTextView().setTextColor(Game.instance.getResources().getColor(R.color.loginColor));
                 textRenderer.getTextView().setText("");
                 textRenderer.getTextView().setTextSize(25);
+                textRenderer.setHorizontal(0);
 
                 transform = new GUITransform();
-                transform.position.x = -(float) GLView.nowWidth + 4;
-                transform.position.y = -1.83f;
+                transform.position.y = (float) GLView.nowHeight - 1f;
+                transform.position.x = (float) GLView.nowWidth - 4.2f;
                 attachComponent(transform);
             }
         };

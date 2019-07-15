@@ -23,10 +23,10 @@ public class SkillCard extends GameObject {
         transform = new Transform();
         attachComponent(transform);
         transform.position.y = -20.48f;
-        transform.position.x = (float) GLView.nowWidth - 1f;
+        transform.position.x = (float) GLView.nowWidth - 1.2f;
         transform.anchor.x = 0;
-        transform.scale.x = 0.55f;
-        transform.scale.y = 0.55f;
+        transform.scale.x = 0.5f;
+        transform.scale.y = 0.5f;
 
         GameObject name = new GameObject() {
             @Override
