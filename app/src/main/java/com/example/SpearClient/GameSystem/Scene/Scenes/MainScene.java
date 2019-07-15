@@ -383,9 +383,6 @@ public class MainScene extends Scene {
             if (state == MAIN_SCENE_STATE.DOWN) {
                 state = MAIN_SCENE_STATE.MOVE_UP;
             }
-            else if (state == MAIN_SCENE_STATE.UP) {
-                Game.instance.finish();
-            }
         }
 
         camera.setZoomY(1);

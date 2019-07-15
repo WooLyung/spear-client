@@ -8,6 +8,7 @@ import com.example.SpearClient.GameSystem.Component.Components.EffectComponent;
 import com.example.SpearClient.GameSystem.Component.Components.RendererComponent.Renderers.SpriteRenderer;
 import com.example.SpearClient.GameSystem.Component.Components.TransformComponent.Transforms.GUITransform;
 import com.example.SpearClient.GameSystem.GameObject.GameObject;
+import com.example.SpearClient.GameSystem.Scene.Scenes.MainScene;
 import com.example.SpearClient.GraphicSystem.GL.GLRenderer;
 import com.example.SpearClient.Main.Game;
 
@@ -28,39 +29,6 @@ public class SettingBoard extends GameObject {
         attachComponent(transform);
         transform.scale.x = 0.6f;
         transform.scale.y = 0.6f;
-
-        appendChild(new GameObject() {
-            SpriteRenderer spriteRenderer;
-
-            @Override
-            public void start() {
-                spriteRenderer = new SpriteRenderer();
-                attachComponent(spriteRenderer);
-                spriteRenderer.bindingImage(GLRenderer.findImage("setting_close"));
-                spriteRenderer.setZ_index(91);
-
-                GUITransform transform = new GUITransform();
-                attachComponent(transform);
-                transform.scale.x = 0.5f;
-                transform.scale.y = 0.5f;
-                transform.position.x = 4.1f;
-                transform.position.y = 2.1f;
-            }
-
-            @Override
-            public void update() {
-                super.update();
-
-                for (int i = 0; i < 5; i++) {
-                    if (Input.getTouchState(i) == Input.TOUCH_STATE.DOWN) {
-                        if (Math.abs(Input.getTouchWorldPos(i).x - transform.position.x) <= 80 / 100f
-                                && Math.abs(Input.getTouchWorldPos(i).y - transform.position.y) <= 80 / 100f) { // 버튼을 클릭했을 경우
-                            getParent().destroy();
-                        }
-                    }
-                }
-            }
-        });
 
         appendChild(new GameObject() {
             SpriteRenderer spriteRenderer;
@@ -234,5 +202,14 @@ public class SettingBoard extends GameObject {
                 }
             }
         });
+    }
+
+    @Override
+    public void update() {
+        super.update();
+
+        if (Input.backkeyDown) {
+            destroy();
+        }
     }
 }
