@@ -152,6 +152,7 @@ public class PracticeScene extends Scene {
     public void update() {
         super.update();
         camUpdate();
+        gameManager.update();
 
         if (Input.backkeyDown) {
             Game.engine.changeScene(new MainScene());

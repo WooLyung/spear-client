@@ -1,5 +1,7 @@
 package com.example.SpearClient.GameSystem.Component.Components;
 
+import android.util.Log;
+
 import com.example.SpearClient.GameIO.SoundPlayer;
 import com.example.SpearClient.GameSystem.Component.Component;
 import com.example.SpearClient.GameSystem.Component.Components.RendererComponent.Renderers.AnimationRenderer;
@@ -321,7 +323,7 @@ public class PlayerStateComponent extends Component {
             }
         }
         else if (action == ACTION.RUSH_STAB) {
-            if (!isAttacked) {
+            if (enemy != null && !isAttacked) {
                 if (enemyStateComponent.action != EnemyStateComponent.ACTION.AVOID) { // 회피중이 아닐 때
                     int dir = (object.getRenderer().getIsFlip() ? 1 : -1);
                     if (enemy.getTransform().position.x * dir <= object.getTransform().position.x * dir

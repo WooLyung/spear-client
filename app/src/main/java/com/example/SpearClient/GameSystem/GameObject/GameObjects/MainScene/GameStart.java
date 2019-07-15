@@ -50,8 +50,8 @@ public class GameStart extends GameObject {
             if (Input.getTouchState(i) == Input.TOUCH_STATE.DOWN) {
                 if (Math.abs(Input.getTouchWorldPos(i).x - transform.position.x) <= 300 / 100f
                         && Math.abs(Input.getTouchWorldPos(i).y - transform.position.y) <= 60 / 100f) { // 버튼을 클릭했을 경우
-                    Game.engine.changeScene(new InGameScene());
-                    //enter();
+                    //Game.engine.changeScene(new InGameScene());
+                    enter();
                 }
             }
         }
