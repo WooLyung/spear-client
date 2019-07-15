@@ -78,7 +78,9 @@ public class PlayerStateComponent extends Component {
                 anim = AnimationManager.playerAnims.get(skinCode).get(2);
                 animationRenderer.setInterval(0.8f / 15f);
 
-                player.playerEffect_deepStab.play();
+                if (Player.pref.getBoolean("setting2", true)) {
+                    player.playerEffect_deepStab.play();
+                }
                 SoundPlayer.playSound(Game.instance, R.raw.deep_stab, 0, 1, 4);
                 try {
                     SocketIOBuilder.getInstance().skill_emit(new JSONObject("{\n" +
@@ -118,28 +120,30 @@ public class PlayerStateComponent extends Component {
                 anim = AnimationManager.playerAnims.get(skinCode).get(5);
                 animationRenderer.setInterval(0.8f / 17);
 
-                if (enemyStateComponent.action == EnemyStateComponent.ACTION.DEEP_STAB
-                    && enemyStateComponent.time <= 0.4f) {
+                if (enemy != null) {
+                    if (enemyStateComponent.action == EnemyStateComponent.ACTION.DEEP_STAB
+                            && enemyStateComponent.time <= 0.4f) {
 
-                    try {
-                        SocketIOBuilder.getInstance().skill_emit(new JSONObject("{\n" +
-                                "\t\"event\":\"skim\"\n" +
-                                "}"));
+                        try {
+                            SocketIOBuilder.getInstance().skill_emit(new JSONObject("{\n" +
+                                    "\t\"event\":\"skim\"\n" +
+                                    "}"));
+                        }
+                        catch (Exception e) {
+                            e.printStackTrace();
+                        }
                     }
-                    catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                }
-                else if (enemyStateComponent.action == EnemyStateComponent.ACTION.SHALLOW_STAB
-                        && enemyStateComponent.time <= 0.3f) {
+                    else if (enemyStateComponent.action == EnemyStateComponent.ACTION.SHALLOW_STAB
+                            && enemyStateComponent.time <= 0.3f) {
 
-                    try {
-                        SocketIOBuilder.getInstance().skill_emit(new JSONObject("{\n" +
-                                "\t\"event\":\"skim\"\n" +
-                                "}"));
-                    }
-                    catch (Exception e) {
-                        e.printStackTrace();
+                        try {
+                            SocketIOBuilder.getInstance().skill_emit(new JSONObject("{\n" +
+                                    "\t\"event\":\"skim\"\n" +
+                                    "}"));
+                        }
+                        catch (Exception e) {
+                            e.printStackTrace();
+                        }
                     }
                 }
 

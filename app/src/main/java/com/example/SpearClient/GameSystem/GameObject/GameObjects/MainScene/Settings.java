@@ -43,7 +43,9 @@ public class Settings extends GameObject {
         for (int i = 0; i < 5; i++) {
             if (Input.getTouchState(i) == Input.TOUCH_STATE.DOWN) {
                 if (Vector.distanceDouble(Input.getTouchWorldPos(i), transform.position) <= 50/147f * 50/147f) { // 버튼을 클릭했을 경우
-                    Log.i("yes!", "yes!");
+                    if (Game.engine.nowScene.findObjectByName("setting") == null) {
+                        Game.engine.nowScene.objs.add(new SettingBoard());
+                    }
                 }
             }
         }

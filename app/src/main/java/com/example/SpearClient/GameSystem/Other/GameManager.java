@@ -27,7 +27,7 @@ public class GameManager {
         RESULT
     }
 
-    public float playerHealth = 100;
+    public float playerHealth = 10;
     public STATE state = STATE.GAMING;
     public static boolean isWin = true;
     public static int[] ratings = new int[] { -1, -1 };

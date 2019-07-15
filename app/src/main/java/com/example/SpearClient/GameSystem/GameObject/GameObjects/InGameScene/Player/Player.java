@@ -1,7 +1,9 @@
 package com.example.SpearClient.GameSystem.GameObject.GameObjects.InGameScene.Player;
 
+import android.content.SharedPreferences;
 import android.media.MediaPlayer;
 import android.media.SoundPool;
+import android.preference.PreferenceManager;
 import android.util.Log;
 
 import com.example.SpearClient.GameIO.MediaPlayers.MediaPlayerHelper;
@@ -29,6 +31,8 @@ import org.json.JSONObject;
 import io.socket.emitter.Emitter;
 
 public class Player extends GameObject {
+    public static SharedPreferences pref = null;
+
     float emitTime1 = 0;
     float emitTime2 = 0;
 
@@ -52,6 +56,10 @@ public class Player extends GameObject {
     @Override
     public void start() {
         setName("player");
+
+        if (pref == null) {
+            pref =  PreferenceManager.getDefaultSharedPreferences(Game.instance);
+        }
 
         knight = new GameObject() {
             public AnimationRenderer animationRenderer;

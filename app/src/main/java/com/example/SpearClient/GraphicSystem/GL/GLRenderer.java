@@ -100,11 +100,18 @@ public class GLRenderer implements GLSurfaceView.Renderer {
         addImage(R.drawable.background_soil, "background_soil");
         addImage(R.drawable.background_under, "background_under");
         addImage(R.drawable.background_black, "background_black");
+        addImage(R.drawable.background_black, "background_black2");
         addImage(R.drawable.background_maching, "background_maching");
         addImage(R.drawable.background_front_wall, "background_front_wall");
         addImage(R.drawable.background_people, "background_people");
         addImage(R.drawable.background_tunnel, "background_tunnel");
         addImage(R.drawable.background_wall, "background_wall");
+
+        // 세팅
+        addImage(R.drawable.setting_board, "setting_board");
+        addImage(R.drawable.setting_close, "setting_close");
+        addImage(R.drawable.setting_off, "setting_off");
+        addImage(R.drawable.setting_on, "setting_on");
 
         // 기사 스킨들
         addImage(R.drawable.knight_purple, "knight_purple");

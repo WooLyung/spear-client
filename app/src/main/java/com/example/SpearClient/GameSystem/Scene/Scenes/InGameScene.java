@@ -247,6 +247,10 @@ public class InGameScene extends Scene {
             alpha = Math.max(alpha, hurt);
         }
 
+        if (!Player.pref.getBoolean("setting2", true)) {
+            alpha = 0;
+        }
+
         float[] color = {
                 1, 1, 1, alpha,
                 1, 1, 1, alpha,

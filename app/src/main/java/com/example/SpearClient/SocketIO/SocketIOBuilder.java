@@ -60,7 +60,7 @@ public class SocketIOBuilder {
     public static SocketIOBuilder getInstance () {
         if (instance == null) {
             try {
-                instance = new SocketIOBuilder("http://spear-server.run.goorm.io");
+                instance = new SocketIOBuilder("http://yuicrafts:xyz:16405");
             } catch (URISyntaxException e) {
                 e.printStackTrace();
             }

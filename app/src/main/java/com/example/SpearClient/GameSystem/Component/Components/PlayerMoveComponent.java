@@ -59,11 +59,16 @@ public class PlayerMoveComponent extends Component {
             if (player.playerEffect_rush.effectComponent.getColors()[3] != 0) {
                 float alpha = player.playerEffect_rush.effectComponent.getColors()[3] - Game.getDeltaTime() * 2;
                 if (alpha < 0) alpha = 0;
+
+                if (!Player.pref.getBoolean("setting2", true)) {
+                    alpha = 0;
+                }
+
                 player.playerEffect_rush.effectComponent.setColors(new float[] {
-                        1, 1, 1, alpha,
-                        1, 1, 1, alpha,
-                        1, 1, 1, alpha,
-                        1, 1, 1, alpha
+                    1, 1, 1, alpha,
+                    1, 1, 1, alpha,
+                    1, 1, 1, alpha,
+                    1, 1, 1, alpha
                 });
             }
 
@@ -87,6 +92,11 @@ public class PlayerMoveComponent extends Component {
             if (player.playerEffect_rush.effectComponent.getColors()[3] != 0) {
                 float alpha = player.playerEffect_rush.effectComponent.getColors()[3] - Game.getDeltaTime() * 4;
                 if (alpha < 0) alpha = 0;
+
+                if (!Player.pref.getBoolean("setting2", true)) {
+                    alpha = 0;
+                }
+
                 player.playerEffect_rush.effectComponent.setColors(new float[] {
                         1, 1, 1, alpha,
                         1, 1, 1, alpha,
@@ -98,6 +108,11 @@ public class PlayerMoveComponent extends Component {
             if (player.playerEffect_rushStab.effectComponent.getColors()[3] != 0) {
                 float alpha = player.playerEffect_rushStab.effectComponent.getColors()[3] - Game.getDeltaTime() * 4;
                 if (alpha < 0) alpha = 0;
+
+                if (!Player.pref.getBoolean("setting2", true)) {
+                    alpha = 0;
+                }
+
                 player.playerEffect_rushStab.effectComponent.setColors(new float[] {
                         1, 1, 1, alpha,
                         1, 1, 1, alpha,
@@ -130,6 +145,11 @@ public class PlayerMoveComponent extends Component {
             if (player.playerEffect_rush.effectComponent.getColors()[3] != 0) {
                 float alpha = player.playerEffect_rush.effectComponent.getColors()[3] - Game.getDeltaTime() * 4;
                 if (alpha < 0) alpha = 0;
+
+                if (!Player.pref.getBoolean("setting2", true)) {
+                    alpha = 0;
+                }
+
                 player.playerEffect_rush.effectComponent.setColors(new float[] {
                         1, 1, 1, alpha,
                         1, 1, 1, alpha,
@@ -141,6 +161,11 @@ public class PlayerMoveComponent extends Component {
             if (player.playerEffect_rushStab.effectComponent.getColors()[3] != 0) {
                 float alpha = player.playerEffect_rushStab.effectComponent.getColors()[3] - Game.getDeltaTime() * 4;
                 if (alpha < 0) alpha = 0;
+
+                if (!Player.pref.getBoolean("setting2", true)) {
+                    alpha = 0;
+                }
+
                 player.playerEffect_rushStab.effectComponent.setColors(new float[] {
                         1, 1, 1, alpha,
                         1, 1, 1, alpha,
@@ -164,6 +189,11 @@ public class PlayerMoveComponent extends Component {
             object.getTransform().position.x += Game.getDeltaTime() * 10f * ((dir == DIR.RIGHT) ? 1 : -1) * speed;
 
             float alpha = ((time > 0.25f) ? 1 : time * 4);
+
+            if (!Player.pref.getBoolean("setting2", true)) {
+                alpha = 0;
+            }
+
             player.playerEffect_rush.effectComponent.setColors(new float[] {
                     1, 1, 1, alpha,
                     1, 1, 1, alpha,
@@ -186,6 +216,11 @@ public class PlayerMoveComponent extends Component {
             object.getTransform().position.x += Game.getDeltaTime() * 9f * ((dir == DIR.RIGHT) ? 1 : -1) * speed;
 
             float alpha = ((time > 0.25f) ? 1 : time * 4);
+
+            if (!Player.pref.getBoolean("setting2", true)) {
+                alpha = 0;
+            }
+
             player.playerEffect_rush.effectComponent.setColors(new float[]{
                     1, 1, 1, alpha,
                     1, 1, 1, alpha,

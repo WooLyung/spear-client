@@ -43,9 +43,12 @@ public class FastMatching extends GameObject {
             if (Input.getTouchState(i) == Input.TOUCH_STATE.DOWN) {
                 if (Math.abs(Input.getTouchWorldPos(i).x - transform.position.x) <= 230 / 100f
                         && Math.abs(Input.getTouchWorldPos(i).y - transform.position.y) <= 80 / 100f) { // 버튼을 클릭했을 경우
-                    ((MainScene)Game.engine.nowScene).state = MainScene.MAIN_SCENE_STATE.MOVE_DOWN;
-                    MainScene.selectedGame = "fast";
-                    ((MainScene)Game.engine.nowScene).time = 0;
+
+                    if (Game.engine.nowScene.findObjectByName("setting") == null) {
+                        ((MainScene)Game.engine.nowScene).state = MainScene.MAIN_SCENE_STATE.MOVE_DOWN;
+                        MainScene.selectedGame = "fast";
+                        ((MainScene)Game.engine.nowScene).time = 0;
+                    }
                 }
             }
         }

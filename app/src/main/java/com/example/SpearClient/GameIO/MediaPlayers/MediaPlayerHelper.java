@@ -3,6 +3,7 @@ package com.example.SpearClient.GameIO.MediaPlayers;
 import android.media.MediaPlayer;
 import android.util.Log;
 
+import com.example.SpearClient.GameIO.SoundPlayer;
 import com.example.SpearClient.Main.Game;
 
 import java.util.ArrayList;
@@ -58,16 +59,30 @@ public class MediaPlayerHelper {
                     deleteMphs.add(mph);
                 }
                 else {
-                    mph.mp.setVolume((1 - mph.time) * mph.volume, (1 - mph.time) * mph.volume);
+                    if (SoundPlayer.pref.getBoolean("setting3", true)) {
+                        mph.mp.setVolume((1 - mph.time) * mph.volume, (1 - mph.time) * mph.volume);
+                    }
+                    else {
+                        mph.mp.setVolume(0, 0);
+                    }
                 }
             }
             else if (mph.time >= 1 || !mph.isFade){
-                mph.mp.setVolume(mph.volume, mph.volume);
+                if (SoundPlayer.pref.getBoolean("setting3", true)) {
+                    mph.mp.setVolume(mph.volume, mph.volume);
+                }
+                else {
+                    mph.mp.setVolume(0, 0);
+                }
             }
             else {
-                mph.mp.setVolume(mph.time * mph.volume, mph.time * mph.volume);
+                if (SoundPlayer.pref.getBoolean("setting3", true)) {
+                    mph.mp.setVolume(mph.time * mph.volume, mph.time * mph.volume);
+                }
+                else {
+                    mph.mp.setVolume(0, 0);
+                }
             }
-
         }
 
         for (MediaPlayerHolder mph : deleteMphs) {
