@@ -1,5 +1,7 @@
 package com.example.SpearClient.GameSystem.Other;
 
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.util.Log;
 
 import com.example.SpearClient.GraphicSystem.GL.GLView;
@@ -7,6 +9,7 @@ import com.example.SpearClient.Main.Game;
 import com.example.SpearClient.Types.Vector;
 
 public class Camera {
+    public SharedPreferences pref;
 
     public class Vibration_move {
         public Vector power = new Vector();
@@ -26,6 +29,17 @@ public class Camera {
         }
 
         public void update() {
+            if (pref.getBoolean("setting2", true)) {
+                power.x = 0;
+                nowPower.x = 0;
+                maxPower.x = 0;
+                sign.x = 0;
+                power.y = 0;
+                nowPower.y = 0;
+                maxPower.y = 0;
+                sign.y = 0;
+            }
+
             if (maxPower.x != 0) {
                 nowPower.x += power.x * sign.x * Game.getDeltaTime();
                 maxPower.x -= Game.getDeltaTime() * 4.5f;
@@ -75,6 +89,13 @@ public class Camera {
         }
 
         public void update() {
+            if (pref.getBoolean("setting2", true)) {
+                power = 0;
+                nowPower = 0;
+                maxPower = 0;
+                sign = 0;
+            }
+
             if (maxPower != 0) {
                 nowPower += power * sign * Game.getDeltaTime();
                 maxPower -= Game.getDeltaTime() * 7f;
@@ -105,6 +126,8 @@ public class Camera {
         setAngle(0);
         setZoomX(1);
         setZoomY(1);
+
+        pref =  PreferenceManager.getDefaultSharedPreferences(Game.instance);
     }
 
     public void setAngle(float angle) {

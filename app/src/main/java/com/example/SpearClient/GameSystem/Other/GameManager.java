@@ -1,5 +1,8 @@
 package com.example.SpearClient.GameSystem.Other;
 
+import android.content.Context;
+import android.os.Vibrator;
+import android.preference.PreferenceManager;
 import android.util.Log;
 
 import com.example.SpearClient.GameIO.SoundPlayer;
@@ -27,7 +30,7 @@ public class GameManager {
         RESULT
     }
 
-    public float playerHealth = 10;
+    public float playerHealth = 100;
     public STATE state = STATE.GAMING;
     public static boolean isWin = true;
     public static int[] ratings = new int[] { -1, -1 };
@@ -62,6 +65,11 @@ public class GameManager {
                         }
                         else { // 피해를 받음
                             ((InGameScene)Game.engine.nowScene).bloodTime = 1;
+
+                            if (PreferenceManager.getDefaultSharedPreferences(Game.instance).getBoolean("setting1", false)) {
+                                final Vibrator vibrator = (Vibrator)Game.instance.getSystemService(Context.VIBRATOR_SERVICE);
+                                vibrator.vibrate(300);
+                            }
 
                             if (isCrit) {
                                 Game.engine.nowScene.camera.vibrateHeavy();
