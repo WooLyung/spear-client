@@ -63,7 +63,7 @@ public class InGameScene extends Scene {
 
     Blood[] bloods = { new Blood(), new Blood(), new Blood(), new Blood()};
 
-    public GameManager gameManager = new GameManager();
+    public GameManager gameManager;
     public float time = 0;
     public float bloodTime = 0;
     private int bloodCode;
@@ -118,6 +118,15 @@ public class InGameScene extends Scene {
 
         bloodSetting();
         createBackgrounds();
+    }
+
+    public InGameScene() {
+        if (GameManager.getInstance() == null) {
+            gameManager  = new GameManager();
+        }
+        else {
+            gameManager = GameManager.getInstance();
+        }
     }
 
     private void createBackgrounds() {

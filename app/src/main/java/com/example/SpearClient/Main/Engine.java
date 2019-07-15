@@ -2,6 +2,7 @@ package com.example.SpearClient.Main;
 
 import android.media.MediaPlayer;
 import android.provider.MediaStore;
+import android.util.Log;
 
 import com.example.SpearClient.GameIO.MediaPlayers.MediaPlayerHelper;
 import com.example.SpearClient.GameIO.MediaPlayers.MediaPlayerHolder;
@@ -22,6 +23,7 @@ public class Engine {
     public static String id = "";
     public static String nickname = "";
     public static String enemyNickname = "";
+    public static float sceneChangeTime = 5;
 
     public Engine() {
         changeScene(new IntroScene());
@@ -36,6 +38,7 @@ public class Engine {
         nowScene.update();
         Input.update();
         mediaPlayerHelper.update();
+        sceneChangeTime += Game.getNoneDeltaTime();
     }
 
     public void render(GL10 gl) {
@@ -47,9 +50,14 @@ public class Engine {
     }
 
     public void changeScene(Scene newScene) {
-        if (nowScene != null)
-            nowScene.finish();
-        nowScene = newScene;
-        newScene.start();
+        if (sceneChangeTime > 0.7f) {
+            Log.i("Scene", "Scene Changed");
+
+            sceneChangeTime = 0;
+            if (nowScene != null)
+                nowScene.finish();
+            nowScene = newScene;
+            newScene.start();
+        }
     }
 }

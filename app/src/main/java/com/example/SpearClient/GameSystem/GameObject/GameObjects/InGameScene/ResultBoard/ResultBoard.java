@@ -175,9 +175,6 @@ public class ResultBoard extends GameObject {
             });
 
             if (alpha >= 1) {
-                Log.i("rating", "인덱스1 : " + GameManager.ratings[0]+ "");
-                Log.i("rating", "인덱스2 : " + GameManager.ratings[1]+ "");
-                Log.i("rating", "나는? : " + GameManager.me + "");
                 textRenderer.setText((5 - (GameManager.ratings[GameManager.me]- 1) % 5) + "");
             }
         }

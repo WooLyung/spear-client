@@ -125,6 +125,8 @@ public class GameManager {
             @Override
             public void call(Object... args) {
                 try {
+                    Log.i("gameover", "gameover");
+
                     JSONObject jsonObject = new JSONObject(args[0].toString());
 
                     if (!jsonObject.isNull("winner")) {

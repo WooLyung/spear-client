@@ -29,7 +29,7 @@ public class Camera {
         }
 
         public void update() {
-            if (pref.getBoolean("setting2", true)) {
+            if (!pref.getBoolean("setting2", true)) {
                 power.x = 0;
                 nowPower.x = 0;
                 maxPower.x = 0;
@@ -89,7 +89,7 @@ public class Camera {
         }
 
         public void update() {
-            if (pref.getBoolean("setting2", true)) {
+            if (!pref.getBoolean("setting2", true)) {
                 power = 0;
                 nowPower = 0;
                 maxPower = 0;

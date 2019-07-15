@@ -128,7 +128,7 @@ public class Player extends GameObject {
             transform.position.x = -35;
 
         if (!isPractice) {
-            if (emitTime2 >= 0.01f) {
+            if (emitTime2 >= 0.02f) {
                 emitTime2 = 0;
 
                 try {

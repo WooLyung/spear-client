@@ -14,6 +14,7 @@ import com.example.SpearClient.GameSystem.Other.GameManager;
 import com.example.SpearClient.GameSystem.Scene.Scene;
 import com.example.SpearClient.GraphicSystem.GL.GLRenderer;
 import com.example.SpearClient.GraphicSystem.GL.GLView;
+import com.example.SpearClient.Main.Engine;
 import com.example.SpearClient.Main.Game;
 import com.example.SpearClient.R;
 import com.example.SpearClient.SocketIO.SocketIOBuilder;
@@ -88,6 +89,7 @@ public class MachingScene extends Scene {
                                 GameManager.ratings[1] = rates.getInt("two");
                             }
 
+                            Engine.sceneChangeTime = 3;
                             Game.engine.changeScene(new InGameScene());
                         }
                         catch (Exception e) {
