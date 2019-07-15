@@ -36,10 +36,11 @@ public class GameStart extends GameObject {
 
         transform = new Transform();
         attachComponent(transform);
-        transform.position.y = -20.48f - 3.5f;
-        transform.position.x = -(float) GLView.nowWidth + 4;
-        transform.scale.x = 1000/1470f;
-        transform.scale.y = 1000/1470f;
+        transform.position.y = -20.48f - (float) GLView.nowHeight + 1f;
+        transform.position.x = (float) GLView.nowWidth - 1f;
+        transform.anchor.x = 0;
+        transform.scale.x = 0.55f;
+        transform.scale.y = 0.55f;
     }
 
     @Override

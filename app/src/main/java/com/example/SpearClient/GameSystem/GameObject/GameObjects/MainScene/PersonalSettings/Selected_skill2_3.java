@@ -28,10 +28,10 @@ public class Selected_skill2_3 extends GameObject {
 
         transform = new Transform();
         attachComponent(transform);
-        transform.position.y = -20.48f + 0.3f;
-        transform.position.x = (float) GLView.nowWidth - 5.5f + 1.1f;
-        transform.scale.x = 1000/1470f;
-        transform.scale.y = 1000/1470f;
+        transform.position.y = -20.48f + 0.3f + 0.7f;
+        transform.position.x = -(float) GLView.nowWidth + 6f + 1.215f;
+        transform.scale.x = 1000/1470f * 0.8f;
+        transform.scale.y = 1000/1470f * 0.8f;
     }
 
     @Override
@@ -44,6 +44,13 @@ public class Selected_skill2_3 extends GameObject {
                     if (ActionManager.selectedSkill != -1)
                         ActionManager.skill2[2] = ActionManager.selectedSkill;
                     ActionManager.selectedSkill = -1;
+                    ((MainScene) Game.engine.nowScene).skill_slot1.selected.setIsVisible(false);
+                    ((MainScene)Game.engine.nowScene).skill_slot2.selected.setIsVisible(false);
+                    ((MainScene)Game.engine.nowScene).skill_slot3.selected.setIsVisible(false);
+                    ((MainScene)Game.engine.nowScene).skill_slot4.selected.setIsVisible(false);
+                    ((MainScene)Game.engine.nowScene).skill_slot5.selected.setIsVisible(false);
+                    ((MainScene)Game.engine.nowScene).skill_slot6.selected.setIsVisible(false);
+                    ((MainScene)Game.engine.nowScene).skillCard.spriteRenderer.bindingImage(GLRenderer.findImage("skillcard_none"));
 
                     try {
                         SocketIOBuilder.getInstance().setSkill(new JSONObject("{" + "\"username\":" + SocketIOBuilder.id + "," +

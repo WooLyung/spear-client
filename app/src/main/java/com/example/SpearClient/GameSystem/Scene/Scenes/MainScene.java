@@ -22,6 +22,7 @@ import com.example.SpearClient.GameSystem.GameObject.GameObjects.MainScene.Perso
 import com.example.SpearClient.GameSystem.GameObject.GameObjects.MainScene.PersonalSettings.Selected_skill2_2;
 import com.example.SpearClient.GameSystem.GameObject.GameObjects.MainScene.PersonalSettings.Selected_skill2_3;
 import com.example.SpearClient.GameSystem.GameObject.GameObjects.MainScene.PersonalSettings.Selected_skill2_4;
+import com.example.SpearClient.GameSystem.GameObject.GameObjects.MainScene.PersonalSettings.SkillCard;
 import com.example.SpearClient.GameSystem.GameObject.GameObjects.MainScene.PersonalSettings.Skill_slot1;
 import com.example.SpearClient.GameSystem.GameObject.GameObjects.MainScene.PersonalSettings.Skill_slot2;
 import com.example.SpearClient.GameSystem.GameObject.GameObjects.MainScene.PersonalSettings.Skill_slot3;
@@ -29,6 +30,7 @@ import com.example.SpearClient.GameSystem.GameObject.GameObjects.MainScene.Perso
 import com.example.SpearClient.GameSystem.GameObject.GameObjects.MainScene.PersonalSettings.Skill_slot5;
 import com.example.SpearClient.GameSystem.GameObject.GameObjects.MainScene.PersonalSettings.Skill_slot6;
 import com.example.SpearClient.GameSystem.GameObject.GameObjects.MainScene.Place;
+import com.example.SpearClient.GameSystem.GameObject.GameObjects.MainScene.RankGame;
 import com.example.SpearClient.GameSystem.GameObject.GameObjects.MainScene.Settings;
 import com.example.SpearClient.GameSystem.GameObject.GameObjects.MainScene.Practice;
 import com.example.SpearClient.GameSystem.Other.ActionManager;
@@ -54,17 +56,18 @@ public class MainScene extends Scene {
     FastMatching fastMatching;
     Settings settings;
     Practice practice;
+    RankGame rankGame;
     GameStart gameStart;
     Place place;
     PersonalSettings personalSettings;
     GameObject black;
 
-    Skill_slot1 skill_slot1;
-    Skill_slot2 skill_slot2;
-    Skill_slot3 skill_slot3;
-    Skill_slot4 skill_slot4;
-    Skill_slot5 skill_slot5;
-    Skill_slot6 skill_slot6;
+    public Skill_slot1 skill_slot1;
+    public Skill_slot2 skill_slot2;
+    public Skill_slot3 skill_slot3;
+    public Skill_slot4 skill_slot4;
+    public Skill_slot5 skill_slot5;
+    public Skill_slot6 skill_slot6;
     Selected_skill1_1 selected_skill1_1;
     Selected_skill1_2 selected_skill1_2;
     Selected_skill1_3 selected_skill1_3;
@@ -73,6 +76,7 @@ public class MainScene extends Scene {
     Selected_skill2_2 selected_skill2_2;
     Selected_skill2_3 selected_skill2_3;
     Selected_skill2_4 selected_skill2_4;
+    public SkillCard skillCard;
 
     public static String selectedGame = "fast";
     public MAIN_SCENE_STATE state = MAIN_SCENE_STATE.UP;
@@ -93,6 +97,7 @@ public class MainScene extends Scene {
         fastMatching = new FastMatching();
         settings = new Settings();
         practice = new Practice();
+        rankGame = new RankGame();
         gameStart = new GameStart();
         place = new Place();
         personalSettings = new PersonalSettings();
@@ -120,6 +125,7 @@ public class MainScene extends Scene {
         objs.add(fastMatching);
         objs.add(settings);
         objs.add(practice);
+        objs.add(rankGame);
         objs.add(gameStart);
         objs.add(place);
         objs.add(personalSettings);
@@ -221,6 +227,75 @@ public class MainScene extends Scene {
         catch (Exception e) {
             e.printStackTrace();
         }
+
+        createBackgrounds();
+    }
+
+    private void createBackgrounds() {
+        objs.add(new GameObject() {
+            @Override
+            public void start() {
+                SpriteRenderer spriteRenderer = new SpriteRenderer();
+                attachComponent(spriteRenderer);
+                spriteRenderer.bindingImage(GLRenderer.findImage("background_wall"));
+                spriteRenderer.setZ_index(-8);
+
+                Transform transform = new Transform();
+                attachComponent(transform);
+                transform.anchor.y = 1;
+                transform.scale.x = 0.8f;
+                transform.scale.y = 0.8f;
+                transform.position.y = -2f;
+            }
+        });
+        objs.add(new GameObject() {
+            @Override
+            public void start() {
+                SpriteRenderer spriteRenderer = new SpriteRenderer();
+                attachComponent(spriteRenderer);
+                spriteRenderer.bindingImage(GLRenderer.findImage("background_tunnel"));
+                spriteRenderer.setZ_index(-7);
+
+                Transform transform = new Transform();
+                attachComponent(transform);
+                transform.anchor.y = 1;
+                transform.scale.x = 0.8f;
+                transform.scale.y = 0.8f;
+                transform.position.y = -2f;
+            }
+        });
+        objs.add(new GameObject() {
+            @Override
+            public void start() {
+                SpriteRenderer spriteRenderer = new SpriteRenderer();
+                attachComponent(spriteRenderer);
+                spriteRenderer.bindingImage(GLRenderer.findImage("background_people"));
+                spriteRenderer.setZ_index(-6);
+
+                Transform transform = new Transform();
+                attachComponent(transform);
+                transform.anchor.y = 1;
+                transform.scale.x = 0.8f;
+                transform.scale.y = 0.8f;
+                transform.position.y = -2f;
+            }
+        });
+        objs.add(new GameObject() {
+            @Override
+            public void start() {
+                SpriteRenderer spriteRenderer = new SpriteRenderer();
+                attachComponent(spriteRenderer);
+                spriteRenderer.bindingImage(GLRenderer.findImage("background_front_wall"));
+                spriteRenderer.setZ_index(-5);
+
+                Transform transform = new Transform();
+                attachComponent(transform);
+                transform.anchor.y = 1;
+                transform.scale.x = 0.8f;
+                transform.scale.y = 0.8f;
+                transform.position.y = -2f;
+            }
+        });
     }
 
     public void updateImages() {
@@ -249,6 +324,7 @@ public class MainScene extends Scene {
         selected_skill2_2 = new Selected_skill2_2();
         selected_skill2_3 = new Selected_skill2_3();
         selected_skill2_4 = new Selected_skill2_4();
+        skillCard = new SkillCard();
 
         objs.add(skill_slot1);
         objs.add(skill_slot2);
@@ -264,6 +340,7 @@ public class MainScene extends Scene {
         objs.add(selected_skill2_2);
         objs.add(selected_skill2_3);
         objs.add(selected_skill2_4);
+        objs.add(skillCard);
         objs.add(new GameObject() {
             @Override
             public void start() {
@@ -274,10 +351,10 @@ public class MainScene extends Scene {
 
                 transform = new Transform();
                 attachComponent(transform);
-                transform.position.y = -20.48f + 2.15f;
-                transform.position.x = (float) GLView.nowWidth - 5.5f;
-                transform.scale.x = 1000/1470f;
-                transform.scale.y = 1000/1470f;
+                transform.position.y = -20.48f + 2.2f + 0.7f;
+                transform.position.x = -(float) GLView.nowWidth + 6f;
+                transform.scale.x = 0.5f;
+                transform.scale.y = 0.5f;
             }
         });
         objs.add(new GameObject() {
@@ -290,10 +367,10 @@ public class MainScene extends Scene {
 
                 transform = new Transform();
                 attachComponent(transform);
-                transform.position.y = -20.48f + 0.25f;
-                transform.position.x = (float) GLView.nowWidth - 5.5f;
-                transform.scale.x = 1000/1470f;
-                transform.scale.y = 1000/1470f;
+                transform.position.y = -20.48f + 0.3f + 0.7f;
+                transform.position.x = -(float) GLView.nowWidth + 6f;
+                transform.scale.x = 0.5f;
+                transform.scale.y = 0.5f;
             }
         });
     }

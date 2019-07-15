@@ -1,4 +1,4 @@
-package com.example.SpearClient.GameSystem.GameObject.GameObjects.MainScene;
+package com.example.SpearClient.GameSystem.GameObject.GameObjects.MainScene.PersonalSettings;
 
 import com.example.SpearClient.GameSystem.Component.Components.RendererComponent.Renderers.SpriteRenderer;
 import com.example.SpearClient.GameSystem.Component.Components.RendererComponent.Renderers.TextRenderer;
@@ -10,17 +10,19 @@ import com.example.SpearClient.GraphicSystem.GL.GLView;
 import com.example.SpearClient.Main.Game;
 import com.example.SpearClient.R;
 
-public class Place extends GameObject {
+public class SkillCard extends GameObject {
+    public SpriteRenderer spriteRenderer;
+
     @Override
     public void start() {
-        SpriteRenderer spriteRenderer = new SpriteRenderer();
+        spriteRenderer = new SpriteRenderer();
         attachComponent(spriteRenderer);
-        spriteRenderer.bindingImage(GLRenderer.findImage("place_bronze"));
+        spriteRenderer.bindingImage(GLRenderer.findImage("skillcard_none"));
         spriteRenderer.setZ_index(-9);
 
         transform = new Transform();
         attachComponent(transform);
-        transform.position.y = -20.48f + (float) GLView.nowHeight - 1f;
+        transform.position.y = -20.48f;
         transform.position.x = (float) GLView.nowWidth - 1f;
         transform.anchor.x = 0;
         transform.scale.x = 0.55f;

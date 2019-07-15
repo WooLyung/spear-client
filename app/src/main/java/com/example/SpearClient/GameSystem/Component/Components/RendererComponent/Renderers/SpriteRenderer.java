@@ -51,7 +51,8 @@ public class SpriteRenderer extends RendererComponent {
             renderTarget.color = GLRenderer.imageDatas.get(image[0]).getColorBuffer();
         }
 
-        GLRenderer.renderTargets.add(renderTarget);
+        if (getIsVisible())
+            GLRenderer.renderTargets.add(renderTarget);
 
         // 렌더 타겟 추가 마무리
         gl.glPopMatrix();

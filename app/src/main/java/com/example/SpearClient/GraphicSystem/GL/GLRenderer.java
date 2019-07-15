@@ -81,6 +81,16 @@ public class GLRenderer implements GLSurfaceView.Renderer {
         addImage(R.drawable.button_skill2, "button_skill2");
         addImage(R.drawable.button_regame, "button_regame");
         addImage(R.drawable.button_home, "button_home");
+        addImage(R.drawable.button_rankgame, "button_rankgame");
+
+        // 스킬 카드
+        addImage(R.drawable.skillcard_avoid, "skillcard_avoid");
+        addImage(R.drawable.skillcard_skim, "skillcard_skim");
+        addImage(R.drawable.skillcard_rush, "skillcard_rush");
+        addImage(R.drawable.skillcard_rush_stab, "skillcard_rush_stab");
+        addImage(R.drawable.skillcard_shallow_stab, "skillcard_shallow_stab");
+        addImage(R.drawable.skillcard_deep_stab, "skillcard_deep_stab");
+        addImage(R.drawable.skillcard_none, "skillcard_none");
 
         // 배경들
         addImage(R.drawable.background_ground_small, "background_ground_small");
@@ -208,6 +218,7 @@ public class GLRenderer implements GLSurfaceView.Renderer {
         addImage(R.drawable.vs, "vs");
         addImage(R.drawable.win, "win");
         addImage(R.drawable.lose, "lose");
+        addImage(R.drawable.selected_skill, "selected_skill");
 
         // 랭크
         addImage(R.drawable.rank_bronze, "rank_bronze");
@@ -240,7 +251,9 @@ public class GLRenderer implements GLSurfaceView.Renderer {
        // 기타
         addImage(R.drawable.left_bricks, "left_bricks");
         addImage(R.drawable.right_bricks, "right_bricks");
-        addImage(R.drawable.place, "place");
+        addImage(R.drawable.place_bronze, "place_bronze");
+        addImage(R.drawable.place_silver, "place_silver");
+        addImage(R.drawable.place_gold, "place_gold");
         addImage(R.drawable.empty, "empty");
         addImage(R.drawable.blood, "blood");
 
