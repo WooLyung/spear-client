@@ -53,8 +53,8 @@ public class SettingBoard extends GameObject {
 
                 for (int i = 0; i < 5; i++) {
                     if (Input.getTouchState(i) == Input.TOUCH_STATE.DOWN) {
-                        if (Math.abs(Input.getTouchWorldPos(i).x - transform.position.x) <= 50 / 100f
-                                && Math.abs(Input.getTouchWorldPos(i).y - transform.position.y) <= 50 / 100f) { // 버튼을 클릭했을 경우
+                        if (Math.abs(Input.getTouchWorldPos(i).x - transform.position.x) <= 80 / 100f
+                                && Math.abs(Input.getTouchWorldPos(i).y - transform.position.y) <= 80 / 100f) { // 버튼을 클릭했을 경우
                             getParent().destroy();
                         }
                     }

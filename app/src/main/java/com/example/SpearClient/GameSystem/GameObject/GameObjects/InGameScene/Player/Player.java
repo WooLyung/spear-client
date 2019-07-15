@@ -151,7 +151,7 @@ public class Player extends GameObject {
                 try {
                     AnimationRenderer knightAnimationRenderer = (AnimationRenderer)knight.getComponent("animationRenderer");
 
-                    SocketIOBuilder.getInstance().playerUpdate(new JSONObject("\n" +
+                    JSONObject jsonObject = new JSONObject("\n" +
                             "\n" +
                             "{\n" +
                             "\"player_image\":" + knightAnimationRenderer.getImage()[knightAnimationRenderer.getNowFrame()] + ",\n" +
@@ -207,7 +207,9 @@ public class Player extends GameObject {
                             "\"angle\":" + knight.getTransform().angle + "\n" +
                             "}\n" +
                             "}\n" +
-                            "}"));
+                            "}");
+
+                    SocketIOBuilder.getInstance().playerUpdate(jsonObject);
                 }
                 catch (Exception e) {
                     e.printStackTrace();

@@ -45,18 +45,9 @@ public class PracticeScene extends Scene {
     Skill1 skill1;
     Skill2 skill2;
 
-    public GameManager gameManager;
+    public GameManager gameManager = new GameManager();;
 
     private MediaPlayerHolder mph;
-
-    public PracticeScene() {
-        if (GameManager.getInstance() == null) {
-            gameManager  = new GameManager();
-        }
-        else {
-            gameManager = GameManager.getInstance();
-        }
-    }
 
     @Override
     public void start() {

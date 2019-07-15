@@ -89,7 +89,6 @@ public class MachingScene extends Scene {
                                 GameManager.ratings[1] = rates.getInt("two");
                             }
 
-                            Engine.sceneChangeTime = 3;
                             Game.engine.changeScene(new InGameScene());
                         }
                         catch (Exception e) {

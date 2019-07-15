@@ -59,64 +59,59 @@ public class ResultBoard extends GameObject {
             appendChild(homeButton);
             buttonAppeared = true;
         }
+        else {
+            rank = new GameObject() {
+                @Override
+                public void start() {
+                    SpriteRenderer spriteRenderer = new SpriteRenderer();
+                    attachComponent(spriteRenderer);
+                    spriteRenderer.setZ_index(60);
 
-        rank = new GameObject() {
-            @Override
-            public void start() {
-                SpriteRenderer spriteRenderer = new SpriteRenderer();
-                attachComponent(spriteRenderer);
-                spriteRenderer.setZ_index(60);
-
-                spriteRenderer.bindingImage(GLRenderer.findImage("none"));
-                if (MainScene.selectedGame.equals("rank")) {
                     if (GameManager.isWin) {
                         GameManager.ratings[GameManager.me]++;
-                    }
-                    else {
+                    } else {
                         GameManager.ratings[GameManager.me]--;
                         if (GameManager.ratings[GameManager.me] <= 0)
                             GameManager.ratings[GameManager.me] = 1;
                     }
 
-                    if (GameManager.ratings[GameManager.me]<= 5) {
+                    if (GameManager.ratings[GameManager.me] <= 5) {
                         spriteRenderer.bindingImage(GLRenderer.findImage("rank_bronze"));
-                    }
-                    else if (GameManager.ratings[GameManager.me]<= 10) {
+                    } else if (GameManager.ratings[GameManager.me] <= 10) {
                         spriteRenderer.bindingImage(GLRenderer.findImage("rank_silver"));
-                    }
-                    else {
+                    } else {
                         spriteRenderer.bindingImage(GLRenderer.findImage("rank_gold"));
                     }
+
+                    GUITransform transform = new GUITransform();
+                    attachComponent(transform);
+                    transform.scale.x = 1.4f;
+                    transform.scale.y = 1.4f;
+
+                    textRenderer = new TextRenderer();
+                    attachComponent(textRenderer);
+                    textRenderer.setText("");
+                    textRenderer.setHorizontal(1);
+                    textRenderer.setVertical(1);
+                    Game.instance.runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            textRenderer.getTextView().setTextColor(Game.instance.getResources().getColor(R.color.white));
+                            textRenderer.getTextView().setTextSize(60);
+                        }
+                    });
+
+                    effectComponent2 = new EffectComponent();
+                    attachComponent(effectComponent2);
+                    effectComponent2.setColors(new float[]{
+                            1, 1, 1, 0,
+                            1, 1, 1, 0,
+                            1, 1, 1, 0,
+                            1, 1, 1, 0
+                    });
                 }
-
-                GUITransform transform = new GUITransform();
-                attachComponent(transform);
-                transform.scale.x = 1.4f;
-                transform.scale.y = 1.4f;
-
-                textRenderer = new TextRenderer();
-                attachComponent(textRenderer);
-                textRenderer.setText("");
-                textRenderer.setHorizontal(1);
-                textRenderer.setVertical(1);
-                Game.instance.runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        textRenderer.getTextView().setTextColor(Game.instance.getResources().getColor(R.color.white));
-                        textRenderer.getTextView().setTextSize(60);
-                    }
-                });
-
-                effectComponent2 = new EffectComponent();
-                attachComponent(effectComponent2);
-                effectComponent2.setColors(new float[]{
-                        1, 1, 1, 0,
-                        1, 1, 1, 0,
-                        1, 1, 1, 0,
-                        1, 1, 1, 0
-                });
-            }
-        };
+            };
+        }
 
         appendChild(rank);
         appendChild(new GameObject() {

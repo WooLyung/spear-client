@@ -67,8 +67,9 @@ abstract public class GameObject {
     }
 
     public void appendChild(GameObject child) {
-        childs.add(child);
-        child.parent = this;
+        if (child != null) {
+            childs.add(child);
+        }
     }
 
     public void setParent(GameObject parent) {

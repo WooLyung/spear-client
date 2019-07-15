@@ -31,7 +31,7 @@ public class GameManager {
     }
 
     public float playerHealth = 100;
-    public STATE state = STATE.GAMING;
+    public STATE state = STATE.WAITING1;
     public static boolean isWin = true;
     public static int[] ratings = new int[] { -1, -1 };
     public static int me = -1;
@@ -125,8 +125,6 @@ public class GameManager {
             @Override
             public void call(Object... args) {
                 try {
-                    Log.i("gameover", "gameover");
-
                     JSONObject jsonObject = new JSONObject(args[0].toString());
 
                     if (!jsonObject.isNull("winner")) {

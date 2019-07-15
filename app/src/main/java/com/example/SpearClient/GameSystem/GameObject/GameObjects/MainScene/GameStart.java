@@ -70,8 +70,6 @@ public class GameStart extends GameObject {
                     Game.instance.runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            Log.i("enter", "enter!!");
-
                             try {
                                 JSONObject jsonObject = new JSONObject(args[0].toString());
                                 String message = jsonObject.getString("message");
